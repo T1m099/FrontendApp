@@ -37,11 +37,13 @@ npm manifest:
   		"eject": "expo eject"
   	},
   	"dependencies": {
+  		"@react-native-community/datetimepicker": "3.0.4",
   		"@react-native-community/netinfo": "5.9.7",
   		"@react-navigation/bottom-tabs": "^5.11.8",
   		"@react-navigation/native": "^5.9.3",
   		"@react-navigation/stack": "^5.14.3",
   		"apisauce": "^2.0.1",
+  		"dayjs": "^1.10.4",
   		"expo": "40.0.0",
   		"expo-constants": "9.3.3",
   		"expo-permissions": "~10.0.0",
@@ -52,6 +54,7 @@ npm manifest:
   		"react": "16.13.1",
   		"react-dom": "16.13.1",
   		"react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
+  		"react-native-calendars": "^1.1249.0",
   		"react-native-gesture-handler": "~1.8.0",
   		"react-native-progress": "^4.1.2",
   		"react-native-screens": "~2.15.0",
@@ -1737,6 +1740,13 @@ Lockfile:
       sudo-prompt "^9.0.0"
       wcwidth "^1.0.1"
   
+  "@react-native-community/datetimepicker@3.0.4":
+    version "3.0.4"
+    resolved "https://registry.yarnpkg.com/@react-native-community/datetimepicker/-/datetimepicker-3.0.4.tgz#ad3efa90fab78fc3c0710abf3cb06d2976603140"
+    integrity sha512-IsBkemz1XYubH5twfQPC/xleZdILA5SEUaLJ2C86IbnIOctb6suk8tB6uT9VxQkCsw4zjkrlqt9p9LGx9DJ97w==
+    dependencies:
+      invariant "^2.2.4"
+  
   "@react-native-community/netinfo@5.9.7":
     version "5.9.7"
     resolved "https://registry.yarnpkg.com/@react-native-community/netinfo/-/netinfo-5.9.7.tgz#769c6b306ea6bbaa1c4a3fffdd183d0cfc30ed7e"
@@ -2695,6 +2705,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/crypto-random-string/-/crypto-random-string-1.0.0.tgz#a230f64f568310e1498009940790ec99545bca7e"
     integrity sha1-ojD2T1aDEOFJgAmUB5DsmVRbyn4=
   
+  dayjs@^1.10.4:
+    version "1.10.4"
+    resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.10.4.tgz#8e544a9b8683f61783f570980a8a80eaf54ab1e2"
+    integrity sha512-RI/Hh4kqRc1UKLOAf/T5zdMMX5DQIlDxwUe3wSyMMnEbGunnpENCdbUgM+dW7kXidZqCttBrmw7BhN4TMddkCw==
+  
   dayjs@^1.8.15:
     version "1.10.4"
     resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.10.4.tgz"
@@ -3601,7 +3616,7 @@ Lockfile:
     dependencies:
       source-map "^0.7.3"
   
-  hoist-non-react-statics@^3.3.0:
+  hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.1:
     version "3.3.2"
     resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
     integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
@@ -3647,6 +3662,11 @@ Lockfile:
     version "3.3.0"
     resolved "https://registry.yarnpkg.com/immediate/-/immediate-3.3.0.tgz#1aef225517836bcdf7f2a2de2600c79ff0269266"
     integrity sha512-HR7EVodfFUdQCTIeySw+WDRFJlPcLOJbXfwwZ7Oom6tjsvZ3bOkCDJHehQC3nxJrv7+f9XecwazynjU8e4Vw3Q==
+  
+  immutable@^4.0.0-rc.12:
+    version "4.0.0-rc.12"
+    resolved "https://registry.yarnpkg.com/immutable/-/immutable-4.0.0-rc.12.tgz#ca59a7e4c19ae8d9bf74a97bdf0f6e2f2a5d0217"
+    integrity sha512-0M2XxkZLx/mi3t8NVwIm1g8nHoEmM9p9UBl/G9k4+hm0kBgOVdMV/B3CY5dQ8qG8qc80NN4gDV4HQv6FTJ5q7A==
   
   import-fresh@^2.0.0:
     version "2.0.0"
@@ -4710,6 +4730,11 @@ Lockfile:
     dependencies:
       minimist "^1.2.5"
   
+  moment@^2.24.0:
+    version "2.29.1"
+    resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
+    integrity sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==
+  
   ms@2.0.0:
     version "2.0.0"
     resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz"
@@ -5329,6 +5354,19 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.1.tgz#5b3531bd76a645a4c9fb6e693ed36419e3301339"
     integrity sha512-NAnt2iGDXohE5LI7uBnLnqvLQMtzhkiAOLXTmv+qnF9Ky7xAPcX8Up/xWIhxvLVGJvuLiNc4xQLtuqDRzb4fSA==
   
+  react-native-calendars@^1.1249.0:
+    version "1.1249.0"
+    resolved "https://registry.yarnpkg.com/react-native-calendars/-/react-native-calendars-1.1249.0.tgz#e94deb0e77186b4fc15b11d18a7eeece452d331b"
+    integrity sha512-DJqF8OJ4C4btkltJOzGS27FdWBVczkQmBHRYVaKuy3qUvoZ6/l/pdSQuTPNJHN/WCCCy9Uc+bXPsws2BAHh6Kg==
+    dependencies:
+      hoist-non-react-statics "^3.3.1"
+      immutable "^4.0.0-rc.12"
+      lodash "^4.17.15"
+      moment "^2.24.0"
+      prop-types "^15.5.10"
+      react-native-swipe-gestures "^1.0.5"
+      xdate "^0.8.0"
+  
   react-native-gesture-handler@~1.8.0:
     version "1.8.0"
     resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.8.0.tgz#18f61f51da50320f938957b0ee79bc58f47449dc"
@@ -5368,6 +5406,11 @@ Lockfile:
     version "2.15.2"
     resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.15.2.tgz#a449700e895b462937211ec72ed6f09652758f06"
     integrity sha512-CagNf2APXkVoRlF3Mugr264FbKbrBg9eXUkqhIPVeZB8EsdS8XPrnt99yj/pzmT+yJMBY0dGrjXT8+68WYh6YQ==
+  
+  react-native-swipe-gestures@^1.0.5:
+    version "1.0.5"
+    resolved "https://registry.yarnpkg.com/react-native-swipe-gestures/-/react-native-swipe-gestures-1.0.5.tgz#a172cb0f3e7478ccd681fd36b8bfbcdd098bde7c"
+    integrity sha512-Ns7Bn9H/Tyw278+5SQx9oAblDZ7JixyzeOczcBK8dipQk2pD7Djkcfnf1nB/8RErAmMLL9iXgW0QHqiII8AhKw==
   
   "react-native@https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz":
     version "0.63.2"
@@ -6506,6 +6549,11 @@ Lockfile:
     dependencies:
       simple-plist "^1.1.0"
       uuid "^7.0.3"
+  
+  xdate@^0.8.0:
+    version "0.8.2"
+    resolved "https://registry.yarnpkg.com/xdate/-/xdate-0.8.2.tgz#d7b033c00485d02695baf0044f4eacda3fc961a3"
+    integrity sha1-17AzwASF0CaVuvAET06s2j/JYaM=
   
   xhr@^2.0.1:
     version "2.6.0"

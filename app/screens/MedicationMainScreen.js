@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, StyleSheet, Button } from 'react-native';
 
+import routes from '../navigation/routes';
+
 function MedicationMainScreen({ navigation }) {
 	return (
 		<View style={styles.container}>
