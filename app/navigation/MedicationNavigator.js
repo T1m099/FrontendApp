@@ -1,7 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import OrganizationMainScreen from '../screens/OrganizationMainScreen';
 import CalendarScreen from '../screens/CalendarScreen';
 import TimelineScreen from '../screens/TimelineScreen';
 import routes from './routes';
