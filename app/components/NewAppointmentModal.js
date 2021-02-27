@@ -53,6 +53,7 @@ function NewAppointmentModal({
 							end: endDate,
 							title,
 							description,
+							color: { label: 'Red', value: '#ff0000' },
 						}}
 						onSubmit={handleSubmit}
 						validationSchema={validationSchema}
