@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { MaterialCommunityIcons, Fontisto } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 
 import MainScreen from '../screens/MainScreen';
 import routes from './routes';
@@ -10,9 +10,10 @@ import MedicationNavigator from '../navigation/MedicationNavigator';
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
+
 	return (
 		<Tab.Navigator
-			tabBarOptions={{ showLabel: false }}
+			tabBarOptions={{ showLabel: false}}
 			initialRouteName={routes.HOME}
 		>
 			<Tab.Screen
@@ -20,8 +21,8 @@ const AppNavigator = () => {
 				component={OrganisationNavigator}
 				options={{
 					tabBarIcon: ({ color, size }) => (
-						<MaterialCommunityIcons
-							name='calendar'
+						<AntDesign
+							name='book'
 							color={color}
 							size={size}
 						/>
@@ -33,7 +34,7 @@ const AppNavigator = () => {
 				component={MainScreen}
 				options={{
 					tabBarIcon: ({ color, size }) => (
-						<MaterialCommunityIcons
+						<AntDesign
 							name='home'
 							color={color}
 							size={size}
@@ -46,7 +47,7 @@ const AppNavigator = () => {
 				component={MedicationNavigator}
 				options={{
 					tabBarIcon: ({ color, size }) => (
-						<Fontisto name='pills' color={color} size={size} />
+						<AntDesign name='medicinebox' color={color} size={size} />
 					),
 				}}
 			/>

@@ -9,6 +9,7 @@ import MedicationMainScreen from '../screens/MedicationMainScreen';
 const Stack = createStackNavigator();
 
 const MedicationNavigator = () => (
+
 	<Stack.Navigator mode='modal'>
 		<Stack.Screen
 			name={routes.MEDICATION}
