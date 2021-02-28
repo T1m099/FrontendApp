@@ -3,7 +3,7 @@ import { View, StyleSheet, FlatList } from 'react-native';
 import { useFormikContext } from 'formik';
 
 import AppButton from './AppButton';
-import AppFormDatePicker from './forms/AppFormDatePicker';
+import ReminderPicker from './ReminderPicker';
 
 function ReminderList({ name, style }) {
 	const { setFieldValue, values } = useFormikContext();
@@ -18,6 +18,17 @@ function ReminderList({ name, style }) {
 		setFieldValue(name, reminders);
 	};
 
+	const handlePressNewReminder = async () => {
+		const reminder = { date: new Date() };
+		reminder.date.setSeconds(0);
+		const vals = [...values[name]];
+		const itemName = createReminderName(vals.length + 1);
+
+		vals.push({ name: itemName });
+		setFieldValue(itemName, reminder);
+		setFieldValue(name, vals);
+	};
+
 	return (
 		<View style={style}>
 			<FlatList
@@ -28,7 +39,7 @@ function ReminderList({ name, style }) {
 				renderItem={({ item }) => {
 					return (
 						<View>
-							<AppFormDatePicker
+							<ReminderPicker
 								name={item.name}
 								valueViewTransform={toTimeString}
 								mode='time'
@@ -37,18 +48,7 @@ function ReminderList({ name, style }) {
 					);
 				}}
 			/>
-			<AppButton
-				title='New Reminder'
-				onPress={async () => {
-					const nd = new Date();
-					const vals = [...values[name]];
-					const itemName = createReminderName(vals.length + 1);
-
-					vals.push({ name: itemName });
-					setFieldValue(itemName, nd);
-					setFieldValue(name, vals);
-				}}
-			/>
+			<AppButton title='New Reminder' onPress={handlePressNewReminder} />
 		</View>
 	);
 }

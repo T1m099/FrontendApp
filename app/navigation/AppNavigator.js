@@ -6,10 +6,12 @@ import MainScreen from '../screens/MainScreen';
 import routes from './routes';
 import OrganisationNavigator from './OrganisationNavigator';
 import MedicationNavigator from '../navigation/MedicationNavigator';
+import useNotifications from '../hooks/useNotifications';
 
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
+	useNotifications();
 	return (
 		<Tab.Navigator
 			tabBarOptions={{ showLabel: false }}

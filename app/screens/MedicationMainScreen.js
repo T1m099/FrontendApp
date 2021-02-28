@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Alert, FlatList } from 'react-native';
+import { View, StyleSheet, Alert, FlatList, Platform } from 'react-native';
 import AppButton from '../components/AppButton';
 import MediactionListItem from '../components/MediactionListItem';
 import MedicationModal from '../components/MedicationModal';
 
 import medicationService from '../services/medicationService';
+import notificationService from '../services/notificationService';
 
 function MedicationMainScreen({ navigation }) {
 	const baseMedItemDetails = {
@@ -31,7 +32,7 @@ function MedicationMainScreen({ navigation }) {
 			)
 				loadedMeds = loadedMeds.map((m) => {
 					m.reminders = m.reminders.map((r) => {
-						r = new Date(r);
+						r.date = new Date(r.date);
 						return r;
 					});
 					return m;
@@ -50,6 +51,29 @@ function MedicationMainScreen({ navigation }) {
 		const originalMeds = [...meds];
 		const currentMeds = [...meds];
 		const d = { ...data };
+		//checking if reminders are new (no ID) and give them a id
+		d.reminders = await Promise.all(
+			d.reminders.map(async (r, i) => {
+				if (!r.id) {
+					let id;
+					try {
+						id = await notificationService.scheduleAsync(
+							Platform.OS,
+							{ title: d.title, message: d.description },
+							r.date,
+							false
+						);
+					} catch (error) {
+						console.log(error);
+					}
+
+					r.id = id;
+				}
+				return r;
+			})
+		);
+		console.log('now: ' + new Date(Date.now()));
+		console.log('scheduled: ' + d.reminders[0].date);
 
 		if (data.id === 'new') {
 			d.id = '' + (meds.length + 1);
@@ -68,6 +92,7 @@ function MedicationMainScreen({ navigation }) {
 			setMeds(originalMeds);
 		}
 	};
+
 	const handleDelete = async (item) => {
 		let currentMeds = [...meds];
 		currentMeds = currentMeds.filter((m) => m.id !== item.id);
