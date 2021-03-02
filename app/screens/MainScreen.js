@@ -21,8 +21,7 @@ function MainScreen({ navigation }) {
 				<Button
 					title='Magic.'
 					onPress={async () => {
-						//console.log(await notificationService.cancelAllAsync());
-						console.log(await notificationService.magicMethod());
+						console.log(await notificationService.cancelAllAsync());
 					}}
 				></Button>
 			</View>

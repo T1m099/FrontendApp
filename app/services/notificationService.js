@@ -1,11 +1,7 @@
 import * as Notifications from 'expo-notifications';
+import logger from '../utils/logger';
 
 let handlerSet = false;
-
-const cancelAllAsync = async () => {
-	await Notifications.cancelAllScheduledNotificationsAsync();
-	return await Notifications.getAllScheduledNotificationsAsync();
-};
 
 const defaultHandler = async () => ({
 	shouldShowAlert: true,
@@ -13,14 +9,21 @@ const defaultHandler = async () => ({
 	shouldSetBadge: false,
 });
 
+const cancelAllAsync = async () => {
+	await Notifications.cancelAllScheduledNotificationsAsync();
+	return await Notifications.getAllScheduledNotificationsAsync();
+};
+const cancelAsync = async (id) => {
+	try {
+		await Notifications.cancelScheduledNotificationAsync(id);
+	} catch (error) {
+		logger.log('Could not cancel notification: ' + error);
+	}
+};
 const setHandler = (handler = defaultHandler) => {
 	Notifications.setNotificationHandler({
 		handleNotification: handler,
 	});
-};
-
-const magicMethod = async () => {
-	return await Notifications.getAllScheduledNotificationsAsync();
 };
 const scheduleAsync = async (platform, content, time, repeat = false) => {
 	if (!handlerSet) {
@@ -57,6 +60,6 @@ const scheduleAsync = async (platform, content, time, repeat = false) => {
 export default {
 	cancelAllAsync,
 	setHandler,
-	magicMethod,
 	scheduleAsync,
+	cancelAsync,
 };

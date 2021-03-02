@@ -10,8 +10,8 @@ const load = async () => {
 	return Array.isArray(loaded) ? loaded : [];
 };
 const clear = async () => {
-	await SecureCache.remove(medsCacheKey);
-	await SecureCache.store(medsCacheKey, []);
+	await secureCache.remove(medsCacheKey);
+	await secureCache.store(medsCacheKey, []);
 };
 
 export default {

@@ -1,25 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Alert, FlatList, Platform } from 'react-native';
+
 import AppButton from '../components/AppButton';
 import MediactionListItem from '../components/MediactionListItem';
-import MedicationModal from '../components/MedicationModal';
+import routes from '../navigation/routes';
 
 import medicationService from '../services/medicationService';
 import notificationService from '../services/notificationService';
 
-function MedicationMainScreen({ navigation }) {
-	const baseMedItemDetails = {
-		id: 'new',
-		title: 'My Medication',
-		description: '',
-		unit: 'pills',
-		quantity: '1',
-		reminders: [],
-	};
+const baseMedItemDetails = {
+	id: 'new',
+	title: 'My Medication',
+	description: '',
+	unit: 'pills',
+	quantity: '1',
+	reminders: [],
+};
 
+function MedicationMainScreen({ navigation }) {
 	const [meds, setMeds] = useState([]);
-	const [modalVisible, setModalVisible] = useState(false);
-	const [modalItem, setModalItem] = useState(baseMedItemDetails);
 
 	const loadMeds = async () => {
 		try {
@@ -51,15 +50,40 @@ function MedicationMainScreen({ navigation }) {
 		const originalMeds = [...meds];
 		const currentMeds = [...meds];
 		const d = { ...data };
-		//checking if reminders are new (no ID) and give them a id
-		d.reminders = await Promise.all(
-			d.reminders.map(async (r, i) => {
-				if (!r.id) {
-					let id;
+		//cancel all scheduled notifications for the edited item, in case there are any
+		d.reminders.forEach((r) => {
+			if (!r.id.match('new_')) {
+				notificationService.cancelAsync(r.id);
+			}
+		});
+
+		//checking if reminders are new and schedule notifications for them
+		d.reminders = await scheduleReminderNotifications(d.reminders, d);
+
+		if (data.id.match('new')) {
+			d.id = '' + (meds.length + 1);
+			currentMeds.push(d);
+		} else {
+			const index = currentMeds.indexOf(
+				currentMeds.find((m) => m.id === data.id)
+			);
+			currentMeds[index] = d;
+		}
+		persistMeds(currentMeds, originalMeds);
+	};
+
+	const scheduleReminderNotifications = async (reminders, messageDetails) => {
+		return await Promise.all(
+			reminders.map(async (r, i) => {
+				if (r.id.match('new_')) {
+					let id = r.id;
 					try {
 						id = await notificationService.scheduleAsync(
 							Platform.OS,
-							{ title: d.title, message: d.description },
+							{
+								title: messageDetails.title,
+								message: messageDetails.description,
+							},
 							r.date,
 							false
 						);
@@ -72,18 +96,21 @@ function MedicationMainScreen({ navigation }) {
 				return r;
 			})
 		);
-		console.log('now: ' + new Date(Date.now()));
-		console.log('scheduled: ' + d.reminders[0].date);
+	};
 
-		if (data.id === 'new') {
-			d.id = '' + (meds.length + 1);
-			currentMeds.push(d);
-		} else {
-			const index = currentMeds.indexOf(
-				currentMeds.find((m) => m.id === data.id)
-			);
-			currentMeds[index] = d;
-		}
+	//TODO: Persist deletions
+	const handleDeleteMedication = async (item) => {
+		const originalMeds = [...meds];
+		let currentMeds = [...meds];
+		item.reminders?.forEach((r) => {
+			if (r.id) {
+				notificationService.cancelAsync(r.id);
+			}
+		});
+		currentMeds = currentMeds.filter((m) => m.id !== item.id);
+		persistMeds(currentMeds, originalMeds);
+	};
+	const persistMeds = async (currentMeds, originalMeds) => {
 		setMeds(currentMeds);
 		try {
 			await medicationService.save(currentMeds);
@@ -93,15 +120,27 @@ function MedicationMainScreen({ navigation }) {
 		}
 	};
 
-	const handleDelete = async (item) => {
-		let currentMeds = [...meds];
-		currentMeds = currentMeds.filter((m) => m.id !== item.id);
-		setMeds(currentMeds);
+	const handleDeleteReminder = async (reminder) => {
+		console.log(reminder);
+		if (reminder.id && !reminder.id.match('new_')) {
+			await notificationService.cancelAsync(reminder.id);
+		}
 	};
-	const handlePressEditItem = (item) => {
-		setModalItem(item);
-		setModalVisible(true);
+
+	const goToMedicationEdit = (item) => {
+		navigation.push(routes.MEDICATION_EDIT, {
+			title: 'New Medication',
+			description: '',
+			onSubmit: (values) => {
+				handleSaveMedication(values);
+			},
+			onDeleteReminder: (reminder) => {
+				handleDeleteReminder(reminder);
+			},
+			initialValues: item,
+		});
 	};
+
 	return (
 		<View style={styles.container}>
 			<FlatList
@@ -113,34 +152,31 @@ function MedicationMainScreen({ navigation }) {
 					return (
 						<MediactionListItem
 							data={item}
-							onPress={handlePressEditItem}
+							onPress={() => {
+								goToMedicationEdit(item);
+							}}
 							onDelete={(item) => {
-								handleDelete(item);
+								handleDeleteMedication(item);
 							}}
 						/>
 					);
 				}}
 				ListFooterComponent={
-					<AppButton
-						onPress={() => {
-							setModalItem(baseMedItemDetails);
-							setModalVisible(true);
-						}}
-						title='New Medication Item'
-					/>
+					<React.Fragment>
+						<AppButton
+							onPress={() => {
+								goToMedicationEdit(baseMedItemDetails);
+							}}
+							title='New Medication Item'
+						/>
+						<AppButton
+							onPress={() => {
+								medicationService.clear();
+							}}
+							title='Clear Cache'
+						/>
+					</React.Fragment>
 				}
-			/>
-			<MedicationModal
-				visible={modalVisible}
-				onPressClose={() => {
-					setModalVisible(false);
-				}}
-				title='New Medication'
-				description=''
-				onSubmit={(values) => {
-					handleSaveMedication(values);
-				}}
-				initialValues={modalItem}
 			/>
 		</View>
 	);

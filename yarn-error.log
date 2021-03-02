@@ -46,6 +46,7 @@ npm manifest:
   		"dayjs": "^1.10.4",
   		"expo": "40.0.0",
   		"expo-constants": "9.3.3",
+  		"expo-notifications": "^0.8.1",
   		"expo-permissions": "~10.0.0",
   		"expo-secure-store": "~9.3.0",
   		"expo-status-bar": "^1.0.3",
@@ -1257,6 +1258,11 @@ Lockfile:
     dependencies:
       "@hapi/hoek" "^8.3.0"
   
+  "@ide/backoff@^1.0.0":
+    version "1.0.0"
+    resolved "https://registry.yarnpkg.com/@ide/backoff/-/backoff-1.0.0.tgz#466842c25bd4a4833e0642fab41ccff064010176"
+    integrity sha512-F0YfUDjvT+Mtt/R4xdl2X0EYCHMMiJqNLdxHD++jDT5ydEFIyqbCHh51Qx2E211dgZprPKhV7sHmnXKpLuvc5g==
+  
   "@jest/console@^24.9.0":
     version "24.9.0"
     resolved "https://registry.yarnpkg.com/@jest/console/-/console-24.9.0.tgz"
@@ -2192,7 +2198,7 @@ Lockfile:
       "@babel/plugin-transform-template-literals" "^7.0.0"
       babel-plugin-syntax-trailing-function-commas "^7.0.0-beta.0"
   
-  badgin@^1.1.2:
+  badgin@^1.1.2, badgin@^1.1.5:
     version "1.2.2"
     resolved "https://registry.yarnpkg.com/badgin/-/badgin-1.2.2.tgz#cbb0b71b047230c681a68911eb24136f0632adc6"
     integrity sha512-XtoSjNhy2D09qGiLhFWBJmBwBlmleQuwyYyjddWNCJ3gqGRBOBR25VGcd8CAOSghpEUmghB3LD4NpHrUG89zCg==
@@ -3038,6 +3044,14 @@ Lockfile:
       path-browserify "^1.0.0"
       url-parse "^1.4.4"
   
+  expo-constants@9.3.1:
+    version "9.3.1"
+    resolved "https://registry.yarnpkg.com/expo-constants/-/expo-constants-9.3.1.tgz#1cab4896ea5e626fc7f19f49893526c94b481443"
+    integrity sha512-58ENdEeVxZ29INv87IqZf5ZD4+NjvxzrHOCFha8iW3TbTL8GXY/6QjlIZ/yGHu4TwBoatozeJQ+9WCCz/hXM0A==
+    dependencies:
+      fbjs "1.0.0"
+      uuid "^3.3.2"
+  
   expo-constants@9.3.3:
     version "9.3.3"
     resolved "https://registry.yarnpkg.com/expo-constants/-/expo-constants-9.3.3.tgz#e02b71109e0514d17aa7eacbad44f1277eca1ae8"
@@ -3101,6 +3115,18 @@ Lockfile:
     version "10.0.0"
     resolved "https://registry.yarnpkg.com/expo-location/-/expo-location-10.0.0.tgz#2923411649434f2f079343b163b13c5c9eee8b2d"
     integrity sha512-QLEb0iaBv4/blLxxfKRj2/HPisY+1t+g6MgegqZ1j1U/0qih4dvzUQrxie9ZOZyQB9gnXFCRnZv3QzHEb52dcA==
+  
+  expo-notifications@^0.8.1:
+    version "0.8.1"
+    resolved "https://registry.yarnpkg.com/expo-notifications/-/expo-notifications-0.8.1.tgz#f495f78df0ae21103d41879be6f94f2cfc07ca1f"
+    integrity sha512-QGhP4Y/iTNbwvgsjdkoE2iQRbXcWLC9WPVWTLSkPt434Ot01M/XFoZtlLgeZyjiOm+/26IORUJus3vNG32KzEA==
+    dependencies:
+      "@ide/backoff" "^1.0.0"
+      abort-controller "^3.0.0"
+      badgin "^1.1.5"
+      expo-application "~2.4.1"
+      expo-constants "9.3.1"
+      uuid "^3.4.0"
   
   expo-permissions@~10.0.0:
     version "10.0.0"
