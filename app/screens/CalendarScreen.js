@@ -3,18 +3,29 @@ import { View, StyleSheet } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import dayjs from 'dayjs';
 
-import NewAppointmentModal from '../components/NewAppointmentModal';
-
-import AppointmentService from '../services/appointmentService';
+import EventService from '../services/eventService';
 import AppButton from '../components/AppButton';
+import routes from '../navigation/routes';
+import PickerModal from '../components/PickerModal';
 
-function CalendarScreen(props) {
-	const now = new Date();
-
-	const [showModal, setShowModal] = useState(false);
-	const [startDate, setStartDate] = useState(now);
-	const [endDate, setEndDate] = useState(now);
-	const [appointments, setAppointments] = useState([]);
+function CalendarScreen({ navigation }) {
+	const [events, setEvents] = useState([]);
+	const [selectedDateEvents, setSelectedDateEvents] = useState([]);
+	const [selectEventModalVisible, setSelectEventModalVisible] = useState(
+		false
+	);
+	const loadEvents = async () => {
+		let loadedEvents = await EventService.loadEvents();
+		loadedEvents = loadedEvents.map((e) => {
+			e.start = new Date(e.start);
+			e.end = new Date(e.end);
+			return e;
+		});
+		setEvents(loadedEvents);
+	};
+	useEffect(() => {
+		loadEvents();
+	}, []);
 
 	const toTimeString = (date) => {
 		return `${date.getHours()}:${
@@ -26,26 +37,20 @@ function CalendarScreen(props) {
 	const toDateString = (date) => {
 		return date.toDateString();
 	};
-	const dateToCalendarFormat = (date) => {
+	const dateToCalendarFormat = (dayjsDate) => {
 		//this function uses dayjs
-		return date.format('YYYY-MM-DD');
+		return dayjsDate.format('YYYY-MM-DD');
 	};
-	const createAppointment = (appointment) => {
-		const currentAppointments = [...appointments];
-		currentAppointments.push(appointment);
-		AppointmentService.safeAppointment(appointment);
-		setAppointments(currentAppointments);
-	};
-
-	const mapAppointmentsToMarkings = (appointments) => {
+	const mapEventsToMarkings = (eventsToMap) => {
 		const currentlyMarkedDates = {};
+		console.log(eventsToMap);
 
-		appointments.forEach((appointment) => {
-			const start = dayjs(appointment.start);
-			const end = dayjs(appointment.end);
+		eventsToMap.forEach((event) => {
+			const start = dayjs(event.start);
+			const end = dayjs(event.end);
 			const diff = end.diff(start, 'd');
 
-			let dateToMark = dayjs(appointment.start);
+			let dateToMark = dayjs(event.start);
 			for (let i = 0; i <= diff; i++) {
 				//mark date
 
@@ -57,7 +62,7 @@ function CalendarScreen(props) {
 				currentlyMarkedDates[
 					dateToCalendarFormat(dateToMark)
 				].periods.push({
-					color: appointment.color,
+					color: event.color,
 					startingDay: i === 0 ? true : false,
 					endingDay: i === diff ? true : false,
 				});
@@ -68,60 +73,94 @@ function CalendarScreen(props) {
 		return currentlyMarkedDates;
 	};
 
-	const loadAppointments = async () => {
-		const appointments = await AppointmentService.loadAppointments();
-		setAppointments(appointments);
+	const handleSubmitEventEdit = async (event) => {
+		const currentEvents = [...events];
+
+		const index = currentEvents.findIndex((e) => e.id === event.id);
+		if (index > -1) {
+			//cutting the element out of the array so it is updated instead of being created
+			currentEvents.splice(index, 1);
+		}
+		const savedEvent = await EventService.safeEvent(event);
+		currentEvents.push(savedEvent);
+
+		setEvents(currentEvents);
 	};
 
-	useEffect(() => {
-		loadAppointments();
-	}, []);
+	const handlePressNewEvent = (day) => {
+		const start = new Date(day.timestamp);
+		const end = new Date(day.timestamp);
+		end.setTime(end.getTime() + 60 * 60 * 1000);
+
+		const event = {
+			id: 'new',
+			start,
+			end,
+			title: 'New Event',
+			description: '',
+		};
+		goToEventEdit(event);
+	};
+
+	const goToEventEdit = (event) => {
+		navigation.push(routes.EVENT_EDIT, {
+			valueDateViewTransform: toDateString,
+			valueTimeViewTransform: toTimeString,
+			event,
+			onSubmit: handleSubmitEventEdit,
+		});
+	};
+
+	const handlePressDay = (day) => {
+		const allEvents = [...events];
+		const eventsAtThisDate = allEvents.filter((e) => {
+			const start = dayjs(e.start);
+			const end = dayjs(e.end);
+			const date = dayjs(new Date(day.timestamp));
+
+			return (
+				date.isSame(start) ||
+				date.isSame(end) ||
+				(date.isAfter(start) && date.isBefore(end))
+			);
+		});
+		if (eventsAtThisDate.length === 0) {
+			handlePressNewEvent(day);
+		} else {
+			setSelectedDateEvents(eventsAtThisDate);
+			setSelectEventModalVisible(true);
+		}
+	};
 
 	return (
 		<View style={styles.container}>
 			<Calendar
-				// Initially visible month. Default = Date()
-				current={now}
-				// Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
-				// Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
-				// Handler which gets executed on day press. Default = undefined
-				onDayPress={(day) => {
-					console.log('selected day', day);
-				}}
-				onDayLongPress={(day) => {
-					const start = new Date(day.timestamp);
-					const end = new Date(day.timestamp);
-					end.setTime(end.getTime() + 60 * 60 * 1000);
-					setStartDate(start);
-					setEndDate(end);
-					setShowModal(true);
-				}}
-				// Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting
+				onDayPress={handlePressDay}
+				onDayLongPress={handlePressNewEvent}
 				monthFormat={'MMMM yyyy'}
 				firstDay={1}
-				markedDates={mapAppointmentsToMarkings(appointments)}
+				markedDates={mapEventsToMarkings(events)}
 				markingType='multi-period'
 			/>
 			<AppButton
 				onPress={() => {
-					AppointmentService.clearAppointments();
-					setAppointments([]);
+					EventService.clearEvents();
+					setEvents([]);
 				}}
 				title='Clear Calender'
 			/>
-
-			<NewAppointmentModal
-				startDate={startDate}
-				endDate={endDate}
-				title=''
-				description=''
-				valueDateViewTransform={toDateString}
-				valueTimeViewTransform={toTimeString}
-				visible={showModal}
-				onPressClose={() => {
-					setShowModal(false);
+			{/* todo: proper id */}
+			<PickerModal
+				items={selectedDateEvents}
+				modalVisible={selectEventModalVisible}
+				labelProp='title'
+				idProp='id'
+				onSelectItem={(item) => {
+					goToEventEdit(item);
 				}}
-				onSubmit={createAppointment}
+				onPressClose={() => {
+					setSelectEventModalVisible(false);
+				}}
 			/>
 		</View>
 	);

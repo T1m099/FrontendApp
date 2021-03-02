@@ -5,6 +5,7 @@ import OrganizationMainScreen from '../screens/OrganizationMainScreen';
 import CalendarScreen from '../screens/CalendarScreen';
 import TimelineScreen from '../screens/TimelineScreen';
 import routes from './routes';
+import EventEditScreen from '../screens/EventEditScreen';
 
 const Stack = createStackNavigator();
 
@@ -15,6 +16,7 @@ const OrganisationNavigator = () => (
 			component={OrganizationMainScreen}
 		/>
 		<Stack.Screen name={routes.CALENDAR} component={CalendarScreen} />
+		<Stack.Screen name={routes.EVENT_EDIT} component={EventEditScreen} />
 		<Stack.Screen name={routes.TIMELINE} component={TimelineScreen} />
 	</Stack.Navigator>
 );

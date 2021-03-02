@@ -121,7 +121,6 @@ function MedicationMainScreen({ navigation }) {
 	};
 
 	const handleDeleteReminder = async (reminder) => {
-		console.log(reminder);
 		if (reminder.id && !reminder.id.match('new_')) {
 			await notificationService.cancelAsync(reminder.id);
 		}

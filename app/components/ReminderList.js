@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 import { useFormikContext } from 'formik';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
@@ -35,7 +35,6 @@ function ReminderList({ name, style, valueViewTransform, onReminderDelete }) {
 		setFieldValue(name, reminders);
 		onReminderDelete(reminder);
 	};
-	console.log(values[name]);
 	return (
 		<View style={style}>
 			<FlatList
