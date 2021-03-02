@@ -16,7 +16,7 @@ function CalendarScreen({ navigation }) {
 	);
 	const loadEvents = async () => {
 		let loadedEvents = await EventService.loadEvents();
-		loadedEvents = loadedEvents.map((e) => {
+		loadedEvents = loadedEvents.map(e => {
 			e.start = new Date(e.start);
 			e.end = new Date(e.end);
 			return e;
@@ -27,25 +27,24 @@ function CalendarScreen({ navigation }) {
 		loadEvents();
 	}, []);
 
-	const toTimeString = (date) => {
+	const toTimeString = date => {
 		return `${date.getHours()}:${
 			date.getMinutes() / 10 < 1
 				? '0' + date.getMinutes()
 				: date.getMinutes()
 		}`;
 	};
-	const toDateString = (date) => {
+	const toDateString = date => {
 		return date.toDateString();
 	};
-	const dateToCalendarFormat = (dayjsDate) => {
+	const dateToCalendarFormat = dayjsDate => {
 		//this function uses dayjs
 		return dayjsDate.format('YYYY-MM-DD');
 	};
-	const mapEventsToMarkings = (eventsToMap) => {
+	const mapEventsToMarkings = eventsToMap => {
 		const currentlyMarkedDates = {};
-		console.log(eventsToMap);
 
-		eventsToMap.forEach((event) => {
+		eventsToMap.forEach(event => {
 			const start = dayjs(event.start);
 			const end = dayjs(event.end);
 			const diff = end.diff(start, 'd');
@@ -62,7 +61,7 @@ function CalendarScreen({ navigation }) {
 				currentlyMarkedDates[
 					dateToCalendarFormat(dateToMark)
 				].periods.push({
-					color: event.color,
+					color: event.markingColor,
 					startingDay: i === 0 ? true : false,
 					endingDay: i === diff ? true : false,
 				});
@@ -73,10 +72,10 @@ function CalendarScreen({ navigation }) {
 		return currentlyMarkedDates;
 	};
 
-	const handleSubmitEventEdit = async (event) => {
+	const handleSubmitEventEdit = async event => {
 		const currentEvents = [...events];
 
-		const index = currentEvents.findIndex((e) => e.id === event.id);
+		const index = currentEvents.findIndex(e => e.id === event.id);
 		if (index > -1) {
 			//cutting the element out of the array so it is updated instead of being created
 			currentEvents.splice(index, 1);
@@ -87,7 +86,7 @@ function CalendarScreen({ navigation }) {
 		setEvents(currentEvents);
 	};
 
-	const handlePressNewEvent = (day) => {
+	const handlePressNewEvent = day => {
 		const start = new Date(day.timestamp);
 		const end = new Date(day.timestamp);
 		end.setTime(end.getTime() + 60 * 60 * 1000);
@@ -102,7 +101,7 @@ function CalendarScreen({ navigation }) {
 		goToEventEdit(event);
 	};
 
-	const goToEventEdit = (event) => {
+	const goToEventEdit = event => {
 		navigation.push(routes.EVENT_EDIT, {
 			valueDateViewTransform: toDateString,
 			valueTimeViewTransform: toTimeString,
@@ -110,10 +109,21 @@ function CalendarScreen({ navigation }) {
 			onSubmit: handleSubmitEventEdit,
 		});
 	};
+	const goToDateEventScreen = selectedDateEvents => {
+		navigation.push(routes.DATE_EVENT_OVERVIEW, {
+			events: selectedDateEvents,
+			labelProp: 'title',
+			idProp: 'id',
+			onSelectEvent: goToEventEdit,
+			onPressClose: () => {
+				//setSelectEventModalVisible(false);
+			},
+		});
+	};
 
-	const handlePressDay = (day) => {
+	const handlePressDay = day => {
 		const allEvents = [...events];
-		const eventsAtThisDate = allEvents.filter((e) => {
+		const eventsAtThisDate = allEvents.filter(e => {
 			const start = dayjs(e.start);
 			const end = dayjs(e.end);
 			const date = dayjs(new Date(day.timestamp));
@@ -127,8 +137,9 @@ function CalendarScreen({ navigation }) {
 		if (eventsAtThisDate.length === 0) {
 			handlePressNewEvent(day);
 		} else {
-			setSelectedDateEvents(eventsAtThisDate);
-			setSelectEventModalVisible(true);
+			//setSelectedDateEvents(eventsAtThisDate);
+			//setSelectEventModalVisible(true);
+			goToDateEventScreen(eventsAtThisDate);
 		}
 	};
 
@@ -155,7 +166,7 @@ function CalendarScreen({ navigation }) {
 				modalVisible={selectEventModalVisible}
 				labelProp='title'
 				idProp='id'
-				onSelectItem={(item) => {
+				onSelectItem={item => {
 					goToEventEdit(item);
 				}}
 				onPressClose={() => {

@@ -18,7 +18,7 @@ function EventEditScreen({ navigation, route }) {
 		event,
 		onSubmit,
 	} = route.params;
-	event.color = { label: 'Red', value: '#ff0000' };
+	event.markingColor = { label: 'Red', value: '#ff0000' };
 
 	const validationSchema = Yup.object().shape({
 		title: Yup.string().required().min(1).label('Title'),
@@ -31,9 +31,9 @@ function EventEditScreen({ navigation, route }) {
 		{ label: 'Red', value: '#ff0000' },
 	];
 
-	const handleSubmit = (event) => {
+	const handleSubmit = event => {
 		const e = { ...event };
-		e.color = event.color.value;
+		e.markingColor = event.markingColor.value;
 		onSubmit(e);
 		navigation.pop();
 	};
@@ -68,7 +68,7 @@ function EventEditScreen({ navigation, route }) {
 					placeholder='Description'
 				/>
 				<AppFormPicker
-					name='color'
+					name='markingColor'
 					items={pickerItems}
 					placeholder='Choose color'
 				/>
