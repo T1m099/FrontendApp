@@ -5,6 +5,7 @@ import CalendarScreen from '../screens/CalendarScreen';
 import TimelineScreen from '../screens/TimelineScreen';
 import routes from './routes';
 import MedicationMainScreen from '../screens/MedicationMainScreen';
+import MedicationEditScreen from '../screens/MedicationEditScreen';
 
 const Stack = createStackNavigator();
 
@@ -13,6 +14,10 @@ const MedicationNavigator = () => (
 		<Stack.Screen
 			name={routes.MEDICATION}
 			component={MedicationMainScreen}
+		/>
+		<Stack.Screen
+			name={routes.MEDICATION_EDIT}
+			component={MedicationEditScreen}
 		/>
 		<Stack.Screen name={routes.CALENDAR} component={CalendarScreen} />
 		<Stack.Screen name={routes.TIMELINE} component={TimelineScreen} />

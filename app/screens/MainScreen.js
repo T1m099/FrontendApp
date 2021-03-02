@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, StyleSheet, Text, Button } from 'react-native';
+import { View, StyleSheet, Text, Button, Platform } from 'react-native';
 
 import SafeAreaScreen from '../components/SafeAreaScreen';
 import routes from '../navigation/routes';
+import notificationService from '../services/notificationService';
 
 function MainScreen({ navigation }) {
 	return (
@@ -15,6 +16,12 @@ function MainScreen({ navigation }) {
 						navigation.navigate(routes.ORGANIZATION, {
 							screen: routes.CALENDAR,
 						});
+					}}
+				></Button>
+				<Button
+					title='Magic.'
+					onPress={async () => {
+						console.log(await notificationService.cancelAllAsync());
 					}}
 				></Button>
 			</View>

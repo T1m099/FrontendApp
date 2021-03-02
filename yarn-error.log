@@ -46,6 +46,7 @@ npm manifest:
   		"dayjs": "^1.10.4",
   		"expo": "40.0.0",
   		"expo-constants": "9.3.3",
+  		"expo-notifications": "^0.8.1",
   		"expo-permissions": "~10.0.0",
   		"expo-secure-store": "~9.3.0",
   		"expo-status-bar": "^1.0.3",
@@ -55,6 +56,7 @@ npm manifest:
   		"react-dom": "16.13.1",
   		"react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
   		"react-native-calendars": "^1.1249.0",
+  		"react-native-dropdown-picker": "^4.0.2",
   		"react-native-gesture-handler": "~1.8.0",
   		"react-native-progress": "^4.1.2",
   		"react-native-screens": "~2.15.0",
@@ -1256,6 +1258,11 @@ Lockfile:
     dependencies:
       "@hapi/hoek" "^8.3.0"
   
+  "@ide/backoff@^1.0.0":
+    version "1.0.0"
+    resolved "https://registry.yarnpkg.com/@ide/backoff/-/backoff-1.0.0.tgz#466842c25bd4a4833e0642fab41ccff064010176"
+    integrity sha512-F0YfUDjvT+Mtt/R4xdl2X0EYCHMMiJqNLdxHD++jDT5ydEFIyqbCHh51Qx2E211dgZprPKhV7sHmnXKpLuvc5g==
+  
   "@jest/console@^24.9.0":
     version "24.9.0"
     resolved "https://registry.yarnpkg.com/@jest/console/-/console-24.9.0.tgz"
@@ -2191,7 +2198,7 @@ Lockfile:
       "@babel/plugin-transform-template-literals" "^7.0.0"
       babel-plugin-syntax-trailing-function-commas "^7.0.0-beta.0"
   
-  badgin@^1.1.2:
+  badgin@^1.1.2, badgin@^1.1.5:
     version "1.2.2"
     resolved "https://registry.yarnpkg.com/badgin/-/badgin-1.2.2.tgz#cbb0b71b047230c681a68911eb24136f0632adc6"
     integrity sha512-XtoSjNhy2D09qGiLhFWBJmBwBlmleQuwyYyjddWNCJ3gqGRBOBR25VGcd8CAOSghpEUmghB3LD4NpHrUG89zCg==
@@ -2705,14 +2712,9 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/crypto-random-string/-/crypto-random-string-1.0.0.tgz#a230f64f568310e1498009940790ec99545bca7e"
     integrity sha1-ojD2T1aDEOFJgAmUB5DsmVRbyn4=
   
-  dayjs@^1.10.4:
+  dayjs@^1.10.4, dayjs@^1.8.15:
     version "1.10.4"
     resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.10.4.tgz#8e544a9b8683f61783f570980a8a80eaf54ab1e2"
-    integrity sha512-RI/Hh4kqRc1UKLOAf/T5zdMMX5DQIlDxwUe3wSyMMnEbGunnpENCdbUgM+dW7kXidZqCttBrmw7BhN4TMddkCw==
-  
-  dayjs@^1.8.15:
-    version "1.10.4"
-    resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.10.4.tgz"
     integrity sha512-RI/Hh4kqRc1UKLOAf/T5zdMMX5DQIlDxwUe3wSyMMnEbGunnpENCdbUgM+dW7kXidZqCttBrmw7BhN4TMddkCw==
   
   debug@2.6.9, debug@^2.2.0, debug@^2.3.3:
@@ -3042,6 +3044,14 @@ Lockfile:
       path-browserify "^1.0.0"
       url-parse "^1.4.4"
   
+  expo-constants@9.3.1:
+    version "9.3.1"
+    resolved "https://registry.yarnpkg.com/expo-constants/-/expo-constants-9.3.1.tgz#1cab4896ea5e626fc7f19f49893526c94b481443"
+    integrity sha512-58ENdEeVxZ29INv87IqZf5ZD4+NjvxzrHOCFha8iW3TbTL8GXY/6QjlIZ/yGHu4TwBoatozeJQ+9WCCz/hXM0A==
+    dependencies:
+      fbjs "1.0.0"
+      uuid "^3.3.2"
+  
   expo-constants@9.3.3:
     version "9.3.3"
     resolved "https://registry.yarnpkg.com/expo-constants/-/expo-constants-9.3.3.tgz#e02b71109e0514d17aa7eacbad44f1277eca1ae8"
@@ -3105,6 +3115,18 @@ Lockfile:
     version "10.0.0"
     resolved "https://registry.yarnpkg.com/expo-location/-/expo-location-10.0.0.tgz#2923411649434f2f079343b163b13c5c9eee8b2d"
     integrity sha512-QLEb0iaBv4/blLxxfKRj2/HPisY+1t+g6MgegqZ1j1U/0qih4dvzUQrxie9ZOZyQB9gnXFCRnZv3QzHEb52dcA==
+  
+  expo-notifications@^0.8.1:
+    version "0.8.1"
+    resolved "https://registry.yarnpkg.com/expo-notifications/-/expo-notifications-0.8.1.tgz#f495f78df0ae21103d41879be6f94f2cfc07ca1f"
+    integrity sha512-QGhP4Y/iTNbwvgsjdkoE2iQRbXcWLC9WPVWTLSkPt434Ot01M/XFoZtlLgeZyjiOm+/26IORUJus3vNG32KzEA==
+    dependencies:
+      "@ide/backoff" "^1.0.0"
+      abort-controller "^3.0.0"
+      badgin "^1.1.5"
+      expo-application "~2.4.1"
+      expo-constants "9.3.1"
+      uuid "^3.4.0"
   
   expo-permissions@~10.0.0:
     version "10.0.0"
@@ -5367,6 +5389,13 @@ Lockfile:
       react-native-swipe-gestures "^1.0.5"
       xdate "^0.8.0"
   
+  react-native-dropdown-picker@^4.0.2:
+    version "4.0.2"
+    resolved "https://registry.yarnpkg.com/react-native-dropdown-picker/-/react-native-dropdown-picker-4.0.2.tgz#03cc48d6f817ff1348323c99f35afbc69640e1e7"
+    integrity sha512-x6OZ5YNzFc5PEwWFDYQBBxYq6qvCnc8NPX9d9UsXpaLizTSXLT0kWLsUzsJOMm6SVsUxWY7FOAyXsB4JUSyKdQ==
+    dependencies:
+      react-native-vector-icons "^7.0.0"
+  
   react-native-gesture-handler@~1.8.0:
     version "1.8.0"
     resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.8.0.tgz#18f61f51da50320f938957b0ee79bc58f47449dc"
@@ -5411,6 +5440,20 @@ Lockfile:
     version "1.0.5"
     resolved "https://registry.yarnpkg.com/react-native-swipe-gestures/-/react-native-swipe-gestures-1.0.5.tgz#a172cb0f3e7478ccd681fd36b8bfbcdd098bde7c"
     integrity sha512-Ns7Bn9H/Tyw278+5SQx9oAblDZ7JixyzeOczcBK8dipQk2pD7Djkcfnf1nB/8RErAmMLL9iXgW0QHqiII8AhKw==
+  
+  react-native-vector-icons@^7.0.0:
+    version "7.1.0"
+    resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-7.1.0.tgz#145487d617b2a81d395d2cf64e6e065fcab3a454"
+    integrity sha512-V2a1zJ4i+kS8O4j183gIwX14St9AxxXabxwYpFBgRhvr2NDXyFcjHDEAgrOYYlt2W57e20aN1tBDU/I+wn9WtQ==
+    dependencies:
+      lodash.frompairs "^4.0.1"
+      lodash.isequal "^4.5.0"
+      lodash.isstring "^4.0.1"
+      lodash.omit "^4.5.0"
+      lodash.pick "^4.4.0"
+      lodash.template "^4.5.0"
+      prop-types "^15.7.2"
+      yargs "^15.0.2"
   
   "react-native@https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz":
     version "0.63.2"
@@ -6665,7 +6708,7 @@ Lockfile:
       y18n "^4.0.0"
       yargs-parser "^15.0.1"
   
-  yargs@^15.1.0:
+  yargs@^15.0.2, yargs@^15.1.0:
     version "15.4.1"
     resolved "https://registry.yarnpkg.com/yargs/-/yargs-15.4.1.tgz"
     integrity sha512-aePbxDmcYW++PaqBsJ+HYUFwCdv4LVvdnhBy78E57PIor8/OVvhMrADFFEDh8DHDFRv/O9i3lPhsENjO7QX0+A==

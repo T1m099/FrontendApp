@@ -6,4 +6,5 @@ export default {
 	primary: '#c5c5c5',
 	secondary: '#f5f5f5',
 	accent: '#d26c4e',
+	danger: '#ff5252',
 };
