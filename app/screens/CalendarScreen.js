@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Alert } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import dayjs from 'dayjs';
 
@@ -7,6 +7,7 @@ import EventService from '../services/eventService';
 import AppButton from '../components/AppButton';
 import routes from '../navigation/routes';
 import PickerModal from '../components/PickerModal';
+import eventService from '../services/eventService';
 
 function CalendarScreen({ navigation }) {
 	const [events, setEvents] = useState([]);
@@ -95,10 +96,26 @@ function CalendarScreen({ navigation }) {
 			id: 'new',
 			start,
 			end,
-			title: 'New Event',
+			title: '',
 			description: '',
+			markingColor: '#ff0000',
 		};
 		goToEventEdit(event);
+	};
+
+	const handleDeleteEvent = async event => {
+		const originalEvents = [...events];
+		let currentEvents = [...events];
+
+		currentEvents = currentEvents.filter(e => e.id !== event.id);
+		setEvents(currentEvents);
+
+		try {
+			await eventService.deleteEvent(event);
+		} catch (error) {
+			setEvents(originalEvents);
+			Alert.alert('Error', 'Could not delete event');
+		}
 	};
 
 	const goToEventEdit = event => {
@@ -115,9 +132,7 @@ function CalendarScreen({ navigation }) {
 			labelProp: 'title',
 			idProp: 'id',
 			onSelectEvent: goToEventEdit,
-			onPressClose: () => {
-				//setSelectEventModalVisible(false);
-			},
+			onDeleteEvent: handleDeleteEvent,
 		});
 	};
 
@@ -137,8 +152,6 @@ function CalendarScreen({ navigation }) {
 		if (eventsAtThisDate.length === 0) {
 			handlePressNewEvent(day);
 		} else {
-			//setSelectedDateEvents(eventsAtThisDate);
-			//setSelectEventModalVisible(true);
 			goToDateEventScreen(eventsAtThisDate);
 		}
 	};
@@ -159,19 +172,6 @@ function CalendarScreen({ navigation }) {
 					setEvents([]);
 				}}
 				title='Clear Calender'
-			/>
-			{/* todo: proper id */}
-			<PickerModal
-				items={selectedDateEvents}
-				modalVisible={selectEventModalVisible}
-				labelProp='title'
-				idProp='id'
-				onSelectItem={item => {
-					goToEventEdit(item);
-				}}
-				onPressClose={() => {
-					setSelectEventModalVisible(false);
-				}}
 			/>
 		</View>
 	);

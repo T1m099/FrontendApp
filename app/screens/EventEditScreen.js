@@ -9,7 +9,7 @@ import AppForm from '../components/forms/AppForm';
 import AppFormField from '../components/forms/AppFormField';
 import AppFormDateTimePicker from '../components/forms/AppFormDateTimePicker';
 import SubmitButton from '../components/forms/AppSubmitButton';
-import AppFormPicker from '../components/forms/AppFormPicker';
+import AppFormColorPicker from '../components/forms/AppFormColorPicker';
 
 function EventEditScreen({ navigation, route }) {
 	const {
@@ -18,23 +18,16 @@ function EventEditScreen({ navigation, route }) {
 		event,
 		onSubmit,
 	} = route.params;
-	event.markingColor = { label: 'Red', value: '#ff0000' };
 
 	const validationSchema = Yup.object().shape({
 		title: Yup.string().required().min(1).label('Title'),
 		description: Yup.string().label('Description'),
 	});
 
-	const pickerItems = [
-		{ label: 'Blue', value: '#0000ff' },
-		{ label: 'Green', value: '#00ff00' },
-		{ label: 'Red', value: '#ff0000' },
-	];
+	const pickerItems = ['#ff0000', '#00ff00', '#0000ff', '#0f0f00'];
 
 	const handleSubmit = event => {
-		const e = { ...event };
-		e.markingColor = event.markingColor.value;
-		onSubmit(e);
+		onSubmit(event);
 		navigation.pop();
 	};
 
@@ -45,21 +38,29 @@ function EventEditScreen({ navigation, route }) {
 				onSubmit={handleSubmit}
 				validationSchema={validationSchema}
 			>
-				<AppText>Title:</AppText>
 				<AppFormField name='title' width='100%' placeholder='Title' />
-				<AppText>Start:</AppText>
-				<AppFormDateTimePicker
-					name='start'
-					valueDateTransform={valueDateViewTransform}
-					valueTimeTransform={valueTimeViewTransform}
-				/>
-				<AppText>End:</AppText>
-				<AppFormDateTimePicker
-					name='end'
-					valueDateTransform={valueDateViewTransform}
-					valueTimeTransform={valueTimeViewTransform}
-				/>
-				<AppText>Description:</AppText>
+
+				<View style={styles.startContainer}>
+					<AppText style={styles.datePickerLabel}>From:</AppText>
+					<View style={styles.datePicker}>
+						<AppFormDateTimePicker
+							name='start'
+							valueDateTransform={valueDateViewTransform}
+							valueTimeTransform={valueTimeViewTransform}
+						/>
+					</View>
+				</View>
+				<View style={styles.startContainer}>
+					<AppText style={styles.datePickerLabel}>To:</AppText>
+					<View style={styles.datePicker}>
+						<AppFormDateTimePicker
+							name='end'
+							valueDateTransform={valueDateViewTransform}
+							valueTimeTransform={valueTimeViewTransform}
+						/>
+					</View>
+				</View>
+
 				<AppFormField
 					maxLength={255}
 					multiline
@@ -67,19 +68,22 @@ function EventEditScreen({ navigation, route }) {
 					numberOfLines={3}
 					placeholder='Description'
 				/>
-				<AppFormPicker
-					name='markingColor'
-					items={pickerItems}
-					placeholder='Choose color'
-				/>
-				<SubmitButton title='Mark in Calendar' />
+
+				<AppFormColorPicker name='markingColor' colors={pickerItems} />
+				<View style={styles.buttonContainer}>
+					<AppButton
+						title='Close'
+						onPress={() => {
+							navigation.pop();
+						}}
+						style={styles.closeButton}
+					/>
+					<SubmitButton
+						title='Mark in Calendar'
+						style={styles.submitButton}
+					/>
+				</View>
 			</AppForm>
-			<AppButton
-				title='Close'
-				onPress={() => {
-					navigation.pop();
-				}}
-			/>
 		</View>
 	);
 }
@@ -89,6 +93,21 @@ const styles = StyleSheet.create({
 	dateTimePickerContainer: {
 		flexDirection: 'row',
 		marginVertical: 10,
+	},
+	startContainer: {
+		flexDirection: 'row',
+		alignItems: 'center',
+	},
+	datePickerLabel: { flex: 1 },
+	datePicker: { flex: 5 },
+	buttonContainer: {
+		flexDirection: 'row',
+	},
+	closeButton: {
+		flex: 1,
+	},
+	submitButton: {
+		flex: 3,
 	},
 });
 
