@@ -10,6 +10,8 @@ import AppFormField from '../components/forms/AppFormField';
 import AppFormDateTimePicker from '../components/forms/AppFormDateTimePicker';
 import SubmitButton from '../components/forms/AppSubmitButton';
 import AppFormColorPicker from '../components/forms/AppFormColorPicker';
+import AppFormPicker from '../components/forms/AppFormPicker';
+import AppFormConditionalElement from '../components/forms/AppFormConditionalElement';
 
 function EventEditScreen({ navigation, route }) {
 	const {
@@ -24,21 +26,99 @@ function EventEditScreen({ navigation, route }) {
 		description: Yup.string().label('Description'),
 	});
 
-	const pickerItems = ['#ff0000', '#00ff00', '#0000ff', '#0f0f00'];
+	const colorPickerItems = [
+		'#00ff00',
+		'#0f0f00',
+		'#006CBE',
+		'#427505',
+		'#C33400',
+		'#00345C',
+		'#E3CC00',
+		'#00A3AE',
+		'#CC007E',
+		'#684697',
+		'#B10E1C',
+		'#F9A825',
+	];
+	const categories = [
+		{ label: 'Appointment', value: 'appointment' },
+		{ label: 'Therapy', value: 'therapy' },
+		{ label: 'Descease', value: 'descease' },
+	];
+	const desceases = [
+		{ label: 'Flatulenzen', value: 'pfrrrrrt' },
+		{ label: 'Schnupfen', value: 'hatschiiij' },
+		{ label: 'Gripaler Infekt', value: 'Bruaaah' },
+	];
 
 	const handleSubmit = event => {
-		onSubmit(event);
+		const e = { ...event };
+		e.category = e.category.label;
+
+		if (e.category === 'Descease') {
+			e.descease = e.descease.label;
+		}
+		onSubmit(e);
 		navigation.pop();
+	};
+
+	const mapInitialValues = values => {
+		const vals = { ...values };
+		vals.category = categories.find(c => vals.category === c.label);
+
+		if (vals.category.label === 'Descease') {
+			vals.descease = desceases.find(d => vals.descease === d.label);
+		}
+		return vals;
 	};
 
 	return (
 		<View style={styles.container}>
 			<AppForm
-				initialValues={event}
+				initialValues={mapInitialValues(event)}
 				onSubmit={handleSubmit}
 				validationSchema={validationSchema}
 			>
 				<AppFormField name='title' width='100%' placeholder='Title' />
+
+				<AppFormPicker
+					name='category'
+					items={categories}
+					extractKey={item => {
+						return item.label;
+					}}
+					renderSelectedItem={item => {
+						return <AppText>{item.label}</AppText>;
+					}}
+					renderPickerItem={({ item }) => {
+						return <AppText>{item.label}</AppText>;
+					}}
+					renderPlaceholder={() => {
+						return <AppText>Choose Category</AppText>;
+					}}
+				/>
+				<AppFormConditionalElement
+					checkCondition={values => {
+						return values.category.value === 'descease';
+					}}
+				>
+					<AppFormPicker
+						name='descease'
+						items={desceases}
+						extractKey={item => {
+							return item.label;
+						}}
+						renderSelectedItem={item => {
+							return <AppText>{item.label}</AppText>;
+						}}
+						renderPickerItem={({ item }) => {
+							return <AppText>{item.label}</AppText>;
+						}}
+						renderPlaceholder={() => {
+							return <AppText>Descease</AppText>;
+						}}
+					/>
+				</AppFormConditionalElement>
 
 				<View style={styles.startContainer}>
 					<AppText style={styles.datePickerLabel}>From:</AppText>
@@ -69,7 +149,10 @@ function EventEditScreen({ navigation, route }) {
 					placeholder='Description'
 				/>
 
-				<AppFormColorPicker name='markingColor' colors={pickerItems} />
+				<AppFormColorPicker
+					name='markingColor'
+					colors={colorPickerItems}
+				/>
 				<View style={styles.buttonContainer}>
 					<AppButton
 						title='Close'

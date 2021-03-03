@@ -40,7 +40,7 @@ function AppFormColorPicker({ name, colors }) {
 						contentContainerStyle={styles.colorContainer}
 						data={colors}
 						keyExtractor={item => item}
-						numColumns={2}
+						numColumns={3}
 						renderItem={({ item }) => (
 							<TouchableOpacity
 								onPress={() => {

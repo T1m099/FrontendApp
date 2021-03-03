@@ -76,6 +76,8 @@ function CalendarScreen({ navigation }) {
 	const handleSubmitEventEdit = async event => {
 		const currentEvents = [...events];
 
+		console.log(event);
+
 		const index = currentEvents.findIndex(e => e.id === event.id);
 		if (index > -1) {
 			//cutting the element out of the array so it is updated instead of being created
@@ -99,6 +101,7 @@ function CalendarScreen({ navigation }) {
 			title: '',
 			description: '',
 			markingColor: '#ff0000',
+			category: 'Appointment',
 		};
 		goToEventEdit(event);
 	};

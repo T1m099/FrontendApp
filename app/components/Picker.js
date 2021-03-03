@@ -6,54 +6,44 @@ import {
 	Modal,
 	Button,
 	FlatList,
+	TouchableOpacity,
 } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import AppText from './AppText';
 import defaultStyles from '../config/styles';
-import PickerItem from './PickerItem';
 import SafeAreaScreen from './SafeAreaScreen';
 import colors from '../config/colors';
 
 function AppPicker({
-	icon,
 	items,
-	numberOfColumns = 1,
+	extractKey,
+	renderIcon,
+	renderSelectedItem,
+	renderPickerItem,
+	renderPlaceholder,
 	onSelectItem,
-	PickerItemComponent = PickerItem,
-	placeholder,
+	numberOfColumns = 1,
 	selectedItem,
-	width = '100%',
+	style,
 }) {
 	const [modalVisible, setModalVisible] = useState(false);
 
 	return (
 		<>
 			<TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
-				<View style={[styles.container, { width }]}>
-					{icon && (
-						<MaterialCommunityIcons
-							name={icon}
-							size={20}
-							color={defaultStyles.colors.medium}
-							style={styles.icon}
-						/>
-					)}
-					{selectedItem ? (
-						<AppText style={styles.text}>
-							{selectedItem.label}
-						</AppText>
-					) : (
-						<AppText style={styles.placeholder}>
-							{placeholder}
-						</AppText>
-					)}
+				<View style={[styles.container, style]}>
+					{renderIcon && renderIcon()}
+					{selectedItem
+						? renderSelectedItem(selectedItem)
+						: renderPlaceholder()}
 
-					<MaterialCommunityIcons
-						name='chevron-down'
-						size={20}
-						color={defaultStyles.colors.medium}
-					/>
+					<View style={{ alignSelf: 'center' }}>
+						<MaterialCommunityIcons
+							name='chevron-down'
+							size={20}
+							color={colors.text}
+						/>
+					</View>
 				</View>
 			</TouchableWithoutFeedback>
 			<Modal visible={modalVisible} animationType='slide'>
@@ -64,18 +54,20 @@ function AppPicker({
 					/>
 					<FlatList
 						data={items}
-						keyExtractor={(item) => item.value.toString()}
+						keyExtractor={item => extractKey(item)}
 						numColumns={numberOfColumns}
-						renderItem={({ item }) => (
-							<PickerItemComponent
-								item={item}
-								label={item.label}
-								onPress={() => {
-									setModalVisible(false);
-									onSelectItem(item);
-								}}
-							/>
-						)}
+						renderItem={item => {
+							return (
+								<TouchableOpacity
+									onPress={() => {
+										onSelectItem(item);
+										setModalVisible(false);
+									}}
+								>
+									{renderPickerItem(item)}
+								</TouchableOpacity>
+							);
+						}}
 					/>
 				</SafeAreaScreen>
 			</Modal>
@@ -85,6 +77,7 @@ function AppPicker({
 
 const styles = StyleSheet.create({
 	container: {
+		width: '100%',
 		backgroundColor: colors.primary,
 		borderRadius: 25,
 		flexDirection: 'row',
