@@ -7,6 +7,7 @@ import TimelineScreen from '../screens/TimelineScreen';
 import routes from './routes';
 import EventEditScreen from '../screens/EventEditScreen';
 import DateEventScreen from '../screens/DateEventsScreen';
+import TestScreen from '../screens/TestScreen';
 
 const Stack = createStackNavigator();
 
@@ -22,6 +23,7 @@ const OrganisationNavigator = () => (
 			name={routes.DATE_EVENT_OVERVIEW}
 			component={DateEventScreen}
 		/>
+		<Stack.Screen name={routes.TEST} component={TestScreen} />
 		<Stack.Screen name={routes.TIMELINE} component={TimelineScreen} />
 	</Stack.Navigator>
 );

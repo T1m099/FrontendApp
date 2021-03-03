@@ -6,7 +6,7 @@ import ListItemDeleteAction from '../components/ListItemDeleteAction';
 import AppButton from '../components/AppButton';
 
 function DateEventScreen({ navigation, route }) {
-	const { events, onSelectEvent, onPressClose } = route.params;
+	const { events, onSelectEvent, onDeleteEvent } = route.params;
 
 	return (
 		<View style={styles.container}>
@@ -24,7 +24,8 @@ function DateEventScreen({ navigation, route }) {
 							return (
 								<ListItemDeleteAction
 									onPress={() => {
-										console.log(item);
+										onDeleteEvent(item);
+										navigation.pop();
 									}}
 								/>
 							);
@@ -35,7 +36,6 @@ function DateEventScreen({ navigation, route }) {
 					<AppButton
 						title='Close'
 						onPress={() => {
-							onPressClose();
 							navigation.pop();
 						}}
 					/>

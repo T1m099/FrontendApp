@@ -3,7 +3,7 @@ import SecureCache from '../utils/secureCache';
 const eventCacheKey = 'apmntCache';
 
 //could be optimized
-const safeEvent = async (event) => {
+const safeEvent = async event => {
 	const loaded = await SecureCache.load(eventCacheKey);
 	const events = Array.isArray(loaded) ? loaded : [];
 
@@ -13,7 +13,7 @@ const safeEvent = async (event) => {
 		eventToSave.id = '' + Date.now() + Math.floor(Math.random() * 100000);
 	}
 
-	const index = events.findIndex((e) => e.id === event.id);
+	const index = events.findIndex(e => e.id === event.id);
 	if (index === -1) {
 		events.push(eventToSave);
 	} else {
@@ -24,13 +24,27 @@ const safeEvent = async (event) => {
 
 	return eventToSave;
 };
-const safeEvents = async (event) => {
-	await SecureCache.store(eventCacheKey, Array.isArray(event) ? event : []);
+const safeEvents = async event => {
+	try {
+		await SecureCache.store(
+			eventCacheKey,
+			Array.isArray(event) ? event : []
+		);
+	} catch (error) {
+		alert('Events could not be safed.');
+	}
 };
 
 const loadEvents = async () => {
-	const event = await SecureCache.load(eventCacheKey);
-	if (!event) return [];
+	const events = await SecureCache.load(eventCacheKey);
+	if (!events) return [];
+	return events;
+};
+const deleteEvent = async event => {
+	let events = await loadEvents();
+	events = events.filter(e => e.id !== event.id);
+
+	await safeEvents(events);
 	return event;
 };
 const clearEvents = async () => {
@@ -42,5 +56,6 @@ export default {
 	safeEvent,
 	safeEvents,
 	loadEvents,
+	deleteEvent,
 	clearEvents,
 };

@@ -15,43 +15,38 @@ function ListItem({
 	renderRightActions,
 }) {
 	return (
-		<Swipeable renderRightActions={renderRightActions}>
-			<TouchableOpacity underlayColor={colors.light} onPress={onPress}>
-				<View style={styles.container}>
-					{IconComponent}
-					{image && <Image style={styles.image} source={image} />}
-					<View style={styles.detailsContainer}>
-						<AppText style={styles.title} numberOfLines={1}>
-							{title}
+		<Swipeable
+			renderRightActions={renderRightActions}
+			containerStyle={styles.swipableContainer}
+			childrenContainerStyle={styles.swipableChildren}
+		>
+			<TouchableOpacity onPress={onPress}>
+				{IconComponent}
+				{image && <Image style={styles.image} source={image} />}
+				<View style={styles.detailsContainer}>
+					<AppText style={styles.title} numberOfLines={1}>
+						{title}
+					</AppText>
+					{message !== '' && (
+						<AppText style={styles.message} numberOfLines={2}>
+							{' '}
+							{message}
 						</AppText>
-						{message !== '' && (
-							<AppText style={styles.message} numberOfLines={2}>
-								{' '}
-								{message}
-							</AppText>
-						)}
-					</View>
-
-					<MaterialCommunityIcons
-						color={colors.medium}
-						name='chevron-right'
-						size={25}
-					/>
+					)}
 				</View>
+
+				{/* <MaterialCommunityIcons
+					color={colors.medium}
+					name='chevron-right'
+					size={25}
+				/> */}
 			</TouchableOpacity>
 		</Swipeable>
 	);
 }
 
 const styles = StyleSheet.create({
-	container: {
-		marginTop: 10,
-		alignItems: 'center',
-		flexDirection: 'row',
-		padding: 10,
-		backgroundColor: colors.primary,
-		borderRadius: 25,
-	},
+	container: {},
 	detailsContainer: {
 		flex: 1,
 		marginLeft: 10,
@@ -68,6 +63,13 @@ const styles = StyleSheet.create({
 	title: {
 		fontWeight: '500',
 	},
+	swipableChildren: {
+		flexDirection: 'row',
+		padding: 10,
+		backgroundColor: colors.primary,
+		borderRadius: 25,
+	},
+	swipableContainer: {},
 });
 
 export default ListItem;

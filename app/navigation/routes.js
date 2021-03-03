@@ -7,4 +7,5 @@ export default Object.freeze({
 	ORGANIZATION: 'Organization',
 	MEDICATION: 'Medication',
 	MEDICATION_EDIT: 'Edit Medication',
+	TEST: 'Test',
 });
