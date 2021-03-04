@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Modal, View } from 'react-native';
 import * as Yup from 'yup';
 
-import AppButton from './AppButton';
+import {ButtonStandard} from './Buttons';
 import AppText from './AppText';
 
 import SafeAreaScreen from './SafeAreaScreen';
@@ -90,7 +90,7 @@ function NewAppointmentModal({
 						/>
 						<SubmitButton title='Create new Appointment' />
 					</AppForm>
-					<AppButton title='Close' onPress={onPressClose} />
+					<ButtonStandard Content='Close' onPress={onPressClose} />
 				</View>
 			</Modal>
 		</SafeAreaScreen>

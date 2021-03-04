@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import {View, StyleSheet, ImageBackground} from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import dayjs from 'dayjs';
 
 import NewAppointmentModal from '../components/NewAppointmentModal';
 
 import AppointmentService from '../services/appointmentService';
-import AppButton from '../components/AppButton';
+import {ButtonStandard} from '../components/Buttons';
+import SafeAreaScreen from "../components/SafeAreaScreen";
 
 function CalendarScreen(props) {
 	const now = new Date();
@@ -78,6 +79,8 @@ function CalendarScreen(props) {
 	}, []);
 
 	return (
+		<ImageBackground source={require('../images/Background.png')} style={styles.image}>
+
 		<View style={styles.container}>
 			<Calendar
 				// Initially visible month. Default = Date()
@@ -102,12 +105,12 @@ function CalendarScreen(props) {
 				markedDates={mapAppointmentsToMarkings(appointments)}
 				markingType='multi-period'
 			/>
-			<AppButton
+			<ButtonStandard
 				onPress={() => {
 					AppointmentService.clearAppointments();
 					setAppointments([]);
 				}}
-				title='Clear Calender'
+				Content='Clear Calender'
 			/>
 
 			<NewAppointmentModal
@@ -124,11 +127,18 @@ function CalendarScreen(props) {
 				onSubmit={createAppointment}
 			/>
 		</View>
-	);
+</ImageBackground>
+
+);
 }
 
 const styles = StyleSheet.create({
 	container: {},
+	image: {
+		flex: 1,
+		resizeMode: "cover",
+		justifyContent: "center"
+	},
 });
 
 export default CalendarScreen;
