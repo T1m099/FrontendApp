@@ -2,9 +2,8 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import * as Yup from 'yup';
 
-import AppButton from '../components/AppButton';
 import AppText from '../components/AppText';
-
+import {ButtonStandard} from "../components/Buttons";
 import AppForm from '../components/forms/AppForm';
 import AppFormField from '../components/forms/AppFormField';
 import AppFormDateTimePicker from '../components/forms/AppFormDateTimePicker';
@@ -152,7 +151,7 @@ function EventEditScreen({ navigation, route }) {
 					colors={colorPickerItems}
 				/>
 				<View style={styles.buttonContainer}>
-					<AppButton
+					<ButtonStandard
 						title='Close'
 						onPress={() => {
 							navigation.pop();

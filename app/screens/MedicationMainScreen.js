@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Alert, FlatList, Platform, ImageBackgorund } from 'react-native';
+import { View, StyleSheet, Alert, FlatList, Platform, ImageBackground } from 'react-native';
 
 import {ButtonYellow} from "../components/Buttons";
 import MediactionListItem from '../components/MediactionListItem';
 import routes from '../navigation/routes';
 import colors from "../config/colors";
-import {AntDesign} from "@expo/vector-icons";
 
 import medicationService from '../services/medicationService';
 import reminderService from '../services/reminderService';

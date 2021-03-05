@@ -1,9 +1,8 @@
 import React from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
-
+import {ButtonStandard} from "../components/Buttons";
 import ListItem from '../components/ListItem';
 import ListItemDeleteAction from '../components/ListItemDeleteAction';
-import AppButton from '../components/AppButton';
 
 function DateEventScreen({ navigation, route }) {
 	const { events, onSelectEvent, onDeleteEvent } = route.params;
@@ -33,7 +32,7 @@ function DateEventScreen({ navigation, route }) {
 					/>
 				)}
 				ListFooterComponent={
-					<AppButton
+					<ButtonStandard
 						title='Close'
 						onPress={() => {
 							navigation.pop();

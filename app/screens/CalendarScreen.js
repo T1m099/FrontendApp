@@ -3,9 +3,9 @@ import { View, StyleSheet, Alert, ImageBackground } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import dayjs from 'dayjs';
 
-import NewAppointmentModal from '../components/NewAppointmentModal';
+/*import NewAppointmentModal from '../components/NewAppointmentModal';
 
-import AppointmentService from '../services/appointmentService';
+import AppointmentService from '../services/appointmentService';*/
 import {ButtonDecline, ButtonStandard} from '../components/Buttons';
 import SafeAreaScreen from "../components/SafeAreaScreen";
 import EventService from '../services/eventService';

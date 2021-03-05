@@ -9,7 +9,6 @@ import {
 import { useFormikContext } from 'formik';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
-import AppButton from './AppButton';
 import ListItemDeleteAction from './ListItemDeleteAction';
 import DatePickerInput from './DatePickerInput';
 import reminderService from '../services/reminderService';

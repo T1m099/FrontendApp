@@ -1,8 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, LogBox } from 'react-native';
 import * as Yup from 'yup';
-
-import AppButton from '../components/AppButton';
+import {ButtonStandard} from "../components/Buttons";
 import AppText from '../components/AppText';
 
 import AppForm from '../components/forms/AppForm';
@@ -74,7 +73,7 @@ function MedicationEditScreen({ route, navigation }) {
 					}}
 				/>
 				<View style={styles.buttonArea}>
-					<AppButton
+					<ButtonStandard
 						title='Close'
 						onPress={() => {
 							navigation.pop();
