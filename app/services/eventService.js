@@ -2,6 +2,18 @@ import SecureCache from '../utils/secureCache';
 
 const eventCacheKey = 'apmntCache';
 
+const baseEvent = {
+	id: 'new',
+	start: new Date(),
+	end: new Date(),
+	title: '',
+	description: '',
+	markingColor: '#ff0000',
+	category: 'Appointment',
+	disease: '',
+	reminders: [],
+};
+
 //could be optimized
 const safeEvent = async event => {
 	const loaded = await SecureCache.load(eventCacheKey);
@@ -58,4 +70,5 @@ export default {
 	loadEvents,
 	deleteEvent,
 	clearEvents,
+	baseEvent,
 };

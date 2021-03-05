@@ -6,20 +6,26 @@ import dayjs from 'dayjs';
 import EventService from '../services/eventService';
 import AppButton from '../components/AppButton';
 import routes from '../navigation/routes';
-import PickerModal from '../components/PickerModal';
 import eventService from '../services/eventService';
+import reminderService from '../services/reminderService';
 
 function CalendarScreen({ navigation }) {
 	const [events, setEvents] = useState([]);
-	const [selectedDateEvents, setSelectedDateEvents] = useState([]);
-	const [selectEventModalVisible, setSelectEventModalVisible] = useState(
-		false
-	);
+
+	/* useEffect(() => {
+		navigation.addListener('focus', () => {
+			console.log('focused');
+		});
+	}, [navigation]); */
+
 	const loadEvents = async () => {
 		let loadedEvents = await EventService.loadEvents();
 		loadedEvents = loadedEvents.map(e => {
 			e.start = new Date(e.start);
 			e.end = new Date(e.end);
+			e.reminders = reminderService.parseStringifiedReminders(
+				e.reminders
+			);
 			return e;
 		});
 		setEvents(loadedEvents);
@@ -76,8 +82,6 @@ function CalendarScreen({ navigation }) {
 	const handleSubmitEventEdit = async event => {
 		const currentEvents = [...events];
 
-		console.log(event);
-
 		const index = currentEvents.findIndex(e => e.id === event.id);
 		if (index > -1) {
 			//cutting the element out of the array so it is updated instead of being created
@@ -94,15 +98,9 @@ function CalendarScreen({ navigation }) {
 		const end = new Date(day.timestamp);
 		end.setTime(end.getTime() + 60 * 60 * 1000);
 
-		const event = {
-			id: 'new',
-			start,
-			end,
-			title: '',
-			description: '',
-			markingColor: '#ff0000',
-			category: 'Appointment',
-		};
+		const event = { ...eventService.baseEvent };
+		event.start = start;
+		event.end = end;
 		goToEventEdit(event);
 	};
 
@@ -127,6 +125,8 @@ function CalendarScreen({ navigation }) {
 			valueTimeViewTransform: toTimeString,
 			event,
 			onSubmit: handleSubmitEventEdit,
+			onDeleteReminder: reminder =>
+				reminderService.cancelReminderAsync(reminder),
 		});
 	};
 	const goToDateEventScreen = selectedDateEvents => {
@@ -158,7 +158,6 @@ function CalendarScreen({ navigation }) {
 			goToDateEventScreen(eventsAtThisDate);
 		}
 	};
-
 	return (
 		<View style={styles.container}>
 			<Calendar

@@ -12,13 +12,16 @@ import SubmitButton from '../components/forms/AppSubmitButton';
 import AppFormColorPicker from '../components/forms/AppFormColorPicker';
 import AppFormPicker from '../components/forms/AppFormPicker';
 import AppFormConditionalElement from '../components/forms/AppFormConditionalElement';
+import ReminderList from '../components/ReminderList';
 
 function EventEditScreen({ navigation, route }) {
+	const disceaseKeyword = 'Disease';
 	const {
 		valueDateViewTransform,
 		valueTimeViewTransform,
 		event,
 		onSubmit,
+		onDeleteReminder,
 	} = route.params;
 
 	const validationSchema = Yup.object().shape({
@@ -40,42 +43,24 @@ function EventEditScreen({ navigation, route }) {
 		'#B10E1C',
 		'#F9A825',
 	];
-	const categories = [
-		{ label: 'Appointment', value: 'appointment' },
-		{ label: 'Therapy', value: 'therapy' },
-		{ label: 'Descease', value: 'descease' },
-	];
-	const desceases = [
-		{ label: 'Flatulenzen', value: 'pfrrrrrt' },
-		{ label: 'Schnupfen', value: 'hatschiiij' },
-		{ label: 'Gripaler Infekt', value: 'Bruaaah' },
-	];
+	const categories = ['Appointment', 'Therapy', disceaseKeyword];
+	const diseases = ['Flatulenzen', 'Gripaler Infekt', 'Männergrippe'];
 
 	const handleSubmit = event => {
 		const e = { ...event };
-		e.category = e.category.label;
-
-		if (e.category === 'Descease') {
-			e.descease = e.descease.label;
-		}
+		/* if (e.category === disceaseKeyword) {
+			if (e.reminders) delete e.reminders;
+		} else {
+			if (e.disease) delete e.disease;
+		} */
 		onSubmit(e);
 		navigation.pop();
-	};
-
-	const mapInitialValues = values => {
-		const vals = { ...values };
-		vals.category = categories.find(c => vals.category === c.label);
-
-		if (vals.category.label === 'Descease') {
-			vals.descease = desceases.find(d => vals.descease === d.label);
-		}
-		return vals;
 	};
 
 	return (
 		<View style={styles.container}>
 			<AppForm
-				initialValues={mapInitialValues(event)}
+				initialValues={event}
 				onSubmit={handleSubmit}
 				validationSchema={validationSchema}
 			>
@@ -85,13 +70,13 @@ function EventEditScreen({ navigation, route }) {
 					name='category'
 					items={categories}
 					extractKey={item => {
-						return item.label;
+						return item;
 					}}
 					renderSelectedItem={item => {
-						return <AppText>{item.label}</AppText>;
+						return <AppText>{item}</AppText>;
 					}}
 					renderPickerItem={({ item }) => {
-						return <AppText>{item.label}</AppText>;
+						return <AppText>{item}</AppText>;
 					}}
 					renderPlaceholder={() => {
 						return <AppText>Choose Category</AppText>;
@@ -99,23 +84,23 @@ function EventEditScreen({ navigation, route }) {
 				/>
 				<AppFormConditionalElement
 					checkCondition={values => {
-						return values.category.value === 'descease';
+						return values.category === disceaseKeyword;
 					}}
 				>
 					<AppFormPicker
-						name='descease'
-						items={desceases}
+						name='disease'
+						items={diseases}
 						extractKey={item => {
-							return item.label;
+							return item;
 						}}
 						renderSelectedItem={item => {
-							return <AppText>{item.label}</AppText>;
+							return <AppText>{item.toString()}</AppText>;
 						}}
 						renderPickerItem={({ item }) => {
-							return <AppText>{item.label}</AppText>;
+							return <AppText>{item.toString()}</AppText>;
 						}}
 						renderPlaceholder={() => {
-							return <AppText>Descease</AppText>;
+							return <AppText>Disease</AppText>;
 						}}
 					/>
 				</AppFormConditionalElement>
@@ -140,6 +125,19 @@ function EventEditScreen({ navigation, route }) {
 						/>
 					</View>
 				</View>
+				<AppFormConditionalElement
+					checkCondition={values => {
+						return values.category !== disceaseKeyword;
+					}}
+				>
+					<ReminderList
+						name='reminders'
+						style={styles.reminderList}
+						onReminderDelete={reminder => {
+							onDeleteReminder(reminder);
+						}}
+					/>
+				</AppFormConditionalElement>
 
 				<AppFormField
 					maxLength={255}
@@ -191,6 +189,9 @@ const styles = StyleSheet.create({
 	},
 	submitButton: {
 		flex: 3,
+	},
+	reminderList: {
+		maxHeight: '35%',
 	},
 });
 

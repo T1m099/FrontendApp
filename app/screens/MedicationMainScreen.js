@@ -6,7 +6,7 @@ import MediactionListItem from '../components/MediactionListItem';
 import routes from '../navigation/routes';
 
 import medicationService from '../services/medicationService';
-import notificationService from '../services/notificationService';
+import reminderService from '../services/reminderService';
 
 const baseMedItemDetails = {
 	id: 'new',
@@ -29,11 +29,10 @@ function MedicationMainScreen({ navigation }) {
 				Array.isArray(loadedMeds) &&
 				loadedMeds.length > 0
 			)
-				loadedMeds = loadedMeds.map((m) => {
-					m.reminders = m.reminders.map((r) => {
-						r.date = new Date(r.date);
-						return r;
-					});
+				loadedMeds = loadedMeds.map(m => {
+					m.reminders = reminderService.parseStringifiedReminders(
+						m.reminders
+					);
 					return m;
 				});
 			setMeds(loadedMeds);
@@ -46,68 +45,46 @@ function MedicationMainScreen({ navigation }) {
 		loadMeds();
 	}, []);
 
-	const handleSaveMedication = async (data) => {
+	const handleSaveMedication = async data => {
 		const originalMeds = [...meds];
 		const currentMeds = [...meds];
 		const d = { ...data };
 		//cancel all scheduled notifications for the edited item, in case there are any
-		d.reminders.forEach((r) => {
-			if (!r.id.match('new_')) {
-				notificationService.cancelAsync(r.id);
+		d.reminders.forEach(r => {
+			if (!r.id.match(reminderService.NEW_REMINDER_PREFIX)) {
+				reminderService.cancelReminderAsync(r);
 			}
 		});
 
 		//checking if reminders are new and schedule notifications for them
-		d.reminders = await scheduleReminderNotifications(d.reminders, d);
+		d.reminders = await reminderService.scheduleReminderNotificationsAsync(
+			d.reminders,
+			d,
+			Platform.OS
+		);
 
 		if (data.id.match('new')) {
 			d.id = '' + (meds.length + 1);
 			currentMeds.push(d);
 		} else {
 			const index = currentMeds.indexOf(
-				currentMeds.find((m) => m.id === data.id)
+				currentMeds.find(m => m.id === data.id)
 			);
 			currentMeds[index] = d;
 		}
 		persistMeds(currentMeds, originalMeds);
 	};
 
-	const scheduleReminderNotifications = async (reminders, messageDetails) => {
-		return await Promise.all(
-			reminders.map(async (r, i) => {
-				if (r.id.match('new_')) {
-					let id = r.id;
-					try {
-						id = await notificationService.scheduleAsync(
-							Platform.OS,
-							{
-								title: messageDetails.title,
-								message: messageDetails.description,
-							},
-							r.date,
-							false
-						);
-					} catch (error) {
-						console.log(error);
-					}
-
-					r.id = id;
-				}
-				return r;
-			})
-		);
-	};
-
 	//TODO: Persist deletions
-	const handleDeleteMedication = async (item) => {
+	const handleDeleteMedication = async item => {
 		const originalMeds = [...meds];
 		let currentMeds = [...meds];
-		item.reminders?.forEach((r) => {
+		item.reminders?.forEach(r => {
 			if (r.id) {
-				notificationService.cancelAsync(r.id);
+				reminderService.cancelReminderAsync(r);
 			}
 		});
-		currentMeds = currentMeds.filter((m) => m.id !== item.id);
+		currentMeds = currentMeds.filter(m => m.id !== item.id);
 		persistMeds(currentMeds, originalMeds);
 	};
 	const persistMeds = async (currentMeds, originalMeds) => {
@@ -120,21 +97,15 @@ function MedicationMainScreen({ navigation }) {
 		}
 	};
 
-	const handleDeleteReminder = async (reminder) => {
-		if (reminder.id && !reminder.id.match('new_')) {
-			await notificationService.cancelAsync(reminder.id);
-		}
-	};
-
-	const goToMedicationEdit = (item) => {
+	const goToMedicationEdit = item => {
 		navigation.push(routes.MEDICATION_EDIT, {
 			title: 'New Medication',
 			description: '',
-			onSubmit: (values) => {
+			onSubmit: values => {
 				handleSaveMedication(values);
 			},
-			onDeleteReminder: (reminder) => {
-				handleDeleteReminder(reminder);
+			onDeleteReminder: reminder => {
+				reminderService.cancelReminderAsync(reminder);
 			},
 			initialValues: item,
 		});
@@ -144,7 +115,7 @@ function MedicationMainScreen({ navigation }) {
 		<View style={styles.container}>
 			<FlatList
 				data={meds ? meds : []}
-				keyExtractor={(item) => {
+				keyExtractor={item => {
 					return item.id;
 				}}
 				renderItem={({ item }) => {
@@ -154,7 +125,7 @@ function MedicationMainScreen({ navigation }) {
 							onPress={() => {
 								goToMedicationEdit(item);
 							}}
-							onDelete={(item) => {
+							onDelete={item => {
 								handleDeleteMedication(item);
 							}}
 						/>
@@ -171,6 +142,7 @@ function MedicationMainScreen({ navigation }) {
 						<AppButton
 							onPress={() => {
 								medicationService.clear();
+								setMeds([]);
 							}}
 							title='Clear Cache'
 						/>
