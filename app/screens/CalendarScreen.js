@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Alert } from 'react-native';
+import { View, StyleSheet, Alert, ImageBackground } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import dayjs from 'dayjs';
 
+import NewAppointmentModal from '../components/NewAppointmentModal';
+
+import AppointmentService from '../services/appointmentService';
+import {ButtonDecline, ButtonStandard} from '../components/Buttons';
+import SafeAreaScreen from "../components/SafeAreaScreen";
 import EventService from '../services/eventService';
-import AppButton from '../components/AppButton';
 import routes from '../navigation/routes';
 import eventService from '../services/eventService';
 import reminderService from '../services/reminderService';
@@ -159,6 +163,8 @@ function CalendarScreen({ navigation }) {
 		}
 	};
 	return (
+		<ImageBackground source={require('../images/Background.png')} style={styles.image}>
+
 		<View style={styles.container}>
 			<Calendar
 				onDayPress={handlePressDay}
@@ -168,19 +174,43 @@ function CalendarScreen({ navigation }) {
 				markedDates={mapEventsToMarkings(events)}
 				markingType='multi-period'
 			/>
-			<AppButton
+			<ButtonDecline
 				onPress={() => {
 					EventService.clearEvents();
 					setEvents([]);
 				}}
-				title='Clear Calender'
+				Content='Clear Calender'
+			size={250}
+				position={'center'}
 			/>
 		</View>
-	);
+</ImageBackground>
+
+);
 }
 
 const styles = StyleSheet.create({
-	container: {},
+	container: {
+		flex: 1,
+		flexDirection: 'column',
+		alignItems: 'center',
+		alignSelf: 'center',
+		width: '92%',
+		maxHeight: 400,
+		borderRadius: 10,
+		marginTop: '.75%',
+		marginBottom: '.75%',
+		backgroundColor: 'rgba(0,0,0,.5)',
+		textAlign: 'center',
+		justifyContent: 'space-between',
+
+	},
+
+	image: {
+		flex: 1,
+		resizeMode: "cover",
+		justifyContent: "center"
+	},
 });
 
 export default CalendarScreen;

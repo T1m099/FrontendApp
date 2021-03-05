@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Alert, FlatList, Platform } from 'react-native';
+import { View, StyleSheet, Alert, FlatList, Platform, ImageBackgorund } from 'react-native';
 
-import AppButton from '../components/AppButton';
+import {ButtonYellow} from "../components/Buttons";
 import MediactionListItem from '../components/MediactionListItem';
 import routes from '../navigation/routes';
+import colors from "../config/colors";
+import {AntDesign} from "@expo/vector-icons";
 
 import medicationService from '../services/medicationService';
 import reminderService from '../services/reminderService';
@@ -112,49 +114,80 @@ function MedicationMainScreen({ navigation }) {
 	};
 
 	return (
-		<View style={styles.container}>
-			<FlatList
-				data={meds ? meds : []}
-				keyExtractor={item => {
-					return item.id;
-				}}
-				renderItem={({ item }) => {
-					return (
-						<MediactionListItem
-							data={item}
-							onPress={() => {
-								goToMedicationEdit(item);
-							}}
-							onDelete={item => {
-								handleDeleteMedication(item);
-							}}
-						/>
-					);
-				}}
-				ListFooterComponent={
-					<React.Fragment>
-						<AppButton
-							onPress={() => {
-								goToMedicationEdit(baseMedItemDetails);
-							}}
-							title='New Medication Item'
-						/>
-						<AppButton
-							onPress={() => {
-								medicationService.clear();
-								setMeds([]);
-							}}
-							title='Clear Cache'
-						/>
-					</React.Fragment>
-				}
-			/>
-		</View>
-	);
+		<ImageBackground source={require('../images/Background.png')} style={styles.image}>
+			<View style={styles.container}>
+                <FlatList
+                    data={meds ? meds : []}
+                    keyExtractor={item => {
+                        return item.id;
+                    }}
+                    renderItem={({ item }) => {
+                        return (
+                            <MediactionListItem
+                                data={item}
+                                onPress={() => {
+                                    goToMedicationEdit(item);
+                                }}
+                                onDelete={item => {
+                                    handleDeleteMedication(item);
+                                }}
+                            />
+                        );
+                    }}
+                    ListFooterComponent={
+                        <React.Fragment>
+                            <ButtonYellow
+                                onPress={() => {
+                                    goToMedicationEdit(baseMedItemDetails);
+                                }}
+                                Content='New Medication Item'
+                            />
+                            <ButtonYellow
+                                onPress={() => {
+                                    medicationService.clear();
+                                    setMeds([]);
+                                }}
+                                Content='Clear Cache'
+                            />
+                        </React.Fragment>
+                    }
+                />
+			</View>
+
+		</ImageBackground>
+
+    );
 }
 
 const styles = StyleSheet.create({
-	container: { padding: 5 },
+	container: {
+		flex: 1,
+		flexDirection: 'row',
+		alignItems: 'center',
+		alignSelf: 'center',
+		width: '92%',
+		maxHeight: 81,
+		borderRadius: 10,
+		marginTop: '.75%',
+		marginBottom: '.75%',
+		backgroundColor: 'rgba(0,0,0,.5)',
+		textAlign: 'center',
+		justifyContent: 'space-between'
+	},
+	image: {
+		flex: 1,
+		resizeMode: "cover",
+		justifyContent: "center"
+	},
+	text: {
+		alignItems: 'flex-start',
+		flex: 1,
+		fontSize: 18,
+		fontWeight: 'bold',
+		color: colors.text,
+		marginLeft: '2%',
+
+	}
 });
 
 export default MedicationMainScreen;

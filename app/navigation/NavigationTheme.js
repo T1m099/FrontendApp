@@ -7,5 +7,9 @@ export default {
 		...DefaultTheme.colors,
 		primary: colors.accent,
 		background: colors.background,
+		card:colors.navigation,
+		text: colors.text,
+		border: colors.navigation,
+
 	},
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { MaterialCommunityIcons, Fontisto } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 
 import MainScreen from '../screens/MainScreen';
 import routes from './routes';
@@ -14,16 +14,26 @@ const AppNavigator = () => {
 	useNotifications();
 	return (
 		<Tab.Navigator
-			tabBarOptions={{ showLabel: false }}
+			tabBarOptions={{ showLabel: false}}
 			initialRouteName={routes.HOME}
 		>
+			<Tab.Screen
+				name={routes.CALENDAR}
+				component={OrganisationNavigator}
+				options={{
+					tabBarIcon: ({ color, size }) => (
+						<AntDesign name="calendar" size={size} color={color}/>
+
+					),
+				}}
+			/>
 			<Tab.Screen
 				name={routes.ORGANIZATION}
 				component={OrganisationNavigator}
 				options={{
 					tabBarIcon: ({ color, size }) => (
-						<MaterialCommunityIcons
-							name='calendar'
+						<AntDesign
+							name='book'
 							color={color}
 							size={size}
 						/>
@@ -35,7 +45,7 @@ const AppNavigator = () => {
 				component={MainScreen}
 				options={{
 					tabBarIcon: ({ color, size }) => (
-						<MaterialCommunityIcons
+						<AntDesign
 							name='home'
 							color={color}
 							size={size}
@@ -48,7 +58,20 @@ const AppNavigator = () => {
 				component={MedicationNavigator}
 				options={{
 					tabBarIcon: ({ color, size }) => (
-						<Fontisto name='pills' color={color} size={size} />
+						<AntDesign name='medicinebox' color={color} size={size} />
+					),
+				}}
+			/>
+			<Tab.Screen
+				name={routes.ACCOUNT}
+				component={OrganisationNavigator}
+				options={{
+					tabBarIcon: ({ color, size }) => (
+						<AntDesign
+							name='user'
+							color={color}
+							size={size}
+						/>
 					),
 				}}
 			/>
