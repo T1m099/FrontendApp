@@ -8,8 +8,9 @@ import {
     FlatList,
 } from 'react-native';
 import {useFormikContext} from 'formik';
-import {ButtonStandard} from "../Buttons";
+import {ButtonMagenta, ButtonStandard} from "../Buttons";
 import AppText from '../AppText';
+import {AntDesign} from "@expo/vector-icons";
 
 function AppFormColorPicker({name, colors}) {
     const {setFieldValue, values} = useFormikContext();
@@ -29,7 +30,7 @@ function AppFormColorPicker({name, colors}) {
                             setModalVisible(true);
                         }}
                     >
-                        <AppText>Marking Color</AppText>
+                        {<AntDesign name="tagso" size={24} color="white"/>}
                     </TouchableOpacity>
                 </View>
             </TouchableWithoutFeedback>
@@ -71,11 +72,12 @@ function AppFormColorPicker({name, colors}) {
 const styles = StyleSheet.create({
     container: {
         padding: 10,
-        flexGrow: 1,
-        borderRadius: 25,
-        width: '100%',
+        borderRadius: 10,
+        width: 65,
+        height: 65,
         justifyContent: 'center',
         alignItems: 'center',
+        marginRight: 10,
     },
     colorCircle: {
         width: 100,

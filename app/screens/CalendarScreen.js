@@ -166,7 +166,7 @@ function CalendarScreen({ navigation }) {
 		<ImageBackground source={require('../images/Background.png')} style={styles.image}>
 
 		<View style={styles.container}>
-			<Calendar
+			<Calendar style={[{width: 400}]}
 				onDayPress={handlePressDay}
 				onDayLongPress={handlePressNewEvent}
 				monthFormat={'MMMM yyyy'}
