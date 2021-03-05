@@ -4,4 +4,6 @@ export default Object.freeze({
 	TIMELINE: 'Timeline',
 	ORGANIZATION: 'Organization',
 	MEDICATION: 'Medication',
+	SETTINGS: 'Settings',
+	ACCOUNT: 'Account',
 });

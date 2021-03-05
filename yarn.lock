@@ -1177,19 +1177,6 @@
   resolved "https://registry.yarnpkg.com/@expo/spawn-async/-/spawn-async-1.5.0.tgz#799827edd8c10ef07eb1a2ff9dcfe081d596a395"
   integrity sha512-LB7jWkqrHo+5fJHNrLAFdimuSXQ2MQ4lA7SQW5bf/HbsXuV2VrT/jN/M8f/KoWt0uJMGN4k/j7Opx4AvOOxSew==
   dependencies:
-    cross-spawn "^6.0.5"
-
-"@expo/vector-icons@^12.0.0", "@expo/vector-icons@^12.0.3":
-  version "12.0.3"
-  resolved "https://registry.yarnpkg.com/@expo/vector-icons/-/vector-icons-12.0.3.tgz#d7379a3a6bfd4189bc6aed9b9d295f3aca6a5ece"
-  integrity sha512-KlQ1MC2ff/CBYV/Nsu+O7wa712I0plb5N5PdMhYxLbVGW2KkULEbAoFp04nab3R4eej/Tq10G+yjTu04q16n3g==
-  dependencies:
-    lodash.frompairs "^4.0.1"
-    lodash.isequal "^4.5.0"
-    lodash.isstring "^4.0.1"
-    lodash.omit "^4.5.0"
-    lodash.pick "^4.4.0"
-    lodash.template "^4.5.0"
 
 "@expo/websql@^1.0.1":
   version "1.0.1"
@@ -3117,7 +3104,6 @@ expo@40.0.0:
   integrity sha512-LT6Ae/Ms0qtRyJlJsj/FMB5AQpj6nED39SY9KqY4zK/uFG+R7DJ/4VUzkPued1mWtRUrtaqR+t88pA3p0vAWcg==
   dependencies:
     "@babel/runtime" "^7.1.2"
-    "@expo/vector-icons" "^12.0.0"
     "@unimodules/core" "~6.0.0"
     "@unimodules/react-native-adapter" "~5.7.0"
     babel-preset-expo "~8.3.0"

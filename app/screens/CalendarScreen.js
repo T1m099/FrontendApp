@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 import NewAppointmentModal from '../components/NewAppointmentModal';
 
 import AppointmentService from '../services/appointmentService';
-import {ButtonStandard} from '../components/Buttons';
+import {ButtonDecline, ButtonStandard} from '../components/Buttons';
 import SafeAreaScreen from "../components/SafeAreaScreen";
 
 function CalendarScreen(props) {
@@ -82,7 +82,7 @@ function CalendarScreen(props) {
 		<ImageBackground source={require('../images/Background.png')} style={styles.image}>
 
 		<View style={styles.container}>
-			<Calendar
+			<Calendar style={[{width: 400}]}
 				// Initially visible month. Default = Date()
 				current={now}
 				// Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
@@ -105,12 +105,15 @@ function CalendarScreen(props) {
 				markedDates={mapAppointmentsToMarkings(appointments)}
 				markingType='multi-period'
 			/>
-			<ButtonStandard
+			<ButtonDecline
 				onPress={() => {
 					AppointmentService.clearAppointments();
 					setAppointments([]);
+
 				}}
 				Content='Clear Calender'
+			size={250}
+				position={'center'}
 			/>
 
 			<NewAppointmentModal
@@ -133,7 +136,22 @@ function CalendarScreen(props) {
 }
 
 const styles = StyleSheet.create({
-	container: {},
+	container: {
+		flex: 1,
+		flexDirection: 'column',
+		alignItems: 'center',
+		alignSelf: 'center',
+		width: '92%',
+		maxHeight: 400,
+		borderRadius: 10,
+		marginTop: '.75%',
+		marginBottom: '.75%',
+		backgroundColor: 'rgba(0,0,0,.5)',
+		textAlign: 'center',
+		justifyContent: 'space-between',
+
+	},
+
 	image: {
 		flex: 1,
 		resizeMode: "cover",

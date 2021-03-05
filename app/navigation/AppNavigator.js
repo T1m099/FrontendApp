@@ -17,6 +17,16 @@ const AppNavigator = () => {
 			initialRouteName={routes.HOME}
 		>
 			<Tab.Screen
+				name={routes.CALENDAR}
+				component={OrganisationNavigator}
+				options={{
+					tabBarIcon: ({ color, size }) => (
+						<AntDesign name="calendar" size={size} color={color}/>
+
+					),
+				}}
+			/>
+			<Tab.Screen
 				name={routes.ORGANIZATION}
 				component={OrganisationNavigator}
 				options={{
@@ -48,6 +58,19 @@ const AppNavigator = () => {
 				options={{
 					tabBarIcon: ({ color, size }) => (
 						<AntDesign name='medicinebox' color={color} size={size} />
+					),
+				}}
+			/>
+			<Tab.Screen
+				name={routes.ACCOUNT}
+				component={OrganisationNavigator}
+				options={{
+					tabBarIcon: ({ color, size }) => (
+						<AntDesign
+							name='user'
+							color={color}
+							size={size}
+						/>
 					),
 				}}
 			/>

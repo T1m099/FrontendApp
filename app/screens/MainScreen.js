@@ -4,6 +4,7 @@ import SafeAreaScreen from '../components/SafeAreaScreen';
 import routes from '../navigation/routes';
 import {ButtonAccept, ButtonDecline, ButtonYellow, ButtonMagenta} from "../components/Buttons";
 import {AntDesign} from '@expo/vector-icons';
+import colors from "../config/colors";
 
 
 function MainScreen({navigation}) {
@@ -25,9 +26,9 @@ function MainScreen({navigation}) {
                 </View>
 
                 <View style={styles.container}>
-                    <Text style={styles.text}>Kalender</Text>
+                    <Text style={styles.text}>Organisator</Text>
                     <ButtonYellow style={styles.button}
-                                  Content={<AntDesign name="calendar" size={24} color="white"/>}
+                                  Content={<AntDesign name="book" size={24} color="white"/>}
                                   onPress={() => {
                                       navigation.navigate(routes.ORGANIZATION, {
                                           screen: routes.CALENDAR,
@@ -37,9 +38,9 @@ function MainScreen({navigation}) {
                 </View>
 
                 <View style={styles.container}>
-                    <Text style={styles.text}>Kalender</Text>
+                    <Text style={styles.text}>Erinnerungsassistent für Medikamente</Text>
                     <ButtonMagenta style={styles.button}
-                                   Content={<AntDesign name="calendar" size={24} color="white"/>}
+                                   Content={<AntDesign name="medicinebox" size={24} color="white"/>}
                                    onPress={() => {
                                        navigation.navigate(routes.ORGANIZATION, {
                                            screen: routes.CALENDAR,
@@ -49,9 +50,9 @@ function MainScreen({navigation}) {
                 </View>
 
                 <View style={styles.container}>
-                    <Text style={styles.text}>Kalender</Text>
+                    <Text style={styles.text}>Benutzereinstellungen</Text>
                     <ButtonDecline style={styles.button}
-                                   Content={<AntDesign name="calendar" size={24} color="white"/>}
+                                   Content={<AntDesign name="user" size={24} color="white"/>}
                                    onPress={() => {
                                        navigation.navigate(routes.ORGANIZATION, {
                                            screen: routes.CALENDAR,
@@ -90,7 +91,7 @@ const styles = StyleSheet.create({
         flex: 1,
         fontSize: 18,
         fontWeight: 'bold',
-        color: '#C5C5C5',
+        color: colors.text,
         marginLeft: '2%',
 
     }

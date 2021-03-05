@@ -3,7 +3,7 @@ import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 
 import colors from '../config/colors';
 
-export function ButtonStandard({Content, onPress, size = 65}) {
+export function ButtonStandard({Content, onPress, size = 65,position='flex-end'}) {
     let Button;
     if (typeof (Content) == typeof ("dummy")) {
         Button = <Text style={styles.text}>{Content}</Text>
@@ -13,7 +13,7 @@ export function ButtonStandard({Content, onPress, size = 65}) {
 
     return (
         <TouchableOpacity
-            style={[styles.appbutton, {width: size}]}
+            style={[styles.appbutton, {width: size, alignSelf: position}]}
             onPress={onPress}
         >
             <Text style={styles.text}>{Content}</Text>
@@ -21,7 +21,7 @@ export function ButtonStandard({Content, onPress, size = 65}) {
     );
 }
 
-export function ButtonAccept({Content, onPress, size = 65}) {
+export function ButtonAccept({Content, onPress, size = 65,position='flex-end'}) {
     let Button;
     if (typeof (Content) == typeof ("dummy")) {
         Button = <Text style={styles.text}>{Content}</Text>
@@ -31,7 +31,7 @@ export function ButtonAccept({Content, onPress, size = 65}) {
 
     return (
         <TouchableOpacity
-            style={[styles.buttonAccept, {width: size}]}
+            style={[styles.buttonAccept, {width: size, alignSelf: position}]}
             onPress={onPress}
         >
             {Button}
@@ -39,7 +39,7 @@ export function ButtonAccept({Content, onPress, size = 65}) {
     );
 }
 
-export function ButtonDecline({Content, onPress, size = 65}) {
+export function ButtonDecline({Content, onPress, size = 65,position='flex-end'}) {
     let Button;
     if (typeof (Content) == typeof ("dummy")) {
         Button = <Text style={styles.text}>{Content}</Text>
@@ -48,7 +48,7 @@ export function ButtonDecline({Content, onPress, size = 65}) {
     }
     return (
         <TouchableOpacity
-            style={[styles.buttonDecline, {width: size}]}
+            style={[styles.buttonDecline, {width: size, alignSelf: position}]}
             onPress={onPress}
         >
             {Button}
@@ -56,7 +56,7 @@ export function ButtonDecline({Content, onPress, size = 65}) {
     );
 }
 
-export function ButtonYellow({Content, onPress, size = 65}) {
+export function ButtonYellow({Content, onPress, size = 65,position='flex-end'}) {
     let Button;
     if (typeof (Content) == typeof ("dummy")) {
         Button = <Text style={styles.text}>{Content}</Text>
@@ -65,7 +65,7 @@ export function ButtonYellow({Content, onPress, size = 65}) {
     }
     return (
         <TouchableOpacity
-            style={[styles.buttonYellow, {width: size}]}
+            style={[styles.buttonYellow, {width: size, alignSelf: position}]}
             onPress={onPress}
         >
             {Button}
@@ -73,7 +73,7 @@ export function ButtonYellow({Content, onPress, size = 65}) {
     );
 }
 
-export function ButtonMagenta({Content, onPress, size = 65}) {
+export function ButtonMagenta({Content, onPress, size = 65,position='flex-end'}) {
     let Button;
     if (typeof (Content) == typeof ("dummy")) {
         Button = <Text style={styles.text}>{Content}</Text>
@@ -82,7 +82,7 @@ export function ButtonMagenta({Content, onPress, size = 65}) {
     }
     return (
         <TouchableOpacity
-            style={[styles.buttonMagenta , {width: size}]}
+            style={[styles.buttonMagenta , {width: size, alignSelf: position}]}
             onPress={onPress}
         >
             {Button}
@@ -97,7 +97,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         height: 65,
-        alignSelf: 'flex-end',
         alignContent: 'center',
         marginBottom: 8,
         marginRight: 8
@@ -108,7 +107,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         height: 65,
-        alignSelf: 'flex-end',
         alignContent: 'center',
         marginBottom: 8,
         marginRight: 8
@@ -119,7 +117,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         height: 65,
-        alignSelf: 'flex-end',
         alignContent: 'center',
         marginBottom: 8,
         marginRight: 8
@@ -131,7 +128,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         height: 65,
-        alignSelf: 'flex-end',
         alignContent: 'center',
         marginBottom: 8,
         marginRight: 8
@@ -143,7 +139,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         height: 65,
-        alignSelf: 'flex-end',
         alignContent: 'center',
         marginBottom: 8,
         marginRight: 8
