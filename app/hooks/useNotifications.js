@@ -13,7 +13,6 @@ export default useNotifications = (notificationHandler = defaultHandler) => {
 	useEffect(() => {
 		registerForPushNotifications();
 
-		console.log(notificationHandler);
 		Notifications.setNotificationHandler(notificationHandler);
 	}, []);
 

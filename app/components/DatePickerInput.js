@@ -42,7 +42,7 @@ function DatePickerInput({
 
 const styles = StyleSheet.create({
 	container: {
-		padding: 15,
+		padding: 10,
 		flexDirection: 'row',
 		backgroundColor: colors.primary,
 		justifyContent: 'center',

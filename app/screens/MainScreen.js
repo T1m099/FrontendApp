@@ -24,6 +24,14 @@ function MainScreen({ navigation }) {
 						console.log(await notificationService.cancelAllAsync());
 					}}
 				></Button>
+				<Button
+					title='Test.'
+					onPress={() => {
+						navigation.navigate(routes.ORGANIZATION, {
+							screen: routes.TEST,
+						});
+					}}
+				></Button>
 			</View>
 		</SafeAreaScreen>
 	);

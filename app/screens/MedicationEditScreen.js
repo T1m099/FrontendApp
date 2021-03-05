@@ -29,15 +29,9 @@ function MedicationEditScreen({ route, navigation }) {
 		{ label: 'Pill(s)', value: 'pills' },
 	];
 
-	const handleSubmit = (values) => {
+	const handleSubmit = values => {
 		onSubmit(values);
 		navigation.pop();
-	};
-
-	const toTimeString = (date) => {
-		return `${date.getHours()}:${
-			date.getMinutes() < 10 ? '0' : ''
-		}${date.getMinutes()}`;
 	};
 
 	return (
@@ -75,8 +69,7 @@ function MedicationEditScreen({ route, navigation }) {
 				<ReminderList
 					name='reminders'
 					style={styles.reminderList}
-					valueViewTransform={toTimeString}
-					onReminderDelete={(reminder) => {
+					onReminderDelete={reminder => {
 						onDeleteReminder(reminder);
 					}}
 				/>
