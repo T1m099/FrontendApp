@@ -1,14 +1,18 @@
 import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { Provider } from 'react-redux';
 
+import configureStore from './app/store/configureStore';
 import AppNavigator from './app/navigation/AppNavigator';
 import navigationTheme from './app/navigation/NavigationTheme';
 
 export default function App() {
+	const store = configureStore();
 	return (
-		<NavigationContainer theme={navigationTheme}>
-			<AppNavigator />
-		</NavigationContainer>
+		<Provider store={store}>
+			<NavigationContainer theme={navigationTheme}>
+				<AppNavigator />
+			</NavigationContainer>
+		</Provider>
 	);
 }

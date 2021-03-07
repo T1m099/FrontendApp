@@ -20,16 +20,18 @@ function ReminderList({
 	name,
 	style,
 	valueViewTransform = date => {
-		return `${date.getHours()}:${
-			date.getMinutes() < 10 ? '0' : ''
-		}${date.getMinutes()}`;
+		if (typeof date.getHours === 'function') {
+			return `${date.getHours()}:${
+				date.getMinutes() < 10 ? '0' : ''
+			}${date.getMinutes()}`;
+		}
+		return '';
 	},
 	onReminderDelete,
 }) {
 	const { setFieldValue, values } = useFormikContext();
 	const [reminderCount, setReminderCount] = useState(0);
 
-	console.log(values);
 	const handlePressNewReminder = async () => {
 		const reminder = { id: `new_${reminderCount}`, date: new Date() };
 		setReminderCount(reminderCount + 1);

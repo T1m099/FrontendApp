@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleSheet, View, LogBox } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import * as Yup from 'yup';
 
 import AppButton from '../components/AppButton';
 import AppText from '../components/AppText';
+import { useDispatch, useSelector } from 'react-redux';
 
 import AppForm from '../components/forms/AppForm';
 import AppFormField from '../components/forms/AppFormField';
@@ -11,12 +12,34 @@ import AppSubmitButton from '../components/forms/AppSubmitButton';
 import ReminderList from '../components/ReminderList';
 import AppFormDropdownPicker from '../components/forms/AppFormDropdownPicker';
 
-LogBox.ignoreLogs([
-	'Non-serializable values were found in the navigation state',
-]);
+import reminderService from '../services/reminderService';
+
+import { saveMedItem, getMeds, genId } from '../store/meds';
+
+const baseMedItemDetails = {
+	id: 'new',
+	title: 'My Medication',
+	description: '',
+	unit: 'pills',
+	quantity: '1',
+	reminders: [],
+};
+
+function initMedItem(id, meds) {
+	let mi;
+	if (id.match('new')) {
+		mi = { ...baseMedItemDetails };
+	} else {
+		mi = { ...meds[id] };
+	}
+	return mi;
+}
 
 function MedicationEditScreen({ route, navigation }) {
-	const { onSubmit, initialValues, onDeleteReminder } = route.params;
+	const meds = useSelector(getMeds());
+	const dispatch = useDispatch();
+
+	const { id } = route.params;
 
 	const validationSchema = Yup.object().shape({
 		title: Yup.string().required().min(1).label('Title'),
@@ -29,16 +52,25 @@ function MedicationEditScreen({ route, navigation }) {
 		{ label: 'Pill(s)', value: 'pills' },
 	];
 
-	const handleSubmit = values => {
-		onSubmit(values);
+	const handleSaveMedication = async medItemToSave => {
+		const mi = { ...medItemToSave };
+		if (medItemToSave.id === 'new') mi.id = genId();
+		dispatch(saveMedItem(mi));
+	};
+
+	const handleSubmit = medItemToSave => {
+		handleSaveMedication(medItemToSave);
 		navigation.pop();
 	};
 
 	return (
 		<View style={styles.container}>
 			<AppForm
-				initialValues={initialValues}
-				onSubmit={handleSubmit}
+				initialValues={initMedItem(id, meds)}
+				onSubmit={(values, actions) => {
+					handleSubmit(values);
+					actions.resetForm();
+				}}
 				validationSchema={validationSchema}
 			>
 				<AppText>Title:</AppText>
@@ -70,7 +102,7 @@ function MedicationEditScreen({ route, navigation }) {
 					name='reminders'
 					style={styles.reminderList}
 					onReminderDelete={reminder => {
-						onDeleteReminder(reminder);
+						reminderService.cancelReminderAsync(reminder);
 					}}
 				/>
 				<View style={styles.buttonArea}>
