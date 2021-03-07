@@ -77,12 +77,12 @@ function AppPicker({
 
 const styles = StyleSheet.create({
 	container: {
-		width: '100%',
-		backgroundColor: colors.primary,
-		borderRadius: 25,
+		width: 390,
+		backgroundColor: colors.background,
+		borderRadius: 20,
 		flexDirection: 'row',
 		padding: 15,
-		marginVertical: 10,
+		marginVertical: 9,
 	},
 	icon: {
 		marginRight: 10,

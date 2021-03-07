@@ -9,7 +9,6 @@ import {
 import { useFormikContext } from 'formik';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
-import AppButton from './AppButton';
 import ListItemDeleteAction from './ListItemDeleteAction';
 import DatePickerInput from './DatePickerInput';
 import reminderService from '../services/reminderService';
@@ -71,6 +70,7 @@ function ReminderList({
 	};
 	return (
 		<View style={[styles.container, style]}>
+
 			<TouchableHighlight onPress={handlePressNewReminder}>
 				<View style={styles.addReminderButton}>
 					<AppText>+</AppText>
@@ -122,21 +122,34 @@ function ReminderList({
 }
 
 const styles = StyleSheet.create({
-	container: { flexDirection: 'row' },
+	container: {flex: 1,
+		flexDirection: 'row',
+		alignItems: 'center',
+		alignSelf: 'center',
+minHeight: '100%',
+		marginTop: '.75%',
+		marginBottom: '.75%',
+		textAlign: 'center',
+		justifyContent: 'space-between' },
+
 	reminderListItemChildren: {
 		flexDirection: 'row',
 		width: '100%',
+
 	},
 	reminderListItem: { marginTop: 10 },
 	addReminderButton: {
-		flexGrow: 1,
-		backgroundColor: colors.primary,
+		backgroundColor: colors.background,
 		minWidth: 30,
-		borderRadius: 25,
+		minHeight:30,
+		borderRadius: 10,
 		justifyContent: 'center',
 		alignItems: 'center',
+		marginTop: 20,
+		marginLeft:5,
+		marginRight:5
 	},
-	listContainerStyle: { flex: 7 },
+	listContainerStyle: { flex: 7, marginTop:5 },
 });
 
 export default ReminderList;

@@ -3,13 +3,18 @@ import { View, StyleSheet } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import dayjs from 'dayjs';
 import { useSelector } from 'react-redux';
-
-import AppButton from '../components/AppButton';
+import {ButtonDecline, ButtonStandard} from '../components/Buttons';
 import routes from '../navigation/routes';
 import * as eventActions from '../store/events';
 
 function CalendarScreen({ navigation }) {
-	const events = useSelector(eventActions.getEvents());
+	const [events, setEvents] = useState([]);
+
+	/* useEffect(() => {
+		navigation.addListener('focus', () => {
+			console.log('focused');
+		});
+	}, [navigation]); */
 
 	const dateToCalendarFormat = dayjsDate => {
 		//this function uses dayjs
@@ -62,9 +67,11 @@ function CalendarScreen({ navigation }) {
 	};
 
 	return (
+		<ImageBackground source={require('../images/Background.png')} style={styles.image}>
+
 		<View style={styles.container}>
-			<Calendar
-				onDayPress={goToDateEventScreen}
+			<Calendar style={[{width: 400}]}
+					  onDayPress={goToDateEventScreen}
 				onDayLongPress={day => {
 					goToEventEdit('new', day.timestamp);
 				}}
@@ -73,19 +80,43 @@ function CalendarScreen({ navigation }) {
 				markedDates={mapEventsToMarkings(events)}
 				markingType='multi-period'
 			/>
-			<AppButton
+			<ButtonDecline
 				onPress={() => {
 					//EventService.clearEvents();
 					//setEvents([]);
 				}}
-				title='Clear Calender'
+				Content='Clear Calender'
+			size={250}
+				position={'center'}
 			/>
 		</View>
-	);
+</ImageBackground>
+
+);
 }
 
 const styles = StyleSheet.create({
-	container: {},
+	container: {
+		flex: 1,
+		flexDirection: 'column',
+		alignItems: 'center',
+		alignSelf: 'center',
+		width: '92%',
+		maxHeight: 400,
+		borderRadius: 10,
+		marginTop: '.75%',
+		marginBottom: '.75%',
+		backgroundColor: 'rgba(0,0,0,.5)',
+		textAlign: 'center',
+		justifyContent: 'space-between',
+
+	},
+
+	image: {
+		flex: 1,
+		resizeMode: "cover",
+		justifyContent: "center"
+	},
 });
 
 export default CalendarScreen;

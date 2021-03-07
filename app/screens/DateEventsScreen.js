@@ -3,9 +3,9 @@ import { View, StyleSheet, FlatList } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { StackActions } from '@react-navigation/native';
 
+import {ButtonStandard} from "../components/Buttons";
 import ListItem from '../components/ListItem';
 import ListItemDeleteAction from '../components/ListItemDeleteAction';
-import AppButton from '../components/AppButton';
 import * as eventActions from '../store/events';
 import routes from '../navigation/routes';
 import { filterDaysEvents } from '../store/events';
@@ -69,11 +69,12 @@ function DateEventScreen({ navigation, route }) {
 							/>
 						)}
 						<AppButton
-							title='Close'
-							onPress={() => {
-								navigation.pop();
-							}}
-						/>
+					<ButtonStandard
+						Content='Close'
+						onPress={() => {
+							navigation.pop();
+						}}
+					/>
 					</React.Fragment>
 				}
 			/>

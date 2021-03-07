@@ -1,12 +1,9 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
 
-import AppButton from '../components/AppButton';
 import AppText from '../components/AppText';
-
+import {ButtonAccept, ButtonDecline, ButtonStandard} from "../components/Buttons";
 import AppForm from '../components/forms/AppForm';
 import AppFormField from '../components/forms/AppFormField';
 import AppFormDateTimePicker from '../components/forms/AppFormDateTimePicker';
@@ -15,6 +12,7 @@ import AppFormColorPicker from '../components/forms/AppFormColorPicker';
 import AppFormPicker from '../components/forms/AppFormPicker';
 import AppFormConditionalElement from '../components/forms/AppFormConditionalElement';
 import ReminderList from '../components/ReminderList';
+import {AntDesign} from "@expo/vector-icons";
 
 import * as eventActions from '../store/events';
 import { genId } from '../store/events';
@@ -83,154 +81,188 @@ function EventEditScreen({ navigation, route }) {
 
 	const handleSubmit = event => {
 		const e = { ...event };
-		if (e.id === 'new') {
-			e.id = genId();
-		}
-
-		e.start = e.start.getTime();
-		e.end = e.end.getTime();
-
-		dispatch(eventActions.eventSaved(e));
-
+		/* if (e.category === disceaseKeyword) {
+			if (e.reminders) delete e.reminders;
+		} else {
+			if (e.disease) delete e.disease;
+		} */
+		onSubmit(e);
 		navigation.pop();
 	};
 
-	return (
-		<View style={styles.container}>
-			<AppForm
-				initialValues={event}
-				onSubmit={handleSubmit}
-				validationSchema={validationSchema}
-			>
-				<AppFormField name='title' width='100%' placeholder='Title' />
+    return (
+        <View style={ styles.maincontainer }>
+            <AppForm
+                initialValues={ event }
+                onSubmit={ handleSubmit }
+                validationSchema={ validationSchema }
+            >
+                <View style={ styles.container }>
+                    <AppFormField name='title' width='100%' placeholder='Title'/>
 
-				<AppFormPicker
-					name='category'
-					items={categories}
-					extractKey={item => {
-						return item;
-					}}
-					renderSelectedItem={item => {
-						return <AppText>{item}</AppText>;
-					}}
-					renderPickerItem={({ item }) => {
-						return <AppText>{item}</AppText>;
-					}}
-					renderPlaceholder={() => {
-						return <AppText>Choose Category</AppText>;
-					}}
-				/>
-				<AppFormConditionalElement
-					checkCondition={values => {
-						return values.category === disceaseKeyword;
-					}}
-				>
-					<AppFormPicker
-						name='disease'
-						items={diseases}
-						extractKey={item => {
-							return item;
-						}}
-						renderSelectedItem={item => {
-							return <AppText>{item.toString()}</AppText>;
-						}}
-						renderPickerItem={({ item }) => {
-							return <AppText>{item.toString()}</AppText>;
-						}}
-						renderPlaceholder={() => {
-							return <AppText>Disease</AppText>;
-						}}
-					/>
-				</AppFormConditionalElement>
+                    <AppFormPicker
+                        name='category'
+                        items={ categories }
+                        extractKey={ item => {
+                            return item;
+                        } }
+                        renderSelectedItem={ item => {
+                            return <AppText>{ item }</AppText>;
+                        } }
+                        renderPickerItem={ ({item}) => {
+                            return <AppText>{ item }</AppText>;
+                        } }
+                        renderPlaceholder={ () => {
+                            return <AppText>Choose Category</AppText>;
+                        } }
+                    />
+                </View>
 
-				<View style={styles.startContainer}>
-					<AppText style={styles.datePickerLabel}>From:</AppText>
-					<View style={styles.datePicker}>
-						<AppFormDateTimePicker
-							name='start'
+                <AppFormConditionalElement
+                    checkCondition={ values => {
+                        return values.category === disceaseKeyword;
+                    } }
+                >
+                    <View style={ [styles.container, {maxHeight: 70}] }>
+                        <AppFormPicker
+                            name='disease'
+                            items={ diseases }
+                            extractKey={ item => {
+                                return item;
+                            } }
+                            renderSelectedItem={ item => {
+                                return <AppText>{ item.toString() }</AppText>;
+                            } }
+                            renderPickerItem={ ({item}) => {
+                                return <AppText>{ item.toString() }</AppText>;
+                            } }
+                            renderPlaceholder={ () => {
+                                return <AppText>Disease</AppText>;
+                            } }
+                        />
+                    </View>
+                </AppFormConditionalElement>
+                <AppFormConditionalElement
+                    checkCondition={ values => {
+                        return values.category !== disceaseKeyword;
+                    } }
+                >
+                    <View style={ styles.container }>
+                        <ReminderList
+                            name='reminders'
+                            style={ styles.reminderList }
+                            onReminderDelete={ reminder => {
+                                onDeleteReminder(reminder);
+                            } }
+                        />
+                    </View>
+                </AppFormConditionalElement>
+                <View style={ [styles.container, {maxHeight: 90, marginTop: 5}] }>
+
+                    <View style={ styles.startContainer }>
+                        <AppText style={ styles.datePickerLabel }>From:</AppText>
+                        <View style={ styles.datePicker }>
+                            <AppFormDateTimePicker
+                                name='start'
 							valueDateTransform={toDateString}
 							valueTimeTransform={toTimeString}
-						/>
-					</View>
-				</View>
-				<View style={styles.startContainer}>
-					<AppText style={styles.datePickerLabel}>To:</AppText>
-					<View style={styles.datePicker}>
-						<AppFormDateTimePicker
-							name='end'
+                            />
+                        </View>
+                    </View>
+                    <View style={ styles.startContainer }>
+                        <AppText style={ styles.datePickerLabel }>To:</AppText>
+                        <View style={ styles.datePicker }>
+                            <AppFormDateTimePicker
+                                name='end'
 							valueDateTransform={toDateString}
 							valueTimeTransform={toTimeString}
-						/>
-					</View>
-				</View>
-				<AppFormConditionalElement
-					checkCondition={values => {
-						return values.category !== disceaseKeyword;
-					}}
-				>
-					<ReminderList
-						name='reminders'
-						style={styles.reminderList}
-						onReminderDelete={reminder => {
-							reminderService.cancelReminderAsync(reminder);
-						}}
-					/>
-				</AppFormConditionalElement>
+                            />
+                        </View>
+                    </View>
+                </View>
 
-				<AppFormField
-					maxLength={255}
-					multiline
-					name='description'
-					numberOfLines={3}
-					placeholder='Description'
-				/>
+                <View style={ [styles.container, {marginTop: 5, maxHeight: 90, flexDirection: 'row'}] }>
 
-				<AppFormColorPicker
-					name='markingColor'
-					colors={colorPickerItems}
-				/>
-				<View style={styles.buttonContainer}>
-					<AppButton
-						title='Close'
-						onPress={() => {
-							navigation.pop();
-						}}
-						style={styles.closeButton}
-					/>
-					<SubmitButton
-						title='Mark in Calendar'
-						style={styles.submitButton}
-					/>
-				</View>
-			</AppForm>
-		</View>
-	);
+                    <AppFormField style={ [{width: 250, height: 80, marginTop: 1.5, marginLeft: 4}] }
+                                  maxLength={ 225 }
+                                  multiline
+                                  name='description'
+                                  numberOfLines={ 3 }
+                                  placeholder='Description'
+                    />
+
+                    <AppFormColorPicker
+                        name='markingColor'
+                        colors={ colorPickerItems }
+                    />
+                </View>
+                <View style={ [styles.container, {marginTop: 5, maxHeight: 90, flexDirection: 'row'}] }>
+                    <View style={ styles.buttonContainer }>
+                        <ButtonDecline
+                            Content={ <AntDesign name="close" size={ 24 } color="white"/> }
+                            onPress={ () => {
+                                navigation.pop();
+                            } }
+                        />
+                        <ButtonAccept
+                            Content={ <AntDesign name="addfile" size={ 24 } color="white"/> }
+                        />
+                    </View>
+                </View>
+
+            </AppForm>
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
-	container: { padding: 5 },
-	dateTimePickerContainer: {
-		flexDirection: 'row',
-		marginVertical: 10,
-	},
-	startContainer: {
-		flexDirection: 'row',
-		alignItems: 'center',
-	},
-	datePickerLabel: { flex: 1 },
-	datePicker: { flex: 5 },
-	buttonContainer: {
-		flexDirection: 'row',
-	},
-	closeButton: {
-		flex: 1,
-	},
-	submitButton: {
-		flex: 3,
-	},
-	reminderList: {
-		maxHeight: '35%',
-	},
+    maincontainer: {
+        flex: 1,
+        alignItems: 'center',
+        alignSelf: 'center',
+        width: '92%',
+        marginTop: '.75%',
+        marginBottom: '.75%',
+        textAlign: 'center',
+    },
+    container: {
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
+        alignSelf: 'center',
+        width: 400,
+        maxHeight: 132,
+        borderRadius: 10,
+        marginTop: '.75%',
+        marginBottom: '.75%',
+        backgroundColor: 'rgba(0,0,0,.5)',
+        textAlign: 'center',
+        justifyContent: 'space-between'
+    },
+    dateTimePickerContainer: {
+        flexDirection: 'row',
+        marginVertical: 10,
+
+    },
+    startContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    datePickerLabel: {flex: 1, marginLeft: 10},
+    datePicker: {flex: 5},
+    buttonContainer: {
+        marginLeft: 120,
+        flexDirection: 'row',
+    },
+    closeButton: {
+        flex: 1,
+    },
+    submitButton: {
+        flex: 3,
+    },
+    reminderList: {
+        maxHeight: '35%',
+    },
 });
 
 export default EventEditScreen;

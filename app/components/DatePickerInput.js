@@ -44,14 +44,16 @@ const styles = StyleSheet.create({
 	container: {
 		padding: 10,
 		flexDirection: 'row',
-		backgroundColor: colors.primary,
+		backgroundColor: colors.background,
 		justifyContent: 'center',
 		alignItems: 'center',
-		borderRadius: 25,
-		width: '100%',
+		borderRadius: 5,
+		width: '90%',
+		marginTop:5
 	},
 	text: {
 		fontWeight: 'bold',
+		color: colors.text,
 	},
 });
 

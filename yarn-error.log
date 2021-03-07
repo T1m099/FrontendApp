@@ -1,30 +1,30 @@
 Arguments: 
-  /snap/node/3292/bin/node /snap/node/3292/bin/yarn.js global dir
+  C:\Program Files\nodejs\node.exe C:\Users\Marc\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add global expo-cl
 
 PATH: 
-  /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+  C:\Users\Marc\CodingPlace\FrontendApp\node_modules\.bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Razer Chroma SDK\bin;C:\Program Files\Razer Chroma SDK\bin;C:\Program Files (x86)\Razer\ChromaBroadcast\bin;C:\Program Files\Razer\ChromaBroadcast\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Windows\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps;C:\ProgramData\chocolatey\bin;C:\Program Files\dotnet\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\dotnet\;C:\Program Files\Git\cmd;;;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\nodejs\;C:\Program Files\OpenJDK\openjdk-8u282-b08\bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\Marc\AppData\Local\Microsoft\WindowsApps;C:\Users\Marc\spicetify-cli;C:\Users\Marc\AppData\Local\GitHubDesktop\bin;C:\Users\Marc\.dotnet\tools;C:\Users\Marc\AppData\Roaming\npm
 
 Yarn version: 
-  1.22.5
+  1.22.10
 
 Node version: 
-  12.19.0
+  15.9.0
 
 Platform: 
-  linux x64
+  win32 x64
 
 Trace: 
-  Error: EACCES: permission denied, write
-      at writeSync (fs.js:679:3)
-      at SyncWriteStream._write (internal/fs/sync_write_stream.js:24:3)
-      at doWrite (_stream_writable.js:403:12)
-      at writeOrBuffer (_stream_writable.js:387:5)
-      at SyncWriteStream.Writable.write (_stream_writable.js:318:11)
-      at ConsoleReporter._log (/snap/node/3292/lib/cli.js:96770:17)
-      at ConsoleReporter.log (/snap/node/3292/lib/cli.js:96758:10)
-      at dir (/snap/node/3292/lib/cli.js:36256:14)
-      at Object.<anonymous> (/snap/node/3292/lib/cli.js:25940:25)
-      at Generator.next (<anonymous>)
+  Error: https://registry.yarnpkg.com/expo-cl: Not found
+      at Request.params.callback [as _callback] (C:\Users\Marc\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:66988:18)
+      at Request.self.callback (C:\Users\Marc\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:140662:22)
+      at Request.emit (node:events:378:20)
+      at Request.<anonymous> (C:\Users\Marc\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141634:10)
+      at Request.emit (node:events:378:20)
+      at IncomingMessage.<anonymous> (C:\Users\Marc\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141556:12)
+      at Object.onceWrapper (node:events:484:28)
+      at IncomingMessage.emit (node:events:390:22)
+      at endReadableNT (node:internal/streams/readable:1307:12)
+      at processTicksAndRejections (node:internal/process/task_queues:81:21)
 
 npm manifest: 
   {
@@ -50,6 +50,7 @@ npm manifest:
   		"expo-permissions": "~10.0.0",
   		"expo-secure-store": "~9.3.0",
   		"expo-status-bar": "^1.0.3",
+  		"expo-updates": "~0.4.1",
   		"formik": "^2.2.6",
   		"lottie-react-native": "~2.6.1",
   		"react": "16.13.1",
@@ -383,7 +384,7 @@ Lockfile:
       "@babel/helper-remap-async-to-generator" "^7.12.13"
       "@babel/plugin-syntax-async-generators" "^7.8.0"
   
-  "@babel/plugin-proposal-class-properties@^7.0.0", "@babel/plugin-proposal-class-properties@^7.12.13", "@babel/plugin-proposal-class-properties@^7.4.4":
+  "@babel/plugin-proposal-class-properties@^7.0.0", "@babel/plugin-proposal-class-properties@^7.12.13", "@babel/plugin-proposal-class-properties@^7.4.4", "@babel/plugin-proposal-class-properties@~7.12.13":
     version "7.12.13"
     resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-class-properties/-/plugin-proposal-class-properties-7.12.13.tgz"
     integrity sha512-8SCJ0Ddrpwv4T7Gwb33EmW1V9PY5lggTO+A8WjyIwxrSHDUyBw4MtF96ifn1n8H806YlxbVCoKXbbmzD6RD+cA==
@@ -930,7 +931,7 @@ Lockfile:
       "@babel/helper-create-regexp-features-plugin" "^7.12.13"
       "@babel/helper-plugin-utils" "^7.12.13"
   
-  "@babel/preset-env@^7.4.4", "@babel/preset-env@^7.6.3":
+  "@babel/preset-env@^7.4.4", "@babel/preset-env@^7.6.3", "@babel/preset-env@~7.12.13":
     version "7.12.17"
     resolved "https://registry.yarnpkg.com/@babel/preset-env/-/preset-env-7.12.17.tgz#94a3793ff089c32ee74d76a3c03a7597693ebaaa"
     integrity sha512-9PMijx8zFbCwTHrd2P4PJR5nWGH3zWebx2OcpTjqQrHhCiL2ssSR2Sc9ko2BsI2VmVBfoaQmPrlMTCui4LmXQg==
@@ -1013,7 +1014,7 @@ Lockfile:
       "@babel/types" "^7.4.4"
       esutils "^2.0.2"
   
-  "@babel/preset-typescript@^7.3.3":
+  "@babel/preset-typescript@^7.3.3", "@babel/preset-typescript@~7.12.13":
     version "7.12.17"
     resolved "https://registry.yarnpkg.com/@babel/preset-typescript/-/preset-typescript-7.12.17.tgz#8ecf04618956c268359dd9feab775dc14a666eb5"
     integrity sha512-T513uT4VSThRcmWeqcLkITKJ1oGQho9wfWuhQm10paClQkp1qyd0Wf8mvC8Se7UYssMyRSj4tZYpVTkCmAK/mA==
@@ -1121,10 +1122,50 @@ Lockfile:
       xcode "^2.1.0"
       xml2js "^0.4.23"
   
+  "@expo/config-plugins@1.0.20":
+    version "1.0.20"
+    resolved "https://registry.yarnpkg.com/@expo/config-plugins/-/config-plugins-1.0.20.tgz#b1964daf063d7ce07c3f135aa92ccf1c60cd6e46"
+    integrity sha512-BucZQbi7edu8Pin8zFUNsaQeZAj/8ga7Ei3PKivKZKd5F53DdFU6Yb+ZDyQ0UeOGDi0hZlZWdaBzmQqHEg37TQ==
+    dependencies:
+      "@expo/config-types" "^40.0.0-beta.2"
+      "@expo/configure-splash-screen" "0.3.4"
+      "@expo/image-utils" "0.3.10"
+      "@expo/json-file" "8.2.28-alpha.0"
+      "@expo/plist" "0.0.11"
+      find-up "~5.0.0"
+      fs-extra "9.0.0"
+      getenv "0.7.0"
+      glob "7.1.6"
+      resolve-from "^5.0.0"
+      slash "^3.0.0"
+      slugify "^1.3.4"
+      xcode "^2.1.0"
+      xml2js "^0.4.23"
+  
   "@expo/config-types@^40.0.0-beta.2":
     version "40.0.0-beta.2"
     resolved "https://registry.yarnpkg.com/@expo/config-types/-/config-types-40.0.0-beta.2.tgz#4fea4ef5654d02218b02b0b3772529a9ce5b0471"
     integrity sha512-t9pHCQMXOP4nwd7LGXuHkLlFy0JdfknRSCAeVF4Kw2/y+5OBbR9hW9ZVnetpBf0kORrekgiI7K/qDaa3hh5+Qg==
+  
+  "@expo/config@3.3.30":
+    version "3.3.30"
+    resolved "https://registry.yarnpkg.com/@expo/config/-/config-3.3.30.tgz#4e2f23c84b6563b940f0f32b941ce8495cdb2825"
+    integrity sha512-mOFebiAcowOD9MCpXGtZG/oMku1vAOazGx9BGaDnrod5YHjmrIN65W+hP+eK2dQBcJV1VjbU5K3VpkXO6aWwBA==
+    dependencies:
+      "@babel/core" "7.9.0"
+      "@babel/plugin-proposal-class-properties" "~7.12.13"
+      "@babel/preset-env" "~7.12.13"
+      "@babel/preset-typescript" "~7.12.13"
+      "@expo/config-plugins" "1.0.20"
+      "@expo/config-types" "^40.0.0-beta.2"
+      "@expo/json-file" "8.2.28-alpha.0"
+      fs-extra "9.0.0"
+      getenv "0.7.0"
+      glob "7.1.6"
+      require-from-string "^2.0.2"
+      resolve-from "^5.0.0"
+      semver "7.3.2"
+      slugify "^1.3.4"
   
   "@expo/config@^3.3.18":
     version "3.3.29"
@@ -1186,6 +1227,16 @@ Lockfile:
       fs-extra "9.0.0"
       json5 "^1.0.1"
       write-file-atomic "^2.3.0"
+  
+  "@expo/metro-config@^0.1.16":
+    version "0.1.56"
+    resolved "https://registry.yarnpkg.com/@expo/metro-config/-/metro-config-0.1.56.tgz#b200397b765f002d2101079f2df1e41f45d41697"
+    integrity sha512-h7IBc8GWzqKhdv2OWqU9tU3i5ZMpoXU1gao+kZzvi02dEAV5GzKxvGPiZu9nsvXeeRlCIpzTHvzFPh5n5mtSnA==
+    dependencies:
+      "@expo/config" "3.3.30"
+      chalk "^4.1.0"
+      getenv "^0.7.0"
+      metro-react-native-babel-transformer "^0.59.0"
   
   "@expo/plist@0.0.11":
     version "0.0.11"
@@ -2431,7 +2482,7 @@ Lockfile:
       ansi-styles "^4.1.0"
       supports-color "^7.1.0"
   
-  chalk@^4.0.0:
+  chalk@^4.0.0, chalk@^4.1.0:
     version "4.1.0"
     resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.0.tgz#4e14870a618d9e2edd97dd8345fd9d9dc315646a"
     integrity sha512-qwx12AxXe2Q5xQ43Ac//I6v5aXTipYrSESdOgzrN+9XjgEpyjpKuvSGaN4qE93f7TQTlerQQ8S+EQ0EyDoVL1A==
@@ -3151,6 +3202,15 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/expo-status-bar/-/expo-status-bar-1.0.3.tgz#62b4d6145680abd43ba6ecfa465f835e88bf6263"
     integrity sha512-/Orgla1nkIrfswNHbuAOTbPVq0g3+GrhoQVk7MRafY2dwrFLgXhaPExS+eN2hpmzqPv2LG5cqAZDCQUAjmZYBQ==
   
+  expo-updates@~0.4.1:
+    version "0.4.2"
+    resolved "https://registry.yarnpkg.com/expo-updates/-/expo-updates-0.4.2.tgz#15862bc209fa3fb98d3fa16b7aac4edfcc33f182"
+    integrity sha512-89bvwemgmWWPGAHHnzSFCryWW3TmPNozcShwi7976KAlNcXM7Aitv7uifxtkdBt85TECFm5N6LY278psjyt8Dg==
+    dependencies:
+      "@expo/metro-config" "^0.1.16"
+      fbemitter "^2.1.1"
+      uuid "^3.4.0"
+  
   expo@40.0.0:
     version "40.0.0"
     resolved "https://registry.yarnpkg.com/expo/-/expo-40.0.0.tgz#6caf03587532cd18b482991332a8b75eeca2fcb7"
@@ -3538,7 +3598,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/get-value/-/get-value-2.0.6.tgz"
     integrity sha1-3BXKHGcjh8p2vTesCjlbogQqLCg=
   
-  getenv@0.7.0:
+  getenv@0.7.0, getenv@^0.7.0:
     version "0.7.0"
     resolved "https://registry.yarnpkg.com/getenv/-/getenv-0.7.0.tgz#39b91838707e2086fd1cf6ef8777d1c93e14649e"
     integrity sha1-ObkYOHB+IIb9HPbvh3fRyT4UZJ4=

@@ -8,4 +8,6 @@ export default Object.freeze({
 	MEDICATION: 'Medication',
 	MEDICATION_EDIT: 'Edit Medication',
 	TEST: 'Test',
+	SETTINGS: 'Settings',
+	ACCOUNT: 'Account',
 });
