@@ -1,13 +1,12 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {ImageBackground, StyleSheet, View} from 'react-native';
 import * as Yup from 'yup';
 
 import AppText from '../components/AppText';
-import {ButtonAccept, ButtonDecline, ButtonStandard} from "../components/Buttons";
+import {ButtonAccept, ButtonDecline} from "../components/Buttons";
 import AppForm from '../components/forms/AppForm';
 import AppFormField from '../components/forms/AppFormField';
 import AppFormDateTimePicker from '../components/forms/AppFormDateTimePicker';
-import SubmitButton from '../components/forms/AppSubmitButton';
 import AppFormColorPicker from '../components/forms/AppFormColorPicker';
 import AppFormPicker from '../components/forms/AppFormPicker';
 import AppFormConditionalElement from '../components/forms/AppFormConditionalElement';
@@ -15,9 +14,8 @@ import ReminderList from '../components/ReminderList';
 import {AntDesign} from "@expo/vector-icons";
 
 import * as eventActions from '../store/events';
-import { genId } from '../store/events';
 import eventService from '../services/eventService';
-import reminderService from '../services/reminderService';
+import {useDispatch, useSelector,} from "react-redux";
 
 const disceaseKeyword = 'Disease';
 
@@ -34,6 +32,7 @@ const colorPickerItems = [
 	'#684697',
 	'#B10E1C',
 	'#F9A825',
+
 ];
 const categories = ['Appointment', 'Therapy', disceaseKeyword];
 const diseases = ['Flatulenzen', 'Gripaler Infekt', 'Männergrippe'];
@@ -91,6 +90,7 @@ function EventEditScreen({ navigation, route }) {
 	};
 
     return (
+        <ImageBackground source={require('../images/Background.png')} style={styles.image}>
         <View style={ styles.maincontainer }>
             <AppForm
                 initialValues={ event }
@@ -212,6 +212,7 @@ function EventEditScreen({ navigation, route }) {
 
             </AppForm>
         </View>
+        </ImageBackground>
     );
 }
 
@@ -262,6 +263,11 @@ const styles = StyleSheet.create({
     },
     reminderList: {
         maxHeight: '35%',
+    },
+    image: {
+        flex: 1,
+        resizeMode: "cover",
+        justifyContent: "center"
     },
 });
 

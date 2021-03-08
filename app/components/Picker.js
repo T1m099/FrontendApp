@@ -1,18 +1,10 @@
-import React, { useState } from 'react';
-import {
-	View,
-	StyleSheet,
-	TouchableWithoutFeedback,
-	Modal,
-	Button,
-	FlatList,
-	TouchableOpacity,
-} from 'react-native';
+
+import {View,StyleSheet,TouchableWithoutFeedback,Modal,	Button,	FlatList,TouchableOpacity,} from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import defaultStyles from '../config/styles';
 import SafeAreaScreen from './SafeAreaScreen';
 import colors from '../config/colors';
+import React from "react";
 
 function AppPicker({
 	items,
@@ -26,10 +18,10 @@ function AppPicker({
 	selectedItem,
 	style,
 }) {
-	const [modalVisible, setModalVisible] = useState(false);
+	const [modalVisible, setModalVisible] = React.useState(false)
 
 	return (
-		<>
+		<View>
 			<TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
 				<View style={[styles.container, style]}>
 					{renderIcon && renderIcon()}
@@ -71,7 +63,7 @@ function AppPicker({
 					/>
 				</SafeAreaScreen>
 			</Modal>
-		</>
+		</View>
 	);
 }
 

@@ -1,14 +1,12 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet,ImageBackground } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import dayjs from 'dayjs';
-import { useSelector } from 'react-redux';
-import {ButtonDecline, ButtonStandard} from '../components/Buttons';
+import {ButtonDecline} from '../components/Buttons';
 import routes from '../navigation/routes';
-import * as eventActions from '../store/events';
 
 function CalendarScreen({ navigation }) {
-	const [events, setEvents] = useState([]);
+	const [events, setEvents] =React.useState([false]);
 
 	/* useEffect(() => {
 		navigation.addListener('focus', () => {

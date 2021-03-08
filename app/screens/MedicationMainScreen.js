@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, StyleSheet, FlatList, ImageBackground } from 'react-native';
+import {View, StyleSheet, FlatList, ImageBackground, Text} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import {ButtonYellow} from "../components/Buttons";
-import MediactionListItem from '../components/MediactionListItem';
+import {ButtonAccept, ButtonDecline, ButtonYellow} from "../components/Buttons";
+import MedicationListItem from '../components/MediactionListItem';
 import routes from '../navigation/routes';
 import colors from "../config/colors";
 
@@ -11,6 +11,7 @@ import medicationService from '../services/medicationService';
 import reminderService from '../services/reminderService';
 
 import { getMeds, medItemDeleted } from '../store/meds';
+import {AntDesign} from "@expo/vector-icons";
 
 function MedicationMainScreen({ navigation }) {
 	const meds = useSelector(getMeds());
@@ -34,7 +35,7 @@ function MedicationMainScreen({ navigation }) {
 
 	return (
 		<ImageBackground source={require('../images/Background.png')} style={styles.image}>
-			<View style={styles.container}>
+			<View >
                 <FlatList
 				data={Object.values(meds)}
                     keyExtractor={item => {
@@ -42,7 +43,7 @@ function MedicationMainScreen({ navigation }) {
                     }}
                     renderItem={({ item }) => {
                         return (
-                            <MediactionListItem
+                            <MedicationListItem
                                 data={item}
                                 onPress={() => {
 								goToMedicationEdit(item.id);
@@ -55,19 +56,26 @@ function MedicationMainScreen({ navigation }) {
                     }}
                     ListFooterComponent={
                         <React.Fragment>
-                            <ButtonYellow
+							<View style={styles.container} >
+								<Text style={styles.text}>Neues Medikament</Text>
+
+								<ButtonAccept
                                 onPress={() => {
 								goToMedicationEdit('new');
                                 }}
-                                Content='New Medication Item'
+								Content={<AntDesign name="addfolder" size={24} color="white"/>}
                             />
-                            <ButtonYellow
+							</View>
+							<View style={styles.container} >
+								<Text style={styles.text}>Cache Löschen</Text>
+								<ButtonDecline
                                 onPress={() => {
                                     medicationService.clear();
                                     setMeds([]);
                                 }}
-                                Content='Clear Cache'
+								Content={<AntDesign name="delete" size={24} color="white"/>}
                             />
+							</View>
                         </React.Fragment>
                     }
                 />
@@ -85,7 +93,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		alignSelf: 'center',
 		width: '92%',
-		maxHeight: 81,
+		maxHeight: 83,
 		borderRadius: 10,
 		marginTop: '.75%',
 		marginBottom: '.75%',

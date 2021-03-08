@@ -14,6 +14,7 @@ function AppFormPicker({
 	renderPickerItem,
 	renderPlaceholder,
 	style,
+
 }) {
 	const { errors, setFieldValue, touched, values } = useFormikContext();
 
@@ -30,6 +31,7 @@ function AppFormPicker({
 				renderPlaceholder={renderPlaceholder}
 				selectedItem={values[name]}
 				style={style}
+
 			/>
 			<ErrorMessage error={errors[name]} visible={touched[name]} />
 		</>
