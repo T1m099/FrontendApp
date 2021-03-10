@@ -27,12 +27,7 @@ export const saveMedItem = medItem => async dispatch => {
 	const mi = { ...medItem };
 
 	//cancel all scheduled notifications for the edited item, in case there are any
-	mi.reminders.forEach(r => {
-		if (!r.id.match(reminderService.NEW_REMINDER_PREFIX)) {
-			reminderService.cancelReminderAsync(r);
-		}
-		return r;
-	});
+	reminderService.cancelRemindersAsync(mi.reminders);
 
 	//checking if reminders are new and schedule notifications for them
 	mi.reminders = await reminderService.scheduleReminderNotificationsAsync(
@@ -41,10 +36,7 @@ export const saveMedItem = medItem => async dispatch => {
 		Platform.OS
 	);
 
-	mi.reminders = mi.reminders.map(r => {
-		r.date = r.date.getTime();
-		return r;
-	});
+	mi.reminders = reminderService.makeRemindersSerializable(mi.reminders);
 
 	dispatch(medItemSaved(mi));
 };

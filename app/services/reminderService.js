@@ -45,10 +45,25 @@ const cancelReminderAsync = async reminder => {
 		await notificationService.cancelAsync(reminder.id);
 	}
 };
+const cancelRemindersAsync = async reminders => {
+	reminders.forEach(async r => {
+		if (!r.id.match(NEW_REMINDER_PREFIX)) {
+			await cancelReminderAsync(r);
+		}
+	});
+};
+const makeRemindersSerializable = reminders => {
+	return reminders.map(r => {
+		r.date = r.date.getTime();
+		return r;
+	});
+};
 
 export default {
 	scheduleReminderNotificationsAsync,
 	parseStringifiedReminders,
 	cancelReminderAsync,
+	cancelRemindersAsync,
+	makeRemindersSerializable,
 	NEW_REMINDER_PREFIX,
 };
