@@ -37,7 +37,7 @@ const colorPickerItems = [
 	'#B10E1C',
 	'#F9A825',
 ];
-const categories = ['Appointment', 'Therapy', disceaseKeyword];
+const types = ['Appointment', 'Therapy', disceaseKeyword];
 const diseases = ['Flatulenzen', 'Gripaler Infekt', 'Männergrippe'];
 
 function initEvent(events, id, timestamp) {
@@ -45,13 +45,13 @@ function initEvent(events, id, timestamp) {
 	if (id && id === 'new') {
 		e = {
 			...eventService.baseEvent,
-			start: new Date(timestamp),
+			time: new Date(timestamp),
 			end: new Date(timestamp + 60 * 60 * 1000),
 		};
 	} else {
 		e = { ...events[id] };
 		console.log(e);
-		e.start = new Date(e.start);
+		e.time = new Date(e.time);
 		e.end = new Date(e.end);
 	}
 	return e;
@@ -82,16 +82,7 @@ function EventEditScreen({ navigation, route }) {
 	};
 
 	const handleSubmit = event => {
-		const e = { ...event };
-		if (e.id === 'new') {
-			e.id = genId();
-		}
-
-		e.start = e.start.getTime();
-		e.end = e.end.getTime();
-
-		dispatch(eventActions.eventSaved(e));
-
+		dispatch(eventActions.saveEvent(event));
 		navigation.pop();
 	};
 
@@ -105,8 +96,8 @@ function EventEditScreen({ navigation, route }) {
 				<AppFormField name='title' width='100%' placeholder='Title' />
 
 				<AppFormPicker
-					name='category'
-					items={categories}
+					name='type'
+					items={types}
 					extractKey={item => {
 						return item;
 					}}
@@ -147,7 +138,7 @@ function EventEditScreen({ navigation, route }) {
 					<AppText style={styles.datePickerLabel}>From:</AppText>
 					<View style={styles.datePicker}>
 						<AppFormDateTimePicker
-							name='start'
+							name='time'
 							valueDateTransform={toDateString}
 							valueTimeTransform={toTimeString}
 						/>
@@ -180,9 +171,9 @@ function EventEditScreen({ navigation, route }) {
 				<AppFormField
 					maxLength={255}
 					multiline
-					name='description'
+					name='notes'
 					numberOfLines={3}
-					placeholder='Description'
+					placeholder='Notes'
 				/>
 
 				<AppFormColorPicker

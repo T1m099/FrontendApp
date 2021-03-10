@@ -21,11 +21,11 @@ function CalendarScreen({ navigation }) {
 		let event;
 		Object.keys(eventsToMap).forEach(k => {
 			event = eventsToMap[k];
-			const start = dayjs(event.start);
+			const start = dayjs(event.time);
 			const end = dayjs(event.end);
 			const diff = end.diff(start, 'd');
 
-			let dateToMark = dayjs(event.start);
+			let dateToMark = dayjs(event.time);
 			for (let i = 0; i <= diff; i++) {
 				//mark date
 

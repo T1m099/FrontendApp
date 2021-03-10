@@ -1,6 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { createSelector } from 'reselect';
 import dayjs from 'dayjs';
+import _ from 'lodash';
+
+import {
+	eventTypes,
+	baseEvent,
+	allAdditionalProperties,
+} from '../config/eventTypes';
+import reminderService from '../services/reminderService';
 
 let lastId = 0;
 
@@ -24,6 +32,29 @@ export default slice.reducer;
 
 // Action Creators
 
+export const saveEvent = event => async dispatch => {
+	const ev = { ...event };
+	if (ev.id === 'new') {
+		ev.id = genId();
+	}
+	const type = ev.type;
+
+	//making dates serializable
+	ev.time = ev.time.getTime();
+	ev.end = ev.end.getTime();
+
+	//making reminders serializable
+	ev.reminders = reminderService.makeRemindersSerializable(ev.reminders);
+
+	const keysToPersist = [
+		...Object.keys(baseEvent),
+		...Object.keys(eventTypes[type]),
+	];
+	const eventToSave = _.pick(ev, keysToPersist);
+
+	dispatch(eventSaved(eventToSave));
+};
+
 // Selector
 
 // Memoization
@@ -32,7 +63,25 @@ export default slice.reducer;
 export const getEvents = () =>
 	createSelector(
 		state => state.entities.events,
-		events => events.listObject
+		events => {
+			const eventsToReturn = {};
+			Object.keys(events.listObject).map(k => {
+				const e = { ...events.listObject[k] };
+				const event = {
+					...baseEvent,
+					...allAdditionalProperties,
+					end: new Date(e.time + 60 * 60 * 1000),
+					...e,
+				};
+
+				event.reminders = reminderService.parseStringifiedReminders(
+					event.reminders
+				);
+
+				eventsToReturn[k] = event;
+			});
+			return eventsToReturn;
+		}
 	);
 
 export const genId = () => '' + Date.now() + lastId++;
