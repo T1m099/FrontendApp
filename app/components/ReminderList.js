@@ -1,18 +1,10 @@
 import React, { useState } from 'react';
-import {
-	View,
-	StyleSheet,
-	FlatList,
-	Alert,
-	TouchableHighlight,
-} from 'react-native';
+import { View, StyleSheet, FlatList, TouchableHighlight } from 'react-native';
 import { useFormikContext } from 'formik';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
-import AppButton from './AppButton';
 import ListItemDeleteAction from './ListItemDeleteAction';
 import DatePickerInput from './DatePickerInput';
-import reminderService from '../services/reminderService';
 import AppText from './AppText';
 import colors from '../config/colors';
 
@@ -45,17 +37,6 @@ function ReminderList({
 	};
 
 	const handleUpdateReminder = async (reminder, date) => {
-		if (!reminder.id.match(reminderService.NEW_REMINDER_PREFIX)) {
-			try {
-				await reminderService.cancelReminderAsync(reminder.id);
-			} catch (error) {
-				Alert.alert(
-					'Error',
-					'Could not cancel reminder before updating.'
-				);
-			}
-		}
-
 		const reminders = [...values[name]];
 		const index = reminders.findIndex(r => r.id === reminder.id);
 
@@ -104,7 +85,7 @@ function ReminderList({
 									)}
 									mode='time'
 									onDateSelection={(event, selectedDate) => {
-										if (!event.type === 'dismissed') {
+										if (!(event.type === 'dismissed')) {
 											handleUpdateReminder(
 												reminder,
 												selectedDate
