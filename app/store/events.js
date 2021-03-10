@@ -37,20 +37,32 @@ export const saveEvent = event => async dispatch => {
 	if (ev.id === 'new') {
 		ev.id = genId();
 	}
-	const type = ev.type;
-
-	//making dates serializable
-	ev.time = ev.time.getTime();
-	ev.end = ev.end.getTime();
-
-	//making reminders serializable
-	ev.reminders = reminderService.makeRemindersSerializable(ev.reminders);
 
 	const keysToPersist = [
 		...Object.keys(baseEvent),
-		...Object.keys(eventTypes[type]),
+		...Object.keys(eventTypes[ev.type]),
 	];
+
 	const eventToSave = _.pick(ev, keysToPersist);
+
+	if (eventToSave.reminders) {
+		reminderService.cancelRemindersAsync(eventToSave.reminders);
+
+		eventToSave.reminders = await reminderService.scheduleReminderNotificationsAsync(
+			eventToSave.reminders,
+			eventToSave.title,
+			eventToSave.notes
+		);
+
+		eventToSave.reminders = reminderService.makeRemindersSerializable(
+			eventToSave.reminders
+		);
+	}
+
+	if (eventToSave.end) {
+		eventToSave.end = eventToSave.end.getTime();
+	}
+	eventToSave.time = eventToSave.time.getTime();
 
 	dispatch(eventSaved(eventToSave));
 };

@@ -1,11 +1,13 @@
+import Constants from 'expo-constants';
+
 import notificationService from './notificationService';
 
 const NEW_REMINDER_PREFIX = 'new_';
 
 const scheduleReminderNotificationsAsync = async (
 	reminders,
-	messageDetails,
-	os,
+	title,
+	description,
 	repeats = false
 ) => {
 	return await Promise.all(
@@ -14,10 +16,12 @@ const scheduleReminderNotificationsAsync = async (
 				let id = r.id;
 				try {
 					id = await notificationService.scheduleAsync(
-						os,
+						Object.keys(Constants.platform)[0] === 'android'
+							? 'android'
+							: 'ios',
 						{
-							title: messageDetails.title,
-							message: messageDetails.description,
+							title: title,
+							message: description,
 						},
 						r.date,
 						repeats
@@ -34,8 +38,9 @@ const scheduleReminderNotificationsAsync = async (
 };
 
 const parseStringifiedReminders = stringifiedReminders => {
-	return stringifiedReminders.map(r => {
-		r.date = new Date(r.date);
+	return stringifiedReminders.map(reminder => {
+		const r = { ...reminder };
+		r.date = new Date(reminder.date);
 		return r;
 	});
 };

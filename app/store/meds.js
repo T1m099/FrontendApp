@@ -32,8 +32,8 @@ export const saveMedItem = medItem => async dispatch => {
 	//checking if reminders are new and schedule notifications for them
 	mi.reminders = await reminderService.scheduleReminderNotificationsAsync(
 		mi.reminders,
-		mi,
-		Platform.OS
+		mi.title,
+		mi.description
 	);
 
 	mi.reminders = reminderService.makeRemindersSerializable(mi.reminders);
