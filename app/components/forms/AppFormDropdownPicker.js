@@ -1,25 +1,29 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { useFormikContext } from 'formik';
 
-import AppErrorMessage from './AppErrorMessage';
-
-function AppFormDropdownPicker({ name, items, containerStyle }) {
+function AppFormDropdownPicker({
+	name,
+	items,
+	containerStyle,
+	checkVisible = (vals, name) => true,
+}) {
 	const {
 		setFieldTouched,
 		setFieldValue,
-		errors,
-		touched,
+
 		values,
 	} = useFormikContext();
+	if (!checkVisible(values, name)) return null;
+
 	return (
 		<>
 			<DropDownPicker
 				items={items}
 				containerStyle={[styles.pickerContainer, containerStyle]}
 				defaultValue={values[name]}
-				onChangeItem={(item) => {
+				onChangeItem={item => {
 					setFieldTouched(name, true);
 					setFieldValue(name, item.value);
 				}}

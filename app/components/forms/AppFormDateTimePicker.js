@@ -8,8 +8,11 @@ function AppFormDateTimePicker({
 	name,
 	valueDateTransform,
 	valueTimeTransform,
+	checkVisible = (vals, name) => true,
 }) {
 	const { setFieldValue, values } = useFormikContext();
+	if (!checkVisible(values, name)) return null;
+
 	return (
 		<View style={styles.container}>
 			<DatePickerInput

@@ -31,3 +31,5 @@ export const allAdditionalProperties = {
 	reminders: [],
 	disease: '',
 };
+
+export const typeNames = Object.keys(eventTypes);

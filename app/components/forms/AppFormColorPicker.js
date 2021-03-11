@@ -12,28 +12,28 @@ import { useFormikContext } from 'formik';
 import AppText from '../AppText';
 import AppButton from '../AppButton';
 
-function AppFormColorPicker({ name, colors }) {
+function AppFormColorPicker({
+	name,
+	colors,
+	style,
+	checkVisible = (vals, name) => true,
+}) {
 	const { setFieldValue, values } = useFormikContext();
 	const [modalVisible, setModalVisible] = useState(false);
 
+	if (!checkVisible(values, name)) return null;
+
 	return (
-		<>
-			<TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
-				<View
-					style={[
-						styles.container,
-						{ backgroundColor: values[name] },
-					]}
+		<View style={style}>
+			<View style={[styles.container, { backgroundColor: values[name] }]}>
+				<TouchableOpacity
+					onPress={() => {
+						setModalVisible(true);
+					}}
 				>
-					<TouchableOpacity
-						onPress={() => {
-							setModalVisible(true);
-						}}
-					>
-						<AppText>Marking Color</AppText>
-					</TouchableOpacity>
-				</View>
-			</TouchableWithoutFeedback>
+					<AppText>Marking Color</AppText>
+				</TouchableOpacity>
+			</View>
 			<Modal visible={modalVisible} animationType='slide'>
 				<View style={styles.colorContainer}>
 					<FlatList
@@ -65,7 +65,7 @@ function AppFormColorPicker({ name, colors }) {
 					/>
 				</View>
 			</Modal>
-		</>
+		</View>
 	);
 }
 

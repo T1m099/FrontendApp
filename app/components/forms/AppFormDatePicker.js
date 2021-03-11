@@ -13,11 +13,14 @@ function AppFormDatePicker({
 	mode = 'date',
 	display = 'spinner',
 	style,
+	checkVisible = (vals, name) => true,
 }) {
 	const [visible, setVisible] = useState(false);
 	const { setFieldValue, values } = useFormikContext();
 
-	const viewTransform = (value) => {
+	if (!checkVisible(values, name)) return null;
+
+	const viewTransform = value => {
 		return value ? valueViewTransform(value) : 'Pick value';
 	};
 

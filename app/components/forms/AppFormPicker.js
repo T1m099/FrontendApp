@@ -3,6 +3,7 @@ import { useFormikContext } from 'formik';
 
 import Picker from '../Picker';
 import ErrorMessage from './AppErrorMessage';
+import { View } from 'react-native';
 
 function AppFormPicker({
 	items,
@@ -14,11 +15,14 @@ function AppFormPicker({
 	renderPickerItem,
 	renderPlaceholder,
 	style,
+	checkVisible = (vals, name) => true,
 }) {
 	const { errors, setFieldValue, touched, values } = useFormikContext();
 
+	if (!checkVisible(values, name)) return null;
+
 	return (
-		<>
+		<View style={style}>
 			<Picker
 				items={items}
 				icon={icon}
@@ -32,7 +36,7 @@ function AppFormPicker({
 				style={style}
 			/>
 			<ErrorMessage error={errors[name]} visible={touched[name]} />
-		</>
+		</View>
 	);
 }
 

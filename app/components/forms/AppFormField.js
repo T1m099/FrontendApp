@@ -4,7 +4,12 @@ import { useFormikContext } from 'formik';
 import TextInput from '../AppTextInput';
 import AppErrorMessage from './AppErrorMessage';
 
-function AppFormField({ name, width, ...otherProps }) {
+function AppFormField({
+	name,
+	width,
+	checkVisible = (vals, name) => true,
+	...otherProps
+}) {
 	const {
 		setFieldTouched,
 		setFieldValue,
@@ -13,11 +18,12 @@ function AppFormField({ name, width, ...otherProps }) {
 		values,
 	} = useFormikContext();
 
+	if (!checkVisible(values, name)) return null;
 	return (
 		<>
 			<TextInput
 				onBlur={() => setFieldTouched(name)}
-				onChangeText={(text) => setFieldValue(name, text)}
+				onChangeText={text => setFieldValue(name, text)}
 				value={values[name]}
 				width={width}
 				{...otherProps}
