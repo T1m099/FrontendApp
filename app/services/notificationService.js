@@ -13,7 +13,7 @@ const cancelAllAsync = async () => {
 	await Notifications.cancelAllScheduledNotificationsAsync();
 	return await Notifications.getAllScheduledNotificationsAsync();
 };
-const cancelAsync = async (id) => {
+const cancelAsync = async id => {
 	try {
 		await Notifications.cancelScheduledNotificationAsync(id);
 	} catch (error) {

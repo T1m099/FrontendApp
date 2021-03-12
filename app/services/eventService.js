@@ -4,12 +4,12 @@ const eventCacheKey = 'apmntCache';
 
 const baseEvent = {
 	id: 'new',
-	start: new Date(),
+	time: new Date(),
 	end: new Date(),
 	title: '',
-	description: '',
+	notes: '',
 	markingColor: '#ff0000',
-	category: 'Appointment',
+	type: 'Appointment',
 	disease: '',
 	reminders: [],
 };

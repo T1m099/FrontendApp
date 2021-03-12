@@ -13,15 +13,14 @@ import AppFormDateTimePicker from '../components/forms/AppFormDateTimePicker';
 import SubmitButton from '../components/forms/AppSubmitButton';
 import AppFormColorPicker from '../components/forms/AppFormColorPicker';
 import AppFormPicker from '../components/forms/AppFormPicker';
-import AppFormConditionalElement from '../components/forms/AppFormConditionalElement';
 import ReminderList from '../components/ReminderList';
 
 import * as eventActions from '../store/events';
-import { genId } from '../store/events';
 import eventService from '../services/eventService';
 import reminderService from '../services/reminderService';
 
-const disceaseKeyword = 'Disease';
+import { baseEvent, eventTypes, typeNames } from '../config/eventTypes';
+import AppFormConditionalElement from '../components/forms/AppFormConditionalElement';
 
 const colorPickerItems = [
 	'#00ff00',
@@ -37,7 +36,7 @@ const colorPickerItems = [
 	'#B10E1C',
 	'#F9A825',
 ];
-const categories = ['Appointment', 'Therapy', disceaseKeyword];
+const types = typeNames;
 const diseases = ['Flatulenzen', 'Gripaler Infekt', 'Männergrippe'];
 
 function initEvent(events, id, timestamp) {
@@ -45,13 +44,13 @@ function initEvent(events, id, timestamp) {
 	if (id && id === 'new') {
 		e = {
 			...eventService.baseEvent,
-			start: new Date(timestamp),
+			time: new Date(timestamp),
 			end: new Date(timestamp + 60 * 60 * 1000),
 		};
 	} else {
 		e = { ...events[id] };
 		console.log(e);
-		e.start = new Date(e.start);
+		e.time = new Date(e.time);
 		e.end = new Date(e.end);
 	}
 	return e;
@@ -82,17 +81,18 @@ function EventEditScreen({ navigation, route }) {
 	};
 
 	const handleSubmit = event => {
-		const e = { ...event };
-		if (e.id === 'new') {
-			e.id = genId();
-		}
-
-		e.start = e.start.getTime();
-		e.end = e.end.getTime();
-
-		dispatch(eventActions.eventSaved(e));
-
+		dispatch(eventActions.saveEvent(event));
 		navigation.pop();
+	};
+
+	const checkVisible = (values, name) => {
+		const type = values.type;
+
+		const visibleFields = [
+			...Object.keys(baseEvent),
+			...Object.keys(eventTypes[type]),
+		];
+		return visibleFields.includes(name);
 	};
 
 	return (
@@ -102,54 +102,64 @@ function EventEditScreen({ navigation, route }) {
 				onSubmit={handleSubmit}
 				validationSchema={validationSchema}
 			>
-				<AppFormField name='title' width='100%' placeholder='Title' />
-
-				<AppFormPicker
-					name='category'
-					items={categories}
-					extractKey={item => {
-						return item;
-					}}
-					renderSelectedItem={item => {
-						return <AppText>{item}</AppText>;
-					}}
-					renderPickerItem={({ item }) => {
-						return <AppText>{item}</AppText>;
-					}}
-					renderPlaceholder={() => {
-						return <AppText>Choose Category</AppText>;
-					}}
-				/>
-				<AppFormConditionalElement
-					checkCondition={values => {
-						return values.category === disceaseKeyword;
-					}}
-				>
+				<View style={styles.typeAndColorContainer}>
 					<AppFormPicker
-						name='disease'
-						items={diseases}
+						name='type'
+						items={types}
+						style={styles.typesPicker}
 						extractKey={item => {
 							return item;
 						}}
 						renderSelectedItem={item => {
-							return <AppText>{item.toString()}</AppText>;
+							return <AppText>{item}</AppText>;
 						}}
 						renderPickerItem={({ item }) => {
-							return <AppText>{item.toString()}</AppText>;
+							return <AppText>{item}</AppText>;
 						}}
 						renderPlaceholder={() => {
-							return <AppText>Disease</AppText>;
+							return <AppText>Choose Category</AppText>;
 						}}
+						checkVisible={checkVisible}
 					/>
-				</AppFormConditionalElement>
+					<AppFormColorPicker
+						name='markingColor'
+						colors={colorPickerItems}
+						styles={styles.colorPicker}
+					/>
+				</View>
+
+				<AppFormField
+					name='title'
+					width='100%'
+					placeholder='Title'
+					checkVisible={checkVisible}
+				/>
+				<AppFormPicker
+					name='disease'
+					items={diseases}
+					extractKey={item => {
+						return item;
+					}}
+					renderSelectedItem={item => {
+						return <AppText>{item.toString()}</AppText>;
+					}}
+					renderPickerItem={({ item }) => {
+						return <AppText>{item.toString()}</AppText>;
+					}}
+					renderPlaceholder={() => {
+						return <AppText>Disease</AppText>;
+					}}
+					checkVisible={checkVisible}
+				/>
 
 				<View style={styles.startContainer}>
 					<AppText style={styles.datePickerLabel}>From:</AppText>
 					<View style={styles.datePicker}>
 						<AppFormDateTimePicker
-							name='start'
+							name='time'
 							valueDateTransform={toDateString}
 							valueTimeTransform={toTimeString}
+							checkVisible={checkVisible}
 						/>
 					</View>
 				</View>
@@ -160,13 +170,14 @@ function EventEditScreen({ navigation, route }) {
 							name='end'
 							valueDateTransform={toDateString}
 							valueTimeTransform={toTimeString}
+							checkVisible={checkVisible}
 						/>
 					</View>
 				</View>
+
 				<AppFormConditionalElement
-					checkCondition={values => {
-						return values.category !== disceaseKeyword;
-					}}
+					name='reminders'
+					checkVisible={checkVisible}
 				>
 					<ReminderList
 						name='reminders'
@@ -180,15 +191,11 @@ function EventEditScreen({ navigation, route }) {
 				<AppFormField
 					maxLength={255}
 					multiline
-					name='description'
+					name='notes'
 					numberOfLines={3}
-					placeholder='Description'
+					placeholder='Notes'
 				/>
 
-				<AppFormColorPicker
-					name='markingColor'
-					colors={colorPickerItems}
-				/>
 				<View style={styles.buttonContainer}>
 					<AppButton
 						title='Close'
@@ -217,6 +224,15 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 	},
+	typeAndColorContainer: { flexDirection: 'row' },
+	typesPicker: {
+		flexGrow: 5,
+		marginVertical: 0,
+	},
+	colorPicker: {
+		flexGrow: 5,
+	},
+
 	datePickerLabel: { flex: 1 },
 	datePicker: { flex: 5 },
 	buttonContainer: {

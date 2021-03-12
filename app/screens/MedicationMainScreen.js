@@ -22,7 +22,7 @@ function MedicationMainScreen({ navigation }) {
 				reminderService.cancelReminderAsync(r);
 			}
 		});
-		dispatch(medItemDeleted(item));
+		dispatch(medItemDeleted({ id: item.id }));
 	};
 
 	const goToMedicationEdit = id => {

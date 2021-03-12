@@ -1,11 +1,13 @@
+import Constants from 'expo-constants';
+
 import notificationService from './notificationService';
 
 const NEW_REMINDER_PREFIX = 'new_';
 
 const scheduleReminderNotificationsAsync = async (
 	reminders,
-	messageDetails,
-	os,
+	title,
+	description,
 	repeats = false
 ) => {
 	return await Promise.all(
@@ -14,10 +16,12 @@ const scheduleReminderNotificationsAsync = async (
 				let id = r.id;
 				try {
 					id = await notificationService.scheduleAsync(
-						os,
+						Object.keys(Constants.platform)[0] === 'android'
+							? 'android'
+							: 'ios',
 						{
-							title: messageDetails.title,
-							message: messageDetails.description,
+							title: title,
+							message: description,
 						},
 						r.date,
 						repeats
@@ -34,8 +38,9 @@ const scheduleReminderNotificationsAsync = async (
 };
 
 const parseStringifiedReminders = stringifiedReminders => {
-	return stringifiedReminders.map(r => {
-		r.date = new Date(r.date);
+	return stringifiedReminders.map(reminder => {
+		const r = { ...reminder };
+		r.date = new Date(reminder.date);
 		return r;
 	});
 };
@@ -45,10 +50,25 @@ const cancelReminderAsync = async reminder => {
 		await notificationService.cancelAsync(reminder.id);
 	}
 };
+const cancelRemindersAsync = async reminders => {
+	reminders.forEach(async r => {
+		if (!r.id.match(NEW_REMINDER_PREFIX)) {
+			await cancelReminderAsync(r);
+		}
+	});
+};
+const makeRemindersSerializable = reminders => {
+	return reminders.map(r => {
+		r.date = r.date.getTime();
+		return r;
+	});
+};
 
 export default {
 	scheduleReminderNotificationsAsync,
 	parseStringifiedReminders,
 	cancelReminderAsync,
+	cancelRemindersAsync,
+	makeRemindersSerializable,
 	NEW_REMINDER_PREFIX,
 };

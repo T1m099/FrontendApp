@@ -1,9 +1,9 @@
 import { useFormikContext } from 'formik';
 
-function AppFormConditionalElement({ children, checkCondition }) {
+function AppFormConditionalElement({ name, children, checkVisible }) {
 	const { values } = useFormikContext();
 
-	if (checkCondition(values)) {
+	if (checkVisible(values, name)) {
 		return children;
 	}
 	return null;
