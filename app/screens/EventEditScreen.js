@@ -49,7 +49,6 @@ function initEvent(events, id, timestamp) {
 		};
 	} else {
 		e = { ...events[id] };
-		console.log(e);
 		e.time = new Date(e.time);
 		e.end = new Date(e.end);
 	}
