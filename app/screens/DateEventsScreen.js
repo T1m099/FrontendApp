@@ -17,7 +17,6 @@ function DateEventScreen({ navigation, route }) {
 	const { dayTimestamp } = route.params;
 	const thisDaysEvents = filterDaysEvents(allEvents, dayTimestamp);
 
-	//console.log(thisDaysEvents);
 	return (
 		<View style={styles.container}>
 			<FlatList
@@ -39,7 +38,7 @@ function DateEventScreen({ navigation, route }) {
 								<ListItemDeleteAction
 									onPress={() => {
 										dispatch(
-											eventActions.eventDeleted({
+											eventActions.deleteEvent({
 												id: item.id,
 											})
 										);

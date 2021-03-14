@@ -27,10 +27,14 @@ const slice = createSlice({
 	},
 });
 
-export const { eventSaved, eventDeleted } = slice.actions;
+const { eventSaved, eventDeleted } = slice.actions;
 export default slice.reducer;
 
 // Action Creators
+
+export const deleteEvent = id => async dispatch => {
+	dispatch(eventDeleted({ id }));
+};
 
 export const saveEvent = event => async dispatch => {
 	const ev = { ...event };
@@ -38,12 +42,23 @@ export const saveEvent = event => async dispatch => {
 		ev.id = genId();
 	}
 
-	const keysToPersist = [
-		...Object.keys(baseEvent),
-		...Object.keys(eventTypes[ev.type]),
-	];
+	const eventStructure = {
+		...baseEvent,
+		...eventTypes[ev.type],
+	};
 
-	const eventToSave = _.pick(ev, keysToPersist);
+	const keysToPersist = [...Object.keys(eventStructure)];
+
+	//const eventToSave = _.pick(ev, keysToPersist);
+	let eventToSave = {};
+	keysToPersist.forEach(k => {
+		if (
+			eventStructure[k] !== ev[k] ||
+			(Array.isArray(ev[k]) && ev[k].length !== 0)
+		) {
+			eventToSave[k] = ev[k];
+		}
+	});
 
 	if (eventToSave.reminders) {
 		reminderService.cancelRemindersAsync(eventToSave.reminders);
@@ -103,7 +118,7 @@ export const filterDaysEvents = (events, dayTimestamp) => {
 
 	Object.keys(events).forEach(k => {
 		const e = events[k];
-		let start = dayjs(e.start);
+		let start = dayjs(e.time);
 		start = start.hour(0);
 		start = start.minute(0);
 		start = start.second(0);
