@@ -52,7 +52,12 @@ export const saveEvent = event => async dispatch => {
 	//const eventToSave = _.pick(ev, keysToPersist);
 	let eventToSave = {};
 	keysToPersist.forEach(k => {
-		if (eventStructure[k] !== ev[k]) eventToSave[k] = ev[k];
+		if (
+			eventStructure[k] !== ev[k] ||
+			(Array.isArray(ev[k]) && ev[k].length !== 0)
+		) {
+			eventToSave[k] = ev[k];
+		}
 	});
 
 	if (eventToSave.reminders) {
