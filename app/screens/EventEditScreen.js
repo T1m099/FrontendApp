@@ -19,33 +19,25 @@ import * as eventActions from '../store/events';
 import eventService from '../services/eventService';
 import reminderService from '../services/reminderService';
 
-import { baseEvent, eventTypes, typeNames } from '../config/eventTypes';
+import {
+	baseEvent,
+	eventTypes,
+	typeNames,
+	markingColors,
+	symptoms,
+	moods,
+} from '../config/eventTypes';
 import AppFormConditionalElement from '../components/forms/AppFormConditionalElement';
 
-const colorPickerItems = [
-	'#00ff00',
-	'#0f0f00',
-	'#006CBE',
-	'#427505',
-	'#C33400',
-	'#00345C',
-	'#E3CC00',
-	'#00A3AE',
-	'#CC007E',
-	'#684697',
-	'#B10E1C',
-	'#F9A825',
-];
 const types = typeNames;
-const diseases = ['Flatulenzen', 'Gripaler Infekt', 'Männergrippe'];
 
 function initEvent(events, id, timestamp) {
 	let e;
 	if (id && id === 'new') {
 		e = {
 			...eventService.baseEvent,
-			time: new Date(timestamp),
-			end: new Date(timestamp + 60 * 60 * 1000),
+			time: new Date(timestamp + 12 * 60 * 60 * 1000),
+			end: new Date(timestamp + 13 * 60 * 60 * 1000),
 		};
 	} else {
 		e = { ...events[id] };
@@ -122,7 +114,7 @@ function EventEditScreen({ navigation, route }) {
 					/>
 					<AppFormColorPicker
 						name='markingColor'
-						colors={colorPickerItems}
+						colors={markingColors}
 						styles={styles.colorPicker}
 					/>
 				</View>
@@ -134,8 +126,8 @@ function EventEditScreen({ navigation, route }) {
 					checkVisible={checkVisible}
 				/>
 				<AppFormPicker
-					name='disease'
-					items={diseases}
+					name='symptom'
+					items={symptoms}
 					extractKey={item => {
 						return item;
 					}}
@@ -146,32 +138,57 @@ function EventEditScreen({ navigation, route }) {
 						return <AppText>{item.toString()}</AppText>;
 					}}
 					renderPlaceholder={() => {
-						return <AppText>Disease</AppText>;
+						return <AppText>Symptoms</AppText>;
+					}}
+					checkVisible={checkVisible}
+				/>
+				<AppFormPicker
+					name='mood'
+					items={moods}
+					extractKey={item => {
+						return item;
+					}}
+					renderSelectedItem={item => {
+						return <AppText>{item.toString()}</AppText>;
+					}}
+					renderPickerItem={({ item }) => {
+						return <AppText>{item.toString()}</AppText>;
+					}}
+					renderPlaceholder={() => {
+						return <AppText>Mood</AppText>;
 					}}
 					checkVisible={checkVisible}
 				/>
 
 				<View style={styles.startContainer}>
-					<AppText style={styles.datePickerLabel}>From:</AppText>
-					<View style={styles.datePicker}>
-						<AppFormDateTimePicker
-							name='time'
-							valueDateTransform={toDateString}
-							valueTimeTransform={toTimeString}
-							checkVisible={checkVisible}
-						/>
-					</View>
+					<AppFormConditionalElement
+						name='time'
+						checkVisible={checkVisible}
+					>
+						<AppText style={styles.datePickerLabel}>Time:</AppText>
+						<View style={styles.datePicker}>
+							<AppFormDateTimePicker
+								name='time'
+								valueDateTransform={toDateString}
+								valueTimeTransform={toTimeString}
+							/>
+						</View>
+					</AppFormConditionalElement>
 				</View>
 				<View style={styles.startContainer}>
-					<AppText style={styles.datePickerLabel}>To:</AppText>
-					<View style={styles.datePicker}>
-						<AppFormDateTimePicker
-							name='end'
-							valueDateTransform={toDateString}
-							valueTimeTransform={toTimeString}
-							checkVisible={checkVisible}
-						/>
-					</View>
+					<AppFormConditionalElement
+						name='end'
+						checkVisible={checkVisible}
+					>
+						<AppText style={styles.datePickerLabel}>End:</AppText>
+						<View style={styles.datePicker}>
+							<AppFormDateTimePicker
+								name='end'
+								valueDateTransform={toDateString}
+								valueTimeTransform={toTimeString}
+							/>
+						</View>
+					</AppFormConditionalElement>
 				</View>
 
 				<AppFormConditionalElement
