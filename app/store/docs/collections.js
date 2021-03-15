@@ -39,7 +39,7 @@ export const saveCollection = collection => async dispatch => {
 //Selectors
 export const getcollections = () =>
 	createSelector(
-		state => state.entities.collections,
+		state => state.entities.docs.collections,
 		collections => collections.listObject
 	);
 

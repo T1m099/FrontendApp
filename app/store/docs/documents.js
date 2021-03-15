@@ -39,7 +39,7 @@ export const saveDocument = document => async dispatch => {
 //Selectors
 export const getDocuments = () =>
 	createSelector(
-		state => state.entities.documents,
+		state => state.entities.docs.documents,
 		documents => documents.listObject
 	);
 

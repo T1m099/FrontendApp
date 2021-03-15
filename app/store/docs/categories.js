@@ -37,9 +37,9 @@ export const saveCategory = category => async dispatch => {
 };
 
 //Selectors
-export const getcategories = () =>
+export const getCategories = () =>
 	createSelector(
-		state => state.entities.categories,
+		state => state.entities.docs.categories,
 		categories => categories.listObject
 	);
 

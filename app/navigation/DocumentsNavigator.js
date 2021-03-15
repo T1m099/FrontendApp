@@ -8,7 +8,7 @@ import routes from './routes';
 import EventEditScreen from '../screens/EventEditScreen';
 import DateEventScreen from '../screens/DateEventsScreen';
 import TestScreen from '../screens/TestScreen';
-import DocumentManagementScreen from '../screens/DocumentManagementScreen';
+import CategoryManagementScreen from '../screens/CategoryManagementScreen';
 
 const Stack = createStackNavigator();
 
@@ -16,7 +16,7 @@ const OrganisationNavigator = () => (
 	<Stack.Navigator mode='modal' initialRouteName={routes.DOCUMENT_MANAGEMENT}>
 		<Stack.Screen
 			name={routes.DOCUMENT_MANAGEMENT}
-			component={DocumentManagementScreen}
+			component={CategoryManagementScreen}
 		/>
 	</Stack.Navigator>
 );
