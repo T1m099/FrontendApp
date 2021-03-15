@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, FlatList, Modal } from 'react-native';
+import {
+	View,
+	StyleSheet,
+	Text,
+	FlatList,
+	Modal,
+	TouchableOpacity,
+} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import AppButton from '../components/AppButton';
@@ -9,6 +16,7 @@ import * as collectionActions from '../store/docs/collections';
 import * as documentManagement from '../config/documentManagement';
 
 import colors from '../config/colors';
+import routes from '../navigation/routes';
 import AppSubmitButton from '../components/forms/AppSubmitButton';
 
 function CollectionManagementScreen({ navigation, route }) {
@@ -47,9 +55,17 @@ function CollectionManagementScreen({ navigation, route }) {
 				keyExtractor={item => item.id}
 				renderItem={({ item }) => {
 					return (
-						<View style={styles.collectionListItem}>
-							<Text>{item.title}</Text>
-						</View>
+						<TouchableOpacity
+							onPress={() => {
+								navigation.push(routes.DOCUMENT_MANAGEMENT, {
+									collectionId: item.id,
+								});
+							}}
+						>
+							<View style={styles.collectionListItem}>
+								<Text>{item.title}</Text>
+							</View>
+						</TouchableOpacity>
 					);
 				}}
 				ListFooterComponent={

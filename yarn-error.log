@@ -1,5 +1,5 @@
 Arguments: 
-  /snap/node/3292/bin/node /snap/node/3292/bin/yarn.js add @react-native-async-storage
+  /snap/node/3292/bin/node /snap/node/3292/bin/yarn.js add expo-file-system@~9.3.0
 
 PATH: 
   /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
@@ -14,17 +14,17 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@react-native-async-storage: Request "https://registry.yarnpkg.com/@react-native-async-storage" returned a 405
-      at Request.params.callback [as _callback] (/snap/node/3292/lib/cli.js:66997:18)
-      at Request.self.callback (/snap/node/3292/lib/cli.js:140749:22)
-      at Request.emit (events.js:314:20)
-      at Request.<anonymous> (/snap/node/3292/lib/cli.js:141721:10)
-      at Request.emit (events.js:314:20)
-      at IncomingMessage.<anonymous> (/snap/node/3292/lib/cli.js:141643:12)
-      at Object.onceWrapper (events.js:420:28)
-      at IncomingMessage.emit (events.js:326:22)
-      at endReadableNT (_stream_readable.js:1223:12)
-      at processTicksAndRejections (internal/process/task_queues.js:84:21)
+  Error: EACCES: permission denied, write
+      at writeSync (fs.js:679:3)
+      at SyncWriteStream._write (internal/fs/sync_write_stream.js:24:3)
+      at doWrite (_stream_writable.js:403:12)
+      at writeOrBuffer (_stream_writable.js:387:5)
+      at SyncWriteStream.Writable.write (_stream_writable.js:318:11)
+      at Object.clearLine (readline.js:1251:17)
+      at clearLine (/snap/node/3292/lib/cli.js:49658:12)
+      at ConsoleReporter.warn (/snap/node/3292/lib/cli.js:96791:43)
+      at Add.<anonymous> (/snap/node/3292/lib/cli.js:7266:23)
+      at Generator.next (<anonymous>)
 
 npm manifest: 
   {
@@ -37,6 +37,7 @@ npm manifest:
   		"eject": "expo eject"
   	},
   	"dependencies": {
+  		"@react-native-async-storage/async-storage": "^1.14.1",
   		"@react-native-community/datetimepicker": "3.0.4",
   		"@react-native-community/netinfo": "5.9.7",
   		"@react-navigation/bottom-tabs": "^5.11.8",
@@ -44,11 +45,14 @@ npm manifest:
   		"@react-navigation/stack": "^5.14.3",
   		"@reduxjs/toolkit": "^1.5.0",
   		"apisauce": "^2.0.1",
+  		"buffer": "^6.0.3",
   		"dayjs": "^1.10.4",
   		"expo": "40.0.0",
   		"expo-constants": "9.3.3",
+  		"expo-document-picker": "^8.4.1",
   		"expo-notifications": "^0.8.1",
   		"expo-permissions": "~10.0.0",
+  		"expo-random": "^10.0.0",
   		"expo-secure-store": "~9.3.0",
   		"expo-status-bar": "^1.0.3",
   		"formik": "^2.2.6",
@@ -57,7 +61,6 @@ npm manifest:
   		"react-devtools": "^4.10.1",
   		"react-dom": "16.13.1",
   		"react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
-  		"react-native-async-storage": "^0.0.1",
   		"react-native-calendars": "^1.1249.0",
   		"react-native-color-picker": "^0.6.0",
   		"react-native-dropdown-picker": "^4.0.2",
@@ -67,6 +70,7 @@ npm manifest:
   		"react-redux": "^7.2.2",
   		"redux": "^4.0.5",
   		"redux-persist": "^6.0.0",
+  		"redux-persist-transform-encrypt": "^3.0.1",
   		"yup": "^0.32.9"
   	},
   	"devDependencies": {
@@ -1197,6 +1201,13 @@ Lockfile:
       "@types/yargs" "^15.0.0"
       chalk "^4.0.0"
   
+  "@react-native-async-storage/async-storage@^1.14.1":
+    version "1.14.1"
+    resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.14.1.tgz#3c2ff2b1a312df3b1c809a60fa88665e50a095b8"
+    integrity sha512-UkLUox2q5DKNYB6IMUzsuwrTJeXGLySvtQlnrqd3fd+96JErCT4X3xD+W1cvQjes0nm0LbaELbwObKc+Tea7wA==
+    dependencies:
+      deep-assign "^3.0.0"
+  
   "@react-native-community/art@^1.1.2":
     version "1.2.0"
     resolved "https://registry.npmjs.org/@react-native-community/art/-/art-1.2.0.tgz"
@@ -1840,7 +1851,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz"
     integrity sha1-ibTRmasr7kneFk6gK4nORi1xt2c=
   
-  base64-js@^1.1.2, base64-js@^1.2.3:
+  base64-js@^1.1.2, base64-js@^1.2.3, base64-js@^1.3.0, base64-js@^1.3.1:
     version "1.5.1"
     resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.5.1.tgz"
     integrity sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==
@@ -1976,6 +1987,14 @@ Lockfile:
     version "1.1.1"
     resolved "https://registry.yarnpkg.com/buffer-from/-/buffer-from-1.1.1.tgz"
     integrity sha512-MQcXEUbCKtEo7bhqEs6560Hyd4XaovZlO/k9V3hjVUF/zwW7KBVdSK4gIt/bzwS9MbR5qob+F5jusZsb0YQK2A==
+  
+  buffer@^6.0.3:
+    version "6.0.3"
+    resolved "https://registry.yarnpkg.com/buffer/-/buffer-6.0.3.tgz#2ace578459cc8fbe2a70aaa8f52ee63b6a74c6c6"
+    integrity sha512-FTiCpNxtwiZZHEZbcbTIcZjERVICn9yq/pDFkTl95/AxzD1naBctN7YO68riM/gLSDY7sdrMby8hofADYuuqOA==
+    dependencies:
+      base64-js "^1.3.1"
+      ieee754 "^1.2.1"
   
   bytes@3.0.0:
     version "3.0.0"
@@ -2401,6 +2420,11 @@ Lockfile:
       shebang-command "^1.2.0"
       which "^1.2.9"
   
+  crypto-js@3.1.9-1:
+    version "3.1.9-1"
+    resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-3.1.9-1.tgz#fda19e761fc077e01ffbfdc6e9fdfc59e8806cd8"
+    integrity sha1-/aGedh/Ad+Af+/3G6f38WeiAbNg=
+  
   crypto-random-string@^1.0.0:
     version "1.0.0"
     resolved "https://registry.npmjs.org/crypto-random-string/-/crypto-random-string-1.0.0.tgz"
@@ -2446,6 +2470,13 @@ Lockfile:
     version "0.6.0"
     resolved "https://registry.npmjs.org/dedent/-/dedent-0.6.0.tgz"
     integrity sha1-Dm2o8M5Sg471zsXI+TlrDBtko8s=
+  
+  deep-assign@^3.0.0:
+    version "3.0.0"
+    resolved "https://registry.yarnpkg.com/deep-assign/-/deep-assign-3.0.0.tgz#c8e4c4d401cba25550a2f0f486a2e75bc5f219a2"
+    integrity sha512-YX2i9XjJ7h5q/aQ/IM9PEwEnDqETAIYbggmdDB3HLTlSgo1CxPsj6pvhPG68rq6SVE0+p+6Ywsm5fTYNrYtBWw==
+    dependencies:
+      is-obj "^1.0.0"
   
   deep-extend@^0.6.0:
     version "0.6.0"
@@ -2782,6 +2813,13 @@ Lockfile:
       fbjs "1.0.0"
       uuid "^3.3.2"
   
+  expo-document-picker@^8.4.1:
+    version "8.4.1"
+    resolved "https://registry.yarnpkg.com/expo-document-picker/-/expo-document-picker-8.4.1.tgz#20fc07328ea6155c65fdefecf4b531c6681ca004"
+    integrity sha512-/Si7pSa6dheygGhQA/Ig7XD1uLAFYJaLKXTi0V51+KmHA41F1KeAnoViUAzyKaNSV/bCu6FmiQNosN6OYAV1Hg==
+    dependencies:
+      uuid "^3.3.2"
+  
   expo-error-recovery@~1.4.0:
     version "1.4.0"
     resolved "https://registry.npmjs.org/expo-error-recovery/-/expo-error-recovery-1.4.0.tgz"
@@ -2846,6 +2884,13 @@ Lockfile:
     version "10.0.0"
     resolved "https://registry.npmjs.org/expo-permissions/-/expo-permissions-10.0.0.tgz"
     integrity sha512-b6oitd4JmFdQ7DxczZ2WRS9aDyqgVM7lEhy3JyKZ2dbU19C6NyHyLCcwssZgfzOfGnp2owoaWn3KU4zdrF5MIA==
+  
+  expo-random@^10.0.0:
+    version "10.0.0"
+    resolved "https://registry.yarnpkg.com/expo-random/-/expo-random-10.0.0.tgz#68e9e46a7025918e13a80e655a9a0c2b60d0b9e7"
+    integrity sha512-7x0fDAZGDUUVhlfZ3lbYIfSYb6TIPq0VglbDRXvAZjvfHgefbCW2/+iZWTDYNA0ZOtzoM5dwWg4Z5fiXuAdsrQ==
+    dependencies:
+      base64-js "^1.3.0"
   
   expo-secure-store@~9.3.0:
     version "9.3.0"
@@ -3447,6 +3492,11 @@ Lockfile:
     integrity sha512-2y91h5OpQlolefMPmUlivelittSWy0rP+oYVpn6A7GwVHNE8AWzoYOBNmlwks3LobaJxgHCYZAnyNo2GgpNRNQ==
     dependencies:
       safer-buffer ">= 2.1.2 < 3.0.0"
+  
+  ieee754@^1.2.1:
+    version "1.2.1"
+    resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.2.1.tgz#8eb7a10a63fff25d15a57b001586d177d1b0d352"
+    integrity sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==
   
   image-size@^0.6.0:
     version "0.6.3"
@@ -5198,11 +5248,6 @@ Lockfile:
     resolved "https://registry.npmjs.org/react-is/-/react-is-17.0.1.tgz"
     integrity sha512-NAnt2iGDXohE5LI7uBnLnqvLQMtzhkiAOLXTmv+qnF9Ky7xAPcX8Up/xWIhxvLVGJvuLiNc4xQLtuqDRzb4fSA==
   
-  react-native-async-storage@^0.0.1:
-    version "0.0.1"
-    resolved "https://registry.yarnpkg.com/react-native-async-storage/-/react-native-async-storage-0.0.1.tgz#5f2ef5ff30eae64b4248e265b534e72ea41cdc69"
-    integrity sha1-Xy71/zDq5ktCSOJltTTnLqQc3Gk=
-  
   react-native-calendars@^1.1249.0:
     version "1.1254.0"
     resolved "https://registry.npmjs.org/react-native-calendars/-/react-native-calendars-1.1254.0.tgz"
@@ -5359,6 +5404,14 @@ Lockfile:
       safe-buffer "~5.1.1"
       string_decoder "~1.1.1"
       util-deprecate "~1.0.1"
+  
+  redux-persist-transform-encrypt@^3.0.1:
+    version "3.0.1"
+    resolved "https://registry.yarnpkg.com/redux-persist-transform-encrypt/-/redux-persist-transform-encrypt-3.0.1.tgz#d9428a649a6eefa69f88f61ed9d846f4b8ea0d5b"
+    integrity sha512-09cgNeTnCTzTjMqmbNty+7wPQeQ5YLnKilbVyeKc/YeTvR0vHGo5hnal3+hiQiJMnYRS/qLkII2jhxSfb5Lw6Q==
+    dependencies:
+      crypto-js "3.1.9-1"
+      json-stringify-safe "^5.0.1"
   
   redux-persist@^6.0.0:
     version "6.0.0"

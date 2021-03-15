@@ -11,4 +11,5 @@ export default Object.freeze({
 	DOCUMENTS_TAB_NAVIGATION: 'Document Navigation',
 	CATEGORY_MANAGEMENT: 'Categories',
 	COLLECTION_MANAGEMENT: 'Collections',
+	DOCUMENT_MANAGEMENT: 'Documents',
 });

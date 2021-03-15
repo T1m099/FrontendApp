@@ -44,3 +44,12 @@ export const getDocuments = () =>
 	);
 
 export const genId = () => '' + Date.now() + lastId++;
+
+export const filterDocumentsByCollectionId = (documentsObject, id) => {
+	const filtered = {};
+	Object.keys(documentsObject).forEach(k => {
+		if (documentsObject[k].collection === id)
+			filtered[k] = documentsObject[k];
+	});
+	return filtered;
+};

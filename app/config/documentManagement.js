@@ -7,5 +7,11 @@ export const baseCollection = {
 	id: 'new',
 	categoryId: 'unassigned',
 	title: 'New Collection',
-	icon: '',
+};
+export const baseDocument = {
+	id: 'new',
+	collectionId: 'unassigned',
+	title: 'New Collection',
+	type: '',
+	size: '',
 };

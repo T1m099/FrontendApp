@@ -5,6 +5,7 @@ import routes from './routes';
 
 import CategoryManagementScreen from '../screens/CategoryManagementScreen';
 import CollectionManagementScreen from '../screens/CollectionManagementScreen';
+import DocumentManagementScreen from '../screens/DocumentManagementScreen';
 
 const Stack = createStackNavigator();
 
@@ -17,6 +18,10 @@ const OrganisationNavigator = () => (
 		<Stack.Screen
 			name={routes.COLLECTION_MANAGEMENT}
 			component={CollectionManagementScreen}
+		/>
+		<Stack.Screen
+			name={routes.DOCUMENT_MANAGEMENT}
+			component={DocumentManagementScreen}
 		/>
 	</Stack.Navigator>
 );
