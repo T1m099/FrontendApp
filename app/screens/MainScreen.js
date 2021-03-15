@@ -48,7 +48,7 @@ function MainScreen({ navigation }) {
 
 	const handlePlannerItemPress = item => {
 		if (item.type === 'event') {
-			navigation.navigate(routes.ORGANIZATION, {
+			navigation.navigate(routes.ORGANIZATION_TAB_NAVIGATION, {
 				screen: routes.EVENT_EDIT,
 				params: {
 					id: item.id,
@@ -56,7 +56,7 @@ function MainScreen({ navigation }) {
 				},
 			});
 		} else if (item.type === 'med') {
-			navigation.navigate(routes.MEDICATION, {
+			navigation.navigate(routes.MEDICATION_TAB_NAVIGATION, {
 				screen: routes.MEDICATION_EDIT,
 				params: {
 					id: item.id,
