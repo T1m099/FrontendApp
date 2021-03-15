@@ -6,6 +6,7 @@ import MainScreen from '../screens/MainScreen';
 import routes from './routes';
 import OrganisationNavigator from './OrganisationNavigator';
 import MedicationNavigator from '../navigation/MedicationNavigator';
+import DocumentsNavigator from '../navigation/DocumentsNavigator';
 import useNotifications from '../hooks/useNotifications';
 
 const Tab = createBottomTabNavigator();
@@ -18,12 +19,25 @@ const AppNavigator = () => {
 			initialRouteName={routes.HOME}
 		>
 			<Tab.Screen
-				name={routes.ORGANIZATION}
+				name={routes.ORGANIZATION_TAB_NAVIGATION}
 				component={OrganisationNavigator}
 				options={{
 					tabBarIcon: ({ color, size }) => (
 						<MaterialCommunityIcons
 							name='calendar'
+							color={color}
+							size={size}
+						/>
+					),
+				}}
+			/>
+			<Tab.Screen
+				name={routes.DOCUMENTS_TAB_NAVIGATION}
+				component={DocumentsNavigator}
+				options={{
+					tabBarIcon: ({ color, size }) => (
+						<MaterialCommunityIcons
+							name='file-document'
 							color={color}
 							size={size}
 						/>
@@ -44,7 +58,7 @@ const AppNavigator = () => {
 				}}
 			/>
 			<Tab.Screen
-				name={routes.MEDICATION}
+				name={routes.MEDICATION_TAB_NAVIGATION}
 				component={MedicationNavigator}
 				options={{
 					tabBarIcon: ({ color, size }) => (

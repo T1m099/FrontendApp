@@ -12,7 +12,7 @@ const Stack = createStackNavigator();
 const MedicationNavigator = () => (
 	<Stack.Navigator mode='modal'>
 		<Stack.Screen
-			name={routes.MEDICATION}
+			name={routes.MEDICATION_TAB_NAVIGATION}
 			component={MedicationMainScreen}
 		/>
 		<Stack.Screen

@@ -76,7 +76,10 @@ function EventEditScreen({ navigation, route }) {
 		dispatch(eventActions.saveEvent(event));
 		navigation.reset({
 			index: 0,
-			routes: [{ name: routes.ORGANIZATION }, { name: routes.CALENDAR }],
+			routes: [
+				{ name: routes.ORGANIZATION_TAB_NAVIGATION },
+				{ name: routes.CALENDAR },
+			],
 		});
 	};
 
@@ -223,7 +226,10 @@ function EventEditScreen({ navigation, route }) {
 							navigation.reset({
 								index: 0,
 								routes: [
-									{ name: routes.ORGANIZATION },
+									{
+										name:
+											routes.ORGANIZATION_TAB_NAVIGATION,
+									},
 									{ name: routes.CALENDAR },
 								],
 							});

@@ -8,26 +8,16 @@ import routes from './routes';
 import EventEditScreen from '../screens/EventEditScreen';
 import DateEventScreen from '../screens/DateEventsScreen';
 import TestScreen from '../screens/TestScreen';
+import DocumentManagementScreen from '../screens/DocumentManagementScreen';
 
 const Stack = createStackNavigator();
 
 const OrganisationNavigator = () => (
-	<Stack.Navigator
-		mode='modal'
-		initialRouteName={routes.ORGANIZATION_TAB_NAVIGATION}
-	>
+	<Stack.Navigator mode='modal' initialRouteName={routes.DOCUMENT_MANAGEMENT}>
 		<Stack.Screen
-			name={routes.ORGANIZATION_TAB_NAVIGATION}
-			component={OrganizationMainScreen}
+			name={routes.DOCUMENT_MANAGEMENT}
+			component={DocumentManagementScreen}
 		/>
-		<Stack.Screen name={routes.CALENDAR} component={CalendarScreen} />
-		<Stack.Screen name={routes.EVENT_EDIT} component={EventEditScreen} />
-		<Stack.Screen
-			name={routes.DATE_EVENT_OVERVIEW}
-			component={DateEventScreen}
-		/>
-		<Stack.Screen name={routes.TEST} component={TestScreen} />
-		<Stack.Screen name={routes.TIMELINE} component={TimelineScreen} />
 	</Stack.Navigator>
 );
 

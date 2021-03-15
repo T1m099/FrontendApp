@@ -4,8 +4,10 @@ export default Object.freeze({
 	EVENT_EDIT: 'Edit Calendar Entry',
 	DATE_EVENT_OVERVIEW: 'Calendar Entry Overview',
 	TIMELINE: 'Timeline',
-	ORGANIZATION: 'Organization',
-	MEDICATION: 'Medication',
+	ORGANIZATION_TAB_NAVIGATION: 'Organization',
+	MEDICATION_TAB_NAVIGATION: 'Medication',
 	MEDICATION_EDIT: 'Edit Medication',
 	TEST: 'Test',
+	DOCUMENTS_TAB_NAVIGATION: 'Document Navigation',
+	DOCUMENT_MANAGEMENT: 'Documents',
 });

@@ -63,7 +63,7 @@ function MedicationEditScreen({ route, navigation }) {
 		handleSaveMedication(medItemToSave);
 		navigation.reset({
 			index: 0,
-			routes: [{ name: routes.MEDICATION }],
+			routes: [{ name: routes.MEDICATION_TAB_NAVIGATION }],
 		});
 	};
 
@@ -115,7 +115,11 @@ function MedicationEditScreen({ route, navigation }) {
 						onPress={() => {
 							navigation.reset({
 								index: 0,
-								routes: [{ name: routes.MEDICATION }],
+								routes: [
+									{
+										name: routes.MEDICATION_TAB_NAVIGATION,
+									},
+								],
 							});
 						}}
 						style={styles.cancelButton}
