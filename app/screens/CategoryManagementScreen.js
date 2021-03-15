@@ -10,6 +10,8 @@ import * as documentManagement from '../config/documentManagement';
 
 import colors from '../config/colors';
 import AppSubmitButton from '../components/forms/AppSubmitButton';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import routes from '../navigation/routes';
 
 function CategoryManagementScreen({ navigation }) {
 	const categories = useSelector(categoriesActions.getCategories());
@@ -35,13 +37,22 @@ function CategoryManagementScreen({ navigation }) {
 	return (
 		<View style={styles.container}>
 			<FlatList
+				style={styles.categoryList}
 				data={mapCategories(categories)}
 				keyExtractor={item => item.id}
 				renderItem={({ item }) => {
 					return (
-						<View style={styles.categoriesListItem}>
-							<Text>{item.title}</Text>
-						</View>
+						<TouchableOpacity
+							onPress={() => {
+								navigation.push(routes.COLLECTION_MANAGEMENT, {
+									categoryId: item.id,
+								});
+							}}
+						>
+							<View style={styles.categoriesListItem}>
+								<Text>{item.title}</Text>
+							</View>
+						</TouchableOpacity>
 					);
 				}}
 				ListFooterComponent={
@@ -78,7 +89,13 @@ function CategoryManagementScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-	container: { justifyContent: 'center', alignItems: 'center', flex: 1 },
+	container: {
+		justifyContent: 'center',
+		alignItems: 'center',
+		flexGrow: 1,
+		padding: 5,
+	},
+	categoryList: { flexGrow: 1, width: '100%' },
 	categoriesListItem: {
 		margin: 1,
 		padding: 5,

@@ -9,5 +9,6 @@ export default Object.freeze({
 	MEDICATION_EDIT: 'Edit Medication',
 	TEST: 'Test',
 	DOCUMENTS_TAB_NAVIGATION: 'Document Navigation',
-	DOCUMENT_MANAGEMENT: 'Documents',
+	CATEGORY_MANAGEMENT: 'Categories',
+	COLLECTION_MANAGEMENT: 'Collections',
 });

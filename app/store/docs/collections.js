@@ -37,10 +37,19 @@ export const saveCollection = collection => async dispatch => {
 };
 
 //Selectors
-export const getcollections = () =>
+export const getCollections = () =>
 	createSelector(
 		state => state.entities.docs.collections,
 		collections => collections.listObject
 	);
 
 export const genId = () => '' + Date.now() + lastId++;
+
+export const filterCollectionsByCategoryId = (collectionsObject, id) => {
+	const filtered = {};
+	Object.keys(collectionsObject).forEach(k => {
+		if (collectionsObject[k].categoryId === id)
+			filtered[k] = collectionsObject[k];
+	});
+	return filtered;
+};
