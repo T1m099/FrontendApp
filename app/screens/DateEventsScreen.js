@@ -51,7 +51,7 @@ function DateEventScreen({ navigation, route }) {
 				)}
 				ListFooterComponent={
 					<React.Fragment>
-						{Object.keys(thisDaysEvents).length === 0 && (
+						{
 							<AppButton
 								title='New'
 								onPress={() => {
@@ -66,7 +66,7 @@ function DateEventScreen({ navigation, route }) {
 									);
 								}}
 							/>
-						)}
+						}
 						<AppButton
 							title='Close'
 							onPress={() => {

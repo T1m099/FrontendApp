@@ -15,6 +15,7 @@ import AppFormDropdownPicker from '../components/forms/AppFormDropdownPicker';
 import reminderService from '../services/reminderService';
 
 import { saveMedItem, getMeds, genId } from '../store/meds';
+import routes from '../navigation/routes';
 
 const baseMedItemDetails = {
 	id: 'new',
@@ -60,7 +61,10 @@ function MedicationEditScreen({ route, navigation }) {
 
 	const handleSubmit = medItemToSave => {
 		handleSaveMedication(medItemToSave);
-		navigation.pop();
+		navigation.reset({
+			index: 0,
+			routes: [{ name: routes.MEDICATION }],
+		});
 	};
 
 	return (
@@ -109,7 +113,10 @@ function MedicationEditScreen({ route, navigation }) {
 					<AppButton
 						title='Close'
 						onPress={() => {
-							navigation.pop();
+							navigation.reset({
+								index: 0,
+								routes: [{ name: routes.MEDICATION }],
+							});
 						}}
 						style={styles.cancelButton}
 					/>

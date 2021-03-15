@@ -28,6 +28,7 @@ import {
 	moods,
 } from '../config/eventTypes';
 import AppFormConditionalElement from '../components/forms/AppFormConditionalElement';
+import routes from '../navigation/routes';
 
 const types = typeNames;
 
@@ -73,7 +74,10 @@ function EventEditScreen({ navigation, route }) {
 
 	const handleSubmit = event => {
 		dispatch(eventActions.saveEvent(event));
-		navigation.pop();
+		navigation.reset({
+			index: 0,
+			routes: [{ name: routes.ORGANIZATION }, { name: routes.CALENDAR }],
+		});
 	};
 
 	const checkVisible = (values, name) => {
@@ -216,7 +220,13 @@ function EventEditScreen({ navigation, route }) {
 					<AppButton
 						title='Close'
 						onPress={() => {
-							navigation.pop();
+							navigation.reset({
+								index: 0,
+								routes: [
+									{ name: routes.ORGANIZATION },
+									{ name: routes.CALENDAR },
+								],
+							});
 						}}
 						style={styles.closeButton}
 					/>
