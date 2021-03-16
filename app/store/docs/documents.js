@@ -45,10 +45,10 @@ export const getDocuments = () =>
 
 export const genId = () => '' + Date.now() + lastId++;
 
-export const filterDocumentsByCollectionId = (documentsObject, id) => {
+export const filterDocumentsByCollectionId = (documentsObject, parentId) => {
 	const filtered = {};
 	Object.keys(documentsObject).forEach(k => {
-		if (documentsObject[k].collectionId === id)
+		if (documentsObject[k].parentId === parentId)
 			filtered[k] = documentsObject[k];
 	});
 	return filtered;

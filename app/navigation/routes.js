@@ -9,7 +9,5 @@ export default Object.freeze({
 	MEDICATION_EDIT: 'Edit Medication',
 	TEST: 'Test',
 	DOCUMENTS_TAB_NAVIGATION: 'Document Navigation',
-	CATEGORY_MANAGEMENT: 'Categories',
-	COLLECTION_MANAGEMENT: 'Collections',
-	DOCUMENT_MANAGEMENT: 'Documents',
+	FOLDER_MANAGEMENT: 'Document Management',
 });

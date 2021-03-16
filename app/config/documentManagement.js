@@ -1,12 +1,8 @@
-export const baseCategory = {
+export const baseFolder = {
 	id: 'new',
-	title: 'New Category',
+	parentId: 'root',
+	name: 'New Folder',
 	icon: '',
-};
-export const baseCollection = {
-	id: 'new',
-	categoryId: 'unassigned',
-	title: 'New Collection',
 };
 export const baseDocument = {
 	id: 'new',
