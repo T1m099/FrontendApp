@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import AppButton from '../components/AppButton';
 import AppForm from '../components/forms/AppForm';
 import AppFormField from '../components/forms/AppFormField';
-import * as categoriesActions from '../store/docs/categories';
+import * as categoryActions from '../store/docs/categories';
 import * as documentManagement from '../config/documentManagement';
 
 import colors from '../config/colors';
@@ -14,7 +14,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import routes from '../navigation/routes';
 
 function CategoryManagementScreen({ navigation }) {
-	const categories = useSelector(categoriesActions.getCategories());
+	const categories = useSelector(categoryActions.getCategories());
 	const dispatch = useDispatch();
 
 	const [newCategoryModalVisible, setNewCategoryModalVisble] = useState(
@@ -30,7 +30,7 @@ function CategoryManagementScreen({ navigation }) {
 	};
 
 	const handleSaveCategory = category => {
-		dispatch(categoriesActions.saveCategory(category));
+		dispatch(categoryActions.saveCategory(category));
 		setNewCategoryModalVisble(false);
 	};
 

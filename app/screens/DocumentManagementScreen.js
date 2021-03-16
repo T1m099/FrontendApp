@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, FlatList, Modal } from 'react-native';
+import { View, StyleSheet, Text, FlatList, Modal, Linking } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import * as DocumentPicker from 'expo-document-picker';
-import * as Sharing from 'expo-sharing';
-import * as IntentLauncher from 'expo-intent-launcher';
+
 import * as Permissions from 'expo-permissions';
 
 import AppButton from '../components/AppButton';
@@ -39,14 +38,19 @@ function CollectionManagementScreen({ navigation, route }) {
 		const doc = await DocumentPicker.getDocumentAsync({ multiple: false });
 		if (doc.type === 'cancel') return;
 
-		IntentLauncher.startActivityAsync('android.intent.action.VIEW', {
-			data: doc.uri,
-			flags: 1,
-		});
-		console.log(doc);
-		//dispatch(documentActions.saveDocument(d));
+		//Seems to be bugged - opened an issue at expo
+		//Linking.openURL(fileName);
+
+		const d = {
+			...documentManagement.baseDocument,
+			name: doc.name,
+			size: doc.size,
+			collectionId,
+		};
+		dispatch(documentActions.saveDocument(d));
 	};
 
+	console.log(mapDocuments(documents));
 	return (
 		<View style={styles.container}>
 			<FlatList
@@ -55,8 +59,8 @@ function CollectionManagementScreen({ navigation, route }) {
 				keyExtractor={item => item.id}
 				renderItem={({ item }) => {
 					return (
-						<View style={styles.collectionListItem}>
-							<Text>{item.title}</Text>
+						<View style={styles.documentListItem}>
+							<Text>{item.name}</Text>
 						</View>
 					);
 				}}

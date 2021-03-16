@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import categoriesReducer from './categories';
 import collectionsReducer from './collections';
-import documentsReducer from './categories';
+import documentsReducer from './documents';
 
 export default combineReducers({
 	categories: categoriesReducer,

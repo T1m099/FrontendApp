@@ -11,7 +11,6 @@ export const baseCollection = {
 export const baseDocument = {
 	id: 'new',
 	collectionId: 'unassigned',
-	title: 'New Collection',
-	type: '',
-	size: '',
+	name: 'New Document',
+	size: 0,
 };

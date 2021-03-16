@@ -28,12 +28,12 @@ export const deleteDocument = id => async dispatch => {
 };
 
 export const saveDocument = document => async dispatch => {
-	const c = { ...document };
-	if (c.id === 'new') {
-		c.id = genId();
+	const d = { ...document };
+	if (d.id === 'new') {
+		d.id = genId();
 	}
 
-	dispatch(documentSaved(c));
+	dispatch(documentSaved(d));
 };
 
 //Selectors
@@ -48,7 +48,7 @@ export const genId = () => '' + Date.now() + lastId++;
 export const filterDocumentsByCollectionId = (documentsObject, id) => {
 	const filtered = {};
 	Object.keys(documentsObject).forEach(k => {
-		if (documentsObject[k].collection === id)
+		if (documentsObject[k].collectionId === id)
 			filtered[k] = documentsObject[k];
 	});
 	return filtered;
