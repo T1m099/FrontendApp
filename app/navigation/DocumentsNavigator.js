@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import routes from './routes';
 
-import FoldersManagementScreen from '../screens/FolderManagementScreen';
+import FoldersManagementScreen from '../screens/DocumentManagementScreen';
 
 const Stack = createStackNavigator();
 

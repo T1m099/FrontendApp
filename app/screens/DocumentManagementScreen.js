@@ -10,6 +10,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import * as Permissions from 'expo-permissions';
 import * as DocumentPicker from 'expo-document-picker';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import * as folderActions from '../store/docs/folders';
 import * as documentActions from '../store/docs/documents';
@@ -18,9 +19,11 @@ import * as documentManagement from '../config/documentManagement';
 import AppButton from '../components/AppButton';
 import AppForm from '../components/forms/AppForm';
 import AppFormField from '../components/forms/AppFormField';
-import colors from '../config/colors';
-import routes from '../navigation/routes';
 import AppSubmitButton from '../components/forms/AppSubmitButton';
+import routes from '../navigation/routes';
+import colors from '../config/colors';
+import ListItem from '../components/ListItem';
+import ListItemDeleteAction from '../components/ListItemDeleteAction';
 
 function FolderManagementScreen({ navigation, route }) {
 	const allFolders = useSelector(folderActions.getFolders());
@@ -39,10 +42,24 @@ function FolderManagementScreen({ navigation, route }) {
 	const mapElements = (foldersObject, documentsObject) => {
 		const elementsArray = [];
 		Object.keys(foldersObject).forEach(k => {
-			elementsArray.push(foldersObject[k]);
+			elementsArray.push({
+				...foldersObject[k],
+				icon: 'folder',
+				onPress: () => {
+					navigation.push(routes.FOLDER_MANAGEMENT, {
+						parentId: foldersObject[k].id,
+					});
+				},
+			});
 		});
 		Object.keys(documentsObject).forEach(k => {
-			elementsArray.push(documentsObject[k]);
+			elementsArray.push({
+				...documentsObject[k],
+				icon: 'file-document',
+				onPress: () => {
+					console.log("You don't want to do this - trust me!");
+				},
+			});
 		});
 		return elementsArray;
 	};
@@ -82,17 +99,23 @@ function FolderManagementScreen({ navigation, route }) {
 				keyExtractor={item => item.id}
 				renderItem={({ item }) => {
 					return (
-						<TouchableOpacity
-							onPress={() => {
-								navigation.push(routes.FOLDER_MANAGEMENT, {
-									parentId: item.id,
-								});
-							}}
-						>
-							<View style={styles.collectionListItem}>
-								<Text>{item.name}</Text>
-							</View>
-						</TouchableOpacity>
+						<ListItem
+							title={item.name}
+							IconComponent={
+								<View style={styles.icon}>
+									<MaterialCommunityIcons
+										color={colors.accent}
+										name={item.icon}
+										size={25}
+									/>
+								</View>
+							}
+							onPress={item.onPress}
+							renderRightActions={() => (
+								<ListItemDeleteAction onPress={console.log} />
+							)}
+							containerStyle={styles.listItem}
+						/>
 					);
 				}}
 				ListFooterComponent={
@@ -141,16 +164,22 @@ const styles = StyleSheet.create({
 		padding: 5,
 	},
 	folderList: { flexGrow: 1, width: '100%' },
-	collectionListItem: {
-		margin: 1,
-		padding: 5,
-		borderRadius: 10,
+	listItem: {
+		marginVertical: 1,
+		borderRadius: 20,
 		width: '100%',
 		flexDirection: 'row',
-		backgroundColor: colors.primary,
 	},
 	newCollectionButton: {
 		width: '100%',
+	},
+	icon: {
+		backgroundColor: colors.secondary,
+		width: 40,
+		height: 40,
+		borderRadius: 20,
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
 });
 

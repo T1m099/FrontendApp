@@ -13,21 +13,25 @@ function ListItem({
 	IconComponent,
 	onPress,
 	renderRightActions,
+	containerStyle,
 }) {
 	return (
 		<Swipeable
 			renderRightActions={renderRightActions}
-			containerStyle={styles.swipableContainer}
+			containerStyle={containerStyle}
 			childrenContainerStyle={styles.swipableChildren}
 		>
-			<TouchableOpacity onPress={onPress}>
-				{IconComponent}
+			<TouchableOpacity onPress={onPress} style={styles.container}>
+				<View style={styles.icon}>{IconComponent}</View>
+
 				{image && <Image style={styles.image} source={image} />}
+
 				<View style={styles.detailsContainer}>
 					<AppText style={styles.title} numberOfLines={1}>
 						{title}
 					</AppText>
-					{message !== '' && (
+
+					{message && message !== '' && (
 						<AppText style={styles.message} numberOfLines={2}>
 							{' '}
 							{message}
@@ -36,7 +40,7 @@ function ListItem({
 				</View>
 
 				{/* <MaterialCommunityIcons
-					color={colors.medium}
+					color={colors.secondary}
 					name='chevron-right'
 					size={25}
 				/> */}
@@ -46,9 +50,9 @@ function ListItem({
 }
 
 const styles = StyleSheet.create({
-	container: {},
+	container: { flexDirection: 'row' },
 	detailsContainer: {
-		flex: 1,
+		flexGrow: 7,
 		marginLeft: 10,
 		justifyContent: 'center',
 	},
@@ -57,19 +61,22 @@ const styles = StyleSheet.create({
 		height: 70,
 		borderRadius: 35,
 	},
+	icon: { flexGrow: 1 },
 	message: {
 		color: colors.text,
 	},
 	title: {
 		fontWeight: '500',
+		color: colors.text,
+		width: '80%',
 	},
 	swipableChildren: {
 		flexDirection: 'row',
 		padding: 10,
 		backgroundColor: colors.primary,
 		borderRadius: 25,
+		width: '100%',
 	},
-	swipableContainer: {},
 });
 
 export default ListItem;
