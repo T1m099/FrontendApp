@@ -1140,9 +1140,9 @@
   resolved "https://registry.npmjs.org/@expo/config-types/-/config-types-40.0.0-beta.2.tgz"
   integrity sha512-t9pHCQMXOP4nwd7LGXuHkLlFy0JdfknRSCAeVF4Kw2/y+5OBbR9hW9ZVnetpBf0kORrekgiI7K/qDaa3hh5+Qg==
 
-"@expo/config@3.3.31":
+"@expo/config@3.3.31", "@expo/config@^3.3.18":
   version "3.3.31"
-  resolved "https://registry.npmjs.org/@expo/config/-/config-3.3.31.tgz"
+  resolved "https://registry.yarnpkg.com/@expo/config/-/config-3.3.31.tgz#6651a06230589bb93f031529537fd2b2b36e566e"
   integrity sha512-LRNWctdc9TI7C2BIrqShS97LT+Oe2TuazWh5uFdvxT1gMe7N4TslyLwaYHPiOgetukRtTAOP5+ekXXyc656VdA==
   dependencies:
     "@babel/core" "7.9.0"
@@ -3334,6 +3334,14 @@ expo-constants@9.3.3, expo-constants@~9.3.3:
     fbjs "1.0.0"
     uuid "^3.3.2"
 
+expo-constants@~10.0.0:
+  version "10.0.1"
+  resolved "https://registry.yarnpkg.com/expo-constants/-/expo-constants-10.0.1.tgz#a6cf6998c70ef6e1772a7c4096723482194c5828"
+  integrity sha512-SnMIX1PnTz3AgGcFd+paCb8Ur0WfEiBjEZ7TxCdwpk7XVQO4etCzn6auNutCd4PBc4YVNvmKF9e0WFgLxy4NRQ==
+  dependencies:
+    "@expo/config" "^3.3.18"
+    uuid "^3.3.2"
+
 expo-document-picker@^8.4.1:
   version "8.4.1"
   resolved "https://registry.npmjs.org/expo-document-picker/-/expo-document-picker-8.4.1.tgz"
@@ -3378,7 +3386,17 @@ expo-linear-gradient@~8.4.0:
   resolved "https://registry.npmjs.org/expo-linear-gradient/-/expo-linear-gradient-8.4.0.tgz"
   integrity sha512-f9JOXaIl0MR8RBYRIud5UAsEi52oz81XhQs73VUpujemHjOyHmrZa6dqwf399YOwI/WBwbpcINcUIw/mCYE1mA==
 
-expo-linking@^2.0.0, expo-linking@~2.0.0:
+expo-linking@^2.0.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/expo-linking/-/expo-linking-2.1.1.tgz#90cdf6740f2af4507c5d977a0900e13b03a1ae6a"
+  integrity sha512-pY3d2/eZH0VPtD2f1kPzTuU2cfAVz6s6S4bb8lSTgp1jOmqY1KA2xslMi+vxRQKjqDWvHGsGMsYyUxJIKJzAmw==
+  dependencies:
+    expo-constants "~10.0.0"
+    invariant "^2.2.4"
+    qs "^6.5.0"
+    url-parse "^1.4.4"
+
+expo-linking@~2.0.0:
   version "2.0.1"
   resolved "https://registry.npmjs.org/expo-linking/-/expo-linking-2.0.1.tgz"
   integrity sha512-S+Bb5u1rlld6ZICKOQ4B/htHiIbtd9eJMpwXoWMcl68V+UNNxJisB5lUZePXWSoHlb0QbQfVOAf48u2WD588lQ==
@@ -6072,6 +6090,11 @@ react-native-screens@~2.15.0:
   version "2.15.2"
   resolved "https://registry.npmjs.org/react-native-screens/-/react-native-screens-2.15.2.tgz"
   integrity sha512-CagNf2APXkVoRlF3Mugr264FbKbrBg9eXUkqhIPVeZB8EsdS8XPrnt99yj/pzmT+yJMBY0dGrjXT8+68WYh6YQ==
+
+react-native-sectioned-multi-select@^0.8.1:
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/react-native-sectioned-multi-select/-/react-native-sectioned-multi-select-0.8.1.tgz#5ec8e4fe4136c36dc5df1222b288896760e43c86"
+  integrity sha512-iH/5PHBo64yFhKzjd+6sCG0aEvgDnUwpn3I7R0ohcGo/+gJdw47mYmJMTwJTmR9JqBFXHx+2bkQi4ij2ghfqRQ==
 
 react-native-swipe-gestures@^1.0.5:
   version "1.0.5"
