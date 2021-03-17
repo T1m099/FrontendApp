@@ -29,6 +29,7 @@ import {
 } from '../config/eventTypes';
 import AppFormConditionalElement from '../components/forms/AppFormConditionalElement';
 import routes from '../navigation/routes';
+import AppFormMultiSelect from '../components/forms/AppFormMultiSelect';
 
 const types = typeNames;
 
@@ -132,7 +133,7 @@ function EventEditScreen({ navigation, route }) {
 					placeholder='Title'
 					checkVisible={checkVisible}
 				/>
-				<AppFormPicker
+				{/* <AppFormPicker
 					name='symptom'
 					items={symptoms}
 					extractKey={item => {
@@ -148,7 +149,14 @@ function EventEditScreen({ navigation, route }) {
 						return <AppText>Symptoms</AppText>;
 					}}
 					checkVisible={checkVisible}
+				/> */}
+
+				<AppFormMultiSelect
+					items={symptoms}
+					name='symptoms'
+					checkVisible={checkVisible}
 				/>
+
 				<AppFormPicker
 					name='mood'
 					items={moods}

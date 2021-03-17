@@ -17,12 +17,12 @@ export const eventTypes = {
 		reminders: [],
 		disease: '',
 	},
-	Disease: {
+	/* Disease: {
 		end: new Date(),
 		symptom: '',
-	},
+	}, */
 	Symptom: {
-		symptom: '',
+		symptoms: [],
 		mood: '',
 	},
 };
@@ -30,7 +30,7 @@ export const eventTypes = {
 export const allAdditionalProperties = {
 	end: new Date(),
 	reminders: [],
-	symptom: '',
+	symptoms: [],
 	mood: '',
 };
 
@@ -52,14 +52,24 @@ export const markingColors = [
 ];
 
 export const symptoms = [
-	'Husten',
-	'Zäher Schleim',
-	'Atemnot',
-	'Infekte',
-	'Pneumonie',
-	'Bauchschmerzen',
-	'Verstopfung',
-	'Fettige Stühle',
+	{
+		name: 'Atemwegsbeschwerden',
+		children: [
+			{ name: 'Husten' },
+			{ name: 'Zäher Schleim' },
+			{ name: 'Atemnot' },
+			{ name: 'Infekte' },
+			{ name: 'Pneumonie' },
+		],
+	},
+	{
+		name: 'Verdauungsprobleme',
+		children: [
+			{ name: 'Bauchschmerzen' },
+			{ name: 'Verstopfung' },
+			{ name: 'Fettige Stühle' },
+		],
+	},
 ];
 
 export const moods = ['Great', 'Good', 'Okay', 'Meh', 'Bad', 'Terrible'];
