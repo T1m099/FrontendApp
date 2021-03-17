@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
 	title: {
 		fontWeight: '500',
 		color: colors.text,
-		width: '80%',
+		width: '100%',
 	},
 	swipableChildren: {
 		flexDirection: 'row',

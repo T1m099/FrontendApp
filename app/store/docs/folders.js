@@ -13,6 +13,12 @@ const slice = createSlice({
 			folders.listObject[action.payload.id] = action.payload;
 		},
 		folderDeleted: (folders, action) => {
+			Object.keys(folders.listObject).forEach(k => {
+				if (folders.listObject[k].parentId === action.payload.id) {
+					folders.listObject[k].parentId =
+						folders.listObject[action.payload.id].parentId;
+				}
+			});
 			delete folders.listObject[action.payload.id];
 		},
 	},

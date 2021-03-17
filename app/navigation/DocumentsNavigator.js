@@ -12,7 +12,7 @@ const OrganisationNavigator = () => (
 		<Stack.Screen
 			name={routes.FOLDER_MANAGEMENT}
 			component={FoldersManagementScreen}
-			initialParams={{ parantId: 'root' }}
+			initialParams={{ parentId: 'root' }}
 		/>
 	</Stack.Navigator>
 );

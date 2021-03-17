@@ -45,7 +45,7 @@ export const getDocuments = () =>
 
 export const genId = () => '' + Date.now() + lastId++;
 
-export const filterDocumentsByCollectionId = (documentsObject, parentId) => {
+export const filterDocumentsByParentId = (documentsObject, parentId) => {
 	const filtered = {};
 	Object.keys(documentsObject).forEach(k => {
 		if (documentsObject[k].parentId === parentId)

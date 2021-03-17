@@ -1,12 +1,5 @@
 import React, { useState } from 'react';
-import {
-	View,
-	StyleSheet,
-	Text,
-	FlatList,
-	Modal,
-	TouchableOpacity,
-} from 'react-native';
+import { View, StyleSheet, FlatList, Modal } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Permissions from 'expo-permissions';
 import * as DocumentPicker from 'expo-document-picker';
@@ -34,7 +27,7 @@ function FolderManagementScreen({ navigation, route }) {
 
 	const { parentId } = route.params;
 	const folders = folderActions.filterFoldersByParentId(allFolders, parentId);
-	const documents = documentActions.filterDocumentsByCollectionId(
+	const documents = documentActions.filterDocumentsByParentId(
 		allDocuments,
 		parentId
 	);
@@ -50,14 +43,20 @@ function FolderManagementScreen({ navigation, route }) {
 						parentId: foldersObject[k].id,
 					});
 				},
+				onDelete: folder => {
+					dispatch(folderActions.deleteFolder(folder.id));
+				},
 			});
 		});
 		Object.keys(documentsObject).forEach(k => {
 			elementsArray.push({
 				...documentsObject[k],
 				icon: 'file-document',
-				onPress: () => {
-					console.log("You don't want to do this - trust me!");
+				onPress: doc => {
+					console.log(doc);
+				},
+				onDelete: doc => {
+					dispatch(documentActions.deleteDocument(doc.id));
 				},
 			});
 		});
@@ -65,7 +64,7 @@ function FolderManagementScreen({ navigation, route }) {
 	};
 
 	const handleSaveFolder = folder => {
-		const c = { ...folder, parentId };
+		const c = { ...folder, parentId: parentId ? parentId : 'root' };
 
 		dispatch(folderActions.saveFolder(c));
 		setNewFolderModalVisble(false);
@@ -112,7 +111,11 @@ function FolderManagementScreen({ navigation, route }) {
 							}
 							onPress={item.onPress}
 							renderRightActions={() => (
-								<ListItemDeleteAction onPress={console.log} />
+								<ListItemDeleteAction
+									onPress={() => {
+										item.onDelete(item);
+									}}
+								/>
 							)}
 							containerStyle={styles.listItem}
 						/>
