@@ -16,7 +16,7 @@ function MainScreen({ navigation }) {
 
 	const getPlannerItems = () => {
 		const plannerItems = [];
-		const thisDaysEvents = eventActions.filterDaysEvents(
+		const thisDaysEvents = eventActions.filterEventsForDay(
 			events,
 			Date.now()
 		);

@@ -8,14 +8,16 @@ import ListItemDeleteAction from '../components/ListItemDeleteAction';
 import AppButton from '../components/AppButton';
 import * as eventActions from '../store/events';
 import routes from '../navigation/routes';
-import { filterDaysEvents } from '../store/events';
 
 function DateEventScreen({ navigation, route }) {
 	const dispatch = useDispatch();
 	const allEvents = useSelector(eventActions.getEvents());
 
 	const { dayTimestamp } = route.params;
-	const thisDaysEvents = filterDaysEvents(allEvents, dayTimestamp);
+	const thisDaysEvents = eventActions.filterEventsForDay(
+		allEvents,
+		dayTimestamp
+	);
 
 	return (
 		<View style={styles.container}>

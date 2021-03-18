@@ -92,7 +92,7 @@ export const getEvents = () =>
 		state => state.entities.events,
 		events => {
 			const eventsToReturn = {};
-			Object.keys(events.listObject).map(k => {
+			Object.keys(events.listObject).forEach(k => {
 				const e = { ...events.listObject[k] };
 				const event = {
 					...baseEvent,
@@ -110,30 +110,87 @@ export const getEvents = () =>
 			return eventsToReturn;
 		}
 	);
+export const getEventsByType = eventType =>
+	createSelector(
+		state => state.entities.events,
+		events => {
+			const eventsToReturn = {};
+			Object.keys(events.listObject).forEach(k => {
+				if (events.listObject[k].type === eventType) {
+					const e = { ...events.listObject[k] };
+					const event = {
+						...baseEvent,
+						...allAdditionalProperties,
+						end: new Date(e.time + 60 * 60 * 1000),
+						...e,
+					};
+
+					event.reminders = reminderService.parseStringifiedReminders(
+						event.reminders
+					);
+
+					eventsToReturn[k] = event;
+				}
+			});
+			return eventsToReturn;
+		}
+	);
 
 export const genId = () => '' + Date.now() + lastId++;
 
-export const filterDaysEvents = (events, dayTimestamp) => {
+export const filterEventsForDay = (events, timestamp) => {
 	const found = {};
 
 	Object.keys(events).forEach(k => {
 		const e = events[k];
-		let start = dayjs(e.time);
-		start = start.hour(0);
-		start = start.minute(0);
-		start = start.second(0);
+		let eventStart = dayjs(e.time);
+		eventStart = eventStart.hour(0);
+		eventStart = eventStart.minute(0);
+		eventStart = eventStart.second(0);
 
-		let end = dayjs(e.end);
-		end = end.hour(23);
-		end = end.minute(59);
-		end = end.second(59);
+		let eventEnd = dayjs(e.end);
+		eventEnd = eventEnd.hour(23);
+		eventEnd = eventEnd.minute(59);
+		eventEnd = eventEnd.second(59);
 
-		const date = dayjs(new Date(dayTimestamp));
+		const date = dayjs(new Date(timestamp));
 
 		if (
-			date.isSame(start) ||
-			date.isSame(end) ||
-			(date.isAfter(start) && date.isBefore(end))
+			date.isSame(eventStart) ||
+			date.isSame(eventEnd) ||
+			(date.isAfter(eventStart) && date.isBefore(eventEnd))
+		) {
+			found[k] = e;
+		}
+	});
+	return found;
+};
+export const filterEventsBetweenDays = (
+	events,
+	startTimestamp,
+	endTimestamp
+) => {
+	const found = {};
+
+	Object.keys(events).forEach(k => {
+		const e = events[k];
+		let eventStart = dayjs(e.time);
+		eventStart = eventStart.hour(0);
+		eventStart = eventStart.minute(0);
+		eventStart = eventStart.second(0);
+
+		let eventEnd = dayjs(e.end);
+		eventEnd = eventEnd.hour(23);
+		eventEnd = eventEnd.minute(59);
+		eventEnd = eventEnd.second(59);
+
+		const startDate = dayjs(new Date(startTimestamp));
+		const endDate = dayjs(new Date(endTimestamp));
+
+		if (
+			startDate.isSame(eventStart) ||
+			endDate.isSame(eventEnd) ||
+			(eventStart.isAfter(startDate) && eventEnd.isBefore(endDate))
 		) {
 			found[k] = e;
 		}
