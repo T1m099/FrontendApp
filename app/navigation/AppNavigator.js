@@ -1,18 +1,26 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons, Fontisto } from '@expo/vector-icons';
+import { useSelector } from 'react-redux';
 
 import MainScreen from '../screens/MainScreen';
 import routes from './routes';
+import AuthNavigator from './AuthNavigator';
 import OrganisationNavigator from './OrganisationNavigator';
 import MedicationNavigator from '../navigation/MedicationNavigator';
 import DocumentsNavigator from '../navigation/DocumentsNavigator';
 import useNotifications from '../hooks/useNotifications';
+import * as authActions from '../store/auth';
 
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
 	useNotifications();
+
+	const isLoggedIn = useSelector(authActions.isLoggedIn());
+
+	if (!isLoggedIn) return <AuthNavigator />;
+
 	return (
 		<Tab.Navigator
 			tabBarOptions={{ showLabel: false }}

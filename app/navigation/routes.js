@@ -10,4 +10,6 @@ export default Object.freeze({
 	TEST: 'Test',
 	DOCUMENTS_TAB_NAVIGATION: 'Document Navigation',
 	FOLDER_MANAGEMENT: 'Document Management',
+	LOGIN: 'Login',
+	REGISTER: 'Register',
 });
