@@ -6,13 +6,16 @@ export const baseEvent = {
 	notes: '',
 	time: new Date(),
 };
+export const APPOINTMENT = 'Appointment';
+export const THERAPY = 'Therapy';
+export const SYMPTOM = 'Symptom';
 
 export const eventTypes = {
-	Appointment: {
+	[APPOINTMENT]: {
 		end: new Date(),
 		reminders: [],
 	},
-	Therapy: {
+	[THERAPY]: {
 		end: new Date(),
 		reminders: [],
 		disease: '',
@@ -21,7 +24,7 @@ export const eventTypes = {
 		end: new Date(),
 		symptom: '',
 	}, */
-	Symptom: {
+	[SYMPTOM]: {
 		symptoms: [],
 		mood: '',
 	},
@@ -73,3 +76,11 @@ export const symptoms = [
 ];
 
 export const moods = ['Great', 'Good', 'Okay', 'Meh', 'Bad', 'Terrible'];
+export const moodsEvaluation = {
+	Great: { val: 6 },
+	Good: { val: 5 },
+	Okay: { val: 4 },
+	Meh: { val: 3 },
+	Bad: { val: 2 },
+	Terrible: { val: 1 },
+};

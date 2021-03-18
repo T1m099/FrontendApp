@@ -31,7 +31,9 @@ function DatePickerInput({
 						display='spinner'
 						onChange={(event, selectedDate) => {
 							setVisible(false);
-							onDateSelection(event, selectedDate);
+							if (event.type !== 'dismissed') {
+								onDateSelection(selectedDate);
+							}
 						}}
 					/>
 				)}
