@@ -10,6 +10,7 @@ export default Object.freeze({
 	TEST: 'Test',
 	DOCUMENTS_STACK_NAVIGATION: 'Document Navigation',
 	FOLDER_MANAGEMENT: 'Document Management',
+	WELCOME: 'Welcome',
 	LOGIN: 'Login',
 	REGISTER: 'Register',
 	SETTINGS_STACK_NAVIGATION: 'Settings Navigation',
