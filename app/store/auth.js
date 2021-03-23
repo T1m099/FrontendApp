@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { createSelector } from 'reselect';
 
-const baseCredentials = { username: '', password: '' };
+const baseCredentials = { username: '', mail: '', password: '' };
 
 const slice = createSlice({
 	name: 'auth',
@@ -40,6 +40,10 @@ export const login = credentials => async dispatch => {
 };
 export const logout = () => async dispatch => {
 	dispatch(credentialsDeleted());
+};
+export const register = credentials => async dispatch => {
+	dispatch(credentialsSaved(credentials));
+	dispatch(loginSucceeded());
 };
 
 //Selectors
