@@ -15,4 +15,5 @@ export default Object.freeze({
 	REGISTER: 'Register',
 	SETTINGS_STACK_NAVIGATION: 'Settings Navigation',
 	SETTINGS: 'Settings',
+	TRACKING_CATEGORY_EDIT: 'Tracking Categories',
 });
