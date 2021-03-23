@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 
 import ErrorMessage from '../components/forms/AppErrorMessage';
@@ -16,34 +17,17 @@ const validationSchema = Yup.object().shape({
 });
 
 function RegisterScreen() {
-	/* 	const registerApi = useApi(usersApi.register);
-	const loginApi = useApi(authApi.login);
-	const auth = useAuth();
-	const [error, setError] = useState(); */
+	const loginFailed = useSelector(authActions.loginHasFailed());
+	const dispatch = useDispatch();
 
 	const handleSubmit = async userInfo => {
-		/* 		const result = await registerApi.request(userInfo);
-
-		if (!result.ok) {
-			if (result.data) setError(result.data.error);
-			else {
-				setError('An unexpected error occurred.');
-				console.log(result);
-			}
-			return;
-		}
-
-		const { data: authToken } = await loginApi.request(
-			userInfo.email,
-			userInfo.password
-		);
-		auth.logIn(authToken); */
+		dispatch(authActions.login(credentials));
 	};
 
 	return (
 		<>
 			{/* <ActivityIndicator
-				visible={registerApi.loading || loginApi.loading}
+				visible={}
 			/> */}
 			<SafeAreaView style={styles.container}>
 				<Form

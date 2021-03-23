@@ -84,13 +84,11 @@ function ReminderList({
 										reminder.date
 									)}
 									mode='time'
-									onDateSelection={(event, selectedDate) => {
-										if (!(event.type === 'dismissed')) {
-											handleUpdateReminder(
-												reminder,
-												selectedDate
-											);
-										}
+									onDateSelection={selectedDate => {
+										handleUpdateReminder(
+											reminder,
+											selectedDate
+										);
 									}}
 								/>
 							</Swipeable>

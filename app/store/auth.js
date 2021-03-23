@@ -8,6 +8,7 @@ const slice = createSlice({
 	initialState: {
 		credentials: { ...baseCredentials },
 		token: '',
+		loginFailed: false,
 	},
 	reducers: {
 		credentialsSaved: (auth, action) => {
@@ -16,14 +17,26 @@ const slice = createSlice({
 		credentialsDeleted: (auth, action) => {
 			auth.credentials = { ...baseCredentials };
 		},
+		loginSucceeded: (auth, action) => {
+			auth.loginFailed = false;
+		},
+		loginFailed: (auth, action) => {
+			auth.loginFailed = true;
+		},
 	},
 });
 
-const { credentialsSaved, credentialsDeleted } = slice.actions;
+const {
+	credentialsSaved,
+	credentialsDeleted,
+	loginSucceeded,
+	loginFailed,
+} = slice.actions;
 export default slice.reducer;
 
 export const login = credentials => async dispatch => {
 	dispatch(credentialsSaved(credentials));
+	dispatch(loginSucceeded());
 };
 export const logout = () => async dispatch => {
 	dispatch(credentialsDeleted());
@@ -33,5 +46,11 @@ export const logout = () => async dispatch => {
 export const isLoggedIn = () =>
 	createSelector(
 		state => state.auth,
-		auth => auth.credentials.username && auth.credentials.password
+		auth =>
+			auth.credentials.username !== '' && auth.credentials.password !== ''
+	);
+export const loginHasFailed = () =>
+	createSelector(
+		state => state.auth,
+		auth => auth.loginFailed
 	);

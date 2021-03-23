@@ -78,7 +78,7 @@ function EventEditScreen({ navigation, route }) {
 		navigation.reset({
 			index: 0,
 			routes: [
-				{ name: routes.ORGANIZATION_TAB_NAVIGATION },
+				{ name: routes.ORGANIZATION_STACK_NAVIGATION },
 				{ name: routes.CALENDAR },
 			],
 		});
@@ -236,7 +236,7 @@ function EventEditScreen({ navigation, route }) {
 								routes: [
 									{
 										name:
-											routes.ORGANIZATION_TAB_NAVIGATION,
+											routes.ORGANIZATION_STACK_NAVIGATION,
 									},
 									{ name: routes.CALENDAR },
 								],

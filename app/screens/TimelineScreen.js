@@ -59,7 +59,6 @@ function TimelineScreen(props) {
 	};
 
 	const chartData = createChartData(eventsInSelectedRange);
-	console.log(chartData);
 
 	return (
 		<View style={styles.container}>

@@ -14,10 +14,10 @@ const Stack = createStackNavigator();
 const OrganisationNavigator = () => (
 	<Stack.Navigator
 		mode='modal'
-		initialRouteName={routes.ORGANIZATION_TAB_NAVIGATION}
+		initialRouteName={routes.ORGANIZATION_STACK_NAVIGATION}
 	>
 		<Stack.Screen
-			name={routes.ORGANIZATION_TAB_NAVIGATION}
+			name={routes.ORGANIZATION_STACK_NAVIGATION}
 			component={OrganizationMainScreen}
 		/>
 		<Stack.Screen name={routes.CALENDAR} component={CalendarScreen} />

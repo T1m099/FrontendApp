@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { MaterialCommunityIcons, Fontisto } from '@expo/vector-icons';
+import { MaterialCommunityIcons, Fontisto, Ionicons } from '@expo/vector-icons';
 import { useSelector } from 'react-redux';
 
 import MainScreen from '../screens/MainScreen';
@@ -11,6 +11,8 @@ import MedicationNavigator from '../navigation/MedicationNavigator';
 import DocumentsNavigator from '../navigation/DocumentsNavigator';
 import useNotifications from '../hooks/useNotifications';
 import * as authActions from '../store/auth';
+import SettingsScreen from '../screens/SettingsScreen';
+import SettingsNavigator from './SettingsNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -27,7 +29,7 @@ const AppNavigator = () => {
 			initialRouteName={routes.HOME}
 		>
 			<Tab.Screen
-				name={routes.ORGANIZATION_TAB_NAVIGATION}
+				name={routes.ORGANIZATION_STACK_NAVIGATION}
 				component={OrganisationNavigator}
 				options={{
 					tabBarIcon: ({ color, size }) => (
@@ -40,7 +42,7 @@ const AppNavigator = () => {
 				}}
 			/>
 			<Tab.Screen
-				name={routes.DOCUMENTS_TAB_NAVIGATION}
+				name={routes.DOCUMENTS_STACK_NAVIGATION}
 				component={DocumentsNavigator}
 				options={{
 					tabBarIcon: ({ color, size }) => (
@@ -66,11 +68,24 @@ const AppNavigator = () => {
 				}}
 			/>
 			<Tab.Screen
-				name={routes.MEDICATION_TAB_NAVIGATION}
+				name={routes.MEDICATION_STACK_NAVIGATION}
 				component={MedicationNavigator}
 				options={{
 					tabBarIcon: ({ color, size }) => (
 						<Fontisto name='pills' color={color} size={size} />
+					),
+				}}
+			/>
+			<Tab.Screen
+				name={routes.SETTINGS_STACK_NAVIGATION}
+				component={SettingsNavigator}
+				options={{
+					tabBarIcon: ({ color, size }) => (
+						<Ionicons
+							name='settings-outline'
+							color={color}
+							size={size}
+						/>
 					),
 				}}
 			/>
