@@ -23,11 +23,18 @@ const slice = createSlice({
 	},
 });
 
-const { trackingCategoryAdded, settingsReset } = slice.actions;
+const {
+	trackingCategoryAdded,
+	trackingCategoryRemoved,
+	settingsReset,
+} = slice.actions;
 export default slice.reducer;
 
 export const addTrackingCategory = category => async dispatch => {
 	dispatch(trackingCategoryAdded(category));
+};
+export const removeTrackingCategory = category => async dispatch => {
+	dispatch(trackingCategoryRemoved(category));
 };
 
 //Selectors

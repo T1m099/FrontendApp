@@ -1,35 +1,30 @@
 import React from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
-import { useState } from 'react/cjs/react.development';
+import { useDispatch, useSelector } from 'react-redux';
 
-import AppButton from '../components/AppButton';
-import AppText from '../components/AppText';
 import AppForm from '../components/forms/AppForm';
 import AppFormField from '../components/forms/AppFormField';
 import AppSubmitButton from '../components/forms/AppSubmitButton';
 import ListItem from '../components/ListItem';
 import ListItemDeleteAction from '../components/ListItemDeleteAction';
 
+import * as settingsActions from '../store/settings';
+
 function TrackingEditScreen(props) {
-	const [cats, setCats] = useState([]);
+	const categories = useSelector(settingsActions.getTrackingCategories());
+	const dispatch = useDispatch();
 
 	const handleNewCategory = cat => {
-		const newCats = [...cats];
-		newCats.push(cat);
-
-		setCats(newCats);
+		dispatch(settingsActions.addTrackingCategory());
 	};
 	const handleDeleteCategory = cat => {
-		let newCats = [...cats];
-		newCats = newCats.filter(c => c.category !== cat.category);
-
-		setCats(newCats);
+		dispatch(settingsActions.removeTrackingCategory);
 	};
 
 	return (
 		<View style={styles.container}>
 			<FlatList
-				data={cats}
+				data={categories}
 				renderItem={({ item }) => {
 					return (
 						<ListItem
