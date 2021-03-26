@@ -18,20 +18,16 @@ function AppFormDateTimePicker({
 			<DatePickerInput
 				value={values[name]}
 				valueToDisplay={valueDateTransform(values[name])}
-				onDateSelection={(event, selectedDate) => {
-					if (event.type !== 'dismissed') {
-						setFieldValue(name, selectedDate);
-					}
+				onDateSelection={selectedDate => {
+					setFieldValue(name, selectedDate);
 				}}
 				style={{ flex: 2 }}
 			/>
 			<DatePickerInput
 				value={values[name]}
 				valueToDisplay={valueTimeTransform(values[name])}
-				onDateSelection={(event, selectedDate) => {
-					if (event.type !== 'dismissed') {
-						setFieldValue(name, selectedDate);
-					}
+				onDateSelection={selectedDate => {
+					setFieldValue(name, selectedDate);
 				}}
 				mode='time'
 				style={{ flex: 1 }}

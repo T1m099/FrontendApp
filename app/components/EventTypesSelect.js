@@ -3,10 +3,16 @@ import { View, StyleSheet } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import SectionedMultiSelect from 'react-native-sectioned-multi-select';
 
-import { types } from '../config/eventTypes';
+import { types as defaultTypes } from '../config/eventTypes';
 import colors from '../config/colors';
 
-function EventTypesSelect({ selectedEventTypes, onSelectEventType }) {
+function EventTypesSelect({
+	selectedEventTypes,
+	onSelectEventType,
+	single = false,
+	types = defaultTypes,
+	style,
+}) {
 	const eventTypeSelectItems = [
 		{
 			name: 'Event Types',
@@ -14,7 +20,7 @@ function EventTypesSelect({ selectedEventTypes, onSelectEventType }) {
 		},
 	];
 	return (
-		<View style={styles.container}>
+		<View style={[styles.container, style]}>
 			<SectionedMultiSelect
 				items={eventTypeSelectItems}
 				selectedItems={selectedEventTypes}
@@ -24,6 +30,7 @@ function EventTypesSelect({ selectedEventTypes, onSelectEventType }) {
 				readOnlyHeadings={true}
 				showChips={false}
 				showDropDowns={false}
+				single={single}
 				onSelectedItemsChange={types => {
 					onSelectEventType(types);
 				}}

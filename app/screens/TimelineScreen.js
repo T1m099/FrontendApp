@@ -5,69 +5,59 @@ import { useSelector } from 'react-redux';
 import * as eventActions from '../store/events';
 
 import { LineChart } from 'react-native-chart-kit';
-import { eventTypes, SYMPTOM, moodsEvaluation } from '../config/eventTypes';
+import { trackableTypes } from '../config/eventTypes';
+import { createChartData } from '../utils/createChartData';
 
-import colors from '../config/colors';
 import DatePickerInput from '../components/DatePickerInput';
+import AppText from '../components/AppText';
+import EventTypesSelect from '../components/EventTypesSelect';
 
 function TimelineScreen(props) {
-	const allSymptomEvents = useSelector(eventActions.getEventsByType(SYMPTOM));
+	const allEventsOrderedByTypeAsObject = useSelector(
+		eventActions.getEventsGroupedByTypeAsObject()
+	);
+	const [selectedEventTypeArray, setSelectedEventTypeArray] = useState([
+		trackableTypes[0],
+	]);
 
 	const today = new Date(
 		Math.trunc(Date.now() / (24 * 60 * 60 * 1000)) * 24 * 60 * 60 * 1000
 	);
 
-	const [fromDay, setFromDay] = useState(today);
+	const [fromDay, setFromDay] = useState(
+		new Date(today.getTime() - 1000 * 60 * 60 * 24 * 30)
+	);
 	const [toDay, setToDay] = useState(today);
 
 	const eventsInSelectedRange = eventActions.filterEventsBetweenDays(
-		allSymptomEvents,
+		allEventsOrderedByTypeAsObject[selectedEventTypeArray[0]],
 		fromDay.getTime(),
 		toDay.getTime()
 	);
 
-	const createChartData = symptomEvents => {
-		let eventsOrderedByDay = [];
-		eventsOrderedByDay = [...Object.values(symptomEvents)];
-		eventsOrderedByDay.sort((a, b) => {
-			const startE1 = Math.trunc((a.time / 24) * 60 * 60 * 1000);
-			const startE2 = Math.trunc((b.time / 24) * 60 * 60 * 1000);
-
-			return startE1 - startE2;
-		});
-
-		const mapped = {
-			datasets: [],
-			legend: ['Sympoms tracked', 'Mood'],
-		};
-		const symptomCount = [];
-		eventsOrderedByDay.forEach(e => {
-			symptomCount.push(e.symptoms.length);
-		});
-		const moods = [];
-		eventsOrderedByDay.forEach(e => {
-			const val = e.mood ? moodsEvaluation[e.mood].val : 0;
-			moods.push(val);
-		});
-
-		mapped.datasets.push({
-			data: symptomCount,
-			color: () => `rgba(134, 65, 244, 1)`,
-		});
-		mapped.datasets.push({ data: moods });
-		return mapped;
-	};
-
-	const chartData = createChartData(eventsInSelectedRange);
+	const chartData = createChartData(
+		eventsInSelectedRange,
+		selectedEventTypeArray[0]
+	);
+	const hasData =
+		chartData.datasets.length > 0 && chartData.datasets[0].data.length > 0;
 
 	return (
 		<View style={styles.container}>
+			<EventTypesSelect
+				selectedEventTypes={selectedEventTypeArray}
+				onSelectEventType={setSelectedEventTypeArray}
+				single={true}
+				types={trackableTypes}
+				style={{ width: '100%' }}
+			/>
 			<DatePickerInput
 				value={fromDay}
 				valueToDisplay={fromDay.toDateString()}
 				onDateSelection={e => {
 					setFromDay(e);
 				}}
+				style={{ width: '100%' }}
 			/>
 
 			<DatePickerInput
@@ -76,22 +66,29 @@ function TimelineScreen(props) {
 				onDateSelection={e => {
 					setToDay(e);
 				}}
+				style={{ width: '100%' }}
 			/>
-
-			{chartData.datasets[0].data.length > 0 && (
+			{!hasData && (
+				<AppText>
+					Select a time interval with data to show the timeline
+				</AppText>
+			)}
+			{hasData && (
 				<LineChart
 					data={chartData}
-					width={Dimensions.get('window').width - 10} // from react-native
+					width={Dimensions.get('window').width - 10}
 					height={Dimensions.get('window').height / 2}
 					chartConfig={{
-						backgroundColor: colors.primary,
 						decimalPlaces: 0, // optional, defaults to 2dp
-						color: (opacity = 1) =>
-							`rgba(255, 255, 255, ${opacity})`,
+						color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
 						labelColor: (opacity = 1) =>
-							`rgba(255, 255, 255, ${opacity})`,
+							`rgba(0, 0, 0, ${opacity})`,
 					}}
+					bezier={true}
+					fromZero={true}
+					transparent={true}
 					withDots={false}
+					withShadow={false}
 					style={{
 						flexGrow: 1,
 					}}

@@ -33,7 +33,7 @@ export default slice.reducer;
 // Action Creators
 
 export const deleteEvent = id => async dispatch => {
-	dispatch(eventDeleted({ id }));
+	dispatch(eventDeleted(id));
 };
 
 export const saveEvent = event => async dispatch => {
@@ -78,6 +78,14 @@ export const saveEvent = event => async dispatch => {
 		eventToSave.end = eventToSave.end.getTime();
 	}
 	eventToSave.time = eventToSave.time.getTime();
+
+	if (eventToSave.trackingItems) {
+		const newTrackingItems = {};
+		Object.keys(eventToSave.trackingItems).forEach(k => {
+			newTrackingItems[k] = parseInt(eventToSave.trackingItems[k]);
+		});
+		eventToSave.trackingItems = newTrackingItems;
+	}
 
 	dispatch(eventSaved(eventToSave));
 };
@@ -141,11 +149,6 @@ export const getEventsGroupedByTypeAsObject = () =>
 		events => {
 			const eventsToReturn = {};
 			Object.keys(events.listObject).forEach(k => {
-				const type = events.listObject[k].type;
-				if (!eventsToReturn[type]) {
-					eventsToReturn[type] = {};
-				}
-
 				const e = { ...events.listObject[k] };
 				const event = {
 					...baseEventProperties,
@@ -153,6 +156,11 @@ export const getEventsGroupedByTypeAsObject = () =>
 					end: new Date(e.time + 60 * 60 * 1000),
 					...e,
 				};
+
+				const { type } = event;
+				if (!eventsToReturn[type]) {
+					eventsToReturn[type] = {};
+				}
 
 				event.reminders = reminderService.parseStringifiedReminders(
 					event.reminders
@@ -194,14 +202,14 @@ export const filterEventsForDay = (events, timestamp) => {
 	return found;
 };
 export const filterEventsBetweenDays = (
-	events,
+	eventsObject,
 	startTimestamp,
 	endTimestamp
 ) => {
 	const found = {};
 
-	Object.keys(events).forEach(k => {
-		const e = events[k];
+	Object.keys(eventsObject).forEach(k => {
+		const e = eventsObject[k];
 		let eventStart = dayjs(e.time);
 		eventStart = eventStart.hour(0);
 		eventStart = eventStart.minute(0);
