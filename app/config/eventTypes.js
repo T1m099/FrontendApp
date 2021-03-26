@@ -1,14 +1,16 @@
+export const APPOINTMENT = 'Appointment';
+export const THERAPY = 'Therapy';
+export const SYMPTOM = 'Symptom';
+export const TRACKING = 'Tracking';
+
 export const baseEvent = {
 	id: 'new',
-	type: 'Appointment',
+	type: APPOINTMENT,
 	markingColor: '#ff0000',
 	title: '',
 	notes: '',
 	time: new Date(),
 };
-export const APPOINTMENT = 'Appointment';
-export const THERAPY = 'Therapy';
-export const SYMPTOM = 'Symptom';
 
 export const eventTypes = {
 	[APPOINTMENT]: {
@@ -20,13 +22,12 @@ export const eventTypes = {
 		reminders: [],
 		disease: '',
 	},
-	/* Disease: {
-		end: new Date(),
-		symptom: '',
-	}, */
 	[SYMPTOM]: {
 		symptoms: [],
 		mood: '',
+	},
+	[TRACKING]: {
+		trackingItems: {},
 	},
 };
 
@@ -35,6 +36,7 @@ export const allAdditionalProperties = {
 	reminders: [],
 	symptoms: [],
 	mood: '',
+	trackingItems: {},
 };
 
 export const typeNames = Object.keys(eventTypes);
@@ -84,3 +86,9 @@ export const moodsEvaluation = {
 	Bad: { val: 2 },
 	Terrible: { val: 1 },
 };
+/* export const trackingItem = {
+	category: '',
+	unit: '',
+	value: '',
+};
+ */

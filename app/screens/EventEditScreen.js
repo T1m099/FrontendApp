@@ -16,7 +16,6 @@ import AppFormPicker from '../components/forms/AppFormPicker';
 import ReminderList from '../components/ReminderList';
 
 import * as eventActions from '../store/events';
-import eventService from '../services/eventService';
 import reminderService from '../services/reminderService';
 
 import {
@@ -26,10 +25,12 @@ import {
 	markingColors,
 	symptoms,
 	moods,
+	allAdditionalProperties,
 } from '../config/eventTypes';
 import AppFormConditionalElement from '../components/forms/AppFormConditionalElement';
 import routes from '../navigation/routes';
 import AppFormMultiSelect from '../components/forms/AppFormMultiSelect';
+import TrackingList from '../components/TrackingList';
 
 const types = typeNames;
 
@@ -37,9 +38,10 @@ function initEvent(events, id, timestamp) {
 	let e;
 	if (id && id === 'new') {
 		e = {
-			...eventService.baseEvent,
+			...baseEvent,
 			time: new Date(timestamp + 12 * 60 * 60 * 1000),
 			end: new Date(timestamp + 13 * 60 * 60 * 1000),
+			...allAdditionalProperties,
 		};
 	} else {
 		e = { ...events[id] };
@@ -133,23 +135,6 @@ function EventEditScreen({ navigation, route }) {
 					placeholder='Title'
 					checkVisible={checkVisible}
 				/>
-				{/* <AppFormPicker
-					name='symptom'
-					items={symptoms}
-					extractKey={item => {
-						return item;
-					}}
-					renderSelectedItem={item => {
-						return <AppText>{item.toString()}</AppText>;
-					}}
-					renderPickerItem={({ item }) => {
-						return <AppText>{item.toString()}</AppText>;
-					}}
-					renderPlaceholder={() => {
-						return <AppText>Symptoms</AppText>;
-					}}
-					checkVisible={checkVisible}
-				/> */}
 
 				<AppFormMultiSelect
 					items={symptoms}
@@ -217,6 +202,13 @@ function EventEditScreen({ navigation, route }) {
 							reminderService.cancelReminderAsync(reminder);
 						}}
 					/>
+				</AppFormConditionalElement>
+
+				<AppFormConditionalElement
+					name='trackingItems'
+					checkVisible={checkVisible}
+				>
+					<TrackingList name='trackingItems'></TrackingList>
 				</AppFormConditionalElement>
 
 				<AppFormField
