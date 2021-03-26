@@ -19,9 +19,9 @@ import * as eventActions from '../store/events';
 import reminderService from '../services/reminderService';
 
 import {
-	baseEvent,
-	eventTypes,
-	typeNames,
+	baseEventProperties,
+	eventTypeConditionalProperties,
+	types,
 	markingColors,
 	symptoms,
 	moods,
@@ -32,13 +32,11 @@ import routes from '../navigation/routes';
 import AppFormMultiSelect from '../components/forms/AppFormMultiSelect';
 import TrackingList from '../components/TrackingList';
 
-const types = typeNames;
-
 function initEvent(events, id, timestamp) {
 	let e;
 	if (id && id === 'new') {
 		e = {
-			...baseEvent,
+			...baseEventProperties,
 			time: new Date(timestamp + 12 * 60 * 60 * 1000),
 			end: new Date(timestamp + 13 * 60 * 60 * 1000),
 			...allAdditionalProperties,
@@ -90,8 +88,8 @@ function EventEditScreen({ navigation, route }) {
 		const type = values.type;
 
 		const visibleFields = [
-			...Object.keys(baseEvent),
-			...Object.keys(eventTypes[type]),
+			...Object.keys(baseEventProperties),
+			...Object.keys(eventTypeConditionalProperties[type]),
 		];
 		return visibleFields.includes(name);
 	};

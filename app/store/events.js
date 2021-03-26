@@ -4,8 +4,8 @@ import dayjs from 'dayjs';
 import _ from 'lodash';
 
 import {
-	eventTypes,
-	baseEvent,
+	eventTypeConditionalProperties,
+	baseEventProperties,
 	allAdditionalProperties,
 } from '../config/eventTypes';
 import reminderService from '../services/reminderService';
@@ -43,8 +43,8 @@ export const saveEvent = event => async dispatch => {
 	}
 
 	const eventStructure = {
-		...baseEvent,
-		...eventTypes[ev.type],
+		...baseEventProperties,
+		...eventTypeConditionalProperties[ev.type],
 	};
 
 	const keysToPersist = [...Object.keys(eventStructure)];
@@ -95,7 +95,7 @@ export const getEvents = () =>
 			Object.keys(events.listObject).forEach(k => {
 				const e = { ...events.listObject[k] };
 				const event = {
-					...baseEvent,
+					...baseEventProperties,
 					...allAdditionalProperties,
 					end: new Date(e.time + 60 * 60 * 1000),
 					...e,
@@ -119,7 +119,7 @@ export const getEventsByType = eventType =>
 				if (events.listObject[k].type === eventType) {
 					const e = { ...events.listObject[k] };
 					const event = {
-						...baseEvent,
+						...baseEventProperties,
 						...allAdditionalProperties,
 						end: new Date(e.time + 60 * 60 * 1000),
 						...e,
@@ -131,6 +131,34 @@ export const getEventsByType = eventType =>
 
 					eventsToReturn[k] = event;
 				}
+			});
+			return eventsToReturn;
+		}
+	);
+export const getEventsGroupedByTypeAsObject = () =>
+	createSelector(
+		state => state.entities.events,
+		events => {
+			const eventsToReturn = {};
+			Object.keys(events.listObject).forEach(k => {
+				const type = events.listObject[k].type;
+				if (!eventsToReturn[type]) {
+					eventsToReturn[type] = {};
+				}
+
+				const e = { ...events.listObject[k] };
+				const event = {
+					...baseEventProperties,
+					...allAdditionalProperties,
+					end: new Date(e.time + 60 * 60 * 1000),
+					...e,
+				};
+
+				event.reminders = reminderService.parseStringifiedReminders(
+					event.reminders
+				);
+
+				eventsToReturn[type][k] = event;
 			});
 			return eventsToReturn;
 		}

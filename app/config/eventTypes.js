@@ -3,7 +3,7 @@ export const THERAPY = 'Therapy';
 export const SYMPTOM = 'Symptom';
 export const TRACKING = 'Tracking';
 
-export const baseEvent = {
+export const baseEventProperties = {
 	id: 'new',
 	type: APPOINTMENT,
 	markingColor: '#ff0000',
@@ -12,7 +12,7 @@ export const baseEvent = {
 	time: new Date(),
 };
 
-export const eventTypes = {
+export const eventTypeConditionalProperties = {
 	[APPOINTMENT]: {
 		end: new Date(),
 		reminders: [],
@@ -39,7 +39,8 @@ export const allAdditionalProperties = {
 	trackingItems: {},
 };
 
-export const typeNames = Object.keys(eventTypes);
+export const types = [APPOINTMENT, SYMPTOM, THERAPY, TRACKING];
+export const trackableTypes = [SYMPTOM, TRACKING];
 
 export const markingColors = [
 	'#00ff00',
@@ -86,9 +87,3 @@ export const moodsEvaluation = {
 	Bad: { val: 2 },
 	Terrible: { val: 1 },
 };
-/* export const trackingItem = {
-	category: '',
-	unit: '',
-	value: '',
-};
- */

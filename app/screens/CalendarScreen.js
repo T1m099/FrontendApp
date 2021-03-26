@@ -1,20 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import dayjs from 'dayjs';
 import { useSelector } from 'react-redux';
+import SectionedMultiSelect from 'react-native-sectioned-multi-select';
+import { MaterialIcons } from '@expo/vector-icons';
 
-import AppButton from '../components/AppButton';
 import routes from '../navigation/routes';
 import * as eventActions from '../store/events';
+import colors from '../config/colors';
+import { types } from '../config/eventTypes';
+import EventTypesSelect from '../components/EventTypesSelect';
 
 function CalendarScreen({ navigation }) {
-	const events = useSelector(eventActions.getEvents());
+	const eventsByType = useSelector(
+		eventActions.getEventsGroupedByTypeAsObject()
+	);
+	const [selectedEventTypes, setSelectedEventTypes] = useState(types);
 
 	const dateToCalendarFormat = dayjsDate => {
 		//this function uses dayjs
 		return dayjsDate.format('YYYY-MM-DD');
 	};
+	const getEventsForSelectedTypes = selectedTypes => {
+		let eventsToReturn = {};
+		selectedTypes.forEach(t => {
+			eventsToReturn = { ...eventsToReturn, ...eventsByType[t] };
+		});
+		return eventsToReturn;
+	};
+
 	const mapEventsToMarkings = eventsToMap => {
 		const currentlyMarkedDates = {};
 
@@ -61,8 +76,17 @@ function CalendarScreen({ navigation }) {
 		});
 	};
 
+	const eventsToShow = mapEventsToMarkings(
+		getEventsForSelectedTypes(selectedEventTypes)
+	);
+
 	return (
 		<View style={styles.container}>
+			<EventTypesSelect
+				selectedEventTypes={selectedEventTypes}
+				onSelectEventType={setSelectedEventTypes}
+			/>
+
 			<Calendar
 				onDayPress={goToDateEventScreen}
 				onDayLongPress={day => {
@@ -70,15 +94,8 @@ function CalendarScreen({ navigation }) {
 				}}
 				monthFormat={'MMMM yyyy'}
 				firstDay={1}
-				markedDates={mapEventsToMarkings(events)}
+				markedDates={eventsToShow}
 				markingType='multi-period'
-			/>
-			<AppButton
-				onPress={() => {
-					//EventService.clearEvents();
-					//setEvents([]);
-				}}
-				title='Clear Calender'
 			/>
 		</View>
 	);
