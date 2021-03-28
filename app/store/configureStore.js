@@ -12,6 +12,7 @@ import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { encryptTransform } from 'redux-persist-transform-encrypt';
 
+import api from './middleware/api';
 import reducer from './reducer';
 
 export default function (encryptionKey = 'unsecureKey') {
@@ -43,6 +44,7 @@ export default function (encryptionKey = 'unsecureKey') {
 					],
 				},
 			}),
+			api,
 		],
 	});
 	const persistor = persistStore(store);

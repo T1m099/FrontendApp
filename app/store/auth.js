@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { createSelector } from 'reselect';
+import { apiCallBegan } from './api';
 
-const baseCredentials = { username: '', mail: '', password: '' };
+const baseCredentials = { mail: '', password: '' };
 
 const slice = createSlice({
 	name: 'auth',
@@ -9,41 +10,67 @@ const slice = createSlice({
 		credentials: { ...baseCredentials },
 		token: '',
 		loginFailed: false,
+		loading: false,
 	},
 	reducers: {
-		credentialsSaved: (auth, action) => {
-			auth.credentials = action.payload;
-		},
-		credentialsDeleted: (auth, action) => {
-			auth.credentials = { ...baseCredentials };
-		},
 		loginSucceeded: (auth, action) => {
+			console.log(action.payload);
+
+			auth.credentials = action.payload.user;
+			auth.token = action.payload.token;
+
 			auth.loginFailed = false;
+			auth.loading = false;
+		},
+		logout: (auth, action) => {
+			auth.credentials = { ...baseCredentials };
+			auth.token = '';
+		},
+		loginBegan: (auth, action) => {
+			auth.loading = true;
 		},
 		loginFailed: (auth, action) => {
+			console.error(action.payload);
 			auth.loginFailed = true;
+			auth.loading = false;
 		},
 	},
 });
 
-const {
-	credentialsSaved,
-	credentialsDeleted,
-	loginSucceeded,
-	loginFailed,
-} = slice.actions;
+const { loginSucceeded, loginFailed, loginBegan } = slice.actions;
+export const { logout } = slice.actions;
 export default slice.reducer;
 
 export const login = credentials => async dispatch => {
-	dispatch(credentialsSaved(credentials));
-	dispatch(loginSucceeded());
-};
-export const logout = () => async dispatch => {
-	dispatch(credentialsDeleted());
+	dispatch(
+		apiCallBegan({
+			url: 'login',
+			data: {
+				mail: credentials.mail,
+				password: credentials.password,
+			},
+			method: 'POST',
+			onStart: loginBegan.type,
+			onSuccess: loginSucceeded.type,
+			onError: loginFailed.type,
+		})
+	);
 };
 export const register = credentials => async dispatch => {
-	dispatch(credentialsSaved(credentials));
-	dispatch(loginSucceeded());
+	dispatch(
+		apiCallBegan({
+			url: 'register',
+			data: {
+				mail: credentials.mail,
+				password: credentials.password,
+				name: credentials.username,
+			},
+			method: 'POST',
+			onStart: loginBegan.type,
+			onSuccess: loginSucceeded.type,
+			onError: loginFailed.type,
+		})
+	);
 };
 
 //Selectors
