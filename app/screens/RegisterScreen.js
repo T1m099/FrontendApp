@@ -21,13 +21,7 @@ function RegisterScreen() {
 	const dispatch = useDispatch();
 
 	const handleSubmit = async userInfo => {
-		dispatch(
-			authActions.register({
-				username: userInfo.name,
-				mail: userInfo.email,
-				password: userInfo.password,
-			})
-		);
+		dispatch(authActions.register(userInfo));
 	};
 
 	return (

@@ -46,7 +46,7 @@ export const login = credentials => async dispatch => {
 		apiCallBegan({
 			url: 'login',
 			data: {
-				mail: credentials.mail,
+				mail: credentials.email,
 				password: credentials.password,
 			},
 			method: 'POST',
@@ -61,9 +61,9 @@ export const register = credentials => async dispatch => {
 		apiCallBegan({
 			url: 'register',
 			data: {
-				mail: credentials.mail,
+				mail: credentials.email,
 				password: credentials.password,
-				name: credentials.username,
+				name: credentials.name,
 			},
 			method: 'POST',
 			onStart: loginBegan.type,
