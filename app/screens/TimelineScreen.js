@@ -29,8 +29,12 @@ function TimelineScreen(props) {
 	);
 	const [toDay, setToDay] = useState(today);
 
+	let eventsWithSelectedType =
+		allEventsOrderedByTypeAsObject[selectedEventTypeArray[0]];
+	if (!eventsWithSelectedType) eventsWithSelectedType = {};
+
 	const eventsInSelectedRange = eventActions.filterEventsBetweenDays(
-		allEventsOrderedByTypeAsObject[selectedEventTypeArray[0]],
+		eventsWithSelectedType,
 		fromDay.getTime(),
 		toDay.getTime()
 	);
