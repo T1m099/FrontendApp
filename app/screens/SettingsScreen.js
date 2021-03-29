@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { logout } from '../store/auth';
 
-import AppButton from '../components/AppButton';
+import {ButtonStandard} from "../components/Buttons";
 import routes from '../navigation/routes';
 
 function SettingsScreen({ navigation }) {
@@ -14,13 +14,13 @@ function SettingsScreen({ navigation }) {
 	};
 	return (
 		<View style={styles.container}>
-			<AppButton title='Logout' onPress={handleLogout}></AppButton>
-			<AppButton
+			<ButtonStandard title='Logout' onPress={handleLogout}></ButtonStandard>
+			<ButtonStandard
 				title='Tracking Items'
 				onPress={() => {
 					navigation.push(routes.TRACKING_CATEGORY_EDIT);
 				}}
-			></AppButton>
+			></ButtonStandard>
 		</View>
 	);
 }

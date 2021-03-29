@@ -5,7 +5,7 @@ import { StackActions } from '@react-navigation/native';
 
 import ListItem from '../components/ListItem';
 import ListItemDeleteAction from '../components/ListItemDeleteAction';
-import AppButton from '../components/AppButton';
+import {ButtonStandard} from '../components/Buttons'
 import * as eventActions from '../store/events';
 import routes from '../navigation/routes';
 
@@ -54,7 +54,7 @@ function DateEventScreen({ navigation, route }) {
 				ListFooterComponent={
 					<React.Fragment>
 						{
-							<AppButton
+							<ButtonStandard
 								title='New'
 								onPress={() => {
 									navigation.dispatch(
@@ -69,7 +69,7 @@ function DateEventScreen({ navigation, route }) {
 								}}
 							/>
 						}
-						<AppButton
+						<ButtonStandard
 							title='Close'
 							onPress={() => {
 								navigation.pop();

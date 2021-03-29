@@ -4,9 +4,8 @@ import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
-import AppButton from '../components/AppButton';
 import AppText from '../components/AppText';
-import {ButtonAccept, ButtonDecline} from "../components/Buttons";
+import {ButtonStandard, ButtonAccept, ButtonDecline} from "../components/Buttons";
 import AppForm from '../components/forms/AppForm';
 import AppFormField from '../components/forms/AppFormField';
 import AppFormDateTimePicker from '../components/forms/AppFormDateTimePicker';
@@ -219,7 +218,7 @@ function EventEditScreen({ navigation, route }) {
 				/>
 
 				<View style={styles.buttonContainer}>
-					<AppButton
+					<ButtonStandard
 						title='Close'
 						onPress={() => {
 							navigation.reset({

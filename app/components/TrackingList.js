@@ -3,7 +3,7 @@ import React from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 
 import AppTextInput from './AppTextInput';
-import AppButton from './AppButton';
+import {ButtonStandard} from "./Buttons";
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import ListItemDeleteAction from './ListItemDeleteAction';
 
@@ -92,10 +92,10 @@ function TrackingList({ name }) {
 					);
 				}}
 				ListFooterComponent={
-					<AppButton
+					<ButtonStandard
 						title='Add'
 						onPress={handleNewTrackingItem}
-					></AppButton>
+					></ButtonStandard>
 				}
 			/>
 		</View>

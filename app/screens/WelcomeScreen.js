@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
-import AppButton from '../components/AppButton';
+import {ButtonStandard} from "../components/Buttons";
 import AppText from '../components/AppText';
 import routes from '../navigation/routes';
 
@@ -9,13 +9,13 @@ function WelcomeScreen({ navigation }) {
 	return (
 		<View style={styles.container}>
 			<AppText>Welcome to TheraPie!</AppText>
-			<AppButton
+			<ButtonStandard
 				title='Login'
 				onPress={() => {
 					navigation.push(routes.LOGIN);
 				}}
 			/>
-			<AppButton
+			<ButtonStandard
 				title='Register'
 				onPress={() => {
 					navigation.push(routes.REGISTER);

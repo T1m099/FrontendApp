@@ -9,7 +9,7 @@ import * as folderActions from '../store/docs/folders';
 import * as documentActions from '../store/docs/documents';
 import * as documentManagement from '../config/documentManagement';
 
-import AppButton from '../components/AppButton';
+import {ButtonStandard} from "../components/Buttons";
 import AppForm from '../components/forms/AppForm';
 import AppFormField from '../components/forms/AppFormField';
 import AppSubmitButton from '../components/forms/AppSubmitButton';
@@ -123,14 +123,14 @@ function FolderManagementScreen({ navigation, route }) {
 				}}
 				ListFooterComponent={
 					<>
-						<AppButton
+						<ButtonStandard
 							style={styles.newCollectionButton}
 							title='Add Document'
 							onPress={() => {
 								handlePressAddDocument();
 							}}
 						/>
-						<AppButton
+						<ButtonStandard
 							style={styles.newCollectionButton}
 							title='New Folder'
 							onPress={() => {
@@ -148,12 +148,12 @@ function FolderManagementScreen({ navigation, route }) {
 					<AppFormField name='name' width='100%' placeholder='Name' />
 					<AppSubmitButton title='Create Folder'></AppSubmitButton>
 				</AppForm>
-				<AppButton
+				<ButtonStandard
 					title='Close'
 					onPress={() => {
 						setNewFolderModalVisble(false);
 					}}
-				></AppButton>
+				></ButtonStandard>
 			</Modal>
 		</View>
 	);
