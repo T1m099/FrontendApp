@@ -98,8 +98,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         height: 65,
         alignContent: 'center',
-        marginBottom: 8,
-        marginRight: 8
     },
     buttonAccept: {
         backgroundColor: colors.accept,
@@ -108,8 +106,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         height: 65,
         alignContent: 'center',
-        marginBottom: 8,
-        marginRight: 8
+
     },
     buttonDecline: {
         backgroundColor: colors.decline,
@@ -118,8 +115,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         height: 65,
         alignContent: 'center',
-        marginBottom: 8,
-        marginRight: 8
 
     },
     buttonYellow: {
@@ -129,8 +124,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         height: 65,
         alignContent: 'center',
-        marginBottom: 8,
-        marginRight: 8
+
 
     },
     buttonMagenta: {
@@ -140,8 +134,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         height: 65,
         alignContent: 'center',
-        marginBottom: 8,
-        marginRight: 8
+
     },
 
     text: {
