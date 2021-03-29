@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="23ad1ac1-a35b-416a-9540-dc4db3ae37e6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.expo/packager-info.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/packager-info.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="package.json" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="main" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="MarcDKu &lt;marc-kustermann@gmx.de&gt;" />
+      </list>
+    </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="redisign/wierd" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="2" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/app/components/forms/AppFormDateTimePicker.js" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/components/forms/AppErrorMessage.js" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/components/forms/AppForm.js" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectId" id="1oxvV9c7gidPOcinCruBLplrPqT" />
+  <component name="ProjectViewState">
+    <option name="flattenPackages" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="false" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/yarn.lock" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.standard" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="application.passwordSafe" />
+    <property name="ts.external.directory.path" value="C:\Users\Marc\AppData\Local\JetBrains\Toolbox\apps\WebStorm\ch-0\203.7148.54\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Marc\CodingPlace\FrontendApp\assets" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Marc\CodingPlace\FrontendApp\app\images" />
+      <recent name="C:\Users\Marc\CodingPlace\FrontendApp\assets" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.start">
+    <configuration name="android" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="android" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="ios" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="ios" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="npm.android" />
+      <item itemvalue="npm.ios" />
+      <item itemvalue="npm.start" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.start" />
+        <item itemvalue="npm.ios" />
+        <item itemvalue="npm.android" />
+        <item itemvalue="npm.start" />
+        <item itemvalue="npm.ios" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="23ad1ac1-a35b-416a-9540-dc4db3ae37e6" name="Default Changelist" comment="" />
+      <created>1614241078641</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1614241078641</updated>
+      <workItem from="1614241081505" duration="1355000" />
+      <workItem from="1614508224591" duration="6985000" />
+      <workItem from="1614517495829" duration="3241000" />
+      <workItem from="1614602222488" duration="14474000" />
+      <workItem from="1614678510583" duration="14010000" />
+      <workItem from="1614759859953" duration="2332000" />
+      <workItem from="1614765058981" duration="124000" />
+      <workItem from="1614859251781" duration="159000" />
+      <workItem from="1614859459681" duration="1940000" />
+      <workItem from="1614861583577" duration="253000" />
+      <workItem from="1614861856202" duration="73000" />
+      <workItem from="1614861944178" duration="164000" />
+      <workItem from="1614862131402" duration="130000" />
+      <workItem from="1614862314217" duration="29000" />
+      <workItem from="1614862360335" duration="16000" />
+      <workItem from="1614862495085" duration="3991000" />
+      <workItem from="1614873529285" duration="8868000" />
+      <workItem from="1614936429310" duration="375000" />
+      <workItem from="1614936835859" duration="2000" />
+      <workItem from="1614958089322" duration="5767000" />
+      <workItem from="1614964415858" duration="13947000" />
+      <workItem from="1615127414622" duration="3443000" />
+      <workItem from="1615134182202" duration="274000" />
+      <workItem from="1615134567645" duration="538000" />
+      <workItem from="1615135156071" duration="1953000" />
+      <workItem from="1615137189500" duration="492000" />
+      <workItem from="1615138225297" duration="1157000" />
+      <workItem from="1615140294096" duration="4810000" />
+      <workItem from="1615196949937" duration="4888000" />
+      <workItem from="1615206637042" duration="3041000" />
+      <workItem from="1615224435213" duration="6286000" />
+      <workItem from="1615364822989" duration="671000" />
+      <workItem from="1615383259783" duration="1266000" />
+      <workItem from="1615494963296" duration="121000" />
+      <workItem from="1615656401590" duration="81000" />
+      <workItem from="1616324712362" duration="53000" />
+      <workItem from="1616324849765" duration="1584000" />
+      <workItem from="1616842686664" duration="39000" />
+      <workItem from="1617025453700" duration="724000" />
+      <workItem from="1617026226387" duration="656000" />
+    </task>
+    <task id="LOCAL-00001" summary="Redesign of Colors and Icons to look more modern">
+      <created>1614520757634</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1614520757634</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Add Background Image and add Additional Styles">
+      <created>1614615387470</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1614615387470</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Add Background Image and add Additional Styles">
+      <created>1614615423394</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1614615423394</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Completed new Buttons and added black Boxes around everything">
+      <created>1614881594444</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1614881594444</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Redesigned Calendar">
+      <created>1614960959518</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1614960959518</updated>
+    </task>
+    <task id="LOCAL-00006" summary="final push for Redesign">
+      <created>1614962367626</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1614962367626</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Merge fixes">
+      <created>1614967046575</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1614967046575</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Style change of the Calendar">
+      <created>1614968524792</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1614968524792</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Redesign for the Event funktion">
+      <created>1614978932643</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1614978932643</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Resolved all Import mistakes and completed the correct Merge, witch was not there before">
+      <created>1615207559437</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1615207559437</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Restyled Medicaton Screens">
+      <created>1615230709511</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1615230709511</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="SHOW_OTHER_BRANCHES" value="true" />
+    <option name="COLUMN_ID_WIDTH">
+      <map>
+        <entry key="Table.Default.Date.ColumnIdWidth" value="15" />
+      </map>
+    </option>
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="main" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/overhaul/calendar" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="SCKWorld2012" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Redesign of Colors and Icons to look more modern" />
+    <MESSAGE value="Add Background Image and add Additional Styles" />
+    <MESSAGE value="Completed new Buttons and added black Boxes around everything" />
+    <MESSAGE value="Redesigned Calendar" />
+    <MESSAGE value="final push for Redesign" />
+    <MESSAGE value="Merge fixes" />
+    <MESSAGE value="Style change of the Calendar" />
+    <MESSAGE value="Redesign for the Event funktion" />
+    <MESSAGE value="Resolved all Import mistakes and completed the correct Merge, witch was not there before" />
+    <MESSAGE value="Restyled Medicaton Screens" />
+    <option name="LAST_COMMIT_MESSAGE" value="Restyled Medicaton Screens" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
