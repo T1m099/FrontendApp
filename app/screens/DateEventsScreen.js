@@ -83,8 +83,19 @@ function DateEventScreen({ navigation, route }) {
 }
 
 const styles = StyleSheet.create({
-	container: {
-		padding: 5,
+		container: {
+			flex: 1,
+			flexDirection: 'row',
+			alignItems: 'center',
+			alignSelf: 'center',
+			width: '92%',
+			maxHeight: 81,
+			borderRadius: 10,
+			marginTop: '.75%',
+			marginBottom: '.75%',
+			backgroundColor: 'rgba(0,0,0,.5)',
+			textAlign: 'center',
+			justifyContent: 'space-between'
 	},
 });
 

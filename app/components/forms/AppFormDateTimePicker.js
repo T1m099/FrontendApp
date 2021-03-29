@@ -39,7 +39,7 @@ function AppFormDateTimePicker({
 const styles = StyleSheet.create({
 	container: {
 		flexDirection: 'row',
-		marginVertical: 10,
+		marginVertical: 8,
 	},
 });
 

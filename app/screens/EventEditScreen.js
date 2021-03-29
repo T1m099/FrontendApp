@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import {ImageBackground, StyleSheet, View} from 'react-native';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
 import AppButton from '../components/AppButton';
 import AppText from '../components/AppText';
-
+import {ButtonAccept, ButtonDecline} from "../components/Buttons";
 import AppForm from '../components/forms/AppForm';
 import AppFormField from '../components/forms/AppFormField';
 import AppFormDateTimePicker from '../components/forms/AppFormDateTimePicker';
@@ -14,6 +14,7 @@ import SubmitButton from '../components/forms/AppSubmitButton';
 import AppFormColorPicker from '../components/forms/AppFormColorPicker';
 import AppFormPicker from '../components/forms/AppFormPicker';
 import ReminderList from '../components/ReminderList';
+import {AntDesign} from "@expo/vector-icons";
 
 import * as eventActions from '../store/events';
 import reminderService from '../services/reminderService';

@@ -1,8 +1,7 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import {ImageBackground, StyleSheet, View} from 'react-native';
 import * as Yup from 'yup';
-
-import AppButton from '../components/AppButton';
+import {ButtonAccept, ButtonDecline, ButtonStandard} from "../components/Buttons";
 import AppText from '../components/AppText';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -16,6 +15,8 @@ import reminderService from '../services/reminderService';
 
 import { saveMedItem, getMeds, genId } from '../store/meds';
 import routes from '../navigation/routes';
+import {AntDesign} from "@expo/vector-icons";
+import colors from "../config/colors";
 
 const baseMedItemDetails = {
 	id: 'new',
@@ -68,7 +69,9 @@ function MedicationEditScreen({ route, navigation }) {
 	};
 
 	return (
-		<View style={styles.container}>
+        <ImageBackground source={require('../images/Background.png')} style={styles.image}>
+
+        <View style={styles.maincontainer}>
 			<AppForm
 				initialValues={initMedItem(id, meds)}
 				onSubmit={(values, actions) => {
@@ -77,18 +80,21 @@ function MedicationEditScreen({ route, navigation }) {
 				}}
 				validationSchema={validationSchema}
 			>
-				<AppText>Title:</AppText>
+                <View style={[styles.container, {maxHeight:150, marginBottom:5}]}>
 				<AppFormField name='title' width='100%' placeholder='Title' />
 
 				<AppText>Description:</AppText>
 				<AppFormField
+                    maxHeight={25}
 					maxLength={255}
 					multiline
 					name='description'
 					numberOfLines={3}
 					placeholder='Description'
 				/>
-				<View style={styles.doseArea}>
+                </View>
+                <View style={[styles.container, {maxHeight:75}]}>
+                <View style={[styles.doseArea, {marginTop: 8}]}>
 					<AppFormDropdownPicker
 						name='unit'
 						items={dropdownItems}
@@ -101,7 +107,10 @@ function MedicationEditScreen({ route, navigation }) {
 						style={styles.quanitity}
 					/>
 				</View>
-				<AppText>Reminders:</AppText>
+                </View>
+                <View style={styles.container}>
+
+                <AppText>Reminders:</AppText>
 				<ReminderList
 					name='reminders'
 					style={styles.reminderList}
@@ -109,9 +118,11 @@ function MedicationEditScreen({ route, navigation }) {
 						reminderService.cancelReminderAsync(reminder);
 					}}
 				/>
-				<View style={styles.buttonArea}>
-					<AppButton
-						title='Close'
+                </View>
+				   <View style={ [styles.container, {marginTop: 5, maxHeight: 90, flexDirection: 'row'}] }>
+                    <View style={ styles.buttonContainer }>
+                        <ButtonDecline
+                            Content={ <AntDesign name="close" size={ 24 } color="white"/> }
 						onPress={() => {
 							navigation.reset({
 								index: 0,
@@ -123,20 +134,46 @@ function MedicationEditScreen({ route, navigation }) {
 								],
 							});
 						}}
-						style={styles.cancelButton}
 					/>
-					<AppSubmitButton
-						title='Submit'
-						style={styles.submitButton}
+                        <ButtonAccept
+                            Content={ <AntDesign name="addfile" size={ 24 } color="white"/> }
 					/>
 				</View>
+                </View>
 			</AppForm>
 		</View>
+        </ImageBackground>
 	);
 }
 
 const styles = StyleSheet.create({
-	container: { padding: 5 },
+    maincontainer: {
+        flex: 1,
+        alignItems: 'center',
+        alignSelf: 'center',
+        width: '92%',
+        marginTop: '.75%',
+        marginBottom: '.75%',
+        textAlign: 'center',
+    },    image: {
+        flex: 1,
+        resizeMode: "cover",
+        justifyContent: "center"
+    },
+    container: {
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
+        alignSelf: 'center',
+        width: 400,
+        maxHeight: 132,
+        borderRadius: 10,
+        marginTop: '.75%',
+        marginBottom: '.75%',
+        backgroundColor: 'rgba(0,0,0,.5)',
+        textAlign: 'center',
+        justifyContent: 'space-between'
+    },
 	dateTimePickerContainer: {
 		flexDirection: 'row',
 		marginVertical: 10,
@@ -147,9 +184,11 @@ const styles = StyleSheet.create({
 	buttonArea: {
 		flexDirection: 'row',
 	},
-	doseArea: { flexDirection: 'row', height: '10%' },
+	doseArea: { flexDirection: 'row'  },
 	unitPicker: {
-		flex: 3,
+        width:75,
+        marginLeft: 5,
+        marginRight:5,
 	},
 	quanitity: { flex: 1, height: '100%', marginTop: 0 },
 

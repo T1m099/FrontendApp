@@ -10,6 +10,7 @@ import MedicationEditScreen from '../screens/MedicationEditScreen';
 const Stack = createStackNavigator();
 
 const MedicationNavigator = () => (
+
 	<Stack.Navigator mode='modal'>
 		<Stack.Screen
 			name={routes.MEDICATION_STACK_NAVIGATION}

@@ -102,7 +102,27 @@ function CalendarScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-	container: {},
+	container: {
+		flex: 1,
+		flexDirection: 'column',
+		alignItems: 'center',
+		alignSelf: 'center',
+		width: '92%',
+		maxHeight: 400,
+		borderRadius: 10,
+		marginTop: '.75%',
+		marginBottom: '.75%',
+		backgroundColor: 'rgba(0,0,0,.5)',
+		textAlign: 'center',
+		justifyContent: 'space-between',
+
+	},
+
+	image: {
+		flex: 1,
+		resizeMode: "cover",
+		justifyContent: "center"
+	},
 });
 
 export default CalendarScreen;
