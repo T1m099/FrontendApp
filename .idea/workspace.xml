@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="23ad1ac1-a35b-416a-9540-dc4db3ae37e6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/Buttons.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Buttons.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/screens/WelcomeScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/WelcomeScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/AppTextInput.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/AppTextInput.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/forms/AppSubmitButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/forms/AppSubmitButton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/screens/RegisterScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/RegisterScreen.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,6 +73,7 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="ToolWindowTODO.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/yarn.lock" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -278,7 +280,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617026918009</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Restyled WelcomeScreen.js">
+      <created>1617039686774</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1617039686774</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -376,7 +385,8 @@
     <MESSAGE value="Redesign for the Event funktion" />
     <MESSAGE value="Resolved all Import mistakes and completed the correct Merge, witch was not there before" />
     <MESSAGE value="Restyled Medicaton Screens" />
-    <option name="LAST_COMMIT_MESSAGE" value="Restyled Medicaton Screens" />
+    <MESSAGE value="Restyled WelcomeScreen.js" />
+    <option name="LAST_COMMIT_MESSAGE" value="Restyled WelcomeScreen.js" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

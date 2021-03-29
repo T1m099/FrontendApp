@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, TextInput, StyleSheet} from 'react-native';
-import {MaterialCommunityIcons} from '@expo/vector-icons';
+import {AntDesign} from '@expo/vector-icons';
 
 import defaultStyles from '../config/styles';
 import colors from '../config/colors';
@@ -9,10 +9,10 @@ function AppTextInput({icon, style, ...otherProps}) {
     return (
         <View style={ [styles.container, style] }>
             { icon && (
-                <MaterialCommunityIcons
+                <AntDesign
                     name={ icon }
                     size={ 20 }
-                    color={ defaultStyles.colors.medium }
+                    color={ colors.text }
                     style={ styles.icon }
                 />
             ) }
@@ -27,12 +27,13 @@ function AppTextInput({icon, style, ...otherProps}) {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: colors.background,
-        borderRadius: 20,
+        backgroundColor: colors.navigation,
+        borderRadius: 17,
         flexDirection: 'row',
         padding: 15,
         marginTop: 5,
-        width: 390,
+        width: 340,
+        alignItems: 'center'
     },
     icon: {
         marginRight: 10,
