@@ -3,96 +3,96 @@ import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 
 import colors from '../config/colors';
 
-export function ButtonStandard({Content, onPress, size = 65,position='flex-end'}) {
+export function ButtonStandard({Content, onPress, size = 65, position = 'flex-end'}) {
     let Button;
-    if (typeof (Content) == typeof ("dummy")) {
-        Button = <Text style={styles.text}>{Content}</Text>
+    if (typeof (Content) === typeof ("dummy")) {
+        Button = <Text style={ styles.text }>{ Content }</Text>
     } else {
         Button = Content
     }
 
     return (
         <TouchableOpacity
-            style={[styles.appbutton, {width: size, alignSelf: position}]}
-            onPress={onPress}
+            style={ [styles.appbutton, {width: size, alignSelf: position}] }
+            onPress={ onPress }
         >
-            <Text style={styles.text}>{Content}</Text>
+            { Button }
         </TouchableOpacity>
     );
 }
 
-export function ButtonAccept({Content, onPress, size = 65,position='flex-end'}) {
+export function ButtonAccept({Content, onPress, size = 65, position = 'flex-end'}) {
     let Button;
-    if (typeof (Content) == typeof ("dummy")) {
-        Button = <Text style={styles.text}>{Content}</Text>
+    if (typeof (Content) === typeof ("dummy")) {
+        Button = <Text style={ styles.text }>{ Content }</Text>
     } else {
         Button = Content
     }
 
     return (
         <TouchableOpacity
-            style={[styles.buttonAccept, {width: size, alignSelf: position}]}
-            onPress={onPress}
+            style={ [styles.buttonAccept, {width: size, alignSelf: position}] }
+            onPress={ onPress }
         >
-            {Button}
+            { Button }
         </TouchableOpacity>
     );
 }
 
-export function ButtonDecline({Content, onPress, size = 65,position='flex-end'}) {
+export function ButtonDecline({Content, onPress, size = 65, position = 'flex-end'}) {
     let Button;
-    if (typeof (Content) == typeof ("dummy")) {
-        Button = <Text style={styles.text}>{Content}</Text>
+    if (typeof (Content) === typeof ("dummy")) {
+        Button = <Text style={ styles.text }>{ Content }</Text>
     } else {
         Button = Content
     }
     return (
         <TouchableOpacity
-            style={[styles.buttonDecline, {width: size, alignSelf: position}]}
-            onPress={onPress}
+            style={ [styles.buttonDecline, {width: size, alignSelf: position}] }
+            onPress={ onPress }
         >
-            {Button}
+            { Button }
         </TouchableOpacity>
     );
 }
 
-export function ButtonYellow({Content, onPress, size = 65,position='flex-end'}) {
+export function ButtonYellow({Content, onPress, size = 65, position = 'flex-end'}) {
     let Button;
-    if (typeof (Content) == typeof ("dummy")) {
-        Button = <Text style={styles.text}>{Content}</Text>
+    if (typeof (Content) === typeof ("dummy")) {
+        Button = <Text style={ styles.text }>{ Content }</Text>
     } else {
         Button = Content
     }
     return (
         <TouchableOpacity
-            style={[styles.buttonYellow, {width: size, alignSelf: position}]}
-            onPress={onPress}
+            style={ [styles.buttonYellow, {width: size, alignSelf: position}] }
+            onPress={ onPress }
         >
-            {Button}
+            { Button }
         </TouchableOpacity>
     );
 }
 
-export function ButtonMagenta({Content, onPress, size = 65,position='flex-end'}) {
+export function ButtonMagenta({Content, onPress, size = 65, position = 'flex-end'}) {
     let Button;
-    if (typeof (Content) == typeof ("dummy")) {
-        Button = <Text style={styles.text}>{Content}</Text>
+    if (typeof (Content) === typeof ("dummy")) {
+        Button = <Text style={ styles.text }>{ Content }</Text>
     } else {
         Button = Content
     }
     return (
         <TouchableOpacity
-            style={[styles.buttonMagenta , {width: size, alignSelf: position}]}
-            onPress={onPress}
+            style={ [styles.buttonMagenta, {width: size, alignSelf: position}] }
+            onPress={ onPress }
         >
-            {Button}
+            { Button }
         </TouchableOpacity>
     );
 }
 
 const styles = StyleSheet.create({
     appbutton: {
-        backgroundColor: colors.primary,
+        backgroundColor: colors.navigation,
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        color: colors.white,
+        color: 'white',
         fontSize: 18,
         textTransform: 'uppercase',
         fontWeight: 'bold',

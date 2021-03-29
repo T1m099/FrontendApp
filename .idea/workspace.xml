@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="23ad1ac1-a35b-416a-9540-dc4db3ae37e6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/TrackingList.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/TrackingList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/screens/DateEventsScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/DateEventsScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/screens/DocumentManagementScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/DocumentManagementScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/screens/EventEditScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/EventEditScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/screens/SettingsScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/SettingsScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Buttons.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Buttons.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/screens/WelcomeScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/WelcomeScreen.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -315,7 +311,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="main" />
+                        <option value="origin/redisign/wierd" />
                       </list>
                     </value>
                   </entry>
@@ -331,6 +327,16 @@
         <entry key="Branch">
           <value>
             <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/redisign/wierd" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="Redesign" />
+                </option>
+              </RecentGroup>
               <RecentGroup>
                 <option name="FILTER_VALUES">
                   <option value="main" />
