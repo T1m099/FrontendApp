@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         alignSelf: 'center',
         width: '92%',
-        maxHeight: 81,
+        maxHeight: 250,
         borderRadius: 10,
         marginTop: '.75%',
         marginBottom: '.75%',
