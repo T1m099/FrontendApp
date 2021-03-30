@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, Text, ImageBackground} from 'react-native';
+import {View, StyleSheet, Text, ImageBackground, TouchableOpacity} from 'react-native';
 import {ButtonYellow} from "../components/Buttons";
 import routes from '../navigation/routes';
 import colors from "../config/colors";
@@ -12,6 +12,7 @@ function OrganisationMainScreen({ navigation }) {
 			<Text style={styles.text}>Kalender</Text>
 
 			<ButtonYellow
+				style={ [ {marginRight: 20, }] }
 				Content={<AntDesign name="calendar" size={24} color="white"/>}
 				onPress={() => {
 					navigation.navigate(routes.CALENDAR);

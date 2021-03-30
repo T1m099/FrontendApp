@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="97bb8dd6-f885-462e-ada0-1bbceca86c17" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/screens/MainScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/MainScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/EventTypesSelect.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/EventTypesSelect.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/screens/CalendarScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/CalendarScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/screens/OrganizationMainScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/OrganizationMainScreen.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -295,7 +297,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617043630465</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="finished restyle MainScreen.js">
+      <created>1617127114440</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1617127114440</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -322,7 +331,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="text">
+                    <value>
+                      <list>
+                        <option value="event types" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -383,7 +404,8 @@
     <MESSAGE value="Restyled Medicaton Screens" />
     <MESSAGE value="Restyled WelcomeScreen.js" />
     <MESSAGE value="Restyled RegisterScreen.js" />
-    <option name="LAST_COMMIT_MESSAGE" value="Restyled RegisterScreen.js" />
+    <MESSAGE value="finished restyle MainScreen.js" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished restyle MainScreen.js" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
