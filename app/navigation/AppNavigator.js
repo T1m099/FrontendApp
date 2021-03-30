@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { MaterialCommunityIcons, Fontisto, Ionicons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import { useSelector } from 'react-redux';
 
 import MainScreen from '../screens/MainScreen';
@@ -11,7 +11,6 @@ import MedicationNavigator from '../navigation/MedicationNavigator';
 import DocumentsNavigator from '../navigation/DocumentsNavigator';
 import useNotifications from '../hooks/useNotifications';
 import * as authActions from '../store/auth';
-import SettingsScreen from '../screens/SettingsScreen';
 import SettingsNavigator from './SettingsNavigator';
 
 const Tab = createBottomTabNavigator();
@@ -33,11 +32,8 @@ const AppNavigator = () => {
 				component={OrganisationNavigator}
 				options={{
 					tabBarIcon: ({ color, size }) => (
-						<MaterialCommunityIcons
-							name='calendar'
-							color={color}
-							size={size}
-						/>
+						<AntDesign name="calendar" size={size} color={color}/>
+
 					),
 				}}
 			/>
@@ -46,8 +42,8 @@ const AppNavigator = () => {
 				component={DocumentsNavigator}
 				options={{
 					tabBarIcon: ({ color, size }) => (
-						<MaterialCommunityIcons
-							name='file-document'
+						<AntDesign
+							name='book'
 							color={color}
 							size={size}
 						/>
@@ -59,7 +55,7 @@ const AppNavigator = () => {
 				component={MainScreen}
 				options={{
 					tabBarIcon: ({ color, size }) => (
-						<MaterialCommunityIcons
+						<AntDesign
 							name='home'
 							color={color}
 							size={size}
@@ -72,7 +68,7 @@ const AppNavigator = () => {
 				component={MedicationNavigator}
 				options={{
 					tabBarIcon: ({ color, size }) => (
-						<Fontisto name='pills' color={color} size={size} />
+						<AntDesign name='medicinebox' color={color} size={size} />
 					),
 				}}
 			/>
@@ -81,8 +77,8 @@ const AppNavigator = () => {
 				component={SettingsNavigator}
 				options={{
 					tabBarIcon: ({ color, size }) => (
-						<Ionicons
-							name='settings-outline'
+						<AntDesign
+							name='user'
 							color={color}
 							size={size}
 						/>
