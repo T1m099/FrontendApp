@@ -44,7 +44,6 @@ function MedicationMainScreen({ navigation }) {
                     renderItem={({ item }) => {
                         return (
                             <MedicationListItem
-								style={styles.medicationitem}
                                 data={item}
                                 onPress={() => {
 								goToMedicationEdit(item.id);

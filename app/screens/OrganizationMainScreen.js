@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, Text, ImageBackground, TouchableOpacity} from 'react-native';
-import {ButtonYellow} from "../components/Buttons";
+import {ButtonMagenta, ButtonYellow} from "../components/Buttons";
 import routes from '../navigation/routes';
 import colors from "../config/colors";
 import {AntDesign} from "@expo/vector-icons";
@@ -9,9 +9,9 @@ function OrganisationMainScreen({navigation}) {
     return (
         <ImageBackground source={ require('../images/Background.png') } style={ styles.image }>
             <View style={ styles.container }>
-                <Text style={ styles.text }>Kalender</Text>
+                <Text style={ styles.text }>Calendar</Text>
 
-                <ButtonYellow
+                <ButtonMagenta
                     style={ [{marginBottom: 10,}] }
                     Content={ <AntDesign name="calendar" size={ 24 } color="white"/> }
                     onPress={ () => {
@@ -19,7 +19,7 @@ function OrganisationMainScreen({navigation}) {
                     } }
 
                     margin={ 8 }
-                ></ButtonYellow>
+                />
             </View>
             <View style={ styles.container }>
                 <Text style={ styles.text }>Timeline</Text>
@@ -31,7 +31,7 @@ function OrganisationMainScreen({navigation}) {
                     } }
 
                     margin={ 8 }
-                ></ButtonYellow>
+                />
             </View>
         </ImageBackground>
 
