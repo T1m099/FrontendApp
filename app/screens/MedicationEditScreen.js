@@ -135,8 +135,9 @@ function MedicationEditScreen({ route, navigation }) {
 							});
 						}}
 					/>
-                        <ButtonAccept
-                            Content={ <AntDesign name="addfile" size={ 24 } color="white"/> }
+					<AppSubmitButton
+						title='Submit'
+						style={styles.submitButton}
 					/>
 				</View>
                 </View>

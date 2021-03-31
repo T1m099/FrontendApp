@@ -1,7 +1,6 @@
 import React from 'react';
-import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import {StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
-import colors from '../config/colors';
 import AppText from './AppText';
 import ListItemDeleteAction from './ListItemDeleteAction';
 
@@ -40,10 +39,18 @@ function MediactionListItem({
 
 const styles = StyleSheet.create({
 	children: {
+		flex: 1,
 		flexDirection: 'row',
-		backgroundColor: colors.primary,
-		borderRadius: 25,
-		padding: 10,
+		alignItems: 'center',
+		alignSelf: 'center',
+		width: '92%',
+		height: 40,
+		borderRadius: 10,
+		marginTop: '.75%',
+		marginBottom: '.75%',
+		backgroundColor: 'rgba(0,0,0,.5)',
+		textAlign: 'center',
+		justifyContent: 'space-between'
 	},
 	container: { marginTop: 10 },
 });

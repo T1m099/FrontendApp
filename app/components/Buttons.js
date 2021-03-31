@@ -3,7 +3,7 @@ import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 
 import colors from '../config/colors';
 
-export function ButtonStandard({Content, onPress, size = 65, position = 'flex-end'}) {
+export function ButtonStandard({Content, onPress, size = 65, position = 'flex-end', margin=0}) {
     let Button;
     if (typeof (Content) === typeof ("dummy")) {
         Button = <Text style={ styles.text }>{ Content }</Text>
@@ -13,7 +13,7 @@ export function ButtonStandard({Content, onPress, size = 65, position = 'flex-en
 
     return (
         <TouchableOpacity
-            style={ [styles.appbutton, {width: size, alignSelf: position}] }
+            style={ [styles.appbutton, {width: size, alignSelf: position,marginBottom: margin,marginRight:margin}] }
             onPress={ onPress }
         >
             { Button }
@@ -21,7 +21,7 @@ export function ButtonStandard({Content, onPress, size = 65, position = 'flex-en
     );
 }
 
-export function ButtonAccept({Content, onPress, size = 65, position = 'flex-end'}) {
+export function ButtonAccept({Content, onPress, size = 65, position = 'flex-end', margin=0}) {
     let Button;
     if (typeof (Content) === typeof ("dummy")) {
         Button = <Text style={ styles.text }>{ Content }</Text>
@@ -31,7 +31,7 @@ export function ButtonAccept({Content, onPress, size = 65, position = 'flex-end'
 
     return (
         <TouchableOpacity
-            style={ [styles.buttonAccept, {width: size, alignSelf: position}] }
+            style={ [styles.buttonAccept, {width: size, alignSelf: position,marginBottom: margin,marginRight:margin}] }
             onPress={ onPress }
         >
             { Button }
@@ -39,7 +39,7 @@ export function ButtonAccept({Content, onPress, size = 65, position = 'flex-end'
     );
 }
 
-export function ButtonDecline({Content, onPress, size = 65, position = 'flex-end'}) {
+export function ButtonDecline({Content, onPress, size = 65, position = 'flex-end', margin=0}) {
     let Button;
     if (typeof (Content) === typeof ("dummy")) {
         Button = <Text style={ styles.text }>{ Content }</Text>
@@ -48,7 +48,7 @@ export function ButtonDecline({Content, onPress, size = 65, position = 'flex-end
     }
     return (
         <TouchableOpacity
-            style={ [styles.buttonDecline, {width: size, alignSelf: position}] }
+            style={ [styles.buttonDecline, {width: size, alignSelf: position,marginBottom: margin,marginRight:margin}] }
             onPress={ onPress }
         >
             { Button }
@@ -56,7 +56,7 @@ export function ButtonDecline({Content, onPress, size = 65, position = 'flex-end
     );
 }
 
-export function ButtonYellow({Content, onPress, size = 65, position = 'flex-end'}) {
+export function ButtonYellow({Content, onPress, size = 65, position = 'flex-end', margin=0}) {
     let Button;
     if (typeof (Content) === typeof ("dummy")) {
         Button = <Text style={ styles.text }>{ Content }</Text>
@@ -65,7 +65,7 @@ export function ButtonYellow({Content, onPress, size = 65, position = 'flex-end'
     }
     return (
         <TouchableOpacity
-            style={ [styles.buttonYellow, {width: size, alignSelf: position}] }
+            style={ [styles.buttonYellow, {width: size, alignSelf: position,marginBottom: margin,marginRight:margin}] }
             onPress={ onPress }
         >
             { Button }
@@ -73,7 +73,7 @@ export function ButtonYellow({Content, onPress, size = 65, position = 'flex-end'
     );
 }
 
-export function ButtonMagenta({Content, onPress, size = 65, position = 'flex-end'}) {
+export function ButtonMagenta({Content, onPress, size = 65, position = 'flex-end', margin=0}) {
     let Button;
     if (typeof (Content) === typeof ("dummy")) {
         Button = <Text style={ styles.text }>{ Content }</Text>
@@ -82,7 +82,7 @@ export function ButtonMagenta({Content, onPress, size = 65, position = 'flex-end
     }
     return (
         <TouchableOpacity
-            style={ [styles.buttonMagenta, {width: size, alignSelf: position}] }
+            style={ [styles.buttonMagenta, {width: size, alignSelf: position,marginBottom: margin,marginRight:margin}] }
             onPress={ onPress }
         >
             { Button }
@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
         height: 65,
         alignContent: 'center',
 
+
     },
     buttonDecline: {
         backgroundColor: colors.decline,
@@ -116,6 +117,7 @@ const styles = StyleSheet.create({
         height: 65,
         alignContent: 'center',
 
+
     },
     buttonYellow: {
         backgroundColor: colors.yellow,
@@ -124,7 +126,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         height: 65,
         alignContent: 'center',
-
 
     },
     buttonMagenta: {

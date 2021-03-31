@@ -44,6 +44,7 @@ function MedicationMainScreen({ navigation }) {
                     renderItem={({ item }) => {
                         return (
                             <MedicationListItem
+								style={styles.medicationitem}
                                 data={item}
                                 onPress={() => {
 								goToMedicationEdit(item.id);
@@ -64,18 +65,10 @@ function MedicationMainScreen({ navigation }) {
 								goToMedicationEdit('new');
                                 }}
 								Content={<AntDesign name="addfolder" size={24} color="white"/>}
+								margin={8}
                             />
 							</View>
-							<View style={styles.container} >
-								<Text style={styles.text}>Cache Löschen</Text>
-								<ButtonDecline
-                                onPress={() => {
-                                    medicationService.clear();
-                                    setMeds([]);
-                                }}
-								Content={<AntDesign name="delete" size={24} color="white"/>}
-                            />
-							</View>
+
                         </React.Fragment>
                     }
                 />
@@ -93,7 +86,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		alignSelf: 'center',
 		width: '92%',
-		maxHeight: 83,
+		height: 81,
 		borderRadius: 10,
 		marginTop: '.75%',
 		marginBottom: '.75%',
@@ -101,6 +94,7 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		justifyContent: 'space-between'
 	},
+
 	image: {
 		flex: 1,
 		resizeMode: "cover",

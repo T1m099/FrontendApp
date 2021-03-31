@@ -11,7 +11,7 @@ function ListItemDeleteAction({ onPress }) {
 				<AntDesign
 					name='delete'
 					size={25}
-					color={colors.background}
+					color={'#ffffff'}
 				/>
 			</View>
 		</TouchableWithoutFeedback>
@@ -22,11 +22,13 @@ const styles = StyleSheet.create({
 	container: {
 		backgroundColor: colors.decline,
 		borderRadius: 10,
-		marginTop: 10,
+		marginTop: 5.8,
+		marginRight:12,
 		width: 35,
 		height: 35,
 		justifyContent: 'center',
 		alignItems: 'center',
+
 	},
 });
 
