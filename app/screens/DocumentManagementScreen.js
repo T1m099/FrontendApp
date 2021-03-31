@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, FlatList, Modal, ImageBackground,Text} from 'react-native';
+import {View, StyleSheet, FlatList, Modal, ImageBackground, Text} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import * as Permissions from 'expo-permissions';
 import * as DocumentPicker from 'expo-document-picker';
@@ -9,7 +9,7 @@ import * as folderActions from '../store/docs/folders';
 import * as documentActions from '../store/docs/documents';
 import * as documentManagement from '../config/documentManagement';
 
-import {ButtonAccept, ButtonStandard} from "../components/Buttons";
+import {ButtonAccept, ButtonDecline, ButtonStandard} from "../components/Buttons";
 import AppForm from '../components/forms/AppForm';
 import AppFormField from '../components/forms/AppFormField';
 import AppSubmitButton from '../components/forms/AppSubmitButton';
@@ -132,7 +132,7 @@ function FolderManagementScreen({navigation, route}) {
                                     onPress={ () => {
                                         handlePressAddDocument();
                                     } }
-                                    margin={8}
+                                    margin={ 8 }
                                 />
                             </View>
                             <View style={ styles.container }>
@@ -142,7 +142,7 @@ function FolderManagementScreen({navigation, route}) {
                                     onPress={ () => {
                                         setNewFolderModalVisble(true);
                                     } }
-                                    margin={8}
+                                    margin={ 8 }
 
                                 />
                             </View>
@@ -150,20 +150,26 @@ function FolderManagementScreen({navigation, route}) {
                         </View>
                     }
                 />
-                <Modal visible={ newFolderModalVisible } animationType='slide'>
+                <Modal visible={ newFolderModalVisible } transparent={ true } animationType='slide'>
+                    <View style={[styles.container, {maxHeight:150, flexDirection: 'column',width:'100%', marginTop: '100%',justifyContent: 'space-evenly'}]}>
                     <AppForm
                         initialValues={ documentManagement.baseFolder }
                         onSubmit={ handleSaveFolder }
                     >
-                        <AppFormField name='name' width='100%' placeholder='Name'/>
-                        <AppSubmitButton title='Create Folder'></AppSubmitButton>
+                        <AppFormField name='name' width='100%' placeholder='Please enter the Desired Name' />
+                        <View style={[{flexDirection:'row', width:'90%',justifyContent: 'space-between'}]}>
+                        <AppSubmitButton title='Create Folder' size={300}> style={[{paddingRight:8}]}</AppSubmitButton>
+
+                        <ButtonDecline
+                            Content={<AntDesign name="close" size={24} color="white" />}
+                            onPress={ () => {
+                                setNewFolderModalVisble(false);
+                            } }
+                        ></ButtonDecline>
+                        </View>
                     </AppForm>
-                    <ButtonStandard
-                        title='Close'
-                        onPress={ () => {
-                            setNewFolderModalVisble(false);
-                        } }
-                    ></ButtonStandard>
+
+                    </View>
                 </Modal>
 
             </View>
@@ -217,7 +223,7 @@ const styles = StyleSheet.create(
         newCollectionButton: {
             width: '100%',
         },
-        icon:{
+        icon: {
             marginLeft: 10,
         }
     }

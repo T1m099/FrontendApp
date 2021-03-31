@@ -20,7 +20,7 @@ import colors from "../config/colors";
 
 const baseMedItemDetails = {
 	id: 'new',
-	title: 'My Medication',
+	title: ' ',
 	description: '',
 	unit: 'pills',
 	quantity: '1',

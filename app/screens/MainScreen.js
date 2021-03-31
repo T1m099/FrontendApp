@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet,ImageBackground, Text, FlatList} from 'react-native';
+import {View, StyleSheet, ImageBackground, Text, FlatList} from 'react-native';
 import {useSelector} from 'react-redux';
 
 import SafeAreaScreen from '../components/SafeAreaScreen';
@@ -54,10 +54,12 @@ function MainScreen({navigation}) {
                     renderItem={ ({item}) => {
                         const time = dayjs(item.time);
                         return (
+
                             <TouchableOpacity
                                 onPress={ () => {
                                     handlePlannerItemPress(item);
                                 } }
+                                style={ [{width: '92%',marginLeft:'4%', height: 35,borderRadius: 10,marginTop: '.75%',marginBottom: '.75%',backgroundColor: 'rgba(0,0,0,.5)'}] }
                             >
                                 <Text style={ styles.text }>
                                     { time.format('HH:mm') } | { item.title }</Text>
@@ -90,11 +92,11 @@ function MainScreen({navigation}) {
 
     return (
         <SafeAreaScreen>
-            <ImageBackground source={require('../images/Background.png')} style={styles.image}>
+            <ImageBackground source={ require('../images/Background.png') } style={ styles.image }>
 
-            <View style={ styles.container }>
-                { plannerItemsIsEmpty() }
-            </View>
+                <View>
+                    { plannerItemsIsEmpty() }
+                </View>
             </ImageBackground>
         </SafeAreaScreen>
     );
@@ -125,6 +127,7 @@ const styles = StyleSheet.create({
         flex: 1,
         fontSize: 18,
         fontWeight: 'bold',
+        marginTop: '2%',
         color: colors.text,
         marginLeft: '2%',
 

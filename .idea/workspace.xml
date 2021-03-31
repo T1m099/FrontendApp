@@ -6,11 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="97bb8dd6-f885-462e-ada0-1bbceca86c17" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/ListItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/ListItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/forms/AppSubmitButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/forms/AppSubmitButton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/config/documentManagement.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/documentManagement.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/screens/DateEventsScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/DateEventsScreen.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/screens/DocumentManagementScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/DocumentManagementScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/screens/MedicationMainScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/MedicationMainScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/screens/OrganizationMainScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/OrganizationMainScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/screens/SettingsScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/SettingsScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/screens/MainScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/MainScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/screens/MedicationEditScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/MedicationEditScreen.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -209,7 +210,8 @@
       <workItem from="1617026226387" duration="2341000" />
       <workItem from="1617036604981" duration="349000" />
       <workItem from="1617171037479" duration="11000" />
-      <workItem from="1617188988316" duration="8312000" />
+      <workItem from="1617188988316" duration="8387000" />
+      <workItem from="1617209518498" duration="8102000" />
     </task>
     <task id="LOCAL-00001" summary="Redesign of Colors and Icons to look more modern">
       <created>1614520757634</created>
@@ -330,7 +332,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617193369625</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="redesign of DocumentManagementScreen.js, MedicationMainScreen.js, OrganizationMainScreen.js and SettingsScreen.js">
+      <created>1617197573300</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1617197573300</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -444,7 +453,8 @@
     <MESSAGE value="finished restyle MainScreen.js" />
     <MESSAGE value="Updated Design of CalendarScreen.js and EventTypesSelect.js" />
     <MESSAGE value="fixed MedicationEditScreen.js and centered Buttons" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed MedicationEditScreen.js and centered Buttons" />
+    <MESSAGE value="redesign of DocumentManagementScreen.js, MedicationMainScreen.js, OrganizationMainScreen.js and SettingsScreen.js" />
+    <option name="LAST_COMMIT_MESSAGE" value="redesign of DocumentManagementScreen.js, MedicationMainScreen.js, OrganizationMainScreen.js and SettingsScreen.js" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

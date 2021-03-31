@@ -1,12 +1,12 @@
 export const baseFolder = {
 	id: 'new',
 	parentId: 'root',
-	name: 'New Folder',
+	name: '',
 	icon: '',
 };
 export const baseDocument = {
 	id: 'new',
 	collectionId: 'unassigned',
-	name: 'New Document',
+	name: '',
 	size: 0,
 };
