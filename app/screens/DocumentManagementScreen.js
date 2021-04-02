@@ -156,7 +156,7 @@ function FolderManagementScreen({navigation, route}) {
                         initialValues={ documentManagement.baseFolder }
                         onSubmit={ handleSaveFolder }
                     >
-                        <AppFormField name='name' width='100%' placeholder='Please enter the Desired Name' />
+                        <AppFormField name='name' width='100%' placeholder='please enter the desired name' />
                         <View style={[{flexDirection:'row', width:'90%',justifyContent: 'space-between'}]}>
                         <AppSubmitButton title='Create Folder' size={300}> style={[{paddingRight:8}]}</AppSubmitButton>
 

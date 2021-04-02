@@ -265,9 +265,7 @@ const styles = StyleSheet.create({
 
 	datePickerLabel: { flex: 1 },
 	datePicker: { flex: 5 },
-	buttonContainer: {
-		flexDirection: 'row',
-	},
+
 	closeButton: {
 		flex: 1,
 	},

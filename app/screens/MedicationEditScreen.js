@@ -20,7 +20,7 @@ import colors from "../config/colors";
 
 const baseMedItemDetails = {
 	id: 'new',
-	title: ' ',
+	title: 'My Medication',
 	description: '',
 	unit: 'pills',
 	quantity: '1',
@@ -81,20 +81,13 @@ function MedicationEditScreen({ route, navigation }) {
 				validationSchema={validationSchema}
 			>
                 <View style={[styles.container, {maxHeight:150, marginBottom:5}]}>
-				<AppFormField name='title' width='100%' placeholder='Title' />
+				<AppFormField name='title' width='100%' placeholder='title ' />
 
-				<AppText>Description:</AppText>
-				<AppFormField
-                    maxHeight={25}
-					maxLength={255}
-					multiline
-					name='description'
-					numberOfLines={3}
-					placeholder='Description'
-				/>
+				<AppFormField maxHeight={25} maxLength={255} multiline name='description' numberOfLines={3} placeholder='Description' />
                 </View>
-                <View style={[styles.container, {maxHeight:75}]}>
-                <View style={[styles.doseArea, {marginTop: 8}]}>
+                <View style={[styles.container, {maxHeight:75 }]}>
+					<View style={[{flexDirection:'row', width:'94%',justifyContent: 'space-between'}]}>
+
 					<AppFormDropdownPicker
 						name='unit'
 						items={dropdownItems}
@@ -106,41 +99,37 @@ function MedicationEditScreen({ route, navigation }) {
 						placeholder='Quantity'
 						style={styles.quanitity}
 					/>
-				</View>
+					</View>
                 </View>
                 <View style={styles.container}>
-
-                <AppText>Reminders:</AppText>
-				<ReminderList
+					<ReminderList
 					name='reminders'
 					style={styles.reminderList}
 					onReminderDelete={reminder => {
 						reminderService.cancelReminderAsync(reminder);
 					}}
 				/>
-                </View>
-				   <View style={ [styles.container, {marginTop: 5, maxHeight: 90, flexDirection: 'row'}] }>
-                    <View style={ styles.buttonContainer }>
-                        <ButtonDecline
-                            Content={ <AntDesign name="close" size={ 24 } color="white"/> }
-						onPress={() => {
-							navigation.reset({
-								index: 0,
-								routes: [
-									{
-										name:
-											routes.MEDICATION_STACK_NAVIGATION,
-									},
-								],
-							});
-						}}
-					/>
-					<AppSubmitButton
-						title='Submit'
-						style={styles.submitButton}
-					/>
 				</View>
-                </View>
+					<View style={ [styles.container, {marginTop: 5, maxHeight: 90, flexDirection: 'column'}] }>
+						<View style={[{flexDirection:'row', width:'94%',justifyContent: 'space-between'}]}>
+
+							<AppSubmitButton
+								title='Submit'
+								size={300}
+							></AppSubmitButton>
+							<ButtonDecline Content={ <AntDesign name="close" size={ 24 } color="white"/> }  onPress={() => {
+								navigation.reset({
+									index: 0,
+									routes: [
+										{
+											name:
+											routes.MEDICATION_STACK_NAVIGATION,
+										},
+									],
+								});
+							}}/>
+						</View>
+					</View>
 			</AppForm>
 		</View>
         </ImageBackground>
@@ -173,21 +162,21 @@ const styles = StyleSheet.create({
         marginBottom: '.75%',
         backgroundColor: 'rgba(0,0,0,.5)',
         textAlign: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'center'
     },
 	dateTimePickerContainer: {
 		flexDirection: 'row',
 		marginVertical: 10,
 	},
 	reminderList: {
-		maxHeight: '35%',
+		maxHeight: '100%',
 	},
 	buttonArea: {
 		flexDirection: 'row',
 	},
 	doseArea: { flexDirection: 'row'  },
 	unitPicker: {
-        width:75,
+        width:84,
         marginLeft: 5,
         marginRight:5,
 	},

@@ -59,7 +59,15 @@ function MainScreen({navigation}) {
                                 onPress={ () => {
                                     handlePlannerItemPress(item);
                                 } }
-                                style={ [{width: '92%',marginLeft:'4%', height: 35,borderRadius: 10,marginTop: '.75%',marginBottom: '.75%',backgroundColor: 'rgba(0,0,0,.5)'}] }
+                                style={ [{
+                                    width: '92%',
+                                    marginLeft: '4%',
+                                    height: 35,
+                                    borderRadius: 10,
+                                    marginTop: '.75%',
+                                    marginBottom: '.75%',
+                                    backgroundColor: 'rgba(0,0,0,.5)'
+                                }] }
                             >
                                 <Text style={ styles.text }>
                                     { time.format('HH:mm') } | { item.title }</Text>
@@ -68,7 +76,16 @@ function MainScreen({navigation}) {
                     } }
                 />
             )
-        } else return (<Text style={ styles.text }> Es gibt keine Events, welche auf dich zu kommen
+        } else return (<Text style={ [styles.text, {
+            width: '92%',
+            marginLeft: '4%',
+            marginRight:'4%',
+            height: 35,
+            borderRadius: 10,
+            marginTop: '.75%',
+            marginBottom: '.75%',
+            backgroundColor: 'rgba(0,0,0,.5)'
+        }] }> Es gibt keine Events, welche auf dich zu kommen
         </Text>)
     }
     const handlePlannerItemPress = item => {
@@ -94,33 +111,22 @@ function MainScreen({navigation}) {
         <SafeAreaScreen>
             <ImageBackground source={ require('../images/Background.png') } style={ styles.image }>
 
-                <View>
-                    { plannerItemsIsEmpty() }
-                </View>
+
+                { plannerItemsIsEmpty() }
+
             </ImageBackground>
         </SafeAreaScreen>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center',
-        alignSelf: 'center',
-        width: '92%',
-        maxHeight: 250,
-        borderRadius: 10,
-        marginTop: '.75%',
-        marginBottom: '.75%',
-        backgroundColor: 'rgba(0,0,0,.5)',
-        textAlign: 'center',
-        justifyContent: 'space-between'
-    },
+
     image: {
         flex: 1,
         resizeMode: "cover",
-        justifyContent: "center"
+        justifyContent: "center",
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     text: {
         alignItems: 'flex-start',

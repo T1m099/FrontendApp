@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, FlatList, TouchableHighlight } from 'react-native';
+import {View, StyleSheet, FlatList, TouchableHighlight, TouchableOpacity} from 'react-native';
 import { useFormikContext } from 'formik';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 import ListItemDeleteAction from './ListItemDeleteAction';
 import DatePickerInput from './DatePickerInput';
-import AppText from './AppText';
+import {AntDesign} from "@expo/vector-icons";
 import colors from '../config/colors';
 
 function ReminderList({
@@ -52,12 +52,12 @@ function ReminderList({
 	};
 	return (
 		<View style={[styles.container, style]}>
+			<TouchableOpacity
+				style={ styles.addReminderButton }
+				onPress={handlePressNewReminder}			>
+				<AntDesign name="plus" size={ 24 } color="white"/>
+			</TouchableOpacity>
 
-			<TouchableHighlight onPress={handlePressNewReminder}>
-				<View style={styles.addReminderButton}>
-					<AppText>+</AppText>
-				</View>
-			</TouchableHighlight>
 			<View style={styles.listContainerStyle}>
 				<FlatList
 					data={values[name]}
@@ -106,8 +106,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 		alignSelf: 'center',
-minHeight: '100%',
-		marginTop: '.75%',
+		minHeight: 90,
 		marginBottom: '.75%',
 		textAlign: 'center',
 		justifyContent: 'space-between' },
@@ -117,19 +116,18 @@ minHeight: '100%',
 		width: '100%',
 
 	},
-	reminderListItem: { marginTop: 10 },
+	reminderListItem: {},
 	addReminderButton: {
-		backgroundColor: colors.background,
+		backgroundColor: colors.navigation,
 		minWidth: 30,
 		minHeight:30,
 		borderRadius: 10,
 		justifyContent: 'center',
 		alignItems: 'center',
-		marginTop: 20,
 		marginLeft:5,
 		marginRight:5
 	},
-	listContainerStyle: { flex: 7, marginTop:5 },
+	listContainerStyle: { flex: 7,  },
 });
 
 export default ReminderList;
