@@ -31,7 +31,8 @@ function AppFormColorPicker({
 						setModalVisible(true);
 					}}
 				>
-						<AppText>Marking Color</AppText>
+                    <AntDesign name="tagso" size={ 24 } color="white"/>
+
 				</TouchableOpacity>
 			</View>
             <Modal visible={modalVisible} animationType='slide'>
@@ -77,7 +78,6 @@ const styles = StyleSheet.create({
         height: 65,
         justifyContent: 'center',
         alignItems: 'center',
-        marginRight: 10,
     },
     colorCircle: {
         width: 100,

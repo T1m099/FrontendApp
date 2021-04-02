@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Dimensions, StatusBar } from 'react-native';
+import { View, StyleSheet, Dimensions, ImageBackground } from 'react-native';
 import { useSelector } from 'react-redux';
-
+import colors from "../config/colors";
 import * as eventActions from '../store/events';
 
 import { LineChart } from 'react-native-chart-kit';
@@ -47,21 +47,25 @@ function TimelineScreen(props) {
 		chartData.datasets.length > 0 && chartData.datasets[0].data.length > 0;
 
 	return (
+	        <ImageBackground source={require('../images/Background.png')} style={styles.image}>
+
 		<View style={styles.container}>
 			<EventTypesSelect
 				selectedEventTypes={selectedEventTypeArray}
 				onSelectEventType={setSelectedEventTypeArray}
 				single={true}
 				types={trackableTypes}
-				style={{ width: '100%' }}
+				style={{ width: '100%', marginBottom:8, marginLeft: 15  }}
 			/>
+        </View>
+                <View style={[styles.container, {maxHeight: 100}]}>
 			<DatePickerInput
 				value={fromDay}
 				valueToDisplay={fromDay.toDateString()}
 				onDateSelection={e => {
 					setFromDay(e);
 				}}
-				style={{ width: '100%' }}
+				style={{ width: 150, alignSelf: 'flex-start', marginLeft: 4 }}
 			/>
 
 			<DatePickerInput
@@ -70,8 +74,10 @@ function TimelineScreen(props) {
 				onDateSelection={e => {
 					setToDay(e);
 				}}
-				style={{ width: '100%' }}
+                style={{ width: 150, alignSelf: 'flex-start', marginLeft: 4 }}
 			/>
+                </View>
+			<View style={[styles.container, {maxHeight: 500}]}>
 			{!hasData && (
 				<AppText>
 					Select a time interval with data to show the timeline
@@ -80,13 +86,13 @@ function TimelineScreen(props) {
 			{hasData && (
 				<LineChart
 					data={chartData}
-					width={Dimensions.get('window').width - 10}
-					height={Dimensions.get('window').height / 2}
+					width={400}
+					height={500}
 					chartConfig={{
 						decimalPlaces: 0, // optional, defaults to 2dp
-						color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-						labelColor: (opacity = 1) =>
-							`rgba(0, 0, 0, ${opacity})`,
+						color: (opacity = 0) => `rgba(255, 255, 255, ${opacity})`,
+						labelColor: (opacity = 0) =>
+							`rgba(255, 255, 255, ${opacity})`,
 					}}
 					bezier={true}
 					fromZero={true}
@@ -94,19 +100,47 @@ function TimelineScreen(props) {
 					withDots={false}
 					withShadow={false}
 					style={{
-						flexGrow: 1,
-					}}
+marginLeft:-50, marginTop: 20					}}
 				/>
 			)}
 		</View>
+            </ImageBackground>
 	);
 }
 
+
 const styles = StyleSheet.create({
 	container: {
-		justifyContent: 'center',
+            flex: 1,
+            flexDirection: 'column',
 		alignItems: 'center',
+            alignSelf: 'center',
+            width: '92%',
+            maxHeight: 81,
+            borderRadius: 10,
+            marginTop: '.75%',
+            marginBottom: '.75%',
+            backgroundColor: 'rgba(0,0,0,.5)',
+            textAlign: 'center',
+            justifyContent: 'space-evenly'
+        },
+        image: {
+            flex: 1,
+            resizeMode: "cover",
+            justifyContent: "center"
 	},
+        text: {
+            alignItems: 'flex-start',
+            flex: 1,
+            fontSize: 18,
+            fontWeight: 'bold',
+            color: colors.text,
+            marginLeft: '2%',
+
+        }
+
+
+
 });
 
 export default TimelineScreen;

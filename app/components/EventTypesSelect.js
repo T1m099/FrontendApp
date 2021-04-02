@@ -39,29 +39,29 @@ function EventTypesSelect({
 				}}
 				colors={{ primary: colors.accept, text: colors.text, itemBackground: colors.background, subItemBackground: colors.background, subText: colors.text,  searchSelectionColor: colors.background, disabled: colors.text}}
 				styles={{
-					container: {
-						backgroundColor: colors.background,
-						maxHeight:250,
-					},
+				container: {
+					backgroundColor: colors.background,
+					maxHeight:250,
+				},
 
-					selectToggle: {
-						backgroundColor: colors.navigation,
-						borderRadius: 10,
-						marginTop:10 ,
-						height: 65,
-						width: 200,
+				selectToggle: {
+					backgroundColor: colors.navigation,
+					borderRadius: 10,
+					marginTop:10 ,
+					height: 65,
+					width: 200,
 
 
-					},
-					selectToggleText:{
-						marginTop:30,
-						flex: 1,
-						fontSize: 21,
-						fontWeight: 'bold',
-						color: colors.text,
-						marginLeft: '15%',
-					}
-				}}
+				},
+				selectToggleText:{
+					marginTop:30,
+					flex: 1,
+					fontSize: 21,
+					fontWeight: 'bold',
+					color: colors.text,
+					marginLeft: '15%',
+				}
+			}}
 				IconRenderer={MaterialIcons}
 			/>
 		</View>
