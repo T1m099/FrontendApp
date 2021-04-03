@@ -18,10 +18,17 @@ const slice = createSlice({
 		medItemDeleted: (meds, action) => {
 			delete meds.listObject[action.payload.id];
 		},
+		medsReceived: (meds, action) => {
+			const medsObject = {};
+			action.payload.medications.forEach(d => {
+				medsObject[d.id] = d;
+			});
+			meds.listObject = medsObject;
+		},
 	},
 });
 
-const { medItemSaved, medItemDeleted } = slice.actions;
+const { medItemSaved, medItemDeleted, medsReceived } = slice.actions;
 export default slice.reducer;
 
 export const deleteMedItem = id => async dispatch => {
@@ -61,6 +68,16 @@ export const saveMedItem = medItem => async dispatch => {
 			data: mi,
 			method,
 			onSuccess: medItemSaved.type,
+		})
+	);
+};
+
+export const fetchMeds = () => async dispatch => {
+	dispatch(
+		apiCallBegan({
+			url: 'medications',
+			method: 'GET',
+			onSuccess: medsReceived.type,
 		})
 	);
 };

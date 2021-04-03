@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, StyleSheet, Text, FlatList } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import SafeAreaScreen from '../components/SafeAreaScreen';
 import * as medActions from '../store/meds';
@@ -11,8 +11,15 @@ import dayjs from 'dayjs';
 import routes from '../navigation/routes';
 
 function MainScreen({ navigation }) {
+	const dispatch = useDispatch();
+
 	const events = useSelector(eventActions.getEvents());
 	const meds = useSelector(medActions.getMeds());
+
+	useEffect(() => {
+		dispatch(eventActions.fetchEvents());
+		dispatch(medActions.fetchMeds());
+	}, []);
 
 	const getPlannerItems = () => {
 		const plannerItems = [];

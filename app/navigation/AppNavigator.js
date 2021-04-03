@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons, Fontisto, Ionicons } from '@expo/vector-icons';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import MainScreen from '../screens/MainScreen';
 import routes from './routes';
@@ -11,7 +11,6 @@ import MedicationNavigator from '../navigation/MedicationNavigator';
 import DocumentsNavigator from '../navigation/DocumentsNavigator';
 import useNotifications from '../hooks/useNotifications';
 import * as authActions from '../store/auth';
-import SettingsScreen from '../screens/SettingsScreen';
 import SettingsNavigator from './SettingsNavigator';
 
 const Tab = createBottomTabNavigator();

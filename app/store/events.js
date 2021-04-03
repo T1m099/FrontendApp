@@ -25,10 +25,17 @@ const slice = createSlice({
 		eventDeleted: (events, action) => {
 			delete events.listObject[action.payload.id];
 		},
+		eventsReceived: (events, action) => {
+			const eventsObject = {};
+			action.payload.events.forEach(e => {
+				eventsObject[e.id] = e;
+			});
+			events.listObject = eventsObject;
+		},
 	},
 });
 
-const { eventSaved, eventDeleted } = slice.actions;
+const { eventSaved, eventDeleted, eventsReceived } = slice.actions;
 export default slice.reducer;
 
 // Action Creators
@@ -103,6 +110,16 @@ export const saveEvent = event => async dispatch => {
 			data: eventToSave,
 			method,
 			onSuccess: eventSaved.type,
+		})
+	);
+};
+
+export const fetchEvents = () => async dispatch => {
+	dispatch(
+		apiCallBegan({
+			url: 'events',
+			method: 'GET',
+			onSuccess: eventsReceived.type,
 		})
 	);
 };
