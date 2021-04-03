@@ -9,7 +9,7 @@ import routes from '../navigation/routes';
 import medicationService from '../services/medicationService';
 import reminderService from '../services/reminderService';
 
-import { getMeds, medItemDeleted } from '../store/meds';
+import { deleteMedItem, getMeds } from '../store/meds';
 
 function MedicationMainScreen({ navigation }) {
 	const meds = useSelector(getMeds());
@@ -22,7 +22,7 @@ function MedicationMainScreen({ navigation }) {
 				reminderService.cancelReminderAsync(r);
 			}
 		});
-		dispatch(medItemDeleted({ id: item.id }));
+		dispatch(deleteMedItem({ id: item.id }));
 	};
 
 	const goToMedicationEdit = id => {

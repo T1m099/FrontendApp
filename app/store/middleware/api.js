@@ -6,7 +6,7 @@ const apisauceApi = create({
 	baseURL: 'http://192.168.178.20/',
 });
 
-const api = ({ dispatch }) => next => async action => {
+const api = ({ dispatch, getState }) => next => async action => {
 	const conditionalDispatch = ({ type, payload }) => {
 		if (typeof type === 'function') {
 			dispatch(type(response.data));
@@ -16,6 +16,10 @@ const api = ({ dispatch }) => next => async action => {
 	};
 
 	if (action.type !== actions.apiCallBegan.type) return next(action);
+
+	const {
+		auth: { token = '' },
+	} = getState();
 
 	const { url, method, data, onStart, onSuccess, onError } = action.payload;
 
@@ -27,6 +31,7 @@ const api = ({ dispatch }) => next => async action => {
 		url,
 		method,
 		data,
+		headers: { Authorization: token },
 	});
 	if (response.ok) {
 		conditionalDispatch(actions.apiCallSuccess(response.data));
@@ -35,7 +40,9 @@ const api = ({ dispatch }) => next => async action => {
 		}
 		return;
 	}
-	conditionalDispatch(actions.apiCallFailed(response.problem));
+	conditionalDispatch(
+		actions.apiCallFailed({ error: JSON.stringify(response.originalError) })
+	);
 
 	if (onError)
 		conditionalDispatch({

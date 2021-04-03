@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { createSelector } from 'reselect';
 import dayjs from 'dayjs';
 import _ from 'lodash';
+import { apiCallBegan } from './api';
 
 import {
 	eventTypeConditionalProperties,
@@ -33,14 +34,18 @@ export default slice.reducer;
 // Action Creators
 
 export const deleteEvent = id => async dispatch => {
-	dispatch(eventDeleted(id));
+	dispatch(
+		apiCallBegan({
+			url: 'events',
+			data: id,
+			method: 'DELETE',
+			onSuccess: eventDeleted.type,
+		})
+	);
 };
 
 export const saveEvent = event => async dispatch => {
 	const ev = { ...event };
-	if (ev.id === 'new') {
-		ev.id = genId();
-	}
 
 	const eventStructure = {
 		...baseEventProperties,
@@ -52,14 +57,15 @@ export const saveEvent = event => async dispatch => {
 	//const eventToSave = _.pick(ev, keysToPersist);
 	let eventToSave = {};
 	keysToPersist.forEach(k => {
-		if (
+		/* 		if (
 			eventStructure[k] !== ev[k] ||
 			(Array.isArray(ev[k]) && ev[k].length !== 0)
 		) {
-			eventToSave[k] = ev[k];
-		}
+		} */
+		eventToSave[k] = ev[k];
 	});
 
+	//scheduling reminders
 	if (eventToSave.reminders) {
 		reminderService.cancelRemindersAsync(eventToSave.reminders);
 
@@ -86,8 +92,19 @@ export const saveEvent = event => async dispatch => {
 		});
 		eventToSave.trackingItems = newTrackingItems;
 	}
+	let method = 'PUT';
+	if (ev.id === 'new') {
+		method = 'POST';
+	}
 
-	dispatch(eventSaved(eventToSave));
+	dispatch(
+		apiCallBegan({
+			url: 'events',
+			data: eventToSave,
+			method,
+			onSuccess: eventSaved.type,
+		})
+	);
 };
 
 // Selector

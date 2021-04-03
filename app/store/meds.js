@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { createSelector } from 'reselect';
+import { apiCallBegan } from './api';
 
 import reminderService from '../services/reminderService';
 
@@ -20,8 +21,19 @@ const slice = createSlice({
 	},
 });
 
-export const { medItemSaved, medItemDeleted } = slice.actions;
+const { medItemSaved, medItemDeleted } = slice.actions;
 export default slice.reducer;
+
+export const deleteMedItem = id => async dispatch => {
+	dispatch(
+		apiCallBegan({
+			url: 'medications',
+			data: id,
+			method: 'DELETE',
+			onSuccess: medItemDeleted.type,
+		})
+	);
+};
 
 export const saveMedItem = medItem => async dispatch => {
 	const mi = { ...medItem };
@@ -38,7 +50,19 @@ export const saveMedItem = medItem => async dispatch => {
 
 	mi.reminders = reminderService.makeRemindersSerializable(mi.reminders);
 
-	dispatch(medItemSaved(mi));
+	let method = 'PUT';
+	if (mi.id === 'new') {
+		method = 'POST';
+	}
+
+	dispatch(
+		apiCallBegan({
+			url: 'medications',
+			data: mi,
+			method,
+			onSuccess: medItemSaved.type,
+		})
+	);
 };
 
 //Selectors

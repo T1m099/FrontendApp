@@ -14,8 +14,6 @@ const slice = createSlice({
 	},
 	reducers: {
 		loginSucceeded: (auth, action) => {
-			console.log(action.payload);
-
 			auth.credentials = action.payload.user;
 			auth.token = action.payload.token;
 

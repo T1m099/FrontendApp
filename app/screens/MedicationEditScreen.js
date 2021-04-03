@@ -17,19 +17,12 @@ import reminderService from '../services/reminderService';
 import { saveMedItem, getMeds, genId } from '../store/meds';
 import routes from '../navigation/routes';
 
-const baseMedItemDetails = {
-	id: 'new',
-	title: 'My Medication',
-	description: '',
-	unit: 'pills',
-	quantity: '1',
-	reminders: [],
-};
+import { medication as baseMedicationObject } from '../config/medicationObjectStructure';
 
 function initMedItem(id, meds) {
 	let mi;
 	if (id.match('new')) {
-		mi = { ...baseMedItemDetails };
+		mi = { ...baseMedicationObject };
 	} else {
 		mi = { ...meds[id] };
 	}
@@ -54,9 +47,7 @@ function MedicationEditScreen({ route, navigation }) {
 	];
 
 	const handleSaveMedication = async medItemToSave => {
-		const mi = { ...medItemToSave };
-		if (medItemToSave.id === 'new') mi.id = genId();
-		dispatch(saveMedItem(mi));
+		dispatch(saveMedItem(medItemToSave));
 	};
 
 	const handleSubmit = medItemToSave => {
