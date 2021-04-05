@@ -6,7 +6,8 @@ export const baseFolder = {
 };
 export const baseDocument = {
 	id: 'new',
-	collectionId: 'unassigned',
+	parentId: 'root',
 	name: 'New Document',
 	size: 0,
+	uri: '',
 };

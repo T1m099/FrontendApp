@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { createSelector } from 'reselect';
+import * as FileSystem from 'expo-file-system';
 
 let lastId = 0;
 
@@ -23,8 +24,10 @@ export default slice.reducer;
 
 // Action Creators
 
-export const deleteDocument = id => async dispatch => {
-	dispatch(documentDeleted({ id }));
+export const deleteDocument = doc => async dispatch => {
+	FileSystem.deleteAsync(doc.uri, { idempotent: true });
+
+	dispatch(documentDeleted({ id: doc.id }));
 };
 
 export const saveDocument = document => async dispatch => {
@@ -32,6 +35,11 @@ export const saveDocument = document => async dispatch => {
 	if (d.id === 'new') {
 		d.id = genId();
 	}
+
+	FileSystem.copyAsync({
+		from: d.uri,
+		to: FileSystem.documentDirectory + d.name,
+	});
 
 	dispatch(documentSaved(d));
 };

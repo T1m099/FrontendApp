@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as Permissions from 'expo-permissions';
 import * as DocumentPicker from 'expo-document-picker';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import * as Sharing from 'expo-sharing';
 
 import * as folderActions from '../store/docs/folders';
 import * as documentActions from '../store/docs/documents';
@@ -52,11 +53,13 @@ function FolderManagementScreen({ navigation, route }) {
 			elementsArray.push({
 				...documentsObject[k],
 				icon: 'file-document',
-				onPress: doc => {
-					console.log(doc);
+				onPress: () => {
+					Sharing.shareAsync(documentsObject[k].uri, {
+						dialogTitle: 'Share Document',
+					});
 				},
 				onDelete: doc => {
-					dispatch(documentActions.deleteDocument(doc.id));
+					dispatch(documentActions.deleteDocument(doc));
 				},
 			});
 		});
@@ -85,6 +88,7 @@ function FolderManagementScreen({ navigation, route }) {
 			...documentManagement.baseDocument,
 			name: doc.name,
 			size: doc.size,
+			uri: doc.uri,
 			parentId,
 		};
 		dispatch(documentActions.saveDocument(d));
