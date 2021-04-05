@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import { View, StyleSheet, Text, FlatList } from 'react-native';
+import {View, StyleSheet, ImageBackground, Text, FlatList} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import SafeAreaScreen from '../components/SafeAreaScreen';
 import * as medActions from '../store/meds';
 import * as eventActions from '../store/events';
 import colors from '../config/colors';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import dayjs from 'dayjs';
 import routes from '../navigation/routes';
 
@@ -28,93 +28,124 @@ function MainScreen({ navigation }) {
 			Date.now()
 		);
 
-		Object.keys(thisDaysEvents).forEach(k => {
-			plannerItems.push({
-				type: 'event',
-				id: thisDaysEvents[k].id,
-				time: thisDaysEvents[k].time,
-				title: thisDaysEvents[k].title,
-			});
-		});
-		Object.keys(meds).forEach(k => {
-			meds[k].reminders.forEach(r => {
-				plannerItems.push({
-					type: 'med',
-					id: meds[k].id,
-					time: r.date.getTime(),
-					title: meds[k].title,
-				});
-			});
-		});
+        Object.keys(thisDaysEvents).forEach(k => {
+            plannerItems.push({
+                type: 'event',
+                id: thisDaysEvents[k].id,
+                time: thisDaysEvents[k].time,
+                title: thisDaysEvents[k].title,
+            });
+        });
+        Object.keys(meds).forEach(k => {
+            meds[k].reminders.forEach(r => {
+                plannerItems.push({
+                    type: 'med',
+                    id: meds[k].id,
+                    time: r.date.getTime(),
+                    title: meds[k].title,
+                });
+            });
+        });
 
-		plannerItems.sort((a, b) => {
-			return a.time - b.time;
-		});
-		return plannerItems;
-	};
+        plannerItems.sort((a, b) => {
+            return a.time - b.time;
+        });
+        return plannerItems;
+    };
+    const plannerItemsIsEmpty = () => {
+        if (getPlannerItems().length !== 0) {
+            return (
+                <FlatList
+                    data={ getPlannerItems() }
+                    keyExtractor={ item => item.id }
+                    renderItem={ ({item}) => {
+                        const time = dayjs(item.time);
+                        return (
 
-	const handlePlannerItemPress = item => {
-		if (item.type === 'event') {
-			navigation.navigate(routes.ORGANIZATION_STACK_NAVIGATION, {
-				screen: routes.EVENT_EDIT,
-				params: {
-					id: item.id,
-					dayTimestamp: Date.now(),
-				},
-			});
-		} else if (item.type === 'med') {
-			navigation.navigate(routes.MEDICATION_STACK_NAVIGATION, {
-				screen: routes.MEDICATION_EDIT,
-				params: {
-					id: item.id,
-				},
-			});
-		}
-	};
+                            <TouchableOpacity
+                                onPress={ () => {
+                                    handlePlannerItemPress(item);
+                                } }
+                                style={ [{
+                                    width: '92%',
+                                    marginLeft: '4%',
+                                    height: 35,
+                                    borderRadius: 10,
+                                    marginTop: '.75%',
+                                    marginBottom: '.75%',
+                                    backgroundColor: 'rgba(0,0,0,.5)'
+                                }] }
+                            >
+                                <Text style={ styles.text }>
+                                    { time.format('HH:mm') } | { item.title }</Text>
+                            </TouchableOpacity>
+                        );
+                    } }
+                />
+            )
+        } else return (<Text style={ [styles.text, {
+            width: '92%',
+            marginLeft: '4%',
+            marginRight:'4%',
+            height: 35,
+            borderRadius: 10,
+            marginTop: '.75%',
+            marginBottom: '.75%',
+            backgroundColor: 'rgba(0,0,0,.5)'
+        }] }> Es gibt keine Events, welche auf dich zu kommen
+        </Text>)
+    }
+    const handlePlannerItemPress = item => {
+        if (item.type === 'event') {
+            navigation.navigate(routes.ORGANIZATION_STACK_NAVIGATION, {
+                screen: routes.EVENT_EDIT,
+                params: {
+                    id: item.id,
+                    dayTimestamp: Date.now(),
+                },
+            });
+        } else if (item.type === 'med') {
+            navigation.navigate(routes.MEDICATION_STACK_NAVIGATION, {
+                screen: routes.MEDICATION_EDIT,
+                params: {
+                    id: item.id,
+                },
+            });
+        }
+    };
 
-	return (
-		<SafeAreaScreen>
-			<View style={styles.container}>
-				<FlatList
-					ListHeaderComponent={
-						<Text style={{ fontSize: 40 }}>Homescreen</Text>
-					}
-					data={getPlannerItems()}
-					keyExtractor={item => item.id}
-					renderItem={({ item }) => {
-						const time = dayjs(item.time);
-						return (
-							<TouchableOpacity
-								onPress={() => {
-									handlePlannerItemPress(item);
-								}}
-							>
-								<View style={styles.plannerItem}>
-									<Text style={styles.plannerItemTime}>
-										{time.format('HH:mm')}
-									</Text>
-									<Text>{item.title}</Text>
-								</View>
-							</TouchableOpacity>
-						);
-					}}
-				/>
-			</View>
-		</SafeAreaScreen>
-	);
+    return (
+        <SafeAreaScreen>
+            <ImageBackground source={ require('../images/Background.png') } style={ styles.image }>
+
+
+                { plannerItemsIsEmpty() }
+
+            </ImageBackground>
+        </SafeAreaScreen>
+    );
 }
 
 const styles = StyleSheet.create({
-	container: { justifyContent: 'center', alignItems: 'center', flex: 1 },
-	plannerItem: {
-		margin: 1,
-		padding: 5,
-		borderRadius: 10,
-		width: '100%',
-		flexDirection: 'row',
-		backgroundColor: colors.primary,
-	},
-	plannerItemTime: { marginRight: 5 },
+
+    image: {
+        flex: 1,
+        resizeMode: "cover",
+        justifyContent: "center",
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    text: {
+        alignItems: 'flex-start',
+        flex: 1,
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginTop: '2%',
+        color: colors.text,
+        marginLeft: '2%',
+
+    }
+
 });
 
 export default MainScreen;

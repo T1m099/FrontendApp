@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
 	image: {
 		width: 70,
 		height: 70,
-		borderRadius: 35,
 	},
 	icon: { flexGrow: 1 },
 	message: {
@@ -71,11 +70,18 @@ const styles = StyleSheet.create({
 		width: '100%',
 	},
 	swipableChildren: {
+		flex: 1,
 		flexDirection: 'row',
-		padding: 10,
-		backgroundColor: colors.primary,
-		borderRadius: 25,
-		width: '100%',
+		alignItems: 'center',
+		alignSelf: 'center',
+		width: '92%',
+		height: 40,
+		borderRadius: 10,
+		marginTop: '.75%',
+		marginBottom: '.75%',
+		backgroundColor: 'rgba(0,0,0,.5)',
+		textAlign: 'center',
+		justifyContent: 'space-between'
 	},
 });
 

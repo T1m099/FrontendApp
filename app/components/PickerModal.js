@@ -51,7 +51,6 @@ function PickerModal({
 }
 
 const styles = StyleSheet.create({
-	container: {},
 });
 
 export default PickerModal;

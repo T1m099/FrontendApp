@@ -1,7 +1,7 @@
 export const baseFolder = {
 	id: 'new',
 	parentId: 'root',
-	name: 'New Folder',
+	name: '',
 	icon: '',
 };
 export const baseDocument = {

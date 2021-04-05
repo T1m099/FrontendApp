@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import {AntDesign, MaterialIcons} from '@expo/vector-icons';
 import SectionedMultiSelect from 'react-native-sectioned-multi-select';
 
 import { types as defaultTypes } from '../config/eventTypes';
@@ -26,21 +26,42 @@ function EventTypesSelect({
 				selectedItems={selectedEventTypes}
 				uniqueKey='name'
 				subKey='sub'
-				selectText='Event Types'
+				selectToggleIconComponent={<MaterialIcons name="calendar" size={0} color={colors.background}/>}
+				selectText='Filter Event Types'
 				readOnlyHeadings={true}
 				showChips={false}
 				showDropDowns={false}
 				single={single}
+				hideSearch={true}
+				alwaysShowSelectText={true}
 				onSelectedItemsChange={types => {
 					onSelectEventType(types);
 				}}
-				colors={{ primary: colors.accent }}
+				colors={{ primary: colors.accept, text: colors.text, itemBackground: colors.background, subItemBackground: colors.background, subText: colors.text,  searchSelectionColor: colors.background, disabled: colors.text}}
 				styles={{
-					selectToggle: {
-						backgroundColor: colors.primary,
-						borderRadius: 25,
-					},
-				}}
+				container: {
+					backgroundColor: colors.background,
+					maxHeight:250,
+				},
+
+				selectToggle: {
+					backgroundColor: colors.navigation,
+					borderRadius: 10,
+					marginTop:10 ,
+					height: 65,
+					width: 200,
+
+
+				},
+				selectToggleText:{
+					marginTop:30,
+					flex: 1,
+					fontSize: 21,
+					fontWeight: 'bold',
+					color: colors.text,
+					marginLeft: '15%',
+				}
+			}}
 				IconRenderer={MaterialIcons}
 			/>
 		</View>

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { MaterialCommunityIcons, Fontisto, Ionicons } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
+import { AntDesign } from '@expo/vector-icons';
 
 import MainScreen from '../screens/MainScreen';
 import routes from './routes';
@@ -32,11 +32,8 @@ const AppNavigator = () => {
 				component={OrganisationNavigator}
 				options={{
 					tabBarIcon: ({ color, size }) => (
-						<MaterialCommunityIcons
-							name='calendar'
-							color={color}
-							size={size}
-						/>
+						<AntDesign name="calendar" size={size} color={color}/>
+
 					),
 				}}
 			/>
@@ -45,8 +42,8 @@ const AppNavigator = () => {
 				component={DocumentsNavigator}
 				options={{
 					tabBarIcon: ({ color, size }) => (
-						<MaterialCommunityIcons
-							name='file-document'
+						<AntDesign
+							name='book'
 							color={color}
 							size={size}
 						/>
@@ -58,7 +55,7 @@ const AppNavigator = () => {
 				component={MainScreen}
 				options={{
 					tabBarIcon: ({ color, size }) => (
-						<MaterialCommunityIcons
+						<AntDesign
 							name='home'
 							color={color}
 							size={size}
@@ -71,7 +68,7 @@ const AppNavigator = () => {
 				component={MedicationNavigator}
 				options={{
 					tabBarIcon: ({ color, size }) => (
-						<Fontisto name='pills' color={color} size={size} />
+						<AntDesign name='medicinebox' color={color} size={size} />
 					),
 				}}
 			/>
@@ -80,8 +77,8 @@ const AppNavigator = () => {
 				component={SettingsNavigator}
 				options={{
 					tabBarIcon: ({ color, size }) => (
-						<Ionicons
-							name='settings-outline'
+						<AntDesign
+							name='user'
 							color={color}
 							size={size}
 						/>

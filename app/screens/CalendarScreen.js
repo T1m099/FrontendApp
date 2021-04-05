@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import {View, StyleSheet, ImageBackground} from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import dayjs from 'dayjs';
 import { useSelector } from 'react-redux';
@@ -81,10 +81,13 @@ function CalendarScreen({ navigation }) {
 	);
 
 	return (
+		<ImageBackground source={require('../images/Background.png')} style={styles.image}>
+
 		<View style={styles.container}>
 			<EventTypesSelect
 				selectedEventTypes={selectedEventTypes}
 				onSelectEventType={setSelectedEventTypes}
+
 			/>
 
 			<Calendar
@@ -92,17 +95,43 @@ function CalendarScreen({ navigation }) {
 				onDayLongPress={day => {
 					goToEventEdit('new', day.timestamp);
 				}}
+				style={styles.calen}
 				monthFormat={'MMMM yyyy'}
 				firstDay={1}
 				markedDates={eventsToShow}
 				markingType='multi-period'
 			/>
 		</View>
+		</ImageBackground>
 	);
 }
 
 const styles = StyleSheet.create({
-	container: {},
+	container: {
+		flex: 1,
+		flexDirection: 'column',
+		alignItems: 'center',
+		alignSelf: 'center',
+		width: '92%',
+		maxHeight: 400,
+		borderRadius: 10,
+		marginTop: '.75%',
+		marginBottom: '.75%',
+		backgroundColor: 'rgba(0,0,0,.5)',
+		textAlign: 'center',
+		justifyContent: 'space-between',
+
+	},
+	calen: {
+		width: 350,
+	},
+
+
+	image: {
+		flex: 1,
+		resizeMode: "cover",
+		justifyContent: "center"
+	},
 });
 
 export default CalendarScreen;
