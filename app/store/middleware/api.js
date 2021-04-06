@@ -3,7 +3,7 @@ import { create } from 'apisauce';
 import * as actions from '../api';
 
 const apisauceApi = create({
-	baseURL: 'http://192.168.178.20/',
+	baseURL: 'https://www.itworksonmymachine.studio/',
 });
 
 const api = ({ dispatch, getState }) => next => async action => {
