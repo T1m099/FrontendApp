@@ -9,6 +9,7 @@ const slice = createSlice({
 	initialState: {
 		credentials: { ...baseCredentials },
 		token: '',
+		tokenExpiry: '',
 		loginFailed: false,
 		loading: false,
 	},
@@ -16,6 +17,7 @@ const slice = createSlice({
 		loginSucceeded: (auth, action) => {
 			auth.credentials = action.payload.user;
 			auth.token = action.payload.token;
+			auth.tokenExpiry = action.payload.expiresIn;
 
 			auth.loginFailed = false;
 			auth.loading = false;
@@ -82,4 +84,9 @@ export const loginHasFailed = () =>
 	createSelector(
 		state => state.auth,
 		auth => auth.loginFailed
+	);
+export const isLoginExpired = () =>
+	createSelector(
+		state => state.auth,
+		auth => new Date(auth.tokenExpiry).getTime() > Date.now()
 	);

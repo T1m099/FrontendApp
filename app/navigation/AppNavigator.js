@@ -17,10 +17,10 @@ const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
 	useNotifications();
-
 	const isLoggedIn = useSelector(authActions.isLoggedIn());
+	const isLoginExpired = useSelector(authActions.isLoginExpired());
 
-	if (!isLoggedIn) return <AuthNavigator />;
+	if (isLoggedIn && !isLoginExpired) return <AuthNavigator />;
 
 	return (
 		<Tab.Navigator
@@ -32,8 +32,7 @@ const AppNavigator = () => {
 				component={OrganisationNavigator}
 				options={{
 					tabBarIcon: ({ color, size }) => (
-						<AntDesign name="calendar" size={size} color={color}/>
-
+						<AntDesign name='calendar' size={size} color={color} />
 					),
 				}}
 			/>
@@ -42,11 +41,7 @@ const AppNavigator = () => {
 				component={DocumentsNavigator}
 				options={{
 					tabBarIcon: ({ color, size }) => (
-						<AntDesign
-							name='book'
-							color={color}
-							size={size}
-						/>
+						<AntDesign name='book' color={color} size={size} />
 					),
 				}}
 			/>
@@ -55,11 +50,7 @@ const AppNavigator = () => {
 				component={MainScreen}
 				options={{
 					tabBarIcon: ({ color, size }) => (
-						<AntDesign
-							name='home'
-							color={color}
-							size={size}
-						/>
+						<AntDesign name='home' color={color} size={size} />
 					),
 				}}
 			/>
@@ -68,7 +59,11 @@ const AppNavigator = () => {
 				component={MedicationNavigator}
 				options={{
 					tabBarIcon: ({ color, size }) => (
-						<AntDesign name='medicinebox' color={color} size={size} />
+						<AntDesign
+							name='medicinebox'
+							color={color}
+							size={size}
+						/>
 					),
 				}}
 			/>
@@ -77,11 +72,7 @@ const AppNavigator = () => {
 				component={SettingsNavigator}
 				options={{
 					tabBarIcon: ({ color, size }) => (
-						<AntDesign
-							name='user'
-							color={color}
-							size={size}
-						/>
+						<AntDesign name='user' color={color} size={size} />
 					),
 				}}
 			/>
