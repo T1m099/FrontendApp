@@ -1,6 +1,6 @@
 export const medication = {
 	id: 'new',
-	title: 'My Medication',
+	title: '',
 	description: '',
 	unit: 'pills',
 	quantity: '1',
