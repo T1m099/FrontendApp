@@ -20,7 +20,7 @@ const AppNavigator = () => {
 	const isLoggedIn = useSelector(authActions.isLoggedIn());
 	const isLoginExpired = useSelector(authActions.isLoginExpired());
 
-	if (isLoggedIn && !isLoginExpired) return <AuthNavigator />;
+	if (!isLoggedIn || isLoginExpired) return <AuthNavigator />;
 
 	return (
 		<Tab.Navigator

@@ -25,6 +25,7 @@ const slice = createSlice({
 		logout: (auth, action) => {
 			auth.credentials = { ...baseCredentials };
 			auth.token = '';
+			auth.tokenExpiry = '';
 		},
 		loginBegan: (auth, action) => {
 			auth.loading = true;
@@ -77,8 +78,7 @@ export const register = credentials => async dispatch => {
 export const isLoggedIn = () =>
 	createSelector(
 		state => state.auth,
-		auth =>
-			auth.credentials.username !== '' && auth.credentials.password !== ''
+		auth => auth.token !== ''
 	);
 export const loginHasFailed = () =>
 	createSelector(
@@ -88,5 +88,5 @@ export const loginHasFailed = () =>
 export const isLoginExpired = () =>
 	createSelector(
 		state => state.auth,
-		auth => new Date(auth.tokenExpiry).getTime() > Date.now()
+		auth => new Date(auth.tokenExpiry).getTime() < Date.now()
 	);
