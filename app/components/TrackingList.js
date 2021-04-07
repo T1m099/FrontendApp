@@ -3,7 +3,6 @@ import React from 'react';
 import {View, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
 
 import AppTextInput from './AppTextInput';
-import {ButtonAccept, ButtonStandard} from "./Buttons";
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import ListItemDeleteAction from './ListItemDeleteAction';
 import colors from "../config/colors";
@@ -48,85 +47,111 @@ function TrackingList({name}) {
     };
 
     return (
-        <View style={ styles.container }>
-            <FlatList
-                data={ mapTrackingItemsToArray(values[name]) }
-                keyExtractor={ item => item.key }
-                vertical
-                renderItem={ ({item, index}) => {
-                    return (
-                        <Swipeable
-                            childrenContainerStyle={ {} }
-                            renderRightActions={ () => {
-                                return (
-                                    <ListItemDeleteAction
-                                        onPress={ () => {
-                                            handleDeleteTrackinItem(item);
+        <View style={ [styles.container] }>
+
+            <TouchableOpacity
+                style={ styles.addReminderButton }
+                onPress={ handleNewTrackingItem }>
+                <AntDesign name="plus" size={ 24 } color="white"/>
+            </TouchableOpacity>
+
+            <View style={ styles.listContainerStyle }>
+                <FlatList
+                    data={ mapTrackingItemsToArray(values[name]) }
+                    keyExtractor={ item => item.key }
+                    vertical
+                    renderItem={ ({item, index}) => {
+                        return (
+                            <Swipeable
+                                childrenContainerStyle={ {} }
+                                renderRightActions={ () => {
+                                    return (
+                                        <ListItemDeleteAction
+                                            onPress={ () => {
+                                                handleDeleteTrackinItem(item);
+                                            } }
+                                        />
+                                    );
+                                } }
+                            >
+                                <View style={ styles.inputRow }>
+                                    <AppTextInput
+                                        defaultValue={ item.key }
+                                        key={ `category${ index }` }
+                                        style={ styles.input1 }
+                                        onEndEditing={ event => {
+                                            handleChangedKey(
+                                                item.key,
+                                                event.nativeEvent.text
+                                            );
                                         } }
+                                        bufferDelay={ 20 }
                                     />
-                                );
-                            } }
-                        >
-                            <View style={ styles.inputRow }>
-                                <AppTextInput
-                                    defaultValue={ item.key }
-                                    key={ `category${ index }` }
-                                    style={ styles.input1 }
-                                    onEndEditing={ event => {
-                                        handleChangedKey(
-                                            item.key,
-                                            event.nativeEvent.text
-                                        );
-                                    } }
-                                    bufferDelay={ 20 }
-                                />
-                                <AppTextInput
-                                    defaultValue={ '' + item.value }
-                                    key={ `value${ index }` }
-                                    style={ styles.input2 }
-                                    onChangeText={ text => {
-                                        handleChangedValue(item.key, text);
-                                    } }
-                                    keyboardType='numeric'
-                                />
-                            </View>
-                        </Swipeable>
-                    );
-                } }
-                ListFooterComponent={
-                    <ButtonAccept
-                        Content={ <AntDesign name="plus" size={ 24 } color="white"/>
-                        }
-                        onPress={ handleNewTrackingItem }
-                        margin={8}
-                    ></ButtonAccept>
-                }
-            />
+                                    <AppTextInput
+                                        defaultValue={ '' + item.value }
+                                        key={ `value${ index }` }
+                                        style={ styles.input2 }
+                                        onChangeText={ text => {
+                                            handleChangedValue(item.key, text);
+                                        } }
+                                        keyboardType='numeric'
+                                    />
+                                </View>
+                            </Swipeable>
+                        );
+                    } }
+
+                />
+            </View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        width: '100%'
+    container: {flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        alignSelf: 'center',
+        minHeight: 90,
+        marginBottom: '.75%',
+        textAlign: 'center',
+        justifyContent: 'space-between' },
+
+    reminderListItemChildren: {
+        flexDirection: 'row',
+        width: '100%',
+
     },
-    inputRow: {flexDirection: 'row'},
+    reminderListItem: {},
+    addReminderButton: {
+        backgroundColor: colors.navigation,
+        minWidth: 30,
+        minHeight:30,
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft:5,
+        marginRight:5
+    },
+    inputRow: { flexDirection: 'row' },
     input1: {
         flex: 1,
-        backgroundColor: colors.background,
-        borderRadius: 2,
+        backgroundColor: colors.primary,
+        borderRadius: 10,
         width: '19%',
         marginLeft: '4%',
         height: 50
     },
     input2:{
         width: '75%',
-        marginRight:'4%',
+        marginRight: '4%',
+        marginLeft: '-4%',
         backgroundColor: colors.navigation,
-        borderRadius: 2,
+        borderRadius: 10,
         height: 50
 
-    }
+    },
+    listContainerStyle: { flex: 7,  },
 });
 
 export default TrackingList;

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, ImageBackground, Text, FlatList} from 'react-native';
+import { StyleSheet, ImageBackground, Text, FlatList} from 'react-native';
 import {useSelector} from 'react-redux';
 
 import SafeAreaScreen from '../components/SafeAreaScreen';
@@ -62,7 +62,7 @@ function MainScreen({navigation}) {
                                 style={ [{
                                     width: '92%',
                                     marginLeft: '4%',
-                                    height: 35,
+                                    height: '2%',
                                     borderRadius: 10,
                                     marginTop: '.75%',
                                     marginBottom: '.75%',
@@ -80,7 +80,7 @@ function MainScreen({navigation}) {
             width: '92%',
             marginLeft: '4%',
             marginRight:'4%',
-            height: 35,
+            height: '5%',
             borderRadius: 10,
             marginTop: '.75%',
             marginBottom: '.75%',

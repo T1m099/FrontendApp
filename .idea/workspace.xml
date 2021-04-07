@@ -6,15 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="97bb8dd6-f885-462e-ada0-1bbceca86c17" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/EventTypesSelect.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/EventTypesSelect.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/Picker.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Picker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/PickerModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/PickerModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/TrackingList.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/TrackingList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/forms/AppFormColorPicker.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/forms/AppFormColorPicker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/forms/AppFormMultiSelect.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/forms/AppFormMultiSelect.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/screens/EventEditScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/EventEditScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/screens/TimelineScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/TimelineScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/screens/TrackingEditScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/TrackingEditScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/screens/MainScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/MainScreen.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +45,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="design/frontendLayoutReady" />
+        <entry key="$PROJECT_DIR$" value="finishedBackgroundIntegration" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -215,7 +210,12 @@
       <workItem from="1617171037479" duration="11000" />
       <workItem from="1617188988316" duration="8387000" />
       <workItem from="1617209518498" duration="10174000" />
-      <workItem from="1617362897522" duration="20549000" />
+      <workItem from="1617362897522" duration="20933000" />
+      <workItem from="1617441059569" duration="735000" />
+      <workItem from="1617693989472" duration="615000" />
+      <workItem from="1617706706193" duration="10000" />
+      <workItem from="1617710696346" duration="493000" />
+      <workItem from="1617821757369" duration="4884000" />
     </task>
     <task id="LOCAL-00001" summary="Redesign of Colors and Icons to look more modern">
       <created>1614520757634</created>
@@ -357,7 +357,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617376934033</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="finished Redesigning">
+      <created>1617386606938</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1617386606938</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -477,7 +484,8 @@
     <MESSAGE value="redesign of DocumentManagementScreen.js, MedicationMainScreen.js, OrganizationMainScreen.js and SettingsScreen.js" />
     <MESSAGE value="redesign of a lot of things" />
     <MESSAGE value="Restyled MedicationEditScreen.js" />
-    <option name="LAST_COMMIT_MESSAGE" value="Restyled MedicationEditScreen.js" />
+    <MESSAGE value="finished Redesigning" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished Redesigning" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
