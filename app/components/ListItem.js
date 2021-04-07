@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
 		marginBottom: '.75%',
 		backgroundColor: 'rgba(0,0,0,.5)',
 		textAlign: 'center',
-		justifyContent: 'space-between'
+		justifyContent: 'space-between',
 	},
 });
 
