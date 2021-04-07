@@ -31,10 +31,17 @@ const slice = createSlice({
 			});
 			delete docs.foldersListObject[action.payload.id];
 		},
+		foldersReceived: (docs, action) => {
+			const foldersObject = {};
+			action.payload.folders.forEach(folder => {
+				foldersObject[folder.id] = folder;
+			});
+			docs.foldersListObject = foldersObject;
+		},
 	},
 });
 
-const { folderSaved, folderDeleted } = slice.actions;
+const { folderSaved, folderDeleted, foldersReceived } = slice.actions;
 export const { documentSaved, documentDeleted } = slice.actions;
 export default slice.reducer;
 
@@ -87,6 +94,15 @@ export const saveFolder = folder => async dispatch => {
 			method: 'POST',
 			data: folder,
 			onSuccess: folderSaved.type,
+		})
+	);
+};
+export const fetchFolders = () => async dispatch => {
+	dispatch(
+		apiCallBegan({
+			url: 'folders',
+			method: 'GET',
+			onSuccess: foldersReceived.type,
 		})
 	);
 };
