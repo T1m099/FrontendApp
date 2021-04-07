@@ -120,7 +120,7 @@ function TimelineScreen(props) {
 
 const styles = StyleSheet.create({
 	container: {
-		/* flex: 1,
+		/* 		flex: 1,
 		flexDirection: 'column',
 		alignItems: 'center',
 		alignSelf: 'center',

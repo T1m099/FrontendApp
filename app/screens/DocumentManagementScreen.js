@@ -55,7 +55,7 @@ function FolderManagementScreen({ navigation, route }) {
 					});
 				},
 				onDelete: folder => {
-					dispatch(docActions.deleteFolder(folder.id));
+					dispatch(docActions.deleteFolder({ id: folder.id }));
 				},
 			});
 		});
@@ -69,7 +69,8 @@ function FolderManagementScreen({ navigation, route }) {
 					});
 				},
 				onDelete: doc => {
-					dispatch(docActions.deleteDocument(doc));
+					const { icon, onPress, onDelete, ...rest } = doc;
+					dispatch(docActions.deleteDocument({ ...rest }));
 				},
 			});
 		});
@@ -77,9 +78,10 @@ function FolderManagementScreen({ navigation, route }) {
 	};
 
 	const handleSaveFolder = folder => {
-		const c = { ...folder, parentId: parentId ? parentId : 'root' };
+		const { onDelete, onPress, icon, ...rest } = folder;
+		const toSave = { ...rest, parentId: parentId ? parentId : 'root' };
 
-		dispatch(docActions.saveFolder(c));
+		dispatch(docActions.saveFolder(toSave));
 		setNewFolderModalVisble(false);
 	};
 

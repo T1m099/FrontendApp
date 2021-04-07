@@ -7,14 +7,6 @@ const apisauceApi = create({
 });
 
 const api = ({ dispatch, getState }) => next => async action => {
-	const conditionalDispatch = ({ type, payload }) => {
-		if (typeof type === 'function') {
-			dispatch(type(response.data));
-		} else {
-			dispatch({ type, payload });
-		}
-	};
-
 	if (action.type !== actions.apiCallBegan.type) return next(action);
 
 	const {
@@ -23,7 +15,7 @@ const api = ({ dispatch, getState }) => next => async action => {
 
 	const { url, method, data, onStart, onSuccess, onError } = action.payload;
 
-	if (onStart) conditionalDispatch({ type: onStart });
+	if (onStart) dispatch({ type: onStart });
 
 	next(action);
 
@@ -34,20 +26,18 @@ const api = ({ dispatch, getState }) => next => async action => {
 		headers: { Authorization: token },
 	});
 	if (response.ok) {
-		conditionalDispatch(actions.apiCallSuccess(response.data));
+		dispatch(actions.apiCallSuccess(response.data));
 		if (onSuccess) {
-			conditionalDispatch({ type: onSuccess, payload: response.data });
+			dispatch({ type: onSuccess, payload: response.data });
 		}
 		return;
 	}
-	conditionalDispatch(
-		actions.apiCallFailed({ error: JSON.stringify(response.originalError) })
-	);
+	dispatch(actions.apiCallFailed(JSON.stringify(response.originalError)));
 
 	if (onError)
-		conditionalDispatch({
+		dispatch({
 			type: onError,
-			payload: { error: JSON.stringify(response.originalError) },
+			payload: JSON.stringify(response.originalError),
 		});
 };
 

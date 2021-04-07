@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { createSelector } from 'reselect';
 import * as FileSystem from 'expo-file-system';
+import * as filePersistActions from './file';
+import { apiCallBegan } from './api';
 
 let lastId = 0;
 
@@ -32,46 +34,61 @@ const slice = createSlice({
 	},
 });
 
-const {
-	documentSaved,
-	documentDeleted,
-	folderSaved,
-	folderDeleted,
-} = slice.actions;
+const { folderSaved, folderDeleted } = slice.actions;
+export const { documentSaved, documentDeleted } = slice.actions;
 export default slice.reducer;
 
 // Action Creators
 
 export const deleteDocument = doc => async dispatch => {
-	FileSystem.deleteAsync(doc.uri, { idempotent: true });
+	dispatch(
+		apiCallBegan({
+			url: 'files',
+			method: 'DELETE',
+			data: doc,
+			onSuccess: filePersistActions.removeFile.type,
+		})
+	);
 
 	dispatch(documentDeleted({ id: doc.id }));
 };
-export const deleteFolder = id => async dispatch => {
-	dispatch(folderDeleted({ id }));
+export const deleteFolder = folder => async dispatch => {
+	dispatch(
+		apiCallBegan({
+			url: 'folders',
+			method: 'DELETE',
+			data: folder,
+			onSuccess: folderDeleted.type,
+		})
+	);
 };
 
-export const saveDocument = document => async dispatch => {
-	const d = { ...document };
-	if (d.id === 'new') {
-		d.id = genId();
-	}
-
-	FileSystem.copyAsync({
-		from: d.uri,
-		to: FileSystem.documentDirectory + d.name,
+export const saveDocument = ({ uri, ...rest }) => async dispatch => {
+	const file = await FileSystem.readAsStringAsync(uri, {
+		encoding: 'base64',
 	});
+	const timestamp = Date.now();
+	const data = { timestamp, file, ...rest };
 
-	dispatch(documentSaved(d));
+	dispatch(
+		apiCallBegan({
+			url: 'files',
+			method: 'POST',
+			data,
+			onSuccess: filePersistActions.persistFile.type,
+		})
+	);
 };
 
 export const saveFolder = folder => async dispatch => {
-	const f = { ...folder };
-	if (f.id === 'new') {
-		f.id = genId();
-	}
-
-	dispatch(folderSaved(f));
+	dispatch(
+		apiCallBegan({
+			url: 'folders',
+			method: 'POST',
+			data: folder,
+			onSuccess: folderSaved.type,
+		})
+	);
 };
 
 //Selectors
