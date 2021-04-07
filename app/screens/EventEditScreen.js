@@ -42,9 +42,9 @@ function initEvent(events, id, timestamp) {
 	if (id && id === 'new') {
 		e = {
 			...baseEventProperties,
+			...allAdditionalProperties,
 			time: new Date(timestamp + 12 * 60 * 60 * 1000),
 			end: new Date(timestamp + 13 * 60 * 60 * 1000),
-			...allAdditionalProperties,
 		};
 	} else {
 		e = { ...events[id] };
