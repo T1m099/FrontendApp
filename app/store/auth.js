@@ -32,6 +32,10 @@ const slice = createSlice({
 		},
 		loginFailed: (auth, action) => {
 			console.error(action.payload);
+
+			auth.credentials = { ...baseCredentials };
+			auth.token = '';
+			auth.tokenExpiry = '';
 			auth.loginFailed = true;
 			auth.loading = false;
 		},
@@ -88,5 +92,7 @@ export const loginHasFailed = () =>
 export const isLoginExpired = () =>
 	createSelector(
 		state => state.auth,
-		auth => new Date(auth.tokenExpiry).getTime() < Date.now()
+		auth =>
+			auth.tokenExpiry !== '' &&
+			new Date(auth.tokenExpiry).getTime() < Date.now()
 	);
