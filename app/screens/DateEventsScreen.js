@@ -41,7 +41,6 @@ function DateEventScreen({ navigation, route }) {
 					data={Object.values(thisDaysEvents)}
 					keyExtractor={item => item.id}
 					renderItem={({ item }) => {
-						console.log(item);
 						return (
 							<ListItem
 								title={item.title}

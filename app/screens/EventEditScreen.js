@@ -37,7 +37,7 @@ import AppFormMultiSelect from '../components/forms/AppFormMultiSelect';
 import TrackingList from '../components/TrackingList';
 import colors from '../config/colors';
 
-function initEvent(events, id, timestamp) {
+function initEvent(events, id, timestamp, newEventType) {
 	let e;
 	if (id && id === 'new') {
 		e = {
@@ -45,6 +45,7 @@ function initEvent(events, id, timestamp) {
 			...allAdditionalProperties,
 			time: new Date(timestamp + 12 * 60 * 60 * 1000),
 			end: new Date(timestamp + 13 * 60 * 60 * 1000),
+			type: newEventType,
 		};
 	} else {
 		e = { ...events[id] };
@@ -58,9 +59,9 @@ function EventEditScreen({ navigation, route }) {
 	const dispatch = useDispatch();
 	const events = useSelector(eventActions.getEvents());
 
-	const { id, dayTimestamp } = route.params;
+	const { id, dayTimestamp, newEventType } = route.params;
 
-	const event = initEvent(events, id, dayTimestamp);
+	const event = initEvent(events, id, dayTimestamp, newEventType);
 
 	const validationSchema = Yup.object().shape({
 		title: Yup.string().required().min(1).label('Title'),
