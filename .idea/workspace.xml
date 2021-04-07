@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="97bb8dd6-f885-462e-ada0-1bbceca86c17" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/TrackingList.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/TrackingList.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/screens/MainScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/MainScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/screens/MedicationMainScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/MedicationMainScreen.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +46,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="SIGN_OFF_COMMIT" value="true" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -215,7 +213,7 @@
       <workItem from="1617693989472" duration="615000" />
       <workItem from="1617706706193" duration="10000" />
       <workItem from="1617710696346" duration="493000" />
-      <workItem from="1617821757369" duration="4884000" />
+      <workItem from="1617821757369" duration="5449000" />
     </task>
     <task id="LOCAL-00001" summary="Redesign of Colors and Icons to look more modern">
       <created>1614520757634</created>
@@ -364,7 +362,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617386606938</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="fixed keyboard view and design Bugs">
+      <created>1617826768129</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1617826768129</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -485,7 +490,8 @@
     <MESSAGE value="redesign of a lot of things" />
     <MESSAGE value="Restyled MedicationEditScreen.js" />
     <MESSAGE value="finished Redesigning" />
-    <option name="LAST_COMMIT_MESSAGE" value="finished Redesigning" />
+    <MESSAGE value="fixed keyboard view and design Bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed keyboard view and design Bugs" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

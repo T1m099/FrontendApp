@@ -57,7 +57,7 @@ function MedicationMainScreen({ navigation }) {
                     ListFooterComponent={
                         <React.Fragment>
 							<View style={styles.container} >
-								<Text style={styles.text}>Neues Medikament</Text>
+								<Text style={styles.text}>new Medicine </Text>
 
 								<ButtonAccept
                                 onPress={() => {

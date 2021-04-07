@@ -62,7 +62,7 @@ function MainScreen({navigation}) {
                                 style={ [{
                                     width: '92%',
                                     marginLeft: '4%',
-                                    height: '2%',
+                                    height: 35,
                                     borderRadius: 10,
                                     marginTop: '.75%',
                                     marginBottom: '.75%',
@@ -85,7 +85,7 @@ function MainScreen({navigation}) {
             marginTop: '.75%',
             marginBottom: '.75%',
             backgroundColor: 'rgba(0,0,0,.5)'
-        }] }> Es gibt keine Events, welche auf dich zu kommen
+        }] }> No upcoming events
         </Text>)
     }
     const handlePlannerItemPress = item => {
