@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { createSelector } from 'reselect';
 import * as FileSystem from 'expo-file-system';
-import * as filePersistActions from './file';
-import { apiCallBegan } from './api';
+import * as filePersistActions from './fileEvents';
+import { apiCallBegan } from './apiEvents';
 
 let lastId = 0;
 
@@ -103,6 +103,25 @@ export const fetchFolders = () => async dispatch => {
 			url: 'folders',
 			method: 'GET',
 			onSuccess: foldersReceived.type,
+		})
+	);
+};
+export const fetchDocuments = () => async dispatch => {
+	dispatch(
+		apiCallBegan({
+			url: 'files',
+			method: 'GET',
+			onSuccess: filePersistActions.compareFilesWithBackend.type,
+		})
+	);
+};
+export const fetchDocument = file => async dispatch => {
+	dispatch(
+		apiCallBegan({
+			url: 'files/download',
+			method: 'POST',
+			data: file,
+			onSuccess: filePersistActions.persistFile.type,
 		})
 	);
 };

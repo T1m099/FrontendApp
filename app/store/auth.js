@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { createSelector } from 'reselect';
-import { apiCallBegan } from './api';
+import { apiCallBegan } from './apiEvents';
 
 const baseCredentials = { mail: '', password: '' };
 

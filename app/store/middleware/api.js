@@ -1,6 +1,6 @@
 import { create } from 'apisauce';
 
-import * as actions from '../api';
+import * as actions from '../apiEvents';
 
 const apisauceApi = create({
 	baseURL: 'https://www.itworksonmymachine.studio/',

@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { createSelector } from 'reselect';
 import dayjs from 'dayjs';
 import _ from 'lodash';
-import { apiCallBegan } from './api';
+import { apiCallBegan } from './apiEvents';
 
 import {
 	eventTypeConditionalProperties,

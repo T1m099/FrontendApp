@@ -27,6 +27,7 @@ function MainScreen({ navigation }) {
 		dispatch(eventActions.fetchEvents());
 		dispatch(medActions.fetchMeds());
 		dispatch(docActions.fetchFolders());
+		dispatch(docActions.fetchDocuments());
 	}, []);
 
 	const getPlannerItems = () => {
