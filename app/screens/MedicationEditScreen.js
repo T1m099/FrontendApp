@@ -1,7 +1,11 @@
 import React from 'react';
-import {ImageBackground, StyleSheet, View} from 'react-native';
+import { ImageBackground, StyleSheet, View } from 'react-native';
 import * as Yup from 'yup';
-import {ButtonAccept, ButtonDecline, ButtonStandard} from "../components/Buttons";
+import {
+	ButtonAccept,
+	ButtonDecline,
+	ButtonStandard,
+} from '../components/Buttons';
 import AppText from '../components/AppText';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -15,22 +19,15 @@ import reminderService from '../services/reminderService';
 
 import { saveMedItem, getMeds, genId } from '../store/meds';
 import routes from '../navigation/routes';
-import {AntDesign} from "@expo/vector-icons";
-import colors from "../config/colors";
+import { AntDesign } from '@expo/vector-icons';
+import colors from '../config/colors';
 
-const baseMedItemDetails = {
-	id: 'new',
-	title: 'My Medication',
-	description: '',
-	unit: 'pills',
-	quantity: '1',
-	reminders: [],
-};
+import { medication as baseMedicationObject } from '../config/medicationObjectStructure';
 
 function initMedItem(id, meds) {
 	let mi;
 	if (id.match('new')) {
-		mi = { ...baseMedItemDetails };
+		mi = { ...baseMedicationObject };
 	} else {
 		mi = { ...meds[id] };
 	}
@@ -55,9 +52,7 @@ function MedicationEditScreen({ route, navigation }) {
 	];
 
 	const handleSaveMedication = async medItemToSave => {
-		const mi = { ...medItemToSave };
-		if (medItemToSave.id === 'new') mi.id = genId();
-		dispatch(saveMedItem(mi));
+		dispatch(saveMedItem(medItemToSave));
 	};
 
 	const handleSubmit = medItemToSave => {
@@ -69,101 +64,152 @@ function MedicationEditScreen({ route, navigation }) {
 	};
 
 	return (
-        <ImageBackground source={require('../images/Background.png')} style={styles.image}>
-
-        <View style={styles.maincontainer}>
-			<AppForm
-				initialValues={initMedItem(id, meds)}
-				onSubmit={(values, actions) => {
-					handleSubmit(values);
-					actions.resetForm();
-				}}
-				validationSchema={validationSchema}
-			>
-                <View style={[styles.container, {maxHeight:150, marginBottom:5}]}>
-				<AppFormField name='title' width='100%' placeholder='title ' />
-
-				<AppFormField maxHeight={25} maxLength={255} multiline name='description' numberOfLines={3} placeholder='Description' />
-                </View>
-                <View style={[styles.container, {maxHeight:75 }]}>
-					<View style={[{flexDirection:'row', width:'94%',justifyContent: 'space-between'}]}>
-
-					<AppFormDropdownPicker
-						name='unit'
-						items={dropdownItems}
-						containerStyle={styles.unitPicker}
-					/>
-					<AppFormField
-						maxLength={255}
-						name='quantity'
-						placeholder='Quantity'
-						style={styles.quanitity}
-					/>
-					</View>
-                </View>
-                <View style={styles.container}>
-					<ReminderList
-					name='reminders'
-					style={styles.reminderList}
-					onReminderDelete={reminder => {
-						reminderService.cancelReminderAsync(reminder);
+		<ImageBackground
+			source={require('../images/Background.png')}
+			style={styles.image}
+		>
+			<View style={styles.maincontainer}>
+				<AppForm
+					initialValues={initMedItem(id, meds)}
+					onSubmit={(values, actions) => {
+						handleSubmit(values);
+						actions.resetForm();
 					}}
-				/>
-				</View>
-					<View style={ [styles.container, {marginTop: 5, maxHeight: 90, flexDirection: 'column'}] }>
-						<View style={[{flexDirection:'row', width:'94%',justifyContent: 'space-between'}]}>
+					validationSchema={validationSchema}
+				>
+					<View
+						style={[
+							styles.container,
+							{ maxHeight: 150, marginBottom: 5 },
+						]}
+					>
+						<AppFormField
+							name='title'
+							width='100%'
+							placeholder='My Medication Title '
+						/>
 
+						<AppFormField
+							maxHeight={25}
+							maxLength={255}
+							multiline
+							name='description'
+							numberOfLines={3}
+							placeholder='Description'
+						/>
+					</View>
+					<View style={[styles.container, { maxHeight: 75 }]}>
+						<View
+							style={[
+								{
+									flexDirection: 'row',
+									width: '94%',
+									justifyContent: 'space-between',
+								},
+							]}
+						>
+							<AppFormDropdownPicker
+								name='unit'
+								items={dropdownItems}
+								containerStyle={styles.unitPicker}
+							/>
+							<AppFormField
+								maxLength={255}
+								name='quantity'
+								placeholder='Quantity'
+								style={styles.quanitity}
+							/>
+						</View>
+					</View>
+					<View style={styles.container}>
+						<ReminderList
+							name='reminders'
+							style={styles.reminderList}
+							onReminderDelete={reminder => {
+								reminderService.cancelReminderAsync(reminder);
+							}}
+						/>
+					</View>
+					<View
+						style={[
+							styles.container,
+							{
+								marginTop: 5,
+								maxHeight: 90,
+								flexDirection: 'column',
+							},
+						]}
+					>
+						<View
+							style={[
+								{
+									flexDirection: 'row',
+									width: '94%',
+									justifyContent: 'space-between',
+								},
+							]}
+						>
 							<AppSubmitButton
 								title='Submit'
 								size={300}
 							></AppSubmitButton>
-							<ButtonDecline Content={ <AntDesign name="close" size={ 24 } color="white"/> }  onPress={() => {
-								navigation.reset({
-									index: 0,
-									routes: [
-										{
-											name:
-											routes.MEDICATION_STACK_NAVIGATION,
-										},
-									],
-								});
-							}}/>
+							<ButtonDecline
+								Content={
+									<AntDesign
+										name='close'
+										size={24}
+										color='white'
+									/>
+								}
+								onPress={() => {
+									navigation.reset({
+										index: 0,
+										routes: [
+											{
+												name:
+													routes.MEDICATION_STACK_NAVIGATION,
+											},
+										],
+									});
+								}}
+							/>
 						</View>
 					</View>
-			</AppForm>
-		</View>
-        </ImageBackground>
+				</AppForm>
+			</View>
+		</ImageBackground>
 	);
 }
 
 const styles = StyleSheet.create({
-    maincontainer: {
-        flex: 1,
-        alignItems: 'center',
-        alignSelf: 'center',
-        width: '92%',
-        marginTop: '.75%',
-        marginBottom: '.75%',
-        textAlign: 'center',
-    },    image: {
-        flex: 1,
-        resizeMode: "cover",
-        justifyContent: "center"
-    },
-    container: {
-        flex: 1,
-        flexDirection: 'column',
-        alignItems: 'center',
-        alignSelf: 'center',
-        width: 400,
-        maxHeight: 132,
-        borderRadius: 10,
-        marginTop: '.75%',
-        marginBottom: '.75%',
-        backgroundColor: 'rgba(0,0,0,.5)',
-        textAlign: 'center',
-        justifyContent: 'center'
-    },
+	maincontainer: {
+		flex: 1,
+		alignItems: 'center',
+		alignSelf: 'center',
+		width: '92%',
+		marginTop: '.75%',
+		marginBottom: '.75%',
+		textAlign: 'center',
+	},
+	image: {
+		flex: 1,
+		resizeMode: 'cover',
+		justifyContent: 'center',
+	},
+	container: {
+		flex: 1,
+		flexDirection: 'column',
+		alignItems: 'center',
+		alignSelf: 'center',
+		width: 400,
+		maxHeight: 132,
+		borderRadius: 10,
+		marginTop: '.75%',
+		marginBottom: '.75%',
+		backgroundColor: 'rgba(0,0,0,.5)',
+		textAlign: 'center',
+		justifyContent: 'center',
+	},
 	dateTimePickerContainer: {
 		flexDirection: 'row',
 		marginVertical: 10,
@@ -174,11 +220,11 @@ const styles = StyleSheet.create({
 	buttonArea: {
 		flexDirection: 'row',
 	},
-	doseArea: { flexDirection: 'row'  },
+	doseArea: { flexDirection: 'row' },
 	unitPicker: {
-        width:84,
-        marginLeft: 5,
-        marginRight:5,
+		width: 84,
+		marginLeft: 5,
+		marginRight: 5,
 	},
 	quanitity: { flex: 1, height: '100%', marginTop: 0 },
 

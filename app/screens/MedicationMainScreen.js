@@ -1,17 +1,28 @@
 import React from 'react';
-import {View, StyleSheet, FlatList, ImageBackground, Text} from 'react-native';
+import {
+	View,
+	StyleSheet,
+	FlatList,
+	ImageBackground,
+	Text,
+} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import {ButtonAccept, ButtonDecline, ButtonYellow} from "../components/Buttons";
+import {
+	ButtonAccept,
+	ButtonDecline,
+	ButtonYellow,
+} from '../components/Buttons';
 import MedicationListItem from '../components/MediactionListItem';
 import routes from '../navigation/routes';
-import colors from "../config/colors";
+import colors from '../config/colors';
 
 import medicationService from '../services/medicationService';
 import reminderService from '../services/reminderService';
 
-import { getMeds, medItemDeleted } from '../store/meds';
-import {AntDesign} from "@expo/vector-icons";
+import { deleteMedItem, getMeds } from '../store/meds';
+import { AntDesign } from '@expo/vector-icons';
+import { TRACKING } from '../config/eventTypes';
 
 function MedicationMainScreen({ navigation }) {
 	const meds = useSelector(getMeds());
@@ -24,7 +35,7 @@ function MedicationMainScreen({ navigation }) {
 				reminderService.cancelReminderAsync(r);
 			}
 		});
-		dispatch(medItemDeleted({ id: item.id }));
+		dispatch(deleteMedItem({ id: item.id }));
 	};
 
 	const goToMedicationEdit = id => {
@@ -34,48 +45,83 @@ function MedicationMainScreen({ navigation }) {
 	};
 
 	return (
-		<ImageBackground source={require('../images/Background.png')} style={styles.image}>
-			<View >
-                <FlatList
-				data={Object.values(meds)}
-                    keyExtractor={item => {
-                        return item.id;
-                    }}
-                    renderItem={({ item }) => {
-                        return (
-                            <MedicationListItem
-                                data={item}
-                                onPress={() => {
-								goToMedicationEdit(item.id);
-                                }}
-                                onDelete={item => {
-                                    handleDeleteMedication(item);
-                                }}
-                            />
-                        );
-                    }}
-                    ListFooterComponent={
-                        <React.Fragment>
-							<View style={styles.container} >
-								<Text style={styles.text}>new Medicine </Text>
+		<ImageBackground
+			source={require('../images/Background.png')}
+			style={styles.image}
+		>
+			<View>
+				<FlatList
+					data={Object.values(meds)}
+					keyExtractor={item => {
+						return item.id;
+					}}
+					renderItem={({ item }) => {
+						return (
+							<MedicationListItem
+								data={item}
+								onPress={() => {
+									goToMedicationEdit(item.id);
+								}}
+								onDelete={item => {
+									handleDeleteMedication(item);
+								}}
+							/>
+						);
+					}}
+					ListFooterComponent={
+						<React.Fragment>
+							<View style={styles.container}>
+								<Text style={styles.text}>
+									Neues Medikament
+								</Text>
 
 								<ButtonAccept
-                                onPress={() => {
-								goToMedicationEdit('new');
-                                }}
-								Content={<AntDesign name="addfolder" size={24} color="white"/>}
-								margin={8}
-                            />
+									onPress={() => {
+										goToMedicationEdit('new');
+									}}
+									Content={
+										<AntDesign
+											name='addfolder'
+											size={24}
+											color='white'
+										/>
+									}
+									margin={8}
+								/>
 							</View>
+							<View style={styles.container}>
+								<Text style={styles.text}>Go to Tracking</Text>
 
-                        </React.Fragment>
-                    }
-                />
+								<ButtonAccept
+									onPress={() => {
+										navigation.navigate(
+											routes.ORGANIZATION_STACK_NAVIGATION,
+											{
+												screen: routes.EVENT_EDIT,
+												params: {
+													id: 'new',
+													newEventType: TRACKING,
+													dayTimestamp: Date.now(),
+												},
+											}
+										);
+									}}
+									Content={
+										<AntDesign
+											name='addfolder'
+											size={24}
+											color='white'
+										/>
+									}
+									margin={8}
+								/>
+							</View>
+						</React.Fragment>
+					}
+				/>
 			</View>
-
 		</ImageBackground>
-
-    );
+	);
 }
 
 const styles = StyleSheet.create({
@@ -91,13 +137,13 @@ const styles = StyleSheet.create({
 		marginBottom: '.75%',
 		backgroundColor: 'rgba(0,0,0,.5)',
 		textAlign: 'center',
-		justifyContent: 'space-between'
+		justifyContent: 'space-between',
 	},
 
 	image: {
 		flex: 1,
-		resizeMode: "cover",
-		justifyContent: "center"
+		resizeMode: 'cover',
+		justifyContent: 'center',
 	},
 	text: {
 		alignItems: 'flex-start',
@@ -106,8 +152,7 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 		color: colors.text,
 		marginLeft: '2%',
-
-	}
+	},
 });
 
 export default MedicationMainScreen;

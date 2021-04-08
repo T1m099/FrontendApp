@@ -20,15 +20,9 @@ const validationSchema = Yup.object().shape({
 function RegisterScreen() {
     const dispatch = useDispatch();
 
-    const handleSubmit = async userInfo => {
-        dispatch(
-            authActions.register({
-                username: userInfo.name,
-                mail: userInfo.email,
-                password: userInfo.password,
-            })
-        );
-    };
+	const handleSubmit = async userInfo => {
+		dispatch(authActions.register(userInfo));
+	};
 
     return (
         <>
