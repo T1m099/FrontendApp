@@ -8,9 +8,10 @@ function DateTimePickerInput({
 	valueDateTransform,
 	valueTimeTransform,
 	onChange,
+	style,
 }) {
 	return (
-		<View style={styles.container}>
+		<View style={[styles.container, style]}>
 			<DatePickerInput
 				value={value}
 				valueToDisplay={valueDateTransform(value)}

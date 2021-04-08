@@ -18,26 +18,24 @@ function DatePickerInput({
 			onPress={() => {
 				setVisible(true);
 			}}
-			style={style}
+			style={[styles.container, style]}
 		>
-			<View style={[styles.container, style]}>
-				<AppText style={styles.text}>{valueToDisplay}</AppText>
-				{visible && (
-					<DateTimePicker
-						testID='dateTimePicker'
-						value={value}
-						mode={mode}
-						is24Hour={true}
-						display='spinner'
-						onChange={(event, selectedDate) => {
-							setVisible(false);
-							if (event.type !== 'dismissed') {
-								onDateSelection(selectedDate);
-							}
-						}}
-					/>
-				)}
-			</View>
+			<AppText style={styles.text}>{valueToDisplay}</AppText>
+			{visible && (
+				<DateTimePicker
+					testID='dateTimePicker'
+					value={value}
+					mode={mode}
+					is24Hour={true}
+					display='spinner'
+					onChange={(event, selectedDate) => {
+						setVisible(false);
+						if (event.type !== 'dismissed') {
+							onDateSelection(selectedDate);
+						}
+					}}
+				/>
+			)}
 		</TouchableOpacity>
 	);
 }
@@ -50,8 +48,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		borderRadius: 5,
-		width: '90%',
-		marginTop:5
+		marginTop: 5,
 	},
 	text: {
 		fontWeight: 'bold',

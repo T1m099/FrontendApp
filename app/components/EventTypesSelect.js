@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import {AntDesign, MaterialIcons} from '@expo/vector-icons';
+import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 import SectionedMultiSelect from 'react-native-sectioned-multi-select';
 
 import { types as defaultTypes } from '../config/eventTypes';
@@ -20,56 +20,61 @@ function EventTypesSelect({
 		},
 	];
 	return (
-		<View style={[styles.container, style]}>
-			<SectionedMultiSelect
-				items={eventTypeSelectItems}
-				selectedItems={selectedEventTypes}
-				uniqueKey='name'
-				subKey='sub'
-				selectToggleIconComponent={<MaterialIcons name="calendar" size={0} color={colors.background}/>}
-				selectText='Filter Event Types'
-				readOnlyHeadings={true}
-				showChips={false}
-				showDropDowns={false}
-				single={single}
-				hideSearch={true}
-				alwaysShowSelectText={true}
-				onSelectedItemsChange={types => {
-					onSelectEventType(types);
-				}}
-				colors={{ primary: colors.accept, text: colors.text, itemBackground: colors.background, subItemBackground: colors.background, subText: colors.text,  searchSelectionColor: colors.background, disabled: colors.text}}
-				styles={{
-				container: {
-					backgroundColor: colors.background,
-					maxHeight:250,
-				},
+		<SectionedMultiSelect
+			items={eventTypeSelectItems}
+			selectedItems={selectedEventTypes}
+			uniqueKey='name'
+			subKey='sub'
+			selectToggleIconComponent={
+				<MaterialIcons
+					name='calendar'
+					size={0}
+					color={colors.background}
+				/>
+			}
+			selectText='Filter Event Types'
+			readOnlyHeadings={true}
+			showChips={false}
+			showDropDowns={false}
+			single={single}
+			hideSearch={true}
+			alwaysShowSelectText={true}
+			onSelectedItemsChange={types => {
+				onSelectEventType(types);
+			}}
+			colors={{
+				primary: colors.accept,
+				text: colors.text,
+				itemBackground: colors.background,
+				subItemBackground: colors.background,
+				subText: colors.text,
+				searchSelectionColor: colors.background,
+				disabled: colors.text,
+			}}
+			styles={{
+				container: styles.container,
 
 				selectToggle: {
-					backgroundColor: colors.navigation,
-					borderRadius: 10,
-					marginTop:10 ,
-					height: 65,
-					width: 200,
-
-
+					...style,
 				},
-				selectToggleText:{
-					marginTop:30,
+				selectToggleText: {
 					flex: 1,
 					fontSize: 21,
 					fontWeight: 'bold',
 					color: colors.text,
 					marginLeft: '15%',
-				}
+				},
 			}}
-				IconRenderer={MaterialIcons}
-			/>
-		</View>
+			IconRenderer={MaterialIcons}
+		/>
 	);
 }
 
 const styles = StyleSheet.create({
-	container: {},
+	container: {
+		backgroundColor: colors.background,
+		maxHeight: 250,
+	},
 });
 
 export default EventTypesSelect;

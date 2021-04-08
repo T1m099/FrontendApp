@@ -1,6 +1,6 @@
-import { StyleSheet, ImageBackground, Text, FlatList} from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect } from 'react';
+import { StyleSheet, ImageBackground, Text, FlatList } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 
 import SafeAreaScreen from '../components/SafeAreaScreen';
 import * as medActions from '../store/meds';
@@ -68,17 +68,7 @@ function MainScreen({ navigation }) {
 								onPress={() => {
 									handlePlannerItemPress(item);
 								}}
-								style={[
-									{
-										width: '92%',
-										marginLeft: '4%',
-										height: 35,
-										borderRadius: 10,
-										marginTop: '.75%',
-										marginBottom: '.75%',
-										backgroundColor: 'rgba(0,0,0,.5)',
-									},
-								]}
+								style={styles.eventListItem}
 							>
 								<Text style={styles.text}>
 									{time.format('HH:mm')} | {item.title}
@@ -90,23 +80,9 @@ function MainScreen({ navigation }) {
 			);
 		} else
 			return (
-				<Text
-					style={[
-						styles.text,
-						{
-							width: '92%',
-							marginLeft: '4%',
-							marginRight: '4%',
-							height: 35,
-							borderRadius: 10,
-							marginTop: '.75%',
-							marginBottom: '.75%',
-							backgroundColor: 'rgba(0,0,0,.5)',
-						},
-					]}
-				>
+				<Text style={[styles.text, styles.upcomingEventsText]}>
 					{' '}
-					Es gibt keine Events, welche auf dich zu kommen
+					No upcoming events
 				</Text>
 			);
 	};
@@ -157,6 +133,26 @@ const styles = StyleSheet.create({
 		marginTop: '2%',
 		color: colors.text,
 		marginLeft: '2%',
+	},
+	upcomingEventsText: {
+		width: '92%',
+		marginLeft: '4%',
+		marginRight: '4%',
+		height: 35,
+		borderRadius: 10,
+		marginTop: '.75%',
+		marginBottom: '.75%',
+		backgroundColor: 'rgba(0,0,0,.5)',
+		textAlign: 'center',
+	},
+	eventListItem: {
+		width: '92%',
+		marginLeft: '4%',
+		height: 35,
+		borderRadius: 10,
+		marginTop: '.75%',
+		marginBottom: '.75%',
+		backgroundColor: 'rgba(0,0,0,.5)',
 	},
 });
 

@@ -8,16 +8,11 @@ import {
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import {
-	ButtonAccept,
-	ButtonDecline,
-	ButtonYellow,
-} from '../components/Buttons';
+import { ButtonAccept } from '../components/Buttons';
 import MedicationListItem from '../components/MediactionListItem';
 import routes from '../navigation/routes';
 import colors from '../config/colors';
 
-import medicationService from '../services/medicationService';
 import reminderService from '../services/reminderService';
 
 import { deleteMedItem, getMeds } from '../store/meds';
@@ -28,7 +23,6 @@ function MedicationMainScreen({ navigation }) {
 	const meds = useSelector(getMeds());
 	const dispatch = useDispatch();
 
-	//TODO: Persist deletions
 	const handleDeleteMedication = async item => {
 		item.reminders?.forEach(r => {
 			if (r.id) {
@@ -71,9 +65,7 @@ function MedicationMainScreen({ navigation }) {
 					ListFooterComponent={
 						<React.Fragment>
 							<View style={styles.container}>
-								<Text style={styles.text}>
-									Neues Medikament
-								</Text>
+								<Text style={styles.text}>Add Medication</Text>
 
 								<ButtonAccept
 									onPress={() => {

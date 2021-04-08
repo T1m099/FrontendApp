@@ -51,68 +51,63 @@ function TimelineScreen(props) {
 			source={require('../images/Background.png')}
 			style={styles.image}
 		>
-			<View style={styles.container}>
-				<EventTypesSelect
-					selectedEventTypes={selectedEventTypeArray}
-					onSelectEventType={setSelectedEventTypeArray}
-					single={true}
-					types={trackableTypes}
-					style={{ width: '100%', marginBottom: 8, marginLeft: 15 }}
-				/>
-			</View>
-			<View style={[styles.container, { maxHeight: 100 }]}>
-				<DatePickerInput
-					value={fromDay}
-					valueToDisplay={fromDay.toDateString()}
-					onDateSelection={e => {
-						setFromDay(e);
-					}}
-					style={{
-						width: 150,
-						alignSelf: 'flex-start',
-						marginLeft: 4,
-					}}
-				/>
-
-				<DatePickerInput
-					value={toDay}
-					valueToDisplay={toDay.toDateString()}
-					onDateSelection={e => {
-						setToDay(e);
-					}}
-					style={{
-						width: 150,
-						alignSelf: 'flex-start',
-						marginLeft: 4,
-					}}
-				/>
-			</View>
-			<View style={[styles.container, { maxHeight: 500 }]}>
-				{!hasData && (
-					<AppText>
-						Select a time interval with data to show the timeline
-					</AppText>
-				)}
-				{hasData && (
-					<LineChart
-						data={chartData}
-						width={400}
-						height={500}
-						chartConfig={{
-							decimalPlaces: 0, // optional, defaults to 2dp
-							color: (opacity = 0) =>
-								`rgba(255, 255, 255, ${opacity})`,
-							labelColor: (opacity = 0) =>
-								`rgba(255, 255, 255, ${opacity})`,
-						}}
-						bezier={true}
-						fromZero={true}
-						transparent={true}
-						withDots={false}
-						withShadow={false}
-						style={{ marginLeft: -50, marginTop: 20 }}
+			<View style={[styles.container]}>
+				<View style={[{ maxHeight: 160 }]}>
+					<EventTypesSelect
+						selectedEventTypes={selectedEventTypeArray}
+						onSelectEventType={setSelectedEventTypeArray}
+						single={true}
+						types={trackableTypes}
+						style={styles.eventTypeSelect}
 					/>
-				)}
+					<View style={styles.dateSelectContainer}>
+						<DatePickerInput
+							value={fromDay}
+							valueToDisplay={fromDay.toDateString()}
+							onDateSelection={e => {
+								setFromDay(e);
+							}}
+							style={styles.datePicker}
+						/>
+
+						<DatePickerInput
+							value={toDay}
+							valueToDisplay={toDay.toDateString()}
+							onDateSelection={e => {
+								setToDay(e);
+							}}
+							style={styles.datePicker}
+						/>
+					</View>
+				</View>
+				<View style={styles.diagramContainer}>
+					{!hasData && (
+						<AppText>
+							Select a time interval with data to show the
+							timeline
+						</AppText>
+					)}
+					{hasData && (
+						<LineChart
+							data={chartData}
+							width={350}
+							height={550}
+							chartConfig={{
+								decimalPlaces: 0, // optional, defaults to 2dp
+								color: (opacity = 0) =>
+									`rgba(255, 255, 255, ${opacity})`,
+								labelColor: (opacity = 0) =>
+									`rgba(255, 255, 255, ${opacity})`,
+							}}
+							bezier={true}
+							fromZero={true}
+							transparent={true}
+							withDots={false}
+							withShadow={false}
+							style={styles.diagram}
+						/>
+					)}
+				</View>
 			</View>
 		</ImageBackground>
 	);
@@ -120,18 +115,19 @@ function TimelineScreen(props) {
 
 const styles = StyleSheet.create({
 	container: {
-		/* 		flex: 1,
+		flexGrow: 1,
 		flexDirection: 'column',
-		alignItems: 'center',
 		alignSelf: 'center',
 		width: '92%',
-		maxHeight: 81,
 		borderRadius: 10,
-		marginTop: '.75%',
-		marginBottom: '.75%',
+		marginVertical: '.75%',
 		backgroundColor: 'rgba(0,0,0,.5)',
 		textAlign: 'center',
-		justifyContent: 'space-evenly', */
+		justifyContent: 'space-evenly',
+	},
+	dateSelectContainer: {
+		flexDirection: 'row',
+		width: '100%',
 	},
 	image: {
 		flex: 1,
@@ -140,11 +136,29 @@ const styles = StyleSheet.create({
 	},
 	text: {
 		alignItems: 'flex-start',
-		flex: 1,
 		fontSize: 18,
 		fontWeight: 'bold',
 		color: colors.text,
 		marginLeft: '2%',
+	},
+	datePicker: {
+		width: '46%',
+		marginHorizontal: '2%',
+		marginBottom: 5,
+	},
+	eventTypeSelect: {
+		backgroundColor: colors.navigation,
+		borderRadius: 10,
+		margin: '2%',
+		height: 30,
+		width: '96%',
+	},
+	diagramContainer: {},
+	diagram: {
+		marginLeft: -35,
+		marginBottom: -20,
+		paddingBottom: -80,
+		marginTop: -30,
 	},
 });
 

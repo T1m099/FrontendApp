@@ -45,8 +45,8 @@ function initEvent(events, id, timestamp, newEventType) {
 			...allAdditionalProperties,
 			time: new Date(timestamp + 12 * 60 * 60 * 1000),
 			end: new Date(timestamp + 13 * 60 * 60 * 1000),
-			type: newEventType,
 		};
+		if (newEventType) e.type = newEventType;
 	} else {
 		e = { ...events[id] };
 		e.time = new Date(e.time);
@@ -199,6 +199,15 @@ function EventEditScreen({ navigation, route }) {
 							</AppFormConditionalElement>
 						</View>
 					</View>
+					<View style={styles.container}>
+						<AppFormField
+							maxLength={255}
+							multiline
+							name='notes'
+							numberOfLines={3}
+							placeholder='Notes'
+						/>
+					</View>
 					<View style={[styles.container, { maxHeight: 400 }]}>
 						<AppFormMultiSelect
 							items={symptoms}
@@ -246,15 +255,6 @@ function EventEditScreen({ navigation, route }) {
 						</AppFormConditionalElement>
 					</View>
 
-					<View style={styles.container}>
-						<AppFormField
-							maxLength={255}
-							multiline
-							name='notes'
-							numberOfLines={3}
-							placeholder='Notes'
-						/>
-					</View>
 					<View
 						style={[
 							styles.container,
