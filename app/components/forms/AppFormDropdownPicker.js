@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { useFormikContext } from 'formik';
-import colors from "../../config/colors";
+import colors from '../../config/colors';
 function AppFormDropdownPicker({
 	name,
 	items,
@@ -23,14 +23,20 @@ function AppFormDropdownPicker({
 				items={items}
 				style={[styles.pickerContainer, containerStyle]}
 				defaultValue={values[name]}
-				dropDownStyle={{backgroundColor: colors.navigation, borderColor: colors.navigation, maxWidth:84,marginLeft:5, zIndex:1000000}}
+				dropDownStyle={{
+					backgroundColor: colors.navigation,
+					borderColor: colors.navigation,
+					maxWidth: 84,
+					marginLeft: 5,
+					zIndex: 1000000,
+					height: '100%',
+				}}
 				labelStyle={{
 					fontSize: 14,
 					textAlign: 'left',
-					color: colors.text
+					color: colors.text,
 				}}
-				itemStyle={{maxHeight: 20}}
-
+				itemStyle={{ maxHeight: 20 }}
 				onChangeItem={item => {
 					setFieldTouched(name, true);
 					setFieldValue(name, item.value);
@@ -43,7 +49,11 @@ function AppFormDropdownPicker({
 }
 
 const styles = StyleSheet.create({
-	pickerContainer: {  backgroundColor:colors.navigation, borderColor: colors.navigation,color:colors.text, maxHeight:30},
+	pickerContainer: {
+		backgroundColor: colors.navigation,
+		borderColor: colors.navigation,
+		color: colors.text,
+	},
 });
 
 export default AppFormDropdownPicker;

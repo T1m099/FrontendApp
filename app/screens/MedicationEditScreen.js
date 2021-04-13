@@ -68,15 +68,15 @@ function MedicationEditScreen({ route, navigation }) {
 			source={require('../images/Background.png')}
 			style={styles.image}
 		>
-			<View style={styles.maincontainer}>
-				<AppForm
-					initialValues={initMedItem(id, meds)}
-					onSubmit={(values, actions) => {
-						handleSubmit(values);
-						actions.resetForm();
-					}}
-					validationSchema={validationSchema}
-				>
+			<AppForm
+				initialValues={initMedItem(id, meds)}
+				onSubmit={(values, actions) => {
+					handleSubmit(values);
+					actions.resetForm();
+				}}
+				validationSchema={validationSchema}
+			>
+				<View style={styles.maincontainer}>
 					<View
 						style={[
 							styles.container,
@@ -144,8 +144,8 @@ function MedicationEditScreen({ route, navigation }) {
 							style={[
 								{
 									flexDirection: 'row',
-									width: '94%',
-									justifyContent: 'space-between',
+									width: '100%',
+									justifyContent: 'space-evenly',
 								},
 							]}
 						>
@@ -175,8 +175,8 @@ function MedicationEditScreen({ route, navigation }) {
 							/>
 						</View>
 					</View>
-				</AppForm>
-			</View>
+				</View>
+			</AppForm>
 		</ImageBackground>
 	);
 }
@@ -186,10 +186,12 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		alignSelf: 'center',
-		width: '92%',
+		maxWidth: '100%',
+		width: '95%',
 		marginTop: '.75%',
 		marginBottom: '.75%',
 		textAlign: 'center',
+		marginHorizontal: 10,
 	},
 	image: {
 		flex: 1,
@@ -201,11 +203,11 @@ const styles = StyleSheet.create({
 		flexDirection: 'column',
 		alignItems: 'center',
 		alignSelf: 'center',
-		width: 400,
+		width: '100%',
 		maxHeight: 132,
 		borderRadius: 10,
-		marginTop: '.75%',
-		marginBottom: '.75%',
+		marginVertical: '.75%',
+		marginHorizontal: 10,
 		backgroundColor: 'rgba(0,0,0,.5)',
 		textAlign: 'center',
 		justifyContent: 'center',
