@@ -65,6 +65,7 @@ function EventTypesSelect({
 					textAlign: 'center',
 				},
 			}}
+			IconRenderer={MaterialIcons}
 		/>
 	);
 }
