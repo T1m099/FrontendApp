@@ -101,16 +101,16 @@ function EventEditScreen({ navigation, route }) {
 	};
 
 	return (
-		<View style={styles.maincontainer}>
-			<ImageBackground
-				source={require('../images/Background.png')}
-				style={styles.image}
+		<ImageBackground
+			source={require('../images/Background.png')}
+			style={styles.image}
+		>
+			<AppForm
+				initialValues={event}
+				onSubmit={handleSubmit}
+				validationSchema={validationSchema}
 			>
-				<AppForm
-					initialValues={event}
-					onSubmit={handleSubmit}
-					validationSchema={validationSchema}
-				>
+				<View style={styles.maincontainer}>
 					<View
 						style={[
 							styles.container,
@@ -148,6 +148,7 @@ function EventEditScreen({ navigation, route }) {
 									return <AppText>Choose Category</AppText>;
 								}}
 								checkVisible={checkVisible}
+								style={{ height: 50 }}
 							/>
 							<AppFormColorPicker
 								name='markingColor'
@@ -160,11 +161,12 @@ function EventEditScreen({ navigation, route }) {
 							width={'100%'}
 							placeholder='Title'
 							checkVisible={checkVisible}
+							style={{ height: 50 }}
 						/>
 					</View>
 
-					<View style={[styles.container, { maxHeight: 70 }]}>
-						<View style={styles.startContainer}>
+					<View style={[styles.container]}>
+						<View style={styles.timePickerRow}>
 							<AppFormConditionalElement
 								name='time'
 								checkVisible={checkVisible}
@@ -177,11 +179,14 @@ function EventEditScreen({ navigation, route }) {
 										name='time'
 										valueDateTransform={toDateString}
 										valueTimeTransform={toTimeString}
+										containerStyle={styles.datePicker}
+										dateStyle={styles.datePickerElement}
+										timeStyle={styles.datePickerElement}
 									/>
 								</View>
 							</AppFormConditionalElement>
 						</View>
-						<View style={styles.startContainer}>
+						<View style={styles.timePickerRow}>
 							<AppFormConditionalElement
 								name='end'
 								checkVisible={checkVisible}
@@ -194,6 +199,9 @@ function EventEditScreen({ navigation, route }) {
 										name='end'
 										valueDateTransform={toDateString}
 										valueTimeTransform={toTimeString}
+										containerStyle={styles.datePicker}
+										dateStyle={styles.datePickerElement}
+										timeStyle={styles.datePickerElement}
 									/>
 								</View>
 							</AppFormConditionalElement>
@@ -208,11 +216,17 @@ function EventEditScreen({ navigation, route }) {
 							placeholder='Notes'
 						/>
 					</View>
-					<View style={[styles.container, { maxHeight: 400 }]}>
+					<View
+						style={[
+							styles.container,
+							{ maxHeight: 400, paddingHorizontal: 10 },
+						]}
+					>
 						<AppFormMultiSelect
 							items={symptoms}
 							name='symptoms'
 							checkVisible={checkVisible}
+							style={{ with: '100%' }}
 						/>
 
 						<AppFormPicker
@@ -231,6 +245,7 @@ function EventEditScreen({ navigation, route }) {
 								return <AppText>Mood</AppText>;
 							}}
 							checkVisible={checkVisible}
+							style={{ width: '100%' }}
 						/>
 
 						<AppFormConditionalElement
@@ -269,8 +284,9 @@ function EventEditScreen({ navigation, route }) {
 							style={[
 								{
 									flexDirection: 'row',
-									width: '94%',
-									justifyContent: 'space-between',
+									width: '100%',
+									padding: 10,
+									justifyContent: 'space-evenly',
 								},
 							]}
 						>
@@ -302,9 +318,9 @@ function EventEditScreen({ navigation, route }) {
 							/>
 						</View>
 					</View>
-				</AppForm>
-			</ImageBackground>
-		</View>
+				</View>
+			</AppForm>
+		</ImageBackground>
 	);
 }
 
@@ -313,9 +329,10 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		alignSelf: 'center',
-		width: '92%',
+		width: '96%',
 		marginTop: '.75%',
 		marginBottom: '.75%',
+		marginHorizontal: 5,
 		textAlign: 'center',
 	},
 	image: {
@@ -329,7 +346,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'column',
 		alignItems: 'center',
 		alignSelf: 'center',
-		width: 400,
+		width: '100%',
 		maxHeight: 132,
 		borderRadius: 10,
 		marginTop: '.75%',
@@ -338,21 +355,22 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		justifyContent: 'space-evenly',
 	},
-	dateTimePickerContainer: {
-		flexDirection: 'row',
-		marginVertical: 10,
-	},
-	startContainer: {
-		flexDirection: 'row',
-		alignItems: 'center',
-	},
-
 	colorPicker: {
 		flexGrow: 5,
+		height: 50,
 	},
 
-	datePickerLabel: { flex: 1 },
-	datePicker: { flex: 5 },
+	timePickerRow: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		maxWidth: '100%',
+		width: '100%',
+		paddingRight: 10,
+	},
+
+	datePickerLabel: { width: '5%' },
+	datePicker: { flexGrow: 1 },
+	datePickerElement: { padding: 10, marginTop: 0, margin: 0 },
 	buttonContainer: {
 		flexDirection: 'row',
 	},

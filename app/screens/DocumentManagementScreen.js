@@ -16,11 +16,7 @@ import { AntDesign } from '@expo/vector-icons';
 import * as docActions from '../store/docs';
 import * as documentManagement from '../config/documentManagement';
 
-import {
-	ButtonAccept,
-	ButtonDecline,
-	ButtonStandard,
-} from '../components/Buttons';
+import { ButtonAccept, ButtonDecline } from '../components/Buttons';
 import AppForm from '../components/forms/AppForm';
 import AppFormField from '../components/forms/AppFormField';
 import AppSubmitButton from '../components/forms/AppSubmitButton';
@@ -45,35 +41,39 @@ function FolderManagementScreen({ navigation, route }) {
 
 	const mapElements = (foldersObject, documentsObject) => {
 		const elementsArray = [];
-		Object.keys(foldersObject).forEach(k => {
-			elementsArray.push({
-				...foldersObject[k],
-				icon: 'folder',
-				onPress: () => {
-					navigation.push(routes.FOLDER_MANAGEMENT, {
-						parentId: foldersObject[k].id,
-					});
-				},
-				onDelete: folder => {
-					dispatch(docActions.deleteFolder({ id: folder.id }));
-				},
+		if (foldersObject) {
+			Object.keys(foldersObject).forEach(k => {
+				elementsArray.push({
+					...foldersObject[k],
+					icon: 'folder',
+					onPress: () => {
+						navigation.push(routes.FOLDER_MANAGEMENT, {
+							parentId: foldersObject[k].id,
+						});
+					},
+					onDelete: folder => {
+						dispatch(docActions.deleteFolder({ id: folder.id }));
+					},
+				});
 			});
-		});
-		Object.keys(documentsObject).forEach(k => {
-			elementsArray.push({
-				...documentsObject[k],
-				icon: 'file-document',
-				onPress: () => {
-					Sharing.shareAsync(documentsObject[k].uri, {
-						dialogTitle: 'Share Document',
-					});
-				},
-				onDelete: doc => {
-					const { icon, onPress, onDelete, ...rest } = doc;
-					dispatch(docActions.deleteDocument({ ...rest }));
-				},
+		}
+		if (documentsObject) {
+			Object.keys(documentsObject).forEach(k => {
+				elementsArray.push({
+					...documentsObject[k],
+					icon: 'file-document',
+					onPress: () => {
+						Sharing.shareAsync(documentsObject[k].uri, {
+							dialogTitle: 'Share Document',
+						});
+					},
+					onDelete: doc => {
+						const { icon, onPress, onDelete, ...rest } = doc;
+						dispatch(docActions.deleteDocument({ ...rest }));
+					},
+				});
 			});
-		});
+		}
 		return elementsArray;
 	};
 

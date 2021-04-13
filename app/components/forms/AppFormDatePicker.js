@@ -29,7 +29,6 @@ function AppFormDatePicker({
 			onPress={() => {
 				setVisible(true);
 			}}
-			style={style}
 		>
 			<View style={[styles.container, style]}>
 				<AppText style={styles.text}>

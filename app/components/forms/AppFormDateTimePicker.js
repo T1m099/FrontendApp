@@ -8,20 +8,23 @@ function AppFormDateTimePicker({
 	name,
 	valueDateTransform,
 	valueTimeTransform,
+	containerStyle,
+	dateStyle,
+	timeStyle,
 	checkVisible = (vals, name) => true,
 }) {
 	const { setFieldValue, values } = useFormikContext();
 	if (!checkVisible(values, name)) return null;
 
 	return (
-		<View style={styles.container}>
+		<View style={[styles.container, containerStyle]}>
 			<DatePickerInput
 				value={values[name]}
 				valueToDisplay={valueDateTransform(values[name])}
 				onDateSelection={selectedDate => {
 					setFieldValue(name, selectedDate);
 				}}
-				style={{ flex: 2 }}
+				style={{ flexGrow: 2, ...dateStyle }}
 			/>
 			<DatePickerInput
 				value={values[name]}
@@ -30,7 +33,7 @@ function AppFormDateTimePicker({
 					setFieldValue(name, selectedDate);
 				}}
 				mode='time'
-				style={{ flex: 1 }}
+				style={{ flexGrow: 1, ...timeStyle }}
 			/>
 		</View>
 	);
