@@ -32,13 +32,12 @@ function EventTypesSelect({
 					color={colors.background}
 				/>
 			}
-			selectText='Filter Event Types'
+			selectText='Select Event Types'
 			readOnlyHeadings={true}
 			showChips={false}
 			showDropDowns={false}
 			single={single}
 			hideSearch={true}
-			alwaysShowSelectText={true}
 			onSelectedItemsChange={types => {
 				onSelectEventType(types);
 			}}
@@ -58,11 +57,12 @@ function EventTypesSelect({
 					...style,
 				},
 				selectToggleText: {
-					flex: 1,
+					width: '100%',
+					flexGrow: 1,
 					fontSize: 21,
 					fontWeight: 'bold',
-					color: colors.text,
-					marginLeft: '15%',
+					color: colors.magenta,
+					textAlign: 'center',
 				},
 			}}
 			IconRenderer={MaterialIcons}

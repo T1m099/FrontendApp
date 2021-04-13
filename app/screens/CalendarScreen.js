@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
-import {View, StyleSheet, ImageBackground} from 'react-native';
+import { View, StyleSheet, ImageBackground } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import dayjs from 'dayjs';
 import { useSelector } from 'react-redux';
-import SectionedMultiSelect from 'react-native-sectioned-multi-select';
-import { MaterialIcons } from '@expo/vector-icons';
 
 import routes from '../navigation/routes';
 import * as eventActions from '../store/events';
-import colors from '../config/colors';
 import { types } from '../config/eventTypes';
 import EventTypesSelect from '../components/EventTypesSelect';
 
@@ -81,27 +78,29 @@ function CalendarScreen({ navigation }) {
 	);
 
 	return (
-		<ImageBackground source={require('../images/Background.png')} style={styles.image}>
+		<ImageBackground
+			source={require('../images/Background.png')}
+			style={styles.image}
+		>
+			<View style={styles.container}>
+				<EventTypesSelect
+					selectedEventTypes={selectedEventTypes}
+					onSelectEventType={setSelectedEventTypes}
+					style={{ width: '100%' }}
+				/>
 
-		<View style={styles.container}>
-			<EventTypesSelect
-				selectedEventTypes={selectedEventTypes}
-				onSelectEventType={setSelectedEventTypes}
-
-			/>
-
-			<Calendar
-				onDayPress={goToDateEventScreen}
-				onDayLongPress={day => {
-					goToEventEdit('new', day.timestamp);
-				}}
-				style={styles.calen}
-				monthFormat={'MMMM yyyy'}
-				firstDay={1}
-				markedDates={eventsToShow}
-				markingType='multi-period'
-			/>
-		</View>
+				<Calendar
+					onDayPress={goToDateEventScreen}
+					onDayLongPress={day => {
+						goToEventEdit('new', day.timestamp);
+					}}
+					style={styles.calen}
+					monthFormat={'MMMM yyyy'}
+					firstDay={1}
+					markedDates={eventsToShow}
+					markingType='multi-period'
+				/>
+			</View>
 		</ImageBackground>
 	);
 }
@@ -120,17 +119,15 @@ const styles = StyleSheet.create({
 		backgroundColor: 'rgba(0,0,0,.5)',
 		textAlign: 'center',
 		justifyContent: 'space-between',
-
 	},
 	calen: {
 		width: 350,
 	},
 
-
 	image: {
 		flex: 1,
-		resizeMode: "cover",
-		justifyContent: "center"
+		resizeMode: 'cover',
+		justifyContent: 'center',
 	},
 });
 
