@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { AntDesign, MaterialIcons } from '@expo/vector-icons';
+import { StyleSheet } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
 import SectionedMultiSelect from 'react-native-sectioned-multi-select';
 
 import { types as defaultTypes } from '../config/eventTypes';
@@ -65,7 +65,6 @@ function EventTypesSelect({
 					textAlign: 'center',
 				},
 			}}
-			IconRenderer={MaterialIcons}
 		/>
 	);
 }

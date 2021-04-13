@@ -46,7 +46,7 @@ function FolderManagementScreen({ navigation, route }) {
 			Object.keys(foldersObject).forEach(k => {
 				elementsArray.push({
 					...foldersObject[k],
-					icon: 'folder',
+					icon: 'folder1',
 					onPress: () => {
 						navigation.push(routes.FOLDER_MANAGEMENT, {
 							parentId: foldersObject[k].id,
@@ -62,7 +62,7 @@ function FolderManagementScreen({ navigation, route }) {
 			Object.keys(documentsObject).forEach(k => {
 				elementsArray.push({
 					...documentsObject[k],
-					icon: 'file-document',
+					icon: 'file1',
 					onPress: () => {
 						Sharing.shareAsync(documentsObject[k].uri, {
 							dialogTitle: 'Share Document',
