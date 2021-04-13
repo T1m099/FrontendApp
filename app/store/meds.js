@@ -52,7 +52,8 @@ export const saveMedItem = medItem => async dispatch => {
 	mi.reminders = await reminderService.scheduleReminderNotificationsAsync(
 		mi.reminders,
 		mi.title,
-		mi.description
+		mi.description,
+		true
 	);
 
 	mi.reminders = reminderService.makeRemindersSerializable(mi.reminders);
