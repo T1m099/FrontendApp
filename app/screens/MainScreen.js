@@ -1,5 +1,11 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, ImageBackground, Text, FlatList } from 'react-native';
+import {
+	StyleSheet,
+	ImageBackground,
+	Text,
+	FlatList,
+	View,
+} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import SafeAreaScreen from '../components/SafeAreaScreen';
@@ -10,6 +16,7 @@ import colors from '../config/colors';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import dayjs from 'dayjs';
 import routes from '../navigation/routes';
+import Screen from '../components/Screen';
 
 function MainScreen({ navigation }) {
 	const dispatch = useDispatch();
@@ -80,10 +87,12 @@ function MainScreen({ navigation }) {
 			);
 		} else
 			return (
-				<Text style={[styles.text, styles.upcomingEventsText]}>
-					{' '}
-					No upcoming events
-				</Text>
+				<View>
+					<Text style={[styles.text, styles.upcomingEventsText]}>
+						{' '}
+						No upcoming events
+					</Text>
+				</View>
 			);
 	};
 	const handlePlannerItemPress = item => {
@@ -107,12 +116,14 @@ function MainScreen({ navigation }) {
 
 	return (
 		<SafeAreaScreen>
-			<ImageBackground
-				source={require('../images/Background.png')}
-				style={styles.image}
-			>
-				{plannerItemsIsEmpty()}
-			</ImageBackground>
+			<Screen>
+				<ImageBackground
+					source={require('../images/Background.png')}
+					style={styles.image}
+				>
+					{plannerItemsIsEmpty()}
+				</ImageBackground>
+			</Screen>
 		</SafeAreaScreen>
 	);
 }
@@ -139,6 +150,7 @@ const styles = StyleSheet.create({
 		marginLeft: '4%',
 		marginRight: '4%',
 		height: 35,
+		maxHeight: 35,
 		borderRadius: 10,
 		marginTop: '.75%',
 		marginBottom: '.75%',

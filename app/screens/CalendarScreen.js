@@ -8,6 +8,7 @@ import routes from '../navigation/routes';
 import * as eventActions from '../store/events';
 import { types } from '../config/eventTypes';
 import EventTypesSelect from '../components/EventTypesSelect';
+import Screen from '../components/Screen';
 
 function CalendarScreen({ navigation }) {
 	const eventsByType = useSelector(
@@ -82,25 +83,27 @@ function CalendarScreen({ navigation }) {
 			source={require('../images/Background.png')}
 			style={styles.image}
 		>
-			<View style={styles.container}>
-				<EventTypesSelect
-					selectedEventTypes={selectedEventTypes}
-					onSelectEventType={setSelectedEventTypes}
-					style={{ width: '100%' }}
-				/>
+			<Screen>
+				<View style={styles.container}>
+					<EventTypesSelect
+						selectedEventTypes={selectedEventTypes}
+						onSelectEventType={setSelectedEventTypes}
+						style={{ width: '100%' }}
+					/>
 
-				<Calendar
-					onDayPress={goToDateEventScreen}
-					onDayLongPress={day => {
-						goToEventEdit('new', day.timestamp);
-					}}
-					style={styles.calen}
-					monthFormat={'MMMM yyyy'}
-					firstDay={1}
-					markedDates={eventsToShow}
-					markingType='multi-period'
-				/>
-			</View>
+					<Calendar
+						onDayPress={goToDateEventScreen}
+						onDayLongPress={day => {
+							goToEventEdit('new', day.timestamp);
+						}}
+						style={styles.calen}
+						monthFormat={'MMMM yyyy'}
+						firstDay={1}
+						markedDates={eventsToShow}
+						markingType='multi-period'
+					/>
+				</View>
+			</Screen>
 		</ImageBackground>
 	);
 }

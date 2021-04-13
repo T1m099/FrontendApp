@@ -12,6 +12,7 @@ import DocumentsNavigator from '../navigation/DocumentsNavigator';
 import useNotifications from '../hooks/useNotifications';
 import * as authActions from '../store/auth';
 import SettingsNavigator from './SettingsNavigator';
+import { ActivityIndicator } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 

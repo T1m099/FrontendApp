@@ -1,6 +1,7 @@
 import { create } from 'apisauce';
 
 import * as actions from '../apiEvents';
+import { loadingFinished, loadingStarted } from '../settings';
 
 const apisauceApi = create({
 	baseURL: 'https://www.itworksonmymachine.studio/',
@@ -19,12 +20,14 @@ const api = ({ dispatch, getState }) => next => async action => {
 
 	next(action);
 
+	dispatch(loadingStarted());
 	const response = await apisauceApi.any({
 		url,
 		method,
 		data,
 		headers: { Authorization: token },
 	});
+	dispatch(loadingFinished());
 	if (response.ok) {
 		dispatch(actions.apiCallSuccess(response.data));
 		if (onSuccess) {

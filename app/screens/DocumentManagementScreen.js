@@ -24,6 +24,7 @@ import routes from '../navigation/routes';
 import colors from '../config/colors';
 import ListItem from '../components/ListItem';
 import ListItemDeleteAction from '../components/ListItemDeleteAction';
+import Screen from '../components/Screen';
 
 function FolderManagementScreen({ navigation, route }) {
 	const allFolders = useSelector(docActions.getFolders());
@@ -111,134 +112,138 @@ function FolderManagementScreen({ navigation, route }) {
 			source={require('../images/Background.png')}
 			style={styles.image}
 		>
-			<View>
-				<FlatList
-					style={styles.folderList}
-					data={mapElements(folders, documents)}
-					keyExtractor={item => item.id}
-					renderItem={({ item }) => {
-						return (
-							<ListItem
-								title={item.name}
-								IconComponent={
-									<View style={styles.icon}>
-										<AntDesign
-											color={colors.accent}
-											name={item.icon}
-											size={25}
+			<Screen>
+				<View>
+					<FlatList
+						style={styles.folderList}
+						data={mapElements(folders, documents)}
+						keyExtractor={item => item.id}
+						renderItem={({ item }) => {
+							return (
+								<ListItem
+									title={item.name}
+									IconComponent={
+										<View style={styles.icon}>
+											<AntDesign
+												color={colors.accent}
+												name={item.icon}
+												size={25}
+											/>
+										</View>
+									}
+									onPress={item.onPress}
+									renderRightActions={() => (
+										<ListItemDeleteAction
+											onPress={() => {
+												item.onDelete(item);
+											}}
 										/>
-									</View>
-								}
-								onPress={item.onPress}
-								renderRightActions={() => (
-									<ListItemDeleteAction
+									)}
+									containerStyle={styles.listItem}
+								/>
+							);
+						}}
+						ListFooterComponent={
+							<View>
+								<View style={styles.container}>
+									<Text style={styles.text}>
+										Add Document
+									</Text>
+
+									<ButtonAccept
+										Content={
+											<AntDesign
+												name='addfile'
+												size={24}
+												color='white'
+											/>
+										}
 										onPress={() => {
-											item.onDelete(item);
+											handlePressAddDocument();
 										}}
+										margin={8}
 									/>
-								)}
-								containerStyle={styles.listItem}
-							/>
-						);
-					}}
-					ListFooterComponent={
-						<View>
-							<View style={styles.container}>
-								<Text style={styles.text}>Add Document</Text>
-
-								<ButtonAccept
-									Content={
-										<AntDesign
-											name='addfile'
-											size={24}
-											color='white'
-										/>
-									}
-									onPress={() => {
-										handlePressAddDocument();
-									}}
-									margin={8}
-								/>
+								</View>
+								<View style={styles.container}>
+									<Text style={styles.text}>New Folder</Text>
+									<ButtonAccept
+										Content={
+											<AntDesign
+												name='addfolder'
+												size={24}
+												color='white'
+											/>
+										}
+										onPress={() => {
+											setNewFolderModalVisble(true);
+										}}
+										margin={8}
+									/>
+								</View>
 							</View>
-							<View style={styles.container}>
-								<Text style={styles.text}>New Folder</Text>
-								<ButtonAccept
-									Content={
-										<AntDesign
-											name='addfolder'
-											size={24}
-											color='white'
-										/>
-									}
-									onPress={() => {
-										setNewFolderModalVisble(true);
-									}}
-									margin={8}
-								/>
-							</View>
-						</View>
-					}
-				/>
-				<Modal
-					visible={newFolderModalVisible}
-					transparent={true}
-					animationType='slide'
-				>
-					<View
-						style={[
-							styles.container,
-							{
-								maxHeight: 150,
-								flexDirection: 'column',
-								width: '100%',
-								marginTop: '100%',
-								justifyContent: 'space-evenly',
-							},
-						]}
+						}
+					/>
+					<Modal
+						visible={newFolderModalVisible}
+						transparent={true}
+						animationType='slide'
 					>
-						<AppForm
-							initialValues={documentManagement.baseFolder}
-							onSubmit={handleSaveFolder}
+						<View
+							style={[
+								styles.container,
+								{
+									maxHeight: 150,
+									flexDirection: 'column',
+									width: '100%',
+									marginTop: '100%',
+									justifyContent: 'space-evenly',
+								},
+							]}
 						>
-							<AppFormField
-								name='name'
-								width='100%'
-								placeholder='please enter the desired name'
-							/>
-							<View
-								style={[
-									{
-										flexDirection: 'row',
-										width: '90%',
-										justifyContent: 'space-between',
-									},
-								]}
+							<AppForm
+								initialValues={documentManagement.baseFolder}
+								onSubmit={handleSaveFolder}
 							>
-								<AppSubmitButton
-									title='Create Folder'
-									size={300}
+								<AppFormField
+									name='name'
+									width='100%'
+									placeholder='please enter the desired name'
+								/>
+								<View
+									style={[
+										{
+											flexDirection: 'row',
+											width: '90%',
+											justifyContent: 'space-between',
+										},
+									]}
 								>
-									{' '}
-									style={[{ paddingRight: 8 }]}
-								</AppSubmitButton>
+									<AppSubmitButton
+										title='Create Folder'
+										size={300}
+									>
+										{' '}
+										style={[{ paddingRight: 8 }]}
+									</AppSubmitButton>
 
-								<ButtonDecline
-									Content={
-										<AntDesign
-											name='close'
-											size={24}
-											color='white'
-										/>
-									}
-									onPress={() => {
-										setNewFolderModalVisble(false);
-									}}
-								></ButtonDecline>
-							</View>
-						</AppForm>
-					</View>
-				</Modal>
-			</View>
+									<ButtonDecline
+										Content={
+											<AntDesign
+												name='close'
+												size={24}
+												color='white'
+											/>
+										}
+										onPress={() => {
+											setNewFolderModalVisble(false);
+										}}
+									></ButtonDecline>
+								</View>
+							</AppForm>
+						</View>
+					</Modal>
+				</View>
+			</Screen>
 		</ImageBackground>
 	);
 }
