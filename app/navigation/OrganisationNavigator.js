@@ -7,7 +7,6 @@ import TimelineScreen from '../screens/TimelineScreen';
 import routes from './routes';
 import EventEditScreen from '../screens/EventEditScreen';
 import DateEventScreen from '../screens/DateEventsScreen';
-import TestScreen from '../screens/TestScreen';
 
 const Stack = createStackNavigator();
 
