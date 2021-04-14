@@ -11,6 +11,7 @@ import TestScreen from '../screens/TestScreen';
 
 const Stack = createStackNavigator();
 
+//navigator for the organization tab containing the calender and all corresponding screens as well as the timeline screen
 const OrganisationNavigator = () => (
 	<Stack.Navigator
 		mode='modal'
@@ -26,7 +27,6 @@ const OrganisationNavigator = () => (
 			name={routes.DATE_EVENT_OVERVIEW}
 			component={DateEventScreen}
 		/>
-		<Stack.Screen name={routes.TEST} component={TestScreen} />
 		<Stack.Screen name={routes.TIMELINE} component={TimelineScreen} />
 	</Stack.Navigator>
 );

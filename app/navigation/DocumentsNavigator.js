@@ -7,6 +7,9 @@ import FoldersManagementScreen from '../screens/DocumentManagementScreen';
 
 const Stack = createStackNavigator();
 
+//navigator for the document management
+//only consists of a single screen, but this screen can be accessed with different root ids
+//depending on the root id a different list of folders and files is shown
 const OrganisationNavigator = () => (
 	<Stack.Navigator mode='modal' initialRouteName={routes.FOLDER_MANAGEMENT}>
 		<Stack.Screen

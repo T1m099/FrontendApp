@@ -3,15 +3,14 @@ import {
 	View,
 	StyleSheet,
 	TouchableOpacity,
-	TouchableWithoutFeedback,
 	Modal,
 	FlatList,
 } from 'react-native';
 import { useFormikContext } from 'formik';
-import { ButtonMagenta, ButtonStandard } from '../Buttons';
-import AppText from '../AppText';
+import { ButtonStandard } from '../Buttons';
 import { AntDesign } from '@expo/vector-icons';
 
+//function component to allow the user to pick a color from a set of options
 function AppFormColorPicker({
 	name,
 	colors,
@@ -21,8 +20,11 @@ function AppFormColorPicker({
 	const { setFieldValue, values } = useFormikContext();
 	const [modalVisible, setModalVisible] = useState(false);
 
+	//return null if this component should not be visible
 	if (!checkVisible(values, name)) return null;
 
+	//return a button in the currently selected color
+	//pressing the button brings up a modal with all color options so the user can choose a different color
 	return (
 		<View style={style}>
 			<View style={[styles.container, { backgroundColor: values[name] }]}>

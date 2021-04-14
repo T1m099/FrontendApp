@@ -3,6 +3,8 @@ import { StyleSheet } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { useFormikContext } from 'formik';
 import colors from '../../config/colors';
+
+//funciton component that shows a dropdown form field (wrapper to a foreign module)
 function AppFormDropdownPicker({
 	name,
 	items,
@@ -17,6 +19,7 @@ function AppFormDropdownPicker({
 	} = useFormikContext();
 	if (!checkVisible(values, name)) return null;
 
+	//returning the customized dropdown component
 	return (
 		<>
 			<DropDownPicker

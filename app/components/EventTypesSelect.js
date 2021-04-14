@@ -6,6 +6,8 @@ import SectionedMultiSelect from 'react-native-sectioned-multi-select';
 import { types as defaultTypes } from '../config/eventTypes';
 import colors from '../config/colors';
 
+//function component to render a field that allows the user to choose one event type such as "appointment"
+//needed e.g. in the calendar screen or the timeline screen
 function EventTypesSelect({
 	selectedEventTypes,
 	onSelectEventType,
@@ -19,6 +21,8 @@ function EventTypesSelect({
 			sub: types.map(t => ({ name: t })),
 		},
 	];
+
+	//to render the field a foreign module is used and customized
 	return (
 		<SectionedMultiSelect
 			items={eventTypeSelectItems}

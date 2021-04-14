@@ -16,13 +16,18 @@ import { ActivityIndicator } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
+//functional component; the main navigator for the app.
+//the app uses tabs for navigation. within the tabs stacks are used for nested navigation.
 const AppNavigator = () => {
 	useNotifications();
 	const isLoggedIn = useSelector(authActions.isLoggedIn());
 	const isLoginExpired = useSelector(authActions.isLoginExpired());
 
+	//in case the user is not logged in or his login has expired show the navigator with the login and register options
+	//the user wont see the app navigation until he is logged in
 	if (!isLoggedIn || isLoginExpired) return <AuthNavigator />;
 
+	//returning the nav bar with its 5 tabs (called "screens") and linking the corresponding nested navigators
 	return (
 		<Tab.Navigator
 			tabBarOptions={{ showLabel: false }}

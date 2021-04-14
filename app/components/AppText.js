@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 import colors from '../config/colors';
 
+//function component to display some text with the default style for the app
 function AppText({ children, style, ...otherProps }) {
 	return (
 		<Text style={[styles.text, style]} {...otherProps}>

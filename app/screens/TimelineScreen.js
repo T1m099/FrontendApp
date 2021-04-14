@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Dimensions, ImageBackground } from 'react-native';
+import { View, StyleSheet, ImageBackground } from 'react-native';
 import { useSelector } from 'react-redux';
 import colors from '../config/colors';
 import * as eventActions from '../store/events';
@@ -12,6 +12,7 @@ import DatePickerInput from '../components/DatePickerInput';
 import AppText from '../components/AppText';
 import EventTypesSelect from '../components/EventTypesSelect';
 
+//screen to render a chart out of the stored events data
 function TimelineScreen(props) {
 	const allEventsOrderedByTypeAsObject = useSelector(
 		eventActions.getEventsGroupedByTypeAsObject()
@@ -29,16 +30,19 @@ function TimelineScreen(props) {
 	);
 	const [toDay, setToDay] = useState(today);
 
+	//filter the events with the right type
 	let eventsWithSelectedType =
 		allEventsOrderedByTypeAsObject[selectedEventTypeArray[0]];
 	if (!eventsWithSelectedType) eventsWithSelectedType = {};
 
+	//filter the events that fall in the correct time frame
 	const eventsInSelectedRange = eventActions.filterEventsBetweenDays(
 		eventsWithSelectedType,
 		fromDay.getTime(),
 		toDay.getTime()
 	);
 
+	//creating the data form the chart
 	const chartData = createChartData(
 		eventsInSelectedRange,
 		selectedEventTypeArray[0]
@@ -46,6 +50,7 @@ function TimelineScreen(props) {
 	const hasData =
 		chartData.datasets.length > 0 && chartData.datasets[0].data.length > 0;
 
+	//rendering the screen, consisting of a event type select, two fields for selecting the time window of the diagram and the chart itself
 	return (
 		<ImageBackground
 			source={require('../images/Background.png')}

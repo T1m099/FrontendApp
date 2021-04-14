@@ -7,6 +7,7 @@ import * as SecureStore from 'expo-secure-store';
 
 import configureStore from '../store/configureStore';
 
+//function component that sets up a redux context with encrypted persistion
 function SecurePersistedStoreProvider({ children }) {
 	const ENCRYPTION_KEY_NAME = 'STORE_PERSIST_ENCRYPTION_KEY';
 	const [storeEncryptionKey, setStoreEncryptionKey] = useState();

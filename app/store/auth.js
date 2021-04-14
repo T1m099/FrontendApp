@@ -4,6 +4,7 @@ import { apiCallBegan } from './apiEvents';
 
 const baseCredentials = { mail: '', password: '' };
 
+//creating a store slice for the authentication
 const slice = createSlice({
 	name: 'auth',
 	initialState: {
@@ -14,6 +15,7 @@ const slice = createSlice({
 		loading: false,
 	},
 	reducers: {
+		//reducer to handle successfull login actions
 		loginSucceeded: (auth, action) => {
 			auth.credentials = action.payload.user;
 			auth.token = action.payload.token;
@@ -22,14 +24,17 @@ const slice = createSlice({
 			auth.loginFailed = false;
 			auth.loading = false;
 		},
+		//reducer to handle logouts
 		logout: (auth, action) => {
 			auth.credentials = { ...baseCredentials };
 			auth.token = '';
 			auth.tokenExpiry = '';
 		},
+		//reducer to signalize a login action has begun
 		loginBegan: (auth, action) => {
 			auth.loading = true;
 		},
+		//reducer to handle unsuccessfull login attempts
 		loginFailed: (auth, action) => {
 			console.error(action.payload);
 
@@ -46,6 +51,7 @@ const { loginSucceeded, loginFailed, loginBegan } = slice.actions;
 export const { logout } = slice.actions;
 export default slice.reducer;
 
+//function to trigger a login api call
 export const login = credentials => async dispatch => {
 	dispatch(
 		apiCallBegan({
@@ -61,6 +67,7 @@ export const login = credentials => async dispatch => {
 		})
 	);
 };
+//function to trigger a register api call
 export const register = credentials => async dispatch => {
 	dispatch(
 		apiCallBegan({
@@ -79,16 +86,19 @@ export const register = credentials => async dispatch => {
 };
 
 //Selectors
+//check whether a user is logged in
 export const isLoggedIn = () =>
 	createSelector(
 		state => state.auth,
 		auth => auth.token !== ''
 	);
+//check if the last login attempt has failed
 export const loginHasFailed = () =>
 	createSelector(
 		state => state.auth,
 		auth => auth.loginFailed
 	);
+//check if the users login has expired
 export const isLoginExpired = () =>
 	createSelector(
 		state => state.auth,

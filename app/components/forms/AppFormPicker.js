@@ -5,6 +5,7 @@ import Picker from '../Picker';
 import ErrorMessage from './AppErrorMessage';
 import { View } from 'react-native';
 
+//components to render a picker in a form; tapping the picker shows a modal with the available items
 function AppFormPicker({
 	items,
 	name,
@@ -21,6 +22,7 @@ function AppFormPicker({
 
 	if (!checkVisible(values, name)) return null;
 
+	//return a wrapped picker component to be controlled by a form
 	return (
 		<View style={style}>
 			<Picker

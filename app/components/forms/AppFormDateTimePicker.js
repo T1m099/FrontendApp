@@ -4,6 +4,7 @@ import { useFormikContext } from 'formik';
 
 import DatePickerInput from '../DatePickerInput';
 
+//function component to display a form element that allows the user to choose a date and time
 function AppFormDateTimePicker({
 	name,
 	valueDateTransform,
@@ -16,6 +17,7 @@ function AppFormDateTimePicker({
 	const { setFieldValue, values } = useFormikContext();
 	if (!checkVisible(values, name)) return null;
 
+	//returning the component, consisting of two date input elements (one for the date and one for the time) in a row
 	return (
 		<View style={[styles.container, containerStyle]}>
 			<DatePickerInput

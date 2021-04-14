@@ -13,18 +13,22 @@ import reminderService from '../services/reminderService';
 
 let lastId = 0;
 
+//redux store slice for events
 const slice = createSlice({
 	name: 'events',
 	initialState: {
 		listObject: {},
 	},
 	reducers: {
+		//handle saving an event
 		eventSaved: (events, action) => {
 			events.listObject[action.payload.id] = action.payload;
 		},
+		//handle deleting an event
 		eventDeleted: (events, action) => {
 			delete events.listObject[action.payload.id];
 		},
+		//synchronize the local events with the events received from the backend
 		eventsReceived: (events, action) => {
 			const eventsObject = {};
 			action.payload.events.forEach(e => {
@@ -39,7 +43,7 @@ const { eventSaved, eventDeleted, eventsReceived } = slice.actions;
 export default slice.reducer;
 
 // Action Creators
-
+//function to trigger an api call to delete an event
 export const deleteEvent = id => async dispatch => {
 	dispatch(
 		apiCallBegan({
@@ -50,7 +54,7 @@ export const deleteEvent = id => async dispatch => {
 		})
 	);
 };
-
+//function to trigger an api call to save an event
 export const saveEvent = event => async dispatch => {
 	const ev = { ...event };
 
@@ -59,6 +63,7 @@ export const saveEvent = event => async dispatch => {
 		...eventTypeConditionalProperties[ev.type],
 	};
 
+	//removing all unused properties from the event
 	const keysToPersist = [...Object.keys(eventStructure)];
 
 	//const eventToSave = _.pick(ev, keysToPersist);
@@ -87,6 +92,7 @@ export const saveEvent = event => async dispatch => {
 		);
 	}
 
+	//making time properties serializable
 	if (eventToSave.end) {
 		eventToSave.end = eventToSave.end.getTime();
 	}
@@ -103,7 +109,7 @@ export const saveEvent = event => async dispatch => {
 	if (ev.id === 'new') {
 		method = 'POST';
 	}
-
+	//dispatching the action to trigger the call
 	dispatch(
 		apiCallBegan({
 			url: 'events',
@@ -114,6 +120,7 @@ export const saveEvent = event => async dispatch => {
 	);
 };
 
+//function to fetch all events from the backend
 export const fetchEvents = () => async dispatch => {
 	dispatch(
 		apiCallBegan({
@@ -127,8 +134,7 @@ export const fetchEvents = () => async dispatch => {
 // Selector
 
 // Memoization
-// bugs => get unresolved bugs from the cache
-
+//function to get all events from the store
 export const getEvents = () =>
 	createSelector(
 		state => state.entities.events,
@@ -142,7 +148,7 @@ export const getEvents = () =>
 					end: new Date(e.time + 60 * 60 * 1000),
 					...e,
 				};
-
+				//rehydrating persisted reminders
 				event.reminders = reminderService.parseStringifiedReminders(
 					event.reminders
 				);
@@ -152,6 +158,8 @@ export const getEvents = () =>
 			return eventsToReturn;
 		}
 	);
+
+//function to get all events with a specific type
 export const getEventsByType = eventType =>
 	createSelector(
 		state => state.entities.events,
@@ -177,10 +185,13 @@ export const getEventsByType = eventType =>
 			return eventsToReturn;
 		}
 	);
+
+//function to get all events grouped by their type
 export const getEventsGroupedByTypeAsObject = () =>
 	createSelector(
 		state => state.entities.events,
 		events => {
+			//grouping the events like e.g. events:{appointment:{...},symptom:{...}}
 			const eventsToReturn = {};
 			Object.keys(events.listObject).forEach(k => {
 				const e = { ...events.listObject[k] };
@@ -206,8 +217,10 @@ export const getEventsGroupedByTypeAsObject = () =>
 		}
 	);
 
+//generating a id that should be unique
 export const genId = () => '' + Date.now() + lastId++;
 
+//function to filter all events that are at a given date
 export const filterEventsForDay = (events, timestamp) => {
 	const found = {};
 
@@ -235,6 +248,8 @@ export const filterEventsForDay = (events, timestamp) => {
 	});
 	return found;
 };
+
+//function to filter all events that occur between to dates
 export const filterEventsBetweenDays = (
 	eventsObject,
 	startTimestamp,

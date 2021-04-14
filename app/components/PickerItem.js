@@ -3,6 +3,7 @@ import { TouchableOpacity, StyleSheet } from 'react-native';
 
 import AppText from './AppText';
 
+//function component; an item in the picker component
 function PickerItem({ item, onPress }) {
 	return (
 		<TouchableOpacity onPress={onPress}>

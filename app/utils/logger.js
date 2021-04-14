@@ -1,4 +1,5 @@
-const log = (item) => {
+//logging errors
+const log = item => {
 	console.log(item);
 };
 

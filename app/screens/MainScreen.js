@@ -18,12 +18,14 @@ import dayjs from 'dayjs';
 import routes from '../navigation/routes';
 import Screen from '../components/Screen';
 
+//the main screen of the app
 function MainScreen({ navigation }) {
 	const dispatch = useDispatch();
 
 	const events = useSelector(eventActions.getEvents());
 	const meds = useSelector(medActions.getMeds());
 
+	//upon loading this screen for the first time, fetch updates to events, meds and docs from the server
 	useEffect(() => {
 		dispatch(eventActions.fetchEvents());
 		dispatch(medActions.fetchMeds());
@@ -31,6 +33,7 @@ function MainScreen({ navigation }) {
 		dispatch(docActions.fetchDocuments());
 	}, []);
 
+	//function to generate a list of events and meds of the day
 	const getPlannerItems = () => {
 		const plannerItems = [];
 		const thisDaysEvents = eventActions.filterEventsForDay(
@@ -38,6 +41,7 @@ function MainScreen({ navigation }) {
 			Date.now()
 		);
 
+		//adding all events of this day to the list
 		Object.keys(thisDaysEvents).forEach(k => {
 			plannerItems.push({
 				type: 'event',
@@ -46,6 +50,7 @@ function MainScreen({ navigation }) {
 				title: thisDaysEvents[k].title,
 			});
 		});
+		//adding all meds of this day to the list
 		Object.keys(meds).forEach(k => {
 			meds[k].reminders.forEach(r => {
 				plannerItems.push({
@@ -56,13 +61,15 @@ function MainScreen({ navigation }) {
 				});
 			});
 		});
-
+		//sorting the items in the list
 		plannerItems.sort((a, b) => {
 			return a.time - b.time;
 		});
 		return plannerItems;
 	};
-	const plannerItemsIsEmpty = () => {
+
+	//function to render the list of meds and events if there are any, otherwise return a banner to inform the user nothins is planned for the day
+	const renderPlanner = () => {
 		if (getPlannerItems().length !== 0) {
 			return (
 				<FlatList
@@ -95,6 +102,8 @@ function MainScreen({ navigation }) {
 				</View>
 			);
 	};
+
+	//handling a click on a item in the list; a click takes the user to the corresponding edit screen
 	const handlePlannerItemPress = item => {
 		if (item.type === 'event') {
 			navigation.navigate(routes.ORGANIZATION_STACK_NAVIGATION, {
@@ -114,6 +123,7 @@ function MainScreen({ navigation }) {
 		}
 	};
 
+	//rendering the screen (via calling the earlier defined render method)
 	return (
 		<SafeAreaScreen>
 			<Screen>
@@ -121,7 +131,7 @@ function MainScreen({ navigation }) {
 					source={require('../images/Background.png')}
 					style={styles.image}
 				>
-					{plannerItemsIsEmpty()}
+					{renderPlanner()}
 				</ImageBackground>
 			</Screen>
 		</SafeAreaScreen>

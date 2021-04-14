@@ -3,16 +3,20 @@ import logger from '../utils/logger';
 
 let handlerSet = false;
 
+//collection of various functions that help with scheduling notifications
+
 const defaultHandler = async () => ({
 	shouldShowAlert: true,
 	shouldPlaySound: false,
 	shouldSetBadge: false,
 });
 
+//function to cancel all scheduled notification
 const cancelAllAsync = async () => {
 	await Notifications.cancelAllScheduledNotificationsAsync();
 	return await Notifications.getAllScheduledNotificationsAsync();
 };
+//function to cancel one specific notification
 const cancelAsync = async id => {
 	try {
 		await Notifications.cancelScheduledNotificationAsync(id);
@@ -20,17 +24,20 @@ const cancelAsync = async id => {
 		logger.log('Could not cancel notification: ' + error);
 	}
 };
+//function to set a notification handler that defines how notifications are displayed
 const setHandler = (handler = defaultHandler) => {
 	Notifications.setNotificationHandler({
 		handleNotification: handler,
 	});
 };
+//function to schedule a notification
 const scheduleAsync = async (platform, content, time, repeat = false) => {
 	if (!handlerSet) {
 		setHandler();
 		handlerSet = true;
 	}
 	let trigger;
+	//depending on the platform notificaitons have to be scheduled differently
 	if (platform === 'android') {
 		if (repeat) {
 			trigger = {

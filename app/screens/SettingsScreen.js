@@ -3,10 +3,11 @@ import { View, StyleSheet, ImageBackground, Text } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { logout } from '../store/auth';
 import { AntDesign } from '@expo/vector-icons';
-import { ButtonDecline, ButtonMagenta } from '../components/Buttons';
-import routes from '../navigation/routes';
+import { ButtonDecline } from '../components/Buttons';
 import colors from '../config/colors';
 
+//screen with configuration options
+//Currently there is only a logout button on this screen
 function SettingsScreen({ navigation }) {
 	const dispatch = useDispatch();
 

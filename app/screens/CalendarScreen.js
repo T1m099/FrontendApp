@@ -10,17 +10,24 @@ import { types } from '../config/eventTypes';
 import EventTypesSelect from '../components/EventTypesSelect';
 import Screen from '../components/Screen';
 
+//screen that renders the calendar
 function CalendarScreen({ navigation }) {
 	const eventsByType = useSelector(
 		eventActions.getEventsGroupedByTypeAsObject()
-	);
+	); //fetching all events from the store, grouped by their type
 	const [selectedEventTypes, setSelectedEventTypes] = useState(types);
 
+	//function to parse dates to strings
+	//parameter is a dayjs date object, not a regular JavaScript date!
 	const dateToCalendarFormat = dayjsDate => {
 		//this function uses dayjs
 		return dayjsDate.format('YYYY-MM-DD');
 	};
+
+	//filtering the events that have the selected type
 	const getEventsForSelectedTypes = selectedTypes => {
+		//the events are stored in a object with nested objects that have the events type as a key
+		//all appintments are therefore stored in events:{appointments:{...}}
 		let eventsToReturn = {};
 		selectedTypes.forEach(t => {
 			eventsToReturn = { ...eventsToReturn, ...eventsByType[t] };
@@ -28,9 +35,11 @@ function CalendarScreen({ navigation }) {
 		return eventsToReturn;
 	};
 
+	//generate calendar markings for the shown events
 	const mapEventsToMarkings = eventsToMap => {
 		const currentlyMarkedDates = {};
 
+		//iterating over all events and add one marking object for each day they span
 		let event;
 		Object.keys(eventsToMap).forEach(k => {
 			event = eventsToMap[k];
@@ -62,22 +71,28 @@ function CalendarScreen({ navigation }) {
 		return currentlyMarkedDates;
 	};
 
+	//function to navigate to the event edit screen
 	const goToEventEdit = (id, dayTimestamp) => {
 		navigation.push(routes.EVENT_EDIT, {
 			id,
 			dayTimestamp,
 		});
 	};
+
+	//function to navigate to a screen showing all events of the selected day
 	const goToDateEventScreen = day => {
 		navigation.push(routes.DATE_EVENT_OVERVIEW, {
 			dayTimestamp: day.timestamp,
 		});
 	};
 
+	//since this screen is written as a function, we can create a constant with the events we want to show here
 	const eventsToShow = mapEventsToMarkings(
 		getEventsForSelectedTypes(selectedEventTypes)
 	);
 
+	//rendering the screen, consisting of a event type selection as the calendar component
+	//for the calendar a foreign module is used
 	return (
 		<ImageBackground
 			source={require('../images/Background.png')}

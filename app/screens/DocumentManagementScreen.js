@@ -26,7 +26,9 @@ import ListItem from '../components/ListItem';
 import ListItemDeleteAction from '../components/ListItemDeleteAction';
 import Screen from '../components/Screen';
 
-function FolderManagementScreen({ navigation, route }) {
+//a screen that shows a list of folders and documents
+//depending on the id passed, all folders and documents with this root id are listed
+function DocumentManagementScreen({ navigation, route }) {
 	const allFolders = useSelector(docActions.getFolders());
 	const allDocuments = useSelector(docActions.getDocuments());
 
@@ -34,15 +36,18 @@ function FolderManagementScreen({ navigation, route }) {
 	const [newFolderModalVisible, setNewFolderModalVisble] = useState(false);
 
 	const { parentId } = route.params;
+	//filtering the documents and folders with this parent id
 	const folders = docActions.filterElementsByParentId(allFolders, parentId);
 	const documents = docActions.filterElementsByParentId(
 		allDocuments,
 		parentId
 	);
 
+	//function to map folder objects and document objects into list items
 	const mapElements = (foldersObject, documentsObject) => {
 		const elementsArray = [];
 		if (foldersObject) {
+			//iterating over all folders and create a list item for each one, including a icon to show
 			Object.keys(foldersObject).forEach(k => {
 				elementsArray.push({
 					...foldersObject[k],
@@ -59,6 +64,7 @@ function FolderManagementScreen({ navigation, route }) {
 			});
 		}
 		if (documentsObject) {
+			//iterating over all documents and create a list item for each one
 			Object.keys(documentsObject).forEach(k => {
 				elementsArray.push({
 					...documentsObject[k],
@@ -78,25 +84,27 @@ function FolderManagementScreen({ navigation, route }) {
 		return elementsArray;
 	};
 
+	//handling taps on the "add folder" button
 	const handleSaveFolder = folder => {
 		const { onDelete, onPress, icon, ...rest } = folder;
 		const toSave = { ...rest, parentId: parentId ? parentId : 'root' };
-
+		//creating a folder with the parent id passed to this screen
 		dispatch(docActions.saveFolder(toSave));
 		setNewFolderModalVisble(false);
 	};
 
+	//handling a press on the "add document" button
 	const handlePressAddDocument = async () => {
+		//asking for permission to access the file system
 		const permission = await Permissions.askAsync('mediaLibrary');
 
 		if (!permission.granted) return;
 
+		//displaying a document selection dialog that allows the user to choose a document
 		const doc = await DocumentPicker.getDocumentAsync({ multiple: false });
 		if (doc.type === 'cancel') return;
 
-		//Seems to be bugged - opened an issue at expo
-		//Linking.openURL(fileName);
-
+		//creating a document object
 		const d = {
 			...documentManagement.baseDocument,
 			name: doc.name,
@@ -104,9 +112,11 @@ function FolderManagementScreen({ navigation, route }) {
 			uri: doc.uri,
 			parentId,
 		};
+		//saving that object
 		dispatch(docActions.saveDocument(d));
 	};
 
+	//rendering the actual screen, consisting of  the list, the add document button and a modal for creating new folders
 	return (
 		<ImageBackground
 			source={require('../images/Background.png')}
@@ -295,4 +305,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default FolderManagementScreen;
+export default DocumentManagementScreen;

@@ -6,6 +6,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import AppErrorMessage from './AppErrorMessage';
 import colors from '../../config/colors';
 
+//function component to allow the selection of multiple items in forms, using a foreign module
 function AppFormMultiSelect({
 	name,
 	items,

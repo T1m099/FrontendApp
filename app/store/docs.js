@@ -6,6 +6,7 @@ import { apiCallBegan } from './apiEvents';
 
 let lastId = 0;
 
+//redux store slice for documents and folders
 const slice = createSlice({
 	name: 'docs',
 	initialState: {
@@ -13,16 +14,21 @@ const slice = createSlice({
 		filesListObject: {},
 	},
 	reducers: {
+		//reducer to handle document saving
 		documentSaved: (docs, action) => {
 			docs.filesListObject[action.payload.id] = action.payload;
 		},
+		//reduxer to handle document deletion
 		documentDeleted: (docs, action) => {
 			delete docs.filesListObject[action.payload.id];
 		},
+		//reducer to handle saving a folder
 		folderSaved: (docs, action) => {
 			docs.foldersListObject[action.payload.id] = action.payload;
 		},
+		//reduxer to handle folder deletion
 		folderDeleted: (docs, action) => {
+			//if a folder is deleted, all its children are added to its parent folder rather than to delete them
 			Object.keys(docs.foldersListObject).forEach(k => {
 				if (docs.foldersListObject[k].parentId === action.payload.id) {
 					docs.foldersListObject[k].parentId =
@@ -31,6 +37,7 @@ const slice = createSlice({
 			});
 			delete docs.foldersListObject[action.payload.id];
 		},
+		//reducer to update the local folders with the data from the server
 		foldersReceived: (docs, action) => {
 			const foldersObject = {};
 			action.payload.folders.forEach(folder => {
@@ -47,6 +54,7 @@ export default slice.reducer;
 
 // Action Creators
 
+//function to trigger an api call to delete a document
 export const deleteDocument = doc => async dispatch => {
 	dispatch(
 		apiCallBegan({
@@ -59,6 +67,7 @@ export const deleteDocument = doc => async dispatch => {
 
 	dispatch(documentDeleted({ id: doc.id }));
 };
+//function to trigger an api call to delete a folder
 export const deleteFolder = folder => async dispatch => {
 	dispatch(
 		apiCallBegan({
@@ -70,6 +79,7 @@ export const deleteFolder = folder => async dispatch => {
 	);
 };
 
+//function to trigger an api call to upload a document to the backend
 export const saveDocument = ({ uri, ...rest }) => async dispatch => {
 	const file = await FileSystem.readAsStringAsync(uri, {
 		encoding: 'base64',
@@ -87,6 +97,7 @@ export const saveDocument = ({ uri, ...rest }) => async dispatch => {
 	);
 };
 
+//function to trigger an api call to save a folder
 export const saveFolder = folder => async dispatch => {
 	dispatch(
 		apiCallBegan({
@@ -97,6 +108,8 @@ export const saveFolder = folder => async dispatch => {
 		})
 	);
 };
+
+//function to fetch all folders from the backend
 export const fetchFolders = () => async dispatch => {
 	dispatch(
 		apiCallBegan({
@@ -106,6 +119,7 @@ export const fetchFolders = () => async dispatch => {
 		})
 	);
 };
+//function to fetch all documents from the backend (only the meta data, the actual files have to be downloaded individually)
 export const fetchDocuments = () => async dispatch => {
 	dispatch(
 		apiCallBegan({
@@ -115,6 +129,7 @@ export const fetchDocuments = () => async dispatch => {
 		})
 	);
 };
+//funtion to download a file from the backen
 export const fetchDocument = file => async dispatch => {
 	dispatch(
 		apiCallBegan({

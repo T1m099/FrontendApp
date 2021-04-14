@@ -19,10 +19,12 @@ import { deleteMedItem, getMeds } from '../store/meds';
 import { AntDesign } from '@expo/vector-icons';
 import { TRACKING } from '../config/eventTypes';
 
+//screen that shows all saved medications
 function MedicationMainScreen({ navigation }) {
 	const meds = useSelector(getMeds());
 	const dispatch = useDispatch();
 
+	//handler for deleting a med item
 	const handleDeleteMedication = async item => {
 		item.reminders?.forEach(r => {
 			if (r.id) {
@@ -32,12 +34,15 @@ function MedicationMainScreen({ navigation }) {
 		dispatch(deleteMedItem({ id: item.id }));
 	};
 
+	//function to navigate to the medication edit screen
 	const goToMedicationEdit = id => {
 		navigation.push(routes.MEDICATION_EDIT, {
 			id,
 		});
 	};
 
+	//rendering the screen which is a list of all medication items
+	//the list items are swipable to delete them
 	return (
 		<ImageBackground
 			source={require('../images/Background.png')}

@@ -1,8 +1,10 @@
+//defining the object structure of event objects and corresponding constants
 export const APPOINTMENT = 'Appointment';
 export const THERAPY = 'Therapy';
 export const SYMPTOM = 'Symptom';
 export const TRACKING = 'Tracking';
 
+//all event objects have these basic properties
 export const baseEventProperties = {
 	id: 'new',
 	type: APPOINTMENT,
@@ -12,6 +14,7 @@ export const baseEventProperties = {
 	time: new Date(),
 };
 
+//depending on their type events can have those additional properties
 export const eventTypeConditionalProperties = {
 	[APPOINTMENT]: {
 		end: new Date(),
@@ -31,6 +34,7 @@ export const eventTypeConditionalProperties = {
 	},
 };
 
+//a list of all possible additional properties
 export const allAdditionalProperties = {
 	end: new Date(),
 	reminders: [],
@@ -42,6 +46,7 @@ export const allAdditionalProperties = {
 export const types = [APPOINTMENT, SYMPTOM, THERAPY, TRACKING];
 export const trackableTypes = [SYMPTOM, TRACKING];
 
+//defining the color options to mark events in the calendar
 export const markingColors = [
 	'#00ff00',
 	'#0f0f00',
@@ -57,6 +62,7 @@ export const markingColors = [
 	'#F9A825',
 ];
 
+//defining what symptoms are availabe to choose from
 export const symptoms = [
 	{
 		name: 'Atemwegsbeschwerden',
@@ -78,6 +84,7 @@ export const symptoms = [
 	},
 ];
 
+//defining possible moods for the user to choose from and what number they should be represented with in the timeline screen
 export const moods = ['Great', 'Good', 'Okay', 'Meh', 'Bad', 'Terrible'];
 export const moodsEvaluation = {
 	Great: { val: 6 },

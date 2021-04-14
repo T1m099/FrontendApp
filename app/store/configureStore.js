@@ -16,6 +16,7 @@ import api from './middleware/api';
 import filePersist from './middleware/filePersist';
 import reducer from './reducer';
 
+//function to set up the redux store, including persistion, encryption and middleware
 export default function (encryptionKey = 'unsecureKey') {
 	const encrypt = encryptTransform({
 		secretKey: encryptionKey,
@@ -23,7 +24,7 @@ export default function (encryptionKey = 'unsecureKey') {
 			console.log('Encryption Error! Damn it!');
 		},
 	});
-
+	//configurign how the store should be persisted
 	const persistConfig = {
 		key: 'root',
 		storage: AsyncStorage,

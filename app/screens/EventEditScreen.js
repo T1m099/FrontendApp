@@ -5,11 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
 import AppText from '../components/AppText';
-import {
-	ButtonStandard,
-	ButtonAccept,
-	ButtonDecline,
-} from '../components/Buttons';
+import { ButtonDecline } from '../components/Buttons';
 import AppForm from '../components/forms/AppForm';
 import AppFormField from '../components/forms/AppFormField';
 import AppFormDateTimePicker from '../components/forms/AppFormDateTimePicker';
@@ -35,8 +31,8 @@ import AppFormConditionalElement from '../components/forms/AppFormConditionalEle
 import routes from '../navigation/routes';
 import AppFormMultiSelect from '../components/forms/AppFormMultiSelect';
 import TrackingList from '../components/TrackingList';
-import colors from '../config/colors';
 
+//function to initialize base data for all form fields
 function initEvent(events, id, timestamp, newEventType) {
 	let e;
 	if (id && id === 'new') {
@@ -55,6 +51,8 @@ function initEvent(events, id, timestamp, newEventType) {
 	return e;
 }
 
+//screen to edit events of all sorts
+//if this screen is called with a specific id, show this event to edit, otherwise show a new event
 function EventEditScreen({ navigation, route }) {
 	const dispatch = useDispatch();
 	const events = useSelector(eventActions.getEvents());
@@ -63,11 +61,13 @@ function EventEditScreen({ navigation, route }) {
 
 	const event = initEvent(events, id, dayTimestamp, newEventType);
 
+	//declaring a schema to validate that an event has a title which is string
 	const validationSchema = Yup.object().shape({
 		title: Yup.string().required().min(1).label('Title'),
 		description: Yup.string().label('Description'),
 	});
 
+	//function to transform a date into a time string
 	const toTimeString = date => {
 		return `${date.getHours()}:${
 			date.getMinutes() / 10 < 1
@@ -75,12 +75,16 @@ function EventEditScreen({ navigation, route }) {
 				: date.getMinutes()
 		}`;
 	};
+
+	//function to transform a date into a string
 	const toDateString = date => {
 		return date.toDateString();
 	};
 
+	//function to handle a press on the "submit" button
 	const handleSubmit = event => {
 		dispatch(eventActions.saveEvent(event));
+		//after saving the event, clear the navigation stack and return to the calendar screen
 		navigation.reset({
 			index: 0,
 			routes: [
@@ -90,6 +94,8 @@ function EventEditScreen({ navigation, route }) {
 		});
 	};
 
+	//function to check whether a given form element should be shown depending on the event type
+	//for symptoms e.g. there should be no list of reminders
 	const checkVisible = (values, name) => {
 		const type = values.type;
 
@@ -100,6 +106,7 @@ function EventEditScreen({ navigation, route }) {
 		return visibleFields.includes(name);
 	};
 
+	//rendering the screen, which consists of many different form elements that are shown depending upon whether they are needed for the edited event
 	return (
 		<ImageBackground
 			source={require('../images/Background.png')}

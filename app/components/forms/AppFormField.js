@@ -4,6 +4,7 @@ import { useFormikContext } from 'formik';
 import TextInput from '../AppTextInput';
 import AppErrorMessage from './AppErrorMessage';
 
+//function component to render a text input field in forms
 function AppFormField({
 	name,
 	width,
@@ -19,6 +20,7 @@ function AppFormField({
 	} = useFormikContext();
 
 	if (!checkVisible(values, name)) return null;
+	//return a controlled text input with an additional label that can contain a error message
 	return (
 		<>
 			<TextInput

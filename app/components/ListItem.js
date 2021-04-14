@@ -6,6 +6,8 @@ import Swipeable from 'react-native-gesture-handler/Swipeable';
 import AppText from './AppText';
 import colors from '../config/colors';
 
+//function component  to render an item in a list
+//the item could be an image or text with an optional icon
 function ListItem({
 	title,
 	message,
@@ -15,6 +17,7 @@ function ListItem({
 	renderRightActions,
 	containerStyle,
 }) {
+	//conditial rendering of the image, icon etc.
 	return (
 		<Swipeable
 			renderRightActions={renderRightActions}

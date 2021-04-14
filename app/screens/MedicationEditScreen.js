@@ -1,12 +1,7 @@
 import React from 'react';
 import { ImageBackground, StyleSheet, View } from 'react-native';
 import * as Yup from 'yup';
-import {
-	ButtonAccept,
-	ButtonDecline,
-	ButtonStandard,
-} from '../components/Buttons';
-import AppText from '../components/AppText';
+import { ButtonDecline } from '../components/Buttons';
 import { useDispatch, useSelector } from 'react-redux';
 
 import AppForm from '../components/forms/AppForm';
@@ -20,10 +15,10 @@ import reminderService from '../services/reminderService';
 import { saveMedItem, getMeds, genId } from '../store/meds';
 import routes from '../navigation/routes';
 import { AntDesign } from '@expo/vector-icons';
-import colors from '../config/colors';
 
 import { medication as baseMedicationObject } from '../config/medicationObjectStructure';
 
+//function to ensure there is initial data for all form fields
 function initMedItem(id, meds) {
 	let mi;
 	if (id.match('new')) {
@@ -34,27 +29,32 @@ function initMedItem(id, meds) {
 	return mi;
 }
 
+//screen to edit med items
 function MedicationEditScreen({ route, navigation }) {
 	const meds = useSelector(getMeds());
 	const dispatch = useDispatch();
 
 	const { id } = route.params;
 
+	//validation schema
 	const validationSchema = Yup.object().shape({
 		title: Yup.string().required().min(1).label('Title'),
 		description: Yup.string().label('Description'),
 		quantity: Yup.string().required().min(0).label('Quantity'),
 	});
 
+	//the available options for medication doses
 	const dropdownItems = [
 		{ label: 'Drop(s)', value: 'drops' },
 		{ label: 'Pill(s)', value: 'pills' },
 	];
 
+	//handling te saving of a medication item
 	const handleSaveMedication = async medItemToSave => {
 		dispatch(saveMedItem(medItemToSave));
 	};
 
+	//handle a press on the submit button
 	const handleSubmit = medItemToSave => {
 		handleSaveMedication(medItemToSave);
 		navigation.reset({
@@ -63,6 +63,7 @@ function MedicationEditScreen({ route, navigation }) {
 		});
 	};
 
+	//render the screen which is a big form with different fields for all attributes of a med item
 	return (
 		<ImageBackground
 			source={require('../images/Background.png')}

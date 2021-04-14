@@ -4,6 +4,7 @@ import { useFormikContext } from 'formik';
 import ErrorMessage from './ErrorMessage';
 import ImageInputList from '../ImageInputList';
 
+//fuction component to render a controlled image picker in forms
 function FormImagePicker({ name, checkVisible = (vals, name) => true }) {
 	const { errors, setFieldValue, touched, values } = useFormikContext();
 	if (!checkVisible(values, name)) return null;

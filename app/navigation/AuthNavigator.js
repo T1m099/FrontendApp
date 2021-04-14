@@ -9,6 +9,8 @@ import WelcomeScreen from '../screens/WelcomeScreen';
 
 const Stack = createStackNavigator();
 
+//navigator to be shown when the user is not logged in or the login has expired.
+//consisting of three screens: the welcome screen and screens for loggin in and registering
 const MedicationNavigator = () => (
 	<Stack.Navigator mode='modal' initialRouteName={routes.WELCOME}>
 		<Stack.Screen name={routes.WELCOME} component={WelcomeScreen} />

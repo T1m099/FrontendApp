@@ -1,3 +1,4 @@
+//defining the routes to navigate within the app
 export default Object.freeze({
 	HOME: 'Home',
 	CALENDAR: 'Calendar',

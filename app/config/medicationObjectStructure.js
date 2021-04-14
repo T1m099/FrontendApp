@@ -1,3 +1,4 @@
+//defining what a medication object looks like
 export const medication = {
 	id: 'new',
 	title: '',

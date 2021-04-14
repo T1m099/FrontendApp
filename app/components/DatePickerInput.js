@@ -5,6 +5,8 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import AppText from './AppText';
 import colors from '../config/colors';
 
+//function component to render a date input field,
+//the picker looks like a text field with the selected value, but upon clicking on it a date picker popup is shown
 function DatePickerInput({
 	value,
 	valueToDisplay,

@@ -1,11 +1,19 @@
-
-import {View,StyleSheet,TouchableWithoutFeedback,Modal,	Button,	FlatList,TouchableOpacity,} from 'react-native';
+import {
+	View,
+	StyleSheet,
+	TouchableWithoutFeedback,
+	Modal,
+	Button,
+	FlatList,
+	TouchableOpacity,
+} from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import SafeAreaScreen from './SafeAreaScreen';
 import colors from '../config/colors';
-import React from "react";
+import React from 'react';
 
+//function component to allow the user to pick one of many options in a modal
 function AppPicker({
 	items,
 	extractKey,
@@ -18,8 +26,9 @@ function AppPicker({
 	selectedItem,
 	style,
 }) {
-	const [modalVisible, setModalVisible] = React.useState(false)
+	const [modalVisible, setModalVisible] = React.useState(false);
 
+	//rendering the selected or a placeholder if nothing is selected
 	return (
 		<View>
 			<TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
@@ -73,9 +82,9 @@ const styles = StyleSheet.create({
 		borderRadius: 17,
 		flexDirection: 'row',
 		padding: 15,
-		height:65,
+		height: 65,
 		width: 300,
-		alignItems: 'center'
+		alignItems: 'center',
 	},
 	icon: {
 		marginRight: 10,

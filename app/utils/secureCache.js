@@ -1,11 +1,13 @@
 import * as SecureStore from 'expo-secure-store';
 import logger from './logger';
 
+//saving a key value pair securely
 const store = async (key, value) => {
 	await SecureStore.setItemAsync(key, JSON.stringify(value));
 };
 
-const load = async (key) => {
+//loading a key value pair
+const load = async key => {
 	try {
 		const res = await SecureStore.getItemAsync(key);
 		if (typeof res !== 'string') return null;
@@ -17,7 +19,8 @@ const load = async (key) => {
 	}
 };
 
-const remove = async (key) => {
+//deleting a key value pair
+const remove = async key => {
 	await SecureStore.deleteItemAsync(key);
 };
 

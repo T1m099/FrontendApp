@@ -1,3 +1,4 @@
+//defining how folder and document objects should look like
 export const baseFolder = {
 	parentId: 'root',
 	name: '',

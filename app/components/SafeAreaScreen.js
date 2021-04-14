@@ -2,6 +2,7 @@ import React from 'react';
 import Constants from 'expo-constants';
 import { StyleSheet, SafeAreaView, View } from 'react-native';
 
+//function component to wrapp other components in a view that escapes screen notches
 function SafeAreaScreen({ children, style }) {
 	return (
 		<SafeAreaView style={[styles.screen, style]}>

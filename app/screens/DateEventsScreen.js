@@ -11,26 +11,25 @@ import { StackActions } from '@react-navigation/native';
 
 import ListItem from '../components/ListItem';
 import ListItemDeleteAction from '../components/ListItemDeleteAction';
-import {
-	ButtonAccept,
-	ButtonDecline,
-	ButtonYellow,
-} from '../components/Buttons';
+import { ButtonAccept, ButtonDecline } from '../components/Buttons';
 import * as eventActions from '../store/events';
 import routes from '../navigation/routes';
 import { AntDesign } from '@expo/vector-icons';
 import colors from '../config/colors';
 
+//a screen that lists all events for a given date
 function DateEventScreen({ navigation, route }) {
 	const dispatch = useDispatch();
 	const allEvents = useSelector(eventActions.getEvents());
 
 	const { dayTimestamp } = route.params;
+	//filtering the events to those wich are at the given date
 	const thisDaysEvents = eventActions.filterEventsForDay(
 		allEvents,
 		dayTimestamp
 	);
 
+	//rendering the screen consisting of two buttons and a list of the events
 	return (
 		<ImageBackground
 			source={require('../images/Background.png')}

@@ -7,6 +7,7 @@ import { useFormikContext } from 'formik';
 import AppText from '../AppText';
 import colors from '../../config/colors';
 
+//function component to render a form element that lets the user select a date
 function AppFormDatePicker({
 	name,
 	valueViewTransform,
@@ -20,10 +21,13 @@ function AppFormDatePicker({
 
 	if (!checkVisible(values, name)) return null;
 
+	//transforming the internally stored date value into a displayable string
 	const viewTransform = value => {
 		return value ? valueViewTransform(value) : 'Pick value';
 	};
 
+	//returning the component, which looks like a button
+	//upon taping the component a little modal with the picker pops up
 	return (
 		<TouchableOpacity
 			onPress={() => {

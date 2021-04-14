@@ -4,15 +4,13 @@ import { AntDesign } from '@expo/vector-icons';
 
 import colors from '../config/colors';
 
+//function component to display a delete button
+//used in lists with swipe to delete
 function ListItemDeleteAction({ onPress }) {
 	return (
 		<TouchableWithoutFeedback onPress={onPress}>
 			<View style={styles.container}>
-				<AntDesign
-					name='delete'
-					size={25}
-					color={'#ffffff'}
-				/>
+				<AntDesign name='delete' size={25} color={'#ffffff'} />
 			</View>
 		</TouchableWithoutFeedback>
 	);
@@ -23,12 +21,11 @@ const styles = StyleSheet.create({
 		backgroundColor: colors.decline,
 		borderRadius: 10,
 		marginTop: 5.8,
-		marginRight:12,
+		marginRight: 12,
 		width: 35,
 		height: 35,
 		justifyContent: 'center',
 		alignItems: 'center',
-
 	},
 });
 

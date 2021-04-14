@@ -3,6 +3,7 @@ import { View, StyleSheet } from 'react-native';
 
 import DatePickerInput from './DatePickerInput';
 
+//function component to render two date input fields together for selecting both date and time
 function DateTimePickerInput({
 	value,
 	valueDateTransform,

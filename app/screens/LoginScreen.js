@@ -9,59 +9,66 @@ import FormField from '../components/forms/AppFormField';
 import SubmitButton from '../components/forms/AppSubmitButton';
 
 import * as authActions from '../store/auth';
-import colors from "../config/colors";
+import colors from '../config/colors';
 
 const validationSchema = Yup.object().shape({
 	email: Yup.string().required().email().label('Email'),
 	password: Yup.string().required().min(4).label('Password'),
 });
 
+//screen to show a login mask
 function LoginScreen(props) {
 	const loginFailed = useSelector(authActions.loginHasFailed());
 	const dispatch = useDispatch();
 
+	//handling a press on the submit button
 	const handleSubmit = async credentials => {
+		//dispatching an action to attempt a login with the entered credentials
 		dispatch(authActions.login(credentials));
 	};
 
+	//rendering the screen which consists of two form fields for email and password
 	return (
-		<ImageBackground source={require('../images/Background.png')} style={styles.image}>
-		<View style={styles.container}>
-			{/* 			<Image
+		<ImageBackground
+			source={require('../images/Background.png')}
+			style={styles.image}
+		>
+			<View style={styles.container}>
+				{/* 			<Image
 				style={styles.logo}
 				source={require('../assets/logo-red.png')}
 			/> */}
 
-			<Form
-				initialValues={{ email: '', password: '' }}
-				onSubmit={handleSubmit}
-				validationSchema={validationSchema}
-			>
-				<ErrorMessage
-					error='Invalid email and/or password.'
-					visible={loginFailed}
-				/>
-				<FormField
-					autoCapitalize='none'
-					autoCorrect={false}
-					icon='mail'
-					keyboardType='email-address'
-					name='email'
-					placeholder='Email'
-					textContentType='emailAddress'
-				/>
-				<FormField
-					autoCapitalize='none'
-					autoCorrect={false}
-					icon='lock'
-					name='password'
-					placeholder='Password'
-					secureTextEntry
-					textContentType='password'
-				/>
-				<SubmitButton title='Login' position={'center'} />
-			</Form>
-		</View>
+				<Form
+					initialValues={{ email: '', password: '' }}
+					onSubmit={handleSubmit}
+					validationSchema={validationSchema}
+				>
+					<ErrorMessage
+						error='Invalid email and/or password.'
+						visible={loginFailed}
+					/>
+					<FormField
+						autoCapitalize='none'
+						autoCorrect={false}
+						icon='mail'
+						keyboardType='email-address'
+						name='email'
+						placeholder='Email'
+						textContentType='emailAddress'
+					/>
+					<FormField
+						autoCapitalize='none'
+						autoCorrect={false}
+						icon='lock'
+						name='password'
+						placeholder='Password'
+						secureTextEntry
+						textContentType='password'
+					/>
+					<SubmitButton title='Login' position={'center'} />
+				</Form>
+			</View>
 		</ImageBackground>
 	);
 }
@@ -79,12 +86,12 @@ const styles = StyleSheet.create({
 		marginBottom: '.75%',
 		backgroundColor: 'rgba(0,0,0,.5)',
 		textAlign: 'center',
-		justifyContent: 'space-evenly'
+		justifyContent: 'space-evenly',
 	},
 	image: {
 		flex: 1,
-		resizeMode: "cover",
-		justifyContent: "center"
+		resizeMode: 'cover',
+		justifyContent: 'center',
 	},
 	text: {
 		alignItems: 'flex-start',
@@ -93,8 +100,7 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 		color: colors.text,
 		marginLeft: '2%',
-
-	}
+	},
 });
 
 export default LoginScreen;
