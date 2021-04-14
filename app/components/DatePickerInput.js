@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 import AppText from './AppText';
@@ -29,7 +29,7 @@ function DatePickerInput({
 					value={value}
 					mode={mode}
 					is24Hour={true}
-					display='spinner'
+					display={Platform.OS === 'android' ? 'spinner' : 'default'}
 					onChange={(event, selectedDate) => {
 						setVisible(false);
 						if (event.type !== 'dismissed') {
