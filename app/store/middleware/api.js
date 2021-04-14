@@ -44,6 +44,7 @@ const api = ({ dispatch, getState }) => next => async action => {
 		return;
 	}
 	dispatch(actions.apiCallFailed(JSON.stringify(response.originalError)));
+	alert('An error occured.');
 
 	if (onError)
 		dispatch({
