@@ -11,6 +11,7 @@ import {
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { encryptTransform } from 'redux-persist-transform-encrypt';
+import ExpoFileSystemStorage from 'redux-persist-expo-filesystem';
 
 import api from './middleware/api';
 import filePersist from './middleware/filePersist';
@@ -27,7 +28,7 @@ export default function (encryptionKey = 'unsecureKey') {
 	//configurign how the store should be persisted
 	const persistConfig = {
 		key: 'root',
-		storage: AsyncStorage,
+		storage: ExpoFileSystemStorage,
 		transforms: [encrypt],
 	};
 
