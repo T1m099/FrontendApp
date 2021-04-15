@@ -28,7 +28,7 @@ export default function (encryptionKey = 'unsecureKey') {
 	//configurign how the store should be persisted
 	const persistConfig = {
 		key: 'root',
-		storage: ExpoFileSystemStorage,
+		storage: AsyncStorage,
 		transforms: [encrypt],
 	};
 
