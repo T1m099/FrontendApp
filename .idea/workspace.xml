@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="97bb8dd6-f885-462e-ada0-1bbceca86c17" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/screens/MainScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/MainScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/screens/MedicationMainScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/MedicationMainScreen.js" afterDir="false" />
+    <list default="true" id="97bb8dd6-f885-462e-ada0-1bbceca86c17" name="Default Changelist" comment="changed to Consistent English">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/screens/SettingsScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/SettingsScreen.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +42,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="finishedBackgroundIntegration" />
+        <entry key="$PROJECT_DIR$" value="design/frontendLayoutReady" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -67,9 +67,9 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/app/components/forms/AppFormDateTimePicker.js" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/app/components/forms/AppErrorMessage.js" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/app/components/forms/AppForm.js" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/components/forms/AppErrorMessage.js" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/components/forms/AppFormDateTimePicker.js" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1oxvV9c7gidPOcinCruBLplrPqT" />
   <component name="ProjectViewState">
@@ -85,7 +85,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="ToolWindowTODO.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/yarn.lock" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../frontend" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -213,7 +213,12 @@
       <workItem from="1617693989472" duration="615000" />
       <workItem from="1617706706193" duration="10000" />
       <workItem from="1617710696346" duration="493000" />
-      <workItem from="1617821757369" duration="5449000" />
+      <workItem from="1617821757369" duration="6048000" />
+      <workItem from="1617863368407" duration="11000" />
+      <workItem from="1617871424847" duration="20000" />
+      <workItem from="1618310655505" duration="720000" />
+      <workItem from="1618512772780" duration="745000" />
+      <workItem from="1618736723619" duration="2544000" />
     </task>
     <task id="LOCAL-00001" summary="Redesign of Colors and Icons to look more modern">
       <created>1614520757634</created>
@@ -369,7 +374,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617826768129</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="changed to Consistent English">
+      <created>1617827280771</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1617827280771</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -491,7 +503,8 @@
     <MESSAGE value="Restyled MedicationEditScreen.js" />
     <MESSAGE value="finished Redesigning" />
     <MESSAGE value="fixed keyboard view and design Bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed keyboard view and design Bugs" />
+    <MESSAGE value="changed to Consistent English" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed to Consistent English" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
