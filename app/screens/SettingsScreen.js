@@ -1,15 +1,18 @@
-import React from 'react';
-import { View, StyleSheet, ImageBackground, Text } from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, ImageBackground, Text, Modal } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { logout } from '../store/auth';
 import { AntDesign } from '@expo/vector-icons';
-import { ButtonDecline } from '../components/Buttons';
+import { ButtonDecline, ButtonYellow } from '../components/Buttons';
 import colors from '../config/colors';
 
 //screen with configuration options
 //Currently there is only a logout button on this screen
 function SettingsScreen({ navigation }) {
 	const dispatch = useDispatch();
+	const [securityDisclaimerVisible, setSecurityDisclaimerVisible] = useState(
+		false
+	);
 
 	const handleLogout = () => {
 		dispatch(logout());
@@ -31,6 +34,50 @@ function SettingsScreen({ navigation }) {
 					margin={8}
 				/>
 			</View>
+			<View style={styles.container}>
+				<Text style={styles.text}>Security Disclaimer</Text>
+
+				<ButtonYellow
+					Content={<AntDesign name='lock' size={24} color='white' />}
+					onPress={() => {
+						setSecurityDisclaimerVisible(true);
+					}}
+					margin={8}
+				/>
+			</View>
+			<Modal visible={securityDisclaimerVisible} animationType='slide'>
+				<View
+					style={[
+						styles.container,
+						{
+							maxHeight: 150,
+							flexDirection: 'column',
+							width: '100%',
+							marginTop: '100%',
+							justifyContent: 'space-evenly',
+						},
+					]}
+				>
+					<Text>
+						Your local data is fully encrypted, with the exception
+						being files, which are stored in your devices file
+						system. The files are hidden, so only this app can
+						access them.
+					</Text>
+					<Text>
+						Everything you enter in this app is sent to our servers,
+						where the data is securely stored. This is neccessary
+						for synchronization accross multiple devices.
+					</Text>
+				</View>
+				<ButtonDecline
+					Content={<AntDesign name='close' size={24} color='white' />}
+					onPress={() => {
+						setSecurityDisclaimerVisible(false);
+					}}
+					margin={8}
+				/>
+			</Modal>
 		</ImageBackground>
 	);
 }
