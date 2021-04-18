@@ -43,6 +43,7 @@ const filePersist = ({ dispatch, getState }) => next => async action => {
 					//if a file on the backend is newer that the local version, download the new version and replace the old one
 					if (localFilesObject[fmd.id]?.timestamp !== fmd.timestamp) {
 						dispatch(docActions.fetchDocument(fmd));
+						delete localFilesObject[fmd.id];
 					}
 				});
 				const remoteFileIDs = action.payload.fileMetaData.map(
@@ -66,9 +67,6 @@ const filePersist = ({ dispatch, getState }) => next => async action => {
 						FileSystem.deleteAsync(uri);
 					}
 				});
-
-				await FileSystem.deleteAsync(uri, { idempotent: true });
-				dispatch(docActions.documentDeleted({ name, ...rest, uri }));
 				break;
 		}
 	} catch (error) {

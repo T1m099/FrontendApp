@@ -25,7 +25,7 @@ const AppNavigator = () => {
 
 	//in case the user is not logged in or his login has expired show the navigator with the login and register options
 	//the user wont see the app navigation until he is logged in
-	if (!isLoggedIn || isLoginExpired) return <AuthNavigator />;
+	if (!isLoggedIn) return <AuthNavigator />;
 
 	//returning the nav bar with its 5 tabs (called "screens") and linking the corresponding nested navigators
 	return (

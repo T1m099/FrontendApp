@@ -28,7 +28,6 @@ function DatePickerInput({
 					testID='dateTimePicker'
 					value={value}
 					mode={mode}
-					is24Hour={true}
 					display={Platform.OS === 'android' ? 'spinner' : 'default'}
 					onChange={(event, selectedDate) => {
 						setVisible(false);

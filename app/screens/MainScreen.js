@@ -74,7 +74,7 @@ function MainScreen({ navigation }) {
 			return (
 				<FlatList
 					data={getPlannerItems()}
-					keyExtractor={item => item.id}
+					keyExtractor={item => item.id + item.time}
 					renderItem={({ item }) => {
 						const time = dayjs(item.time);
 						return (

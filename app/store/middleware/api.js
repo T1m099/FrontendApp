@@ -44,7 +44,9 @@ const api = ({ dispatch, getState }) => next => async action => {
 		return;
 	}
 	dispatch(actions.apiCallFailed(JSON.stringify(response.originalError)));
-	alert('An error occured.');
+	alert(
+		'Could not get data from the server. Please try logging out and back in again.'
+	);
 
 	if (onError)
 		dispatch({
